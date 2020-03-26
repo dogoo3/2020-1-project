@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GitHubTestFolder\GitHubTest.cs" />
     <Compile Include="Assets\Script\Camera\CameraMove.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyGFX.cs" />
