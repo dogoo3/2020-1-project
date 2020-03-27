@@ -55,7 +55,6 @@ public class OtherPlayer_Warrior : MonoBehaviour
                 command.Execute(actor);
             }
         }
-
     }
 
     OtherPlayer_Command GetCommand()

@@ -121,9 +121,12 @@ public class Resolve
                     }
                     break;
                 case "SendMessage":
-                    ControlUI.instance.ReceiveComment(Data);
+                    Chatting.instance.ReceiveComment(Data);
                     break;
-
+                case "ItemMixResult":
+                    Debug.Log(data);
+                    Inventory.instance.ReceiveMixResult(Data);
+                    break;
             }
         }
         catch (Exception ex)

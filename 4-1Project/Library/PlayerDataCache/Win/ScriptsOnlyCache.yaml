@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - CameraMove
+    - Chatting
     - ControlUI
     - DataBase
     - DragSlot
@@ -136,6 +137,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13738}
     - Class: 114
       Script: {instanceID: 14384}
+    - Class: 114
+      Script: {instanceID: 31656}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -337,7 +340,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: 547c0f3676d27f9b90cb51065e1724c8
+      Hash: ca79fe87746fd3efe5772158bdc13e7c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DataBase
@@ -607,7 +610,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 1d0f3315b99839059ccd06950a23f027
+      Hash: a6a108eeb44017112a6579399dacadd8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlUI
@@ -1115,9 +1118,15 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 2117ce3f2b058e7861d95e4d5b2c4c89
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Chatting
   platform: 5
   scenePathNames:
   - Assets/Scenes/Login.unity
   - Assets/Scenes/Robby.unity
   - Assets/Scenes/InGame.unity
-  playerPath: C:/Users/dogoo/Desktop/modify3/4-1Project.exe
+  playerPath: C:/Users/dogoo/Desktop/200327_4/4-1Project.exe

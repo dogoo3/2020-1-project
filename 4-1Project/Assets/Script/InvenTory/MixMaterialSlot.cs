@@ -34,6 +34,7 @@ public class MixMaterialSlot : MonoBehaviour,
         item.itemName = "";
         item.itemIcon = null;
         item.itemDescription = "";
+        item.itemCount = 0;
     }
 
     public void PlusItemCount()

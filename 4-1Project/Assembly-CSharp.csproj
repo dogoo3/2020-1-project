@@ -66,17 +66,15 @@
     <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Script\Enemy\EnemyGFX.cs" />
     <Compile Include="Assets\Script\EnergyBall\EnergyBall.cs" />
-    <Compile Include="Assets\Script\InvenTory\ControlUI.cs" />
     <Compile Include="Assets\Script\InvenTory\DataBase.cs" />
     <Compile Include="Assets\Script\InvenTory\DragSlot.cs" />
-    <Compile Include="Assets\Script\InvenTory\GetItem.cs" />
     <Compile Include="Assets\Script\InvenTory\Inventory.cs" />
     <Compile Include="Assets\Script\InvenTory\InventorySlot.cs" />
     <Compile Include="Assets\Script\InvenTory\Item.cs" />
     <Compile Include="Assets\Script\InvenTory\ItemTooltip.cs" />
-    <Compile Include="Assets\Script\InvenTory\Mix.cs" />
     <Compile Include="Assets\Script\InvenTory\MixMaterialSlot.cs" />
     <Compile Include="Assets\Script\InvenTory\MixResultSlot.cs" />
+    <Compile Include="Assets\Script\Item\GetItem.cs" />
     <Compile Include="Assets\Script\Manager\GameManager.cs" />
     <Compile Include="Assets\Script\Manager\MakeManager.cs" />
     <Compile Include="Assets\Script\Manager\RobbyManager.cs" />
@@ -95,6 +93,8 @@
     <Compile Include="Assets\Script\Server\Protocol.cs" />
     <Compile Include="Assets\Script\Server\Resolve.cs" />
     <Compile Include="Assets\Script\Server\ServerClient.cs" />
+    <Compile Include="Assets\Script\UI\Chatting.cs" />
+    <Compile Include="Assets\Script\UI\ControlUI.cs" />
     <Compile Include="Assets\Script\UI\UI.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/2020-1-project/4-1Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

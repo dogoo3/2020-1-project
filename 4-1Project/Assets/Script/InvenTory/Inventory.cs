@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
+using System;
 
 public class Inventory : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Inventory : MonoBehaviour
 
     private int[] mat_itemID; // 조합 재료 아이템 번호를 정렬하기 위한 배열
     private int[] mat_itemCount; // 조합 재료 아이템 갯수를 정렬하기 위한 배열
+    private bool isMixed; // 조합 성공 여부를 서버에서 받아옴
+    private int isMixItemID; // 조합 성공 시 서버에서 받아오는 아이템 번호
+
     public Transform inv_slot, mix_slot;
 
     public ItemMix Data;
@@ -29,6 +33,9 @@ public class Inventory : MonoBehaviour
 
         mat_itemID = new int[mixMaterialSlots.Length];
         mat_itemCount = new int[mixMaterialSlots.Length];
+
+        isMixed = false;
+        isMixItemID = 0;
     }
 
     public bool GetItem(int _itemID) // 인게임 필드에서 새로운 아이템을 획득할 경우에 호출하는 함수.
@@ -83,13 +90,16 @@ public class Inventory : MonoBehaviour
 
     public void CheckMaterial() // 조합 판단
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++) // 조합 슬롯 3개의 itemID랑 itemCount를 받아온다.
         {
+            Debug.Log("아이템 정보 대입중");
             mat_itemID[i] = mixMaterialSlots[i].item.itemID;
             mat_itemCount[i] = mixMaterialSlots[i].item.itemCount;
         }
+        Debug.Log(mat_itemID[0] + "," + mat_itemID[1] + "," + mat_itemID[2]);
+        Debug.Log(mat_itemCount[0] + "," + mat_itemCount[1] + "," + mat_itemCount[2]);
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 2; i++) // 조합 슬롯 3개의 ItemID를 오름차순으로 정렬한다.(itemCount도 같이 변경)
         {
             for (int j = i + 1; j < 3; j++)
             {
@@ -103,36 +113,52 @@ public class Inventory : MonoBehaviour
                     mat_itemCount[i] = mat_itemCount[j];
                     mat_itemCount[j] = temp;
                 }
+                Debug.Log("아이템 정렬 중");
             }
         }
 
-        // 지금은 ABC템 각 1개씩으로만 조합을 만들 수 있음.
-        // 추가적으로 아이템별 갯수도 조합에 영향을 주면 임시 배열 2차원 3*2로 만들고 중복계산 한번만 더 해주면 됨.
-        for (int i = 0; i < theDataBase.mixList.Count; i++)
+        // 서버로 조합 슬롯의 데이터 전송
+        Data.Init(mat_itemID, mat_itemCount, 10000); 
+        JsonData SendData = JsonMapper.ToJson(Data);
+        ServerClient.instance.Send(SendData.ToString()); // Send와 동시에 Resolve받아 조합 성공 여부를 알려줌.
+    }
+
+    private void Update()
+    {
+        if (isMixed) // 조합 성공 시
         {
-            if (theDataBase.mixList[i].itemID_1 == mat_itemID[0] &&
-                theDataBase.mixList[i].itemID_2 == mat_itemID[1] &&
-                theDataBase.mixList[i].itemID_3 == mat_itemID[2]) // 데이터베이스 조합 정보와 조합슬롯의 아이템 ID와 일치하면
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 3; j++)
-                    mixMaterialSlots[j].RemoveItem(); // 조합 슬롯의 아이템을 모두 없앤 다음
-
-                for (int j = 0; j < theDataBase.itemList.Count; j++) // 아이템 데이터베이스에서 ID에 맞는 아이템을 찾은 뒤
-                {
-                    if (theDataBase.mixList[i].itemID == theDataBase.itemList[j].itemID)
-                    {
-                        mixResultSlot.item.itemIcon = theDataBase.itemList[j].itemIcon; // 아이콘 삽입
-                        mixResultSlot.item = theDataBase.itemList[j].Init(); // 아이템 정보를 조합결과 슬롯에 넣어준다.
-                        // mixResultSlot.item.itemCount = 1;
-                        mixResultSlot.InitUI();
-
-                        Data.Init(mat_itemID, mat_itemCount, 10000);
-                        JsonData SendData = JsonMapper.ToJson(Data);
-                        ServerClient.instance.Send(SendData.ToString());
-                    }
-                }
-                break;
+                Debug.Log("아이템 삭제 완료");
+                mixMaterialSlots[i].RemoveItem(); // 조합 슬롯의 아이템을 모두 없앤 다음
             }
+
+            for (int i = 0; i < theDataBase.itemList.Count; i++) // 아이템 데이터베이스에서 ID에 맞는 아이템을 찾은 뒤
+            {
+                if (isMixItemID == theDataBase.itemList[i].itemID)
+                {
+                    mixResultSlot.item.itemIcon = theDataBase.itemList[i].itemIcon; // 아이콘 삽입
+                    mixResultSlot.item = theDataBase.itemList[i].Init(); // 아이템 정보를 조합결과 슬롯에 넣어준다.
+                    mixResultSlot.item.itemCount = 1;
+                    mixResultSlot.InitUI();
+                }
+            }
+            isMixed = false;
+            isMixItemID = 0;
+        }
+    }
+
+    public void ReceiveMixResult(JsonData _data)
+    {
+        try
+        {
+            isMixed = bool.Parse(_data["result"].ToString());
+            if(isMixed)
+                isMixItemID = int.Parse(_data["Item"].ToString());
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
         }
     }
 }

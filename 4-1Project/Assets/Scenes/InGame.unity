@@ -1525,7 +1525,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList: []
-  mixList: []
 --- !u!4 &529467481
 Transform:
   m_ObjectHideFlags: 0
@@ -3034,6 +3033,27 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1765257701}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1765257703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2285652528385990284, guid: f992384e36583cb4ea47173d7f6c9267,
+    type: 3}
+  m_PrefabInstance: {fileID: 1765257701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1765257704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765257703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8483f8cbe696649aecfd549b726dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI_typingfield: {fileID: 2042553801}
+  UI_typingText: {fileID: 150110177}
+  UI_chattingLog: {fileID: 1836693510}
 --- !u!1 &1765839376
 GameObject:
   m_ObjectHideFlags: 0

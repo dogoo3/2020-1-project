@@ -33,6 +33,7 @@ public class MixResultSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         item.itemName = "";
         item.itemIcon = null;
         item.itemDescription = "";
+        item.itemCount = 0;
     }
 
     public void InitUI()
