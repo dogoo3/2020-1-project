@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class MixMaterialSlot : MonoBehaviour,
-    IDragHandler,IBeginDragHandler,IEndDragHandler,IDropHandler
+    IDragHandler,IBeginDragHandler,IEndDragHandler
 {
     private Image UI_item_image;
     private Text UI_item_count;
@@ -74,56 +75,60 @@ public class MixMaterialSlot : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        MixMaterialSlot mixMaterialSlot = eventData.pointerEnter.gameObject.GetComponent<MixMaterialSlot>();
-        if (mixMaterialSlot != null) // 드롭한 슬롯이 조합 슬롯일 경우 슬롯의 정보를 맞교환해준다.
+        try
         {
-            // 슬롯 간 정보를 교환해준 뒤
-            Item temp = mixMaterialSlot.item.Init();
-            mixMaterialSlot.item = item.Init();
-            item = temp.Init();
-
-            // UI 업데이트
-            InitUI();
-            mixMaterialSlot.InitUI();
-        }
-
-        InventorySlot inventorySlot = eventData.pointerEnter.gameObject.GetComponent<InventorySlot>();
-        if (inventorySlot != null) // 드롭한 슬롯이 인벤토리 슬롯일 경우
-        {
-            InventorySlot temp = Inventory.instance.SearchInventorySlot(item.itemID); // 인벤토리 슬롯에 같은 ID의 아이템이 있는지 검색
-            if(temp != null) // 인벤토리 슬롯에 같은 아이템이 있으면
+            MixMaterialSlot mixMaterialSlot = eventData.pointerEnter.gameObject.GetComponent<MixMaterialSlot>();
+            if (mixMaterialSlot != null) // 드롭한 슬롯이 조합 슬롯일 경우 슬롯의 정보를 맞교환해준다.
             {
-                temp.PlusItemCount(); // 인벤토리 슬롯의 갯수 1개 증가
-                MinusItemCount(); // 조합 슬롯 갯수 1개 감소
-                temp.InitUI(); // 인벤토리 슬롯 UI 업데이트
+                // 슬롯 간 정보를 교환해준 뒤
+                Item temp = mixMaterialSlot.item.Init();
+                mixMaterialSlot.item = item.Init();
+                item = temp.Init();
+
+                // UI 업데이트
+                InitUI();
+                mixMaterialSlot.InitUI();
             }
-            else // 인벤토리 슬롯에 같은 ID의 아이템이 없을 경우
+
+            InventorySlot inventorySlot = eventData.pointerEnter.gameObject.GetComponent<InventorySlot>();
+            if (inventorySlot != null) // 드롭한 슬롯이 인벤토리 슬롯일 경우
             {
-                if (inventorySlot.item.itemID == 0)
+                InventorySlot temp = Inventory.instance.SearchInventorySlot(item.itemID); // 인벤토리 슬롯에 같은 ID의 아이템이 있는지 검색
+                if (temp != null) // 인벤토리 슬롯에 같은 아이템이 있으면
                 {
-                    inventorySlot.item = item.Init(); // 인벤토리 슬롯에 아이템 정보 할당
-                    inventorySlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
+                    temp.PlusItemCount(); // 인벤토리 슬롯의 갯수 1개 증가
                     MinusItemCount(); // 조합 슬롯 갯수 1개 감소
+                    temp.InitUI(); // 인벤토리 슬롯 UI 업데이트
                 }
-                else
+                else // 인벤토리 슬롯에 같은 ID의 아이템이 없을 경우
                 {
-                    Item temp2 = inventorySlot.item.Init();
-                    inventorySlot.item = item.Init();
-                    item = temp2.Init();
+                    if (inventorySlot.item.itemID == 0)
+                    {
+                        inventorySlot.item = item.Init(); // 인벤토리 슬롯에 아이템 정보 할당
+                        inventorySlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
+                        MinusItemCount(); // 조합 슬롯 갯수 1개 감소
+                    }
+                    else
+                    {
+                        Item temp2 = inventorySlot.item.Init();
+                        inventorySlot.item = item.Init();
+                        item = temp2.Init();
+                    }
                 }
+
+                InitUI();
+                inventorySlot.InitUI(); // 인벤토리 슬롯 UI 업데이트
+
+                if (item.itemCount == 0)
+                    RemoveItem();
             }
-
-            InitUI();
-            inventorySlot.InitUI(); // 인벤토리 슬롯 UI 업데이트
-
-            if (item.itemCount == 0)
-                RemoveItem();
+            DragSlot.instance.SetColor(0);
         }
-        DragSlot.instance.SetColor(0);
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-
+        catch(Exception)
+        {
+            DragSlot.instance.SetColor(0);
+            return;
+        }
+       
     }
 }

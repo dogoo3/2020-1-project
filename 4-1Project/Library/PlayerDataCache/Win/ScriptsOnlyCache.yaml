@@ -25,6 +25,7 @@ ScriptsOnlyBuild:
     - PoolingManager
     - RobbyManager
     - ServerClient
+    - ShareInventorySlot
     - UI
     AstarPathfindingProject.dll:
     - AstarPath
@@ -88,43 +89,45 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11184}
     - Class: 114
-      Script: {instanceID: 11216}
+      Script: {instanceID: 11214}
     - Class: 114
-      Script: {instanceID: 11236}
+      Script: {instanceID: 11234}
     - Class: 114
-      Script: {instanceID: 11486}
+      Script: {instanceID: 11484}
     - Class: 114
-      Script: {instanceID: 11490}
+      Script: {instanceID: 11488}
     - Class: 114
-      Script: {instanceID: 11538}
+      Script: {instanceID: 11536}
     - Class: 114
-      Script: {instanceID: 11634}
+      Script: {instanceID: 11632}
     - Class: 114
-      Script: {instanceID: 11778}
+      Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 12018}
+      Script: {instanceID: 12016}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12230}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 12386}
+      Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 12436}
+      Script: {instanceID: 12434}
     - Class: 114
-      Script: {instanceID: 12448}
+      Script: {instanceID: 12446}
     - Class: 114
-      Script: {instanceID: 12542}
+      Script: {instanceID: 12540}
     - Class: 114
-      Script: {instanceID: 12582}
+      Script: {instanceID: 12580}
     - Class: 114
-      Script: {instanceID: 12614}
+      Script: {instanceID: 12612}
     - Class: 114
-      Script: {instanceID: 12648}
+      Script: {instanceID: 12646}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12910}
+    - Class: 114
+      Script: {instanceID: 12988}
     - Class: 114
       Script: {instanceID: 13100}
     - Class: 114
@@ -138,7 +141,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14384}
     - Class: 114
-      Script: {instanceID: 31656}
+      Script: {instanceID: 18196}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -185,25 +188,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11184}
     - Class: 114
-      Script: {instanceID: 11378}
+      Script: {instanceID: 11376}
     - Class: 114
-      Script: {instanceID: 11486}
+      Script: {instanceID: 11484}
     - Class: 114
-      Script: {instanceID: 11538}
+      Script: {instanceID: 11536}
     - Class: 114
-      Script: {instanceID: 11736}
+      Script: {instanceID: 11734}
     - Class: 114
-      Script: {instanceID: 11916}
+      Script: {instanceID: 11914}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12472}
+      Script: {instanceID: 12470}
     - Class: 114
-      Script: {instanceID: 12634}
+      Script: {instanceID: 12632}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12910}
     - Class: 114
       Script: {instanceID: 13206}
     - Class: 114
@@ -266,25 +269,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11184}
     - Class: 114
-      Script: {instanceID: 11486}
+      Script: {instanceID: 11484}
     - Class: 114
-      Script: {instanceID: 11490}
+      Script: {instanceID: 11488}
     - Class: 114
-      Script: {instanceID: 11538}
+      Script: {instanceID: 11536}
     - Class: 114
-      Script: {instanceID: 11702}
+      Script: {instanceID: 11700}
     - Class: 114
-      Script: {instanceID: 11750}
+      Script: {instanceID: 11748}
     - Class: 114
-      Script: {instanceID: 12018}
+      Script: {instanceID: 12016}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12542}
+      Script: {instanceID: 12540}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12910}
     - Class: 114
       Script: {instanceID: 13072}
     - Class: 114
@@ -682,7 +685,7 @@ ScriptsOnlyBuild:
     className: SpriteSkinEntity
   - hash:
       serializedVersion: 2
-      Hash: 8a2274bad9a54a8b9a471d4401e84e50
+      Hash: b919d1457e4844af2b9908ead7f182a4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Inventory
@@ -752,6 +755,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DummyPlaeyer
+  - hash:
+      serializedVersion: 2
+      Hash: 2117ce3f2b058e7861d95e4d5b2c4c89
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Chatting
   - hash:
       serializedVersion: 2
       Hash: c42cece7ba6e35101e2a6ab9f1daa336
@@ -1120,13 +1129,13 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 2117ce3f2b058e7861d95e4d5b2c4c89
+      Hash: aecaa01914f1b9e6d73d22905e572726
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Chatting
+    className: ShareInventorySlot
   platform: 5
   scenePathNames:
   - Assets/Scenes/Login.unity
   - Assets/Scenes/Robby.unity
   - Assets/Scenes/InGame.unity
-  playerPath: C:/Users/dogoo/Desktop/200327_4/4-1Project.exe
+  playerPath: C:/Users/dogoo/Desktop/ShareInv_5/4-1Project.exe

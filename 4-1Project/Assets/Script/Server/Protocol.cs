@@ -201,3 +201,45 @@ public struct SendMessage
     }
 }
 
+public struct SendShareInvInfo
+{
+    public string type;
+    public int arrayNum;
+    public int itemNum;
+
+    public void Init(int _arrayNum, int _itemNum)
+    {
+        type = "SendShareInvInfo";
+        arrayNum = _arrayNum;
+        itemNum = _itemNum;
+    }
+}
+
+public struct SendShareSwapInfo
+{
+    public string type;
+    public int arrayNum_1;
+    public int arrayNum_2;
+
+    public void Init(int _arrayNum_1, int _arrayNum_2)
+    {
+        type = "SendShareSwapInfo";
+        arrayNum_1 = _arrayNum_1;
+        arrayNum_2 = _arrayNum_2;
+    }
+}
+
+public struct SendShareDeleteInfo
+{
+    public string type;
+    public int arrayNum;
+
+    public void Init(int _arrayNum)
+    {
+        type = "SendShareDeleteInfo";
+        arrayNum = _arrayNum;
+    }
+}
+
+
+

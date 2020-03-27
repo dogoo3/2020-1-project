@@ -124,8 +124,10 @@ public class Resolve
                     Chatting.instance.ReceiveComment(Data);
                     break;
                 case "ItemMixResult":
-                    Debug.Log(data);
                     Inventory.instance.ReceiveMixResult(Data);
+                    break;
+                case "SendShareInvInfo":
+                    Inventory.instance.UpdateShareInfo(Data);
                     break;
             }
         }

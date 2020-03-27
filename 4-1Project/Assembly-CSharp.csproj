@@ -74,6 +74,7 @@
     <Compile Include="Assets\Script\InvenTory\ItemTooltip.cs" />
     <Compile Include="Assets\Script\InvenTory\MixMaterialSlot.cs" />
     <Compile Include="Assets\Script\InvenTory\MixResultSlot.cs" />
+    <Compile Include="Assets\Script\InvenTory\ShareInventorySlot.cs" />
     <Compile Include="Assets\Script\Item\GetItem.cs" />
     <Compile Include="Assets\Script\Manager\GameManager.cs" />
     <Compile Include="Assets\Script\Manager\MakeManager.cs" />
