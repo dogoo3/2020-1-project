@@ -62,41 +62,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\Camera\CameraMove.cs" />
-    <Compile Include="Assets\Script\Enemy\EnemyAI.cs" />
-    <Compile Include="Assets\Script\Enemy\EnemyGFX.cs" />
-    <Compile Include="Assets\Script\EnergyBall\EnergyBall.cs" />
-    <Compile Include="Assets\Script\InvenTory\DataBase.cs" />
-    <Compile Include="Assets\Script\InvenTory\DragSlot.cs" />
-    <Compile Include="Assets\Script\InvenTory\Inventory.cs" />
-    <Compile Include="Assets\Script\InvenTory\InventorySlot.cs" />
-    <Compile Include="Assets\Script\InvenTory\Item.cs" />
-    <Compile Include="Assets\Script\InvenTory\ItemTooltip.cs" />
-    <Compile Include="Assets\Script\InvenTory\MixMaterialSlot.cs" />
-    <Compile Include="Assets\Script\InvenTory\MixResultSlot.cs" />
-    <Compile Include="Assets\Script\InvenTory\ShareInventorySlot.cs" />
-    <Compile Include="Assets\Script\Item\GetItem.cs" />
-    <Compile Include="Assets\Script\Manager\GameManager.cs" />
-    <Compile Include="Assets\Script\Manager\MakeManager.cs" />
-    <Compile Include="Assets\Script\Manager\RobbyManager.cs" />
-    <Compile Include="Assets\Script\Player\Command_Player\Player.cs" />
-    <Compile Include="Assets\Script\Player\Command_Player\Player_Actor.cs" />
-    <Compile Include="Assets\Script\Player\Command_Player\Player_Command.cs" />
-    <Compile Include="Assets\Script\Player\Command_Player\Player_Warrior.cs" />
-    <Compile Include="Assets\Script\Player\Command_Player\Player_Wizard.cs" />
-    <Compile Include="Assets\Script\Player\DummyPlaeyer.cs" />
-    <Compile Include="Assets\Script\Player\OtherPlayer\OhterPlayer_Actor.cs" />
-    <Compile Include="Assets\Script\Player\OtherPlayer\OtherPlayerManager.cs" />
-    <Compile Include="Assets\Script\Player\OtherPlayer\OtherPlayer_Command.cs" />
-    <Compile Include="Assets\Script\Player\OtherPlayer\OtherPlayer_Warrior.cs" />
-    <Compile Include="Assets\Script\Player\OtherPlayer\OtherPlayer_Wizard.cs" />
-    <Compile Include="Assets\Script\Pooling\PoolingManager.cs" />
-    <Compile Include="Assets\Script\Server\Protocol.cs" />
-    <Compile Include="Assets\Script\Server\Resolve.cs" />
-    <Compile Include="Assets\Script\Server\ServerClient.cs" />
-    <Compile Include="Assets\Script\UI\Chatting.cs" />
-    <Compile Include="Assets\Script\UI\ControlUI.cs" />
-    <Compile Include="Assets\Script\UI\UI.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\DataBase.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\DragSlot.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\Item.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\ItemTooltip.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\MixMaterialSlot.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\MixResultSlot.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\ShareInventorySlot.cs" />
+    <Compile Include="Assets\Scripts\Item\GetItem.cs" />
+    <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\MakeManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\RobbyManager.cs" />
+    <Compile Include="Assets\Scripts\Player\Client\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\Client\SubAnimator.cs" />
+    <Compile Include="Assets\Scripts\Player\OtherPlayer\OtherPlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Player\Server\Player_Server.cs" />
+    <Compile Include="Assets\Scripts\Pooling\PoolingManager.cs" />
+    <Compile Include="Assets\Scripts\Server\Protocol.cs" />
+    <Compile Include="Assets\Scripts\Server\Resolve.cs" />
+    <Compile Include="Assets\Scripts\Server\ServerClient.cs" />
+    <Compile Include="Assets\Scripts\UI\Chatting.cs" />
+    <Compile Include="Assets\Scripts\UI\ControlUI.cs" />
+    <Compile Include="Assets\Scripts\UI\UI.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/2020-1-project/4-1Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -342,9 +332,6 @@
     </Reference>
     <Reference Include="LitJson">
       <HintPath>C:/2020-1-project/4-1Project/Assets/LitJson.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>C:/2020-1-project/4-1Project/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.4f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -691,20 +678,6 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.4f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="AstarPathfindingProject.csproj">
-      <Project>{39EAFF4D-87BC-54DD-0381-3A2E4AA7C387}</Project>
-      <Name>AstarPathfindingProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="PackageToolsEditor.csproj">
-      <Project>{CE0CE675-1A1C-6C9B-F3EF-A9916CCA8D34}</Project>
-      <Name>PackageToolsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
-      <Project>{CBED0D65-EFF7-C3EF-C98E-54EF3AF5B606}</Project>
-      <Name>AstarPathfindingProjectEditor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
