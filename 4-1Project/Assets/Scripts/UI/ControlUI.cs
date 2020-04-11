@@ -8,9 +8,10 @@ public class ControlUI : MonoBehaviour
 {
     public GameObject inventory;
     public InputField UI_typingfield;
+
     private void Awake()
     {
-        inventory.SetActive(true);
+        // inventory.SetActive(true);
         inventory.SetActive(false);
     }
 

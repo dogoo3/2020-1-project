@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using System;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
 
     private DataBase theDataBase; // 아이템, 조합 관련 데이터베이스 받아오기
+
+    private Item[] equip_Inv;
+    private Item[] mat_Inv;
+    private Item[] potion_Inv;
 
     private InventorySlot[] inventorySlots; // 인벤토리 슬롯
     private MixMaterialSlot[] mixMaterialSlots; // 조합 슬롯
@@ -20,20 +25,41 @@ public class Inventory : MonoBehaviour
     private bool isMixed; // 조합 성공 여부를 서버에서 받아옴
     private int isMixItemID; // 조합 성공 시 서버에서 받아오는 아이템 번호
 
+    [HideInInspector]
+    public int _tabIndex; // 장비 / 재료 / 소비탭 인덱스 번호
+
     public Transform inv_slot, mix_slot, share_slot;
+    public InventoryTab[] inventoryTabs;
 
     public ItemMix Data;
 
     private void Awake()
     {
         instance = this;
+
+        // 슬롯 할당
         inventorySlots = inv_slot.GetComponentsInChildren<InventorySlot>();
         mixMaterialSlots = mix_slot.GetComponentsInChildren<MixMaterialSlot>();
         mixResultSlot = mix_slot.GetComponentInChildren<MixResultSlot>();
         shareInventorySlot = share_slot.GetComponentsInChildren<ShareInventorySlot>();
 
+        // 장비, 재료, 소비 아이템을 저장하는 배열 할당
+        equip_Inv = new Item[inventorySlots.Length];
+        mat_Inv = new Item[inventorySlots.Length];
+        potion_Inv = new Item[inventorySlots.Length];
+
+        for(int i=0;i<equip_Inv.Length;i++)
+        {
+            equip_Inv[i] = new Item();
+            mat_Inv[i] = new Item();
+            potion_Inv[i] = new Item();
+        }
+
+        // 서버와의 연동을 위해 공유 인벤토리의 슬롯에 따로 슬롯 인덱스를 할당해줌.
         for (int i = 0; i < shareInventorySlot.Length; i++)
             shareInventorySlot[i].slotIndex = i;
+
+        // 데이터베이스 검색
         theDataBase = FindObjectOfType<DataBase>();
 
         mat_itemID = new int[mixMaterialSlots.Length];
@@ -41,6 +67,12 @@ public class Inventory : MonoBehaviour
 
         isMixed = false;
         isMixItemID = 0;
+
+        _tabIndex = -1; // 기본 탭 세팅 안 되어 있음
+        // 그런데 기본탭 세팅을 0으로 해놓으면은 인벤토리 열기 전에 장비아이템은 습득할 수 없음
+        // 정확히는, 습득은 되지만 UI 이미지는 업데이트되지 않고, 인게임의 아이템도 사라지지 않음. 하지만 아이템 정보는 잘 들어가서 마우스 툴팁이 뜸.
+        // _tabIndex가 처음에 뭘 가르키는지에 따라 막히는 아이템의 타입이 달라짐... 왜지?
+        // 무엇보다 Return이 안 됨.
     }
 
     private void Update()
@@ -48,10 +80,7 @@ public class Inventory : MonoBehaviour
         if (isMixed) // 조합 성공 시
         {
             for (int i = 0; i < 3; i++)
-            {
-                Debug.Log("아이템 삭제 완료");
                 mixMaterialSlots[i].RemoveItem(); // 조합 슬롯의 아이템을 모두 없앤 다음
-            }
 
             for (int i = 0; i < theDataBase.itemList.Count; i++) // 아이템 데이터베이스에서 ID에 맞는 아이템을 찾은 뒤
             {
@@ -77,21 +106,80 @@ public class Inventory : MonoBehaviour
         {
             if(theDataBase.itemList[i].itemID == _itemID) // 데이터베이스 아이템 ID == 습득한 아이템 ID
             {
-                for (int j = 0; j < inventorySlots.Length; j++) // 인벤토리에 같은 ID의 아이템을 보유하고 있는지를 판단.
+                if(_itemID > 200) // 장비템 습득
                 {
-                    if (inventorySlots[j].item.itemID == _itemID) // 같은 ID의 아이템을 보유하고 있으면
+                    for (int j = 0; j < equip_Inv.Length; j++) // 장비 배열 내 검색
                     {
-                        inventorySlots[j].PlusItemCount();
-                        return true;
+                        if (equip_Inv[j].itemID == 0) // 빈 슬롯을 찾으면
+                        {
+                            equip_Inv[j] = theDataBase.itemList[i];
+                            if (_tabIndex == 0) // 현재 열린 창이 장비창일경우
+                            {
+                                inventorySlots[j].item = equip_Inv[j];
+                                inventorySlots[j].InitUI(false);
+                            }
+                            return true;
+                        }
                     }
                 }
-
-                for (int j = 0; j < inventorySlots.Length; j++) // 인벤토리 슬롯 for문
+                else if(_itemID > 100) // 소비템 습득
                 {
-                    if (inventorySlots[j].item.itemID == 0) // 아이템이 비어있는 슬롯을 찾으면
+                    for (int j = 0; j < potion_Inv.Length; j++) // 같은 ID의 아이템이 있는지 체크
                     {
-                        inventorySlots[j].AddItem(theDataBase.itemList[i]); // 비어있는 슬롯에 아이템을 넣어줌
-                        return true;
+                        if (potion_Inv[j].itemID == _itemID) // 슬롯에 같은 아이템이 있으면
+                        {
+                            potion_Inv[j].itemCount++; // 아이템 갯수 1 증가
+                            if (_tabIndex == 2) // 현재 열린 창이 소비창일경우
+                            {
+                                inventorySlots[j].item = potion_Inv[j];
+                                inventorySlots[j].InitUI();
+                            }
+                            return true;
+                        }
+                    }
+
+                    for (int j = 0; j < potion_Inv.Length; j++) // 아이템의 빈 공간 체크
+                    {
+                        if (potion_Inv[j].itemID == 0)
+                        {
+                            potion_Inv[j] = theDataBase.itemList[i]; // 아이템 정보를 슬롯에 할당
+                            if (_tabIndex == 2) // 현재 열린 창이 소비창일경우
+                            {
+                                inventorySlots[j].item = potion_Inv[j];
+                                inventorySlots[j].InitUI();
+                            }
+                            return true;
+                        }
+                    }
+                }
+                else // 재료템 습득
+                {
+                    for (int j = 0; j < mat_Inv.Length; j++) // 같은 ID의 아이템이 있는지 체크
+                    {
+                        if (mat_Inv[j].itemID == _itemID) // 슬롯에 같은 아이템이 있으면
+                        {
+                            mat_Inv[j].itemCount++; // 아이템 갯수 1 증가
+                            if (_tabIndex == 1) // 현재 열린 창이 재료창일경우
+                            {
+                                inventorySlots[j].item = mat_Inv[j];
+                                inventorySlots[j].InitUI();
+                            }
+                            return true;
+                        }
+                    }
+
+                    for (int j = 0; j < mat_Inv.Length; j++) // 아이템의 빈 공간 체크
+                    {
+                        if (mat_Inv[j].itemID == 0) // 슬롯에 같은 아이템이 없으면
+                        {
+                            mat_Inv[j] = theDataBase.itemList[i]; // 아이템 정보를 슬롯에 할당
+                            if (_tabIndex == 1) // 현재 열린 창이 재료창일경우
+                            {
+                                inventorySlots[j].item = mat_Inv[j];
+                                inventorySlots[j].InitUI();
+                            }
+                            return true;
+                        }
                     }
                 }
             }
@@ -204,5 +292,42 @@ public class Inventory : MonoBehaviour
         {
             return;
         }
+    }
+
+    void ChangeTabColor(int _p_tabNum)
+    {
+        inventoryTabs[_tabIndex].DisableTab(); // 이전에 선택된 인덱스의 탭 색깔을 비선택 색깔로 바꿔준 뒤
+        _tabIndex = _p_tabNum; // 탭 인덱스를 바꾸고
+        inventoryTabs[_tabIndex].EnableTab(); // 새로 선택된 인덱스의 탭 색깔로 바꿔준다.
+    }
+
+    public void InitEquipInv(int _tabNum) // 장비 탭 클릭 시
+    {
+        for(int i=0;i<inventorySlots.Length;i++)
+        {
+            inventorySlots[i].item = equip_Inv[i];
+            inventorySlots[i].InitUI(false); // 장비템은 중복이 안 되기 때문에 아이템 갯수를 표시하지 않는다.
+        }
+        ChangeTabColor(_tabNum);
+    }
+
+    public void InitMatInv(int _tabNum) // 재료 탭 클릭 시
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i].item = mat_Inv[i];
+            inventorySlots[i].InitUI();
+        }
+        ChangeTabColor(_tabNum);
+    }
+
+    public void InitPotionInv(int _tabNum) // 소비 탭 클릭 시
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i].item = potion_Inv[i];
+            inventorySlots[i].InitUI();
+        }
+        ChangeTabColor(_tabNum);
     }
 }

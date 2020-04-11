@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
+using UnityEngine.UI;
 
 public class GetItem : MonoBehaviour
 {

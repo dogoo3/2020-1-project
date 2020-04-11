@@ -594,7 +594,6 @@ C:\2020-1-project\4-1Project\Temp\bin\Debug\LitJson.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\Microsoft.Win32.Primitives.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\mscorlib.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\netstandard.dll
-C:\2020-1-project\4-1Project\Temp\bin\Debug\Pathfinding.Ionic.Zip.Reduced.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\PsdPlugin.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\System.AppContext.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\System.Collections.Concurrent.dll
@@ -796,12 +795,8 @@ C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.SerializationLogic.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\ExCSS.Unity.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEditor.TestRunner.dll
-C:\2020-1-project\4-1Project\Temp\bin\Debug\nunit.framework.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.CecilTools.dll
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEngine.TestRunner.dll
-C:\2020-1-project\4-1Project\Temp\bin\Debug\AstarPathfindingProject.pdb
-C:\2020-1-project\4-1Project\Temp\bin\Debug\PackageToolsEditor.pdb
-C:\2020-1-project\4-1Project\Temp\bin\Debug\AstarPathfindingProjectEditor.pdb
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEngine.xml
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEditor.xml
 C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.Timeline.Editor.pdb
@@ -886,8 +881,6 @@ C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEngine.VideoModule.xml
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEngine.WindModule.xml
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEngine.XRModule.xml
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEditor.TestRunner.pdb
-C:\2020-1-project\4-1Project\Temp\bin\Debug\nunit.framework.pdb
-C:\2020-1-project\4-1Project\Temp\bin\Debug\nunit.framework.xml
 C:\2020-1-project\4-1Project\Temp\bin\Debug\UnityEngine.TestRunner.pdb
 C:\2020-1-project\4-1Project\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
 C:\2020-1-project\4-1Project\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

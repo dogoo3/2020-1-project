@@ -11,7 +11,16 @@ public class Item
     public Sprite itemIcon; // 아이템 아이콘
     public int itemCount;
 
-    public Item(int _itemID, string _itemName, string _itemDes, string _itemFilename="") // ItemInfo 클래스에 대한 생성자
+    public Item()
+    {
+        itemID = 0;
+        itemName = "";
+        itemDescription = "";
+        itemIcon = null;
+        itemCount = 0;
+    }
+
+    public Item(int _itemID, string _itemName, string _itemDes, string _itemFilename="") // Item 클래스에 대한 생성자
     {
         itemID = _itemID;
         itemName = _itemName;

@@ -64,11 +64,14 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
             RemoveItem();
     }
 
-    public void InitUI()
+    public void InitUI(bool _showCount = true)
     {
         UI_item_image.sprite = item.itemIcon;
         SetAlpha(1);
-        UI_item_count.text = item.itemCount.ToString();
+        if (_showCount)
+            UI_item_count.text = item.itemCount.ToString();
+        else
+            UI_item_count.text = "";
         if (item.itemCount == 0)
             RemoveItem();
     }
