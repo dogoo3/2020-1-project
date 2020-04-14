@@ -14,7 +14,7 @@ enum TabName
 public class InventoryTab : MonoBehaviour, IPointerClickHandler
 {
     private Image _image;
-    private Color _enableRGB, _disableRGB;
+    private Color _enableCol, _disableCol;
 
     [Header("0:장비 1:재료 2:소비")]
     public int _tabIndex;
@@ -22,19 +22,18 @@ public class InventoryTab : MonoBehaviour, IPointerClickHandler
     private void Awake()
     {
         _image = GetComponent<Image>();
-
-        _enableRGB = new Color(0.545f, 0.545f, 0.545f, 1);
-        _disableRGB = new Color(0.776f, 0.776f, 0.776f, 1);
+        _enableCol = new Color(0.545f, 0.545f, 0.545f, 1);
+        _disableCol = new Color(0.776f, 0.776f, 0.776f, 1);
     }
 
     public void EnableTab()
     {
-        _image.color = _enableRGB;
+        _image.color = _enableCol;
     }
 
     public void DisableTab()
     {
-        _image.color = _disableRGB;
+        _image.color = _disableCol;
     }
 
     public void OnPointerClick(PointerEventData eventData)

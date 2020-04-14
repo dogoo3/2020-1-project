@@ -57,11 +57,17 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     public void InitUI()
     {
+        if (item.itemCount == 0)
+        {
+            RemoveItem();
+            return;
+        }
         UI_item_image.sprite = item.itemIcon;
         SetAlpha(1);
-        UI_item_count.text = item.itemCount.ToString();
-        if (item.itemCount == 0)
-            RemoveItem();
+        if (item.itemID > 200) // 아이템이 장비아이템일경우
+            UI_item_count.text = "";
+        else
+            UI_item_count.text = item.itemCount.ToString();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -95,8 +101,10 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
                 item = temp.Init();
 
                 // UI 업데이트
-                InitUI();
+                // InitUI();
                 // shareInventorySlot.InitUI();
+                DragSlot.instance.SetColor(0);
+                return;
             }
 
             InventorySlot inventorySlot = eventData.pointerEnter.gameObject.GetComponent<InventorySlot>();
@@ -108,30 +116,52 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
                 JsonData SendData = JsonMapper.ToJson(deleteData);
                 ServerClient.instance.Send(SendData.ToString());
 
-                if (temp != null) // 인벤토리 슬롯에 같은 아이템이 있으면
+                if(item.itemID > 200) // 드래그한 아이템이 장비아이템이면
                 {
-                    temp.PlusItemCount(); // 인벤토리 슬롯의 갯수 1개 증가
-                    // MinusItemCount(); // 공유 슬롯 갯수 1개 감소
-                    temp.InitUI(); // 인벤토리 슬롯 UI 업데이트
-                }
-                else // 인벤토리 슬롯에 같은 ID의 아이템이 없을 경우
-                {
-                    if (inventorySlot.item.itemID == 0)
+                    if(inventorySlot.item.itemID == 0) // 드롭한 슬롯이 빈 슬롯일 경우
                     {
-                        inventorySlot.item = item.Init(); // 인벤토리 슬롯에 아이템 정보 할당
-                        inventorySlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
-                        MinusItemCount(); // 조합 슬롯 갯수 1개 감소
+                        inventorySlot.item = item.Init();
+                        inventorySlot.InitUI();
                     }
-                    else
+                    else if(inventorySlot.item.itemID > 200) // 드롭한 슬롯이 장비 슬롯일 경우
                     {
                         Item temp2 = inventorySlot.item.Init();
                         inventorySlot.item = item.Init();
                         item = temp2.Init();
                     }
+                    else // 드롭한 슬롯이 소비/재료 슬롯일 경우
+                    { }
+                }
+                else // 드래그한 아이템이 소비 / 재료 아이템이면
+                {
+                    if (temp != null) // 인벤토리 슬롯에 같은 아이템이 있으면
+                    {
+                        temp.PlusItemCount(); // 인벤토리 슬롯의 갯수 1개 증가
+                        // MinusItemCount(); // 공유 슬롯 갯수 1개 감소
+                        temp.InitUI(); // 인벤토리 슬롯 UI 업데이트
+                    }
+                    else // 인벤토리 슬롯에 같은 ID의 아이템이 없을 경우
+                    {
+                        if (inventorySlot.item.itemID == 0)
+                        {
+                            inventorySlot.item = item.Init(); // 인벤토리 슬롯에 아이템 정보 할당
+                            inventorySlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
+                            MinusItemCount(); // 조합 슬롯 갯수 1개 감소
+                        }
+                        else
+                        {
+                            Item temp2 = inventorySlot.item.Init();
+                            inventorySlot.item = item.Init();
+                            item = temp2.Init();
+                        }
+                    }
                 }
 
                 // InitUI();
-                inventorySlot.InitUI(); // 인벤토리 슬롯 UI 업데이트
+                //if (item.itemID > 200)
+                //    inventorySlot.InitUI(false); // 인벤토리 슬롯 UI 업데이트(장비 아이템)
+                //else
+                //    inventorySlot.InitUI();
 
                 if (item.itemCount == 0)
                     RemoveItem();
@@ -144,6 +174,5 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
             DragSlot.instance.SetColor(0);
             return;
         }
-        
     }
 }

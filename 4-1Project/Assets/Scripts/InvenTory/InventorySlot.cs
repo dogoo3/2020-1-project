@@ -15,7 +15,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
 
     public SendShareInvInfo Data;
 
-    void Awake()
+    private void Awake()
     {
         UI_item_image = GetComponent<Image>();
         UI_item_count = GetComponentInChildren<Text>();
@@ -64,16 +64,19 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
             RemoveItem();
     }
 
-    public void InitUI(bool _showCount = true)
+    public void InitUI()
     {
+        if (item.itemCount == 0)
+        {
+            RemoveItem();
+            return;
+        }
         UI_item_image.sprite = item.itemIcon;
         SetAlpha(1);
-        if (_showCount)
-            UI_item_count.text = item.itemCount.ToString();
-        else
+        if (item.itemID > 200)
             UI_item_count.text = "";
-        if (item.itemCount == 0)
-            RemoveItem();
+        else
+            UI_item_count.text = item.itemCount.ToString();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -114,6 +117,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
             MixMaterialSlot mixMaterialSlot = eventData.pointerEnter.gameObject.GetComponent<MixMaterialSlot>();
             if (mixMaterialSlot != null) // 드롭한 슬롯이 조합재료 슬롯일 경우
             {
+                if(item.itemID > 200)
+                    throw new Exception();
+
                 MixMaterialSlot temp = Inventory.instance.SearchMixMaterialSlot(item.itemID); // 조합 슬롯 3개에 같은 ID의 아이템이 있는지 검색
                 if (temp != null) // 조합 슬롯에 같은 ID의 아이템이 있으면
                 {
@@ -135,44 +141,63 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
                         mixMaterialSlot.item = item.Init();
                         item = temp2.Init();
                     }
+                    mixMaterialSlot.InitUI(); // 조합 슬롯 UI 업데이트
                 }
 
                 InitUI();
-                mixMaterialSlot.InitUI(); // 조합 슬롯 UI 업데이트
 
                 if (item.itemCount == 0)
                     RemoveItem();
             }
 
             ShareInventorySlot shareInventorySlot = eventData.pointerEnter.gameObject.GetComponent<ShareInventorySlot>();
-            if (shareInventorySlot != null) // 드롭한 슬롯이 조합재료 슬롯일 경우
+            if (shareInventorySlot != null) // 드롭한 슬롯이 공유인벤토리일 경우
             {
                 Data.Init(shareInventorySlot.slotIndex,item.itemID);
                 JsonData SendData = JsonMapper.ToJson(Data);
                 ServerClient.instance.Send(SendData.ToString());
 
                 ShareInventorySlot temp = Inventory.instance.SearchShareInventorySlot(item.itemID); // 공유 슬롯 3개에 같은 ID의 아이템이 있는지 검색
-                if (temp != null) // 공유 슬롯에 같은 ID의 아이템이 있으면
+                if(item.itemID > 200) // 드래그한 아이템이 장비아이템일경우
                 {
-                    MinusItemCount(); // 인벤토리 슬롯 갯수 1개 감소
-                }
-                else // 공유 슬롯에 같은 ID의 아이템이 없을 경우
-                {
-                    if (shareInventorySlot.item.itemID == 0) // 빈 슬롯에 드롭할 경우
+                    if(shareInventorySlot.item.itemID == 0) // 드롭한 슬롯이 빈 슬롯일 경우
                     {
-                        shareInventorySlot.item = item.Init(); // 공유 슬롯에 아이템 정보 할당
-                        MinusItemCount(); // 인벤토리 아이템 갯수 1개 감소
-                    }
-                    else // 빈 슬롯이 아닐 경우(아이템을 스왑해 주어야 함)
-                    {
-                        Item temp2 = shareInventorySlot.item.Init();
                         shareInventorySlot.item = item.Init();
-                        item = temp2.Init();
+                        MinusItemCount();
+                    }
+                    else // 드롭한 슬롯이 빈 슬롯이 아니면
+                    {
+                        if (shareInventorySlot.item.itemID > 200) // 장비 아이템끼리만 스왑할 수 있음
+                        {
+                            Item temp2 = shareInventorySlot.item.Init();
+                            shareInventorySlot.item = item.Init();
+                            item = temp2.Init();
+                        }
+                    }
+                }
+                else
+                {
+                    if (temp != null) // 공유 슬롯에 같은 ID의 아이템이 있으면
+                    {
+                        MinusItemCount(); // 인벤토리 슬롯 갯수 1개 감소
+                    }
+                    else // 공유 슬롯에 같은 ID의 아이템이 없을 경우
+                    {
+                        if (shareInventorySlot.item.itemID == 0) // 빈 슬롯에 드롭할 경우
+                        {
+                            shareInventorySlot.item = item.Init(); // 공유 슬롯에 아이템 정보 할당
+                            MinusItemCount(); // 인벤토리 아이템 갯수 1개 감소
+                        }
+                        else // 빈 슬롯이 아닐 경우(아이템을 스왑해 주어야 함)
+                        {
+                            Item temp2 = shareInventorySlot.item.Init();
+                            shareInventorySlot.item = item.Init();
+                            item = temp2.Init();
+                        }
                     }
                 }
 
                 InitUI();
-                // shareInventorySlot.InitUI(); // 공유 슬롯 UI 업데이트
 
                 if (item.itemCount == 0)
                     RemoveItem();

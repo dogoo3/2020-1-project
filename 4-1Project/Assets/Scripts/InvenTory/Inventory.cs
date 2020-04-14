@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
 
     public Transform inv_slot, mix_slot, share_slot;
     public InventoryTab[] inventoryTabs;
+    public GameObject inventory;
 
     public ItemMix Data;
 
@@ -67,12 +68,12 @@ public class Inventory : MonoBehaviour
 
         isMixed = false;
         isMixItemID = 0;
+    }
 
-        _tabIndex = -1; // 기본 탭 세팅 안 되어 있음
-        // 그런데 기본탭 세팅을 0으로 해놓으면은 인벤토리 열기 전에 장비아이템은 습득할 수 없음
-        // 정확히는, 습득은 되지만 UI 이미지는 업데이트되지 않고, 인게임의 아이템도 사라지지 않음. 하지만 아이템 정보는 잘 들어가서 마우스 툴팁이 뜸.
-        // _tabIndex가 처음에 뭘 가르키는지에 따라 막히는 아이템의 타입이 달라짐... 왜지?
-        // 무엇보다 Return이 안 됨.
+    private void Start()
+    {
+        InitEquipInv(0);
+        inventory.SetActive(false);
     }
 
     private void Update()
@@ -112,11 +113,11 @@ public class Inventory : MonoBehaviour
                     {
                         if (equip_Inv[j].itemID == 0) // 빈 슬롯을 찾으면
                         {
-                            equip_Inv[j] = theDataBase.itemList[i];
+                            equip_Inv[j] = theDataBase.itemList[i].Init();
                             if (_tabIndex == 0) // 현재 열린 창이 장비창일경우
                             {
                                 inventorySlots[j].item = equip_Inv[j];
-                                inventorySlots[j].InitUI(false);
+                                inventorySlots[j].InitUI();
                             }
                             return true;
                         }
@@ -142,7 +143,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (potion_Inv[j].itemID == 0)
                         {
-                            potion_Inv[j] = theDataBase.itemList[i]; // 아이템 정보를 슬롯에 할당
+                            potion_Inv[j] = theDataBase.itemList[i].Init(); // 아이템 정보를 슬롯에 할당
                             if (_tabIndex == 2) // 현재 열린 창이 소비창일경우
                             {
                                 inventorySlots[j].item = potion_Inv[j];
@@ -172,7 +173,7 @@ public class Inventory : MonoBehaviour
                     {
                         if (mat_Inv[j].itemID == 0) // 슬롯에 같은 아이템이 없으면
                         {
-                            mat_Inv[j] = theDataBase.itemList[i]; // 아이템 정보를 슬롯에 할당
+                            mat_Inv[j] = theDataBase.itemList[i].Init(); // 아이템 정보를 슬롯에 할당
                             if (_tabIndex == 1) // 현재 열린 창이 재료창일경우
                             {
                                 inventorySlots[j].item = mat_Inv[j];
@@ -255,7 +256,7 @@ public class Inventory : MonoBehaviour
         ServerClient.instance.Send(SendData.ToString()); // Send와 동시에 Resolve받아 조합 성공 여부를 알려줌.
     }
 
-    public void ReceiveMixResult(JsonData _data)
+    public void ReceiveMixResult(JsonData _data) // 조합 결과를 서버에서 받아오는 함수
     {
         try
         {
@@ -269,15 +270,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UpdateShareInfo(JsonData _data)
+    public void UpdateShareInfo(JsonData _data) // 공유 인벤토리 갱신
     {
         try
         {
-            for(int i=0;i<shareInventorySlot.Length;i++)
+            for (int i = 0; i < shareInventorySlot.Length; i++)
             {
                 shareInventorySlot[i].item.itemID = int.Parse(_data["Inventory"][i].ToString());
                 shareInventorySlot[i].item.itemCount = int.Parse(_data["ItemCount"][i].ToString());
-                for(int j=0;j<theDataBase.itemList.Count;j++)
+                for (int j = 0; j < theDataBase.itemList.Count; j++)
                 {
                     if (shareInventorySlot[i].item.itemID == theDataBase.itemList[j].itemID)
                     {
@@ -294,6 +295,25 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    void UpdateItemInfo(int _tabIndex) // 탭을 바꿀 때마다 바꾸기 전 탭의 정보를 아이템 배열에 저장
+    {
+        switch(_tabIndex)
+        {
+            case 0: // 장비
+                for (int i = 0; i < inventorySlots.Length; i++)
+                    equip_Inv[i] = inventorySlots[i].item.Init();
+                break;
+            case 1: // 재료
+                for (int i = 0; i < inventorySlots.Length; i++)
+                    mat_Inv[i] = inventorySlots[i].item.Init();
+                break;
+            case 2: // 소비
+                for (int i = 0; i < inventorySlots.Length; i++)
+                    potion_Inv[i] = inventorySlots[i].item.Init();
+                break;
+        }
+    }
+
     void ChangeTabColor(int _p_tabNum)
     {
         inventoryTabs[_tabIndex].DisableTab(); // 이전에 선택된 인덱스의 탭 색깔을 비선택 색깔로 바꿔준 뒤
@@ -301,33 +321,33 @@ public class Inventory : MonoBehaviour
         inventoryTabs[_tabIndex].EnableTab(); // 새로 선택된 인덱스의 탭 색깔로 바꿔준다.
     }
 
+    void UpdateInvSlot(Item[] _items)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i].item = _items[i];
+            inventorySlots[i].InitUI();
+        }
+    }
+
     public void InitEquipInv(int _tabNum) // 장비 탭 클릭 시
     {
-        for(int i=0;i<inventorySlots.Length;i++)
-        {
-            inventorySlots[i].item = equip_Inv[i];
-            inventorySlots[i].InitUI(false); // 장비템은 중복이 안 되기 때문에 아이템 갯수를 표시하지 않는다.
-        }
+        UpdateItemInfo(_tabIndex);
+        UpdateInvSlot(equip_Inv);
         ChangeTabColor(_tabNum);
     }
 
     public void InitMatInv(int _tabNum) // 재료 탭 클릭 시
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            inventorySlots[i].item = mat_Inv[i];
-            inventorySlots[i].InitUI();
-        }
+        UpdateItemInfo(_tabIndex);
+        UpdateInvSlot(mat_Inv);
         ChangeTabColor(_tabNum);
     }
 
     public void InitPotionInv(int _tabNum) // 소비 탭 클릭 시
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            inventorySlots[i].item = potion_Inv[i];
-            inventorySlots[i].InitUI();
-        }
+        UpdateItemInfo(_tabIndex);
+        UpdateInvSlot(potion_Inv);
         ChangeTabColor(_tabNum);
     }
 }
