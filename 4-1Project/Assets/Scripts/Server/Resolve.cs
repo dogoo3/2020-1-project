@@ -23,7 +23,7 @@ public class Resolve
     byte[] PacketBuffer = new byte[2048];
 
     int PacketBufferMarker;
-    int MessageSize;
+    // int MessageSize;
     int remain_byte;
 
     byte[] Header = new byte[Defines.HEADERSIZE];
@@ -31,7 +31,7 @@ public class Resolve
     public Resolve()
     {
         this.PacketBufferMarker = 0;
-        this.MessageSize = 0;
+        // this.MessageSize = 0;
         this.remain_byte = 0;
     }
 
@@ -91,7 +91,7 @@ public class Resolve
             switch (Data["type"].ToString())
             {
                 case "UI":
-                    UI.instance.Check(Data);
+                    RobbyUI.instance.Check(Data);
                     break;
                 case "PlayerData":
                     if (OtherPlayerManager.instance.PlayerList.ContainsKey(Data["name"].ToString()))
@@ -124,9 +124,18 @@ public class Resolve
                 case "SendShareInvInfo":
                     Inventory.instance.UpdateShareInfo(Data);
                     break;
+                case "BulletDir": // 유도탄
+                    PatternManager.instance.LoadInduceBullet();
+                    break;
+                case "RandomLaser": // 랜덤레이저
+                    PatternManager.instance.LoadRandomLaser();
+                    break;
+                case "BossHp":
+                    Boss.instance.SetHP(Data);
+                    break;
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Debug.Log("데이터를 받는 도중에 오류 " + data);
         }

@@ -32,13 +32,9 @@ public class Player_Server : MonoBehaviour
     //공격 애니메이션을 제어
     public bool AttackOn;
 
-    //오브젝트 풀링 매니져를 가져온다
-    public PoolingManager poolingManager;
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        poolingManager = GetComponent<PoolingManager>();
         _subAnimators = GetComponentsInChildren<SubAnimator>();
     }
 
@@ -60,6 +56,7 @@ public class Player_Server : MonoBehaviour
 
         _animator.SetFloat("xPos", Rot.x);
         _animator.SetFloat("yPos", Rot.y);
+       
     }
 
     //Json 데이터들을 파싱하여 데이터를 갱신한다

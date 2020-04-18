@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     [Header("영웅들을 저장하는 곳입니다 영웅캐릭터 프리팹을 올려주세요(로비에서 사용하는 것은 로비 씬에 있음)")]
     public List<GameObject> ServerHeros;
 
+    [Header("보스 프리팹 저장")]
+    public GameObject boss;
+
     //생성을 위한 함수
     public bool MakeNow;
 

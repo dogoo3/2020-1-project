@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using LitJson;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public enum ServerState
 {
     NOT_CONNECTED,
@@ -21,7 +23,9 @@ public class ServerClient : MonoBehaviour
     //서버상태
     public ServerState ST;
 
+    public InputField ipText;
     public string IP;
+    public InputField portText;
     public int Port;
     
     PlayerInfo playerInfo;
@@ -34,7 +38,7 @@ public class ServerClient : MonoBehaviour
         public Socket WorkingSocket;
         public AsyncObject(int BufferSize)
         {
-            this.Buffer = new byte[BufferSize];
+            Buffer = new byte[BufferSize];
         }
     }
 
@@ -237,6 +241,12 @@ public class ServerClient : MonoBehaviour
 
     public void Connect()
     {
+        if(ipText != null)
+            IP = ipText.text;
+
+        if (portText != null)
+            Port = int.Parse(portText.text);
+
         if(ST == ServerState.NOT_CONNECTED)
         {
             ConnectedToServer(IP, Port);

@@ -16,23 +16,23 @@ public class Player : MonoBehaviour
     PlayerState playerState;
 
     Animator _animator;
-    Camera _camera;
     
     SubAnimator[] _subAnimator;
     SubAnimator _activesubAnimator;
 
-    Vector2 _mousePos, _dirPos, _temp_dirPos;
+    [HideInInspector]
+    public Vector2 _mousePos;
+    Vector2 _dirPos, _temp_dirPos;
     Vector2 _Pos, _movePos, _temp_movePos;
 
     public PlayerData Data;
-
+    public Damage damage_data;
     public float _speed = 5.0f, HP = 100;
 
     void Start()
     {
         playerState = PlayerState.Idle;
         _animator = GetComponent<Animator>();
-        _camera = FindObjectOfType<Camera>();
         _subAnimator = GetComponentsInChildren<SubAnimator>();
         _temp_dirPos = Vector2.zero;
         _temp_movePos = Vector2.zero;
@@ -40,9 +40,10 @@ public class Player : MonoBehaviour
 
         Data.Speed = _speed;
         Data.Init(GameManager.instance.PlayerName);
+        damage_data.Init();
     }
 
-    private void Update()
+    public void Update()
     {
         // 이동뿐만이 아니라 회전했을 때도 현재 위치를 패킷으로 보내주기 때문에
         // (패킷을 보낼 때 현재 위치도 계속 보내기 때문에 최신 위치 정보가 필요해서)
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
 
     public void ChangeLookdirection()
     {
-        _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _mousePos -= (Vector2)transform.position;
 
         // 마우스 커서의 좌표를 -1 ~ 1로 만들어줌
@@ -129,5 +130,20 @@ public class Player : MonoBehaviour
         {
             Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), collision.collider);
         }
+    }
+
+    public void AttackPlayer()
+    {
+        playerState = PlayerState.Attack;
+        Data.State = (int)PlayerState.Attack;
+
+        JsonData SendData = JsonMapper.ToJson(Data);
+        ServerClient.instance.Send(SendData.ToString());
+    }
+
+    public void SendDamageInfo()
+    {
+        JsonData SendData = JsonMapper.ToJson(damage_data);
+        ServerClient.instance.Send(SendData.ToString());
     }
 }

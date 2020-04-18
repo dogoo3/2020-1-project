@@ -7,9 +7,12 @@ using UnityEngine.UI;
 public class MakeManager : MonoBehaviour
 {
     public List<Transform> SpawnPoint;
+    public Transform spawnPoint_boss;
 
     public CameraMove cameraMove;
-    
+
+    private GameObject obj_temp;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -17,14 +20,14 @@ public class MakeManager : MonoBehaviour
         {
             JsonData Data = JsonMapper.ToObject(GameManager.instance.GameSpawnData);
 
-            for (int i = 0; i < Data["SessionIDList"].Count; i++)
+            for (int i = 0; i < Data["SessionIDList"].Count; i++) // 플레이어 및 서버플레이어 소환
             {
                 if (GameManager.instance.PlayerName == Data["SessionIDList"][i]["SessionID"].ToString())
                 {
-                    GameObject obj = Instantiate(GameManager.instance.Heros[GameManager.instance.type]
+                    obj_temp = Instantiate(GameManager.instance.Heros[GameManager.instance.type]
                                , SpawnPoint[i].position, Quaternion.identity);
-                    obj.name = GameManager.instance.PlayerName;
-                    cameraMove.target = obj;
+                    obj_temp.name = GameManager.instance.PlayerName;
+                    cameraMove.target = obj_temp;
                 }
                 else 
                 {
@@ -33,14 +36,18 @@ public class MakeManager : MonoBehaviour
                     {
                         if (GameManager.instance.playerInfo[j].Name == Data["SessionIDList"][i]["SessionID"].ToString())
                         {
-                            GameObject obj = Instantiate(GameManager.instance.ServerHeros[GameManager.instance.playerInfo[j].type]
+                            obj_temp = Instantiate(GameManager.instance.ServerHeros[GameManager.instance.playerInfo[j].type]
                                 , SpawnPoint[i].position, Quaternion.identity);
-                            obj.name = GameManager.instance.playerInfo[j].Name;
-                            OtherPlayerManager.instance.PlayerList.Add(GameManager.instance.playerInfo[j].Name, obj.GetComponent<Player_Server>());
+                            obj_temp.name = GameManager.instance.playerInfo[j].Name;
+                            OtherPlayerManager.instance.PlayerList.Add(GameManager.instance.playerInfo[j].Name, obj_temp.GetComponent<Player_Server>());
                         }
                     }
                 }
             }
+
+            // 보스 소환
+            obj_temp = Instantiate(GameManager.instance.boss, spawnPoint_boss.position, Quaternion.identity);
+            obj_temp.name = "Boss";
         }
     }
 }

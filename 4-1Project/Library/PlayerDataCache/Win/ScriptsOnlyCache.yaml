@@ -1,28 +1,34 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Boss
     - CameraMove
     - Chatting
     - ControlUI
     - DataBase
     - DragSlot
+    - EnergyBall
     - GameManager
     - GetItem
     - Inventory
     - InventorySlot
     - InventoryTab
     - ItemTooltip
+    - Laser
     - MakeManager
     - MixMaterialSlot
     - MixResultSlot
+    - ObjectPoolingManager
     - OtherPlayerManager
+    - PatternManager
     - Player
     - Player_Server
+    - Player_Warrior
     - RobbyManager
+    - RobbyUI
     - ServerClient
     - ShareInventorySlot
     - SubAnimator
-    - UI
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Animation.Runtime.dll:
@@ -74,6 +80,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
     - Class: 58
       Script: {instanceID: 0}
     - Class: 60
@@ -85,59 +93,65 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11182}
     - Class: 114
-      Script: {instanceID: 11212}
+      Script: {instanceID: 11208}
     - Class: 114
-      Script: {instanceID: 11232}
+      Script: {instanceID: 11228}
     - Class: 114
-      Script: {instanceID: 11372}
+      Script: {instanceID: 11368}
+    - Class: 114
+      Script: {instanceID: 11462}
     - Class: 114
       Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11470}
+      Script: {instanceID: 11514}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11602}
     - Class: 114
-      Script: {instanceID: 11606}
+      Script: {instanceID: 11740}
     - Class: 114
-      Script: {instanceID: 11744}
+      Script: {instanceID: 11788}
     - Class: 114
-      Script: {instanceID: 11792}
+      Script: {instanceID: 11972}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 12134}
     - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12172}
+      Script: {instanceID: 12314}
     - Class: 114
-      Script: {instanceID: 12318}
+      Script: {instanceID: 12362}
     - Class: 114
-      Script: {instanceID: 12366}
+      Script: {instanceID: 12458}
     - Class: 114
-      Script: {instanceID: 12462}
+      Script: {instanceID: 12494}
     - Class: 114
-      Script: {instanceID: 12498}
+      Script: {instanceID: 12524}
     - Class: 114
-      Script: {instanceID: 12528}
+      Script: {instanceID: 12554}
     - Class: 114
-      Script: {instanceID: 12558}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 12802}
+      Script: {instanceID: 12870}
     - Class: 114
-      Script: {instanceID: 12874}
+      Script: {instanceID: 12970}
     - Class: 114
-      Script: {instanceID: 12974}
+      Script: {instanceID: 13090}
     - Class: 114
-      Script: {instanceID: 13094}
+      Script: {instanceID: 13214}
     - Class: 114
-      Script: {instanceID: 13218}
+      Script: {instanceID: 13294}
     - Class: 114
-      Script: {instanceID: 13298}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 13534}
+      Script: {instanceID: 14110}
     - Class: 114
-      Script: {instanceID: 14114}
+      Script: {instanceID: 23706}
+    - Class: 114
+      Script: {instanceID: 23708}
+    - Class: 114
+      Script: {instanceID: 23712}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -184,35 +198,41 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11182}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11514}
     - Class: 114
-      Script: {instanceID: 11706}
+      Script: {instanceID: 11702}
     - Class: 114
-      Script: {instanceID: 11832}
+      Script: {instanceID: 11828}
     - Class: 114
-      Script: {instanceID: 12032}
+      Script: {instanceID: 12028}
     - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 12134}
     - Class: 114
-      Script: {instanceID: 12544}
+      Script: {instanceID: 12540}
     - Class: 114
-      Script: {instanceID: 12802}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 13072}
+      Script: {instanceID: 13068}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 13076}
     - Class: 114
-      Script: {instanceID: 13094}
+      Script: {instanceID: 13090}
     - Class: 114
-      Script: {instanceID: 13534}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 13778}
+      Script: {instanceID: 13774}
     - Class: 114
-      Script: {instanceID: 14114}
+      Script: {instanceID: 14110}
+    - Class: 114
+      Script: {instanceID: 23716}
+    - Class: 114
+      Script: {instanceID: 47806}
+    - Class: 114
+      Script: {instanceID: 47850}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -255,35 +275,37 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11182}
+    - Class: 114
+      Script: {instanceID: 11462}
     - Class: 114
       Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11470}
+      Script: {instanceID: 11514}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11668}
     - Class: 114
-      Script: {instanceID: 11672}
+      Script: {instanceID: 11716}
     - Class: 114
-      Script: {instanceID: 11720}
+      Script: {instanceID: 11972}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 12134}
     - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 12458}
     - Class: 114
-      Script: {instanceID: 12462}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 12802}
+      Script: {instanceID: 12942}
     - Class: 114
-      Script: {instanceID: 12946}
+      Script: {instanceID: 13068}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 13076}
     - Class: 114
-      Script: {instanceID: 13094}
+      Script: {instanceID: 13090}
     - Class: 114
-      Script: {instanceID: 13534}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 14114}
+      Script: {instanceID: 14110}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -345,12 +367,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ScrollbarEventHandler
-  - hash:
-      serializedVersion: 2
-      Hash: 439b29334c83f2c1e8c0a687b17f8a8c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PoolingManager
   - hash:
       serializedVersion: 2
       Hash: aecaa01914f1b9e6d73d22905e572726
@@ -443,7 +459,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: f7b01416755e3e81d4e278a42ba9a18e
+      Hash: 60e6370fd888789d335df037fc2414f2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Server
@@ -521,7 +537,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: f7ca3d750d69986212d09922dcc1f31a
+      Hash: 36247c7a662f79888ea6d93385b3f232
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -611,7 +627,7 @@ ScriptsOnlyBuild:
     className: ItemTooltip
   - hash:
       serializedVersion: 2
-      Hash: a9b71c1a0524f738c2c0b95088b31fb1
+      Hash: 464c2ba611b17970f7bc4552fa5f7155
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -671,7 +687,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 500b2b4b449232e776a3bb0af33273d7
+      Hash: dfe85a6ffb7d8792c10bc9004bf643e3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MakeManager
@@ -686,7 +702,7 @@ ScriptsOnlyBuild:
       Hash: e2309c2657d9346b2d5f2f5333350717
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: UI
+    className: RobbyUI
   - hash:
       serializedVersion: 2
       Hash: 783f593b9380cf72d0f7ebfd4a0d4bcd
@@ -785,7 +801,7 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
-      Hash: 80778f9076e0fa92f1f8fbfe15588f1d
+      Hash: 94ab193f99d33b2c61bf6a4975de0a39
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ServerClient
@@ -891,9 +907,45 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 3f70ed87ce5d89afee709297db2f7289
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnergyBall
+  - hash:
+      serializedVersion: 2
+      Hash: 603ec63919db8a936c94b2137bddc9db
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ObjectPoolingManager
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Laser
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PatternManager
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Boss
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Player_Warrior
   platform: 5
   scenePathNames:
   - Assets/Scenes/Login.unity
   - Assets/Scenes/Robby.unity
   - Assets/Scenes/InGame.unity
-  playerPath: C:/Users/dogoo/Desktop/0412/4-1Project.exe
+  playerPath: C:/Users/dogoo/Desktop/0418/4-1Project.exe

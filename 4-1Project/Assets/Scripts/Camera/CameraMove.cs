@@ -15,6 +15,6 @@ public class CameraMove : MonoBehaviour
     void LateUpdate()
     {
         CameraPos = new Vector3(transform.position.x, target.transform.position.y + Height, Distance);
-        this.transform.position = Vector3.Lerp(CameraPos, target.transform.position, Speed * Time.smoothDeltaTime);
+        transform.position = Vector3.Lerp(CameraPos, target.transform.position, Speed * Time.smoothDeltaTime);
     }
 }

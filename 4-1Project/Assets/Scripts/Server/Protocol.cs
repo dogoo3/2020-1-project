@@ -241,5 +241,34 @@ public struct SendShareDeleteInfo
     }
 }
 
+public struct Phase
+{
+    public string type;
+    public double px, py; // 플레이어 x, y
+    public double bx, by; // 보스 x, y
+    public bool isStart;
+
+    public void Init(bool _isStart, double _px = 0, double _py = 0, double _bx = 0, double _by = 0)
+    {
+        type = "Phase";
+        px = _px;
+        py = _py;
+        bx = _bx;
+        by = _by;
+        isStart = _isStart;
+    }
+}
+
+public struct Damage
+{
+    public string type;
+
+    public void Init()
+    {
+        type = "BossDamage";
+    }
+}
+
+
 
 

@@ -22,11 +22,7 @@ public class GetItem : MonoBehaviour
         {
             isGetItem = Inventory.instance.GetItem(itemID); // true를 반환하면 아이템을 획득한 것으로 판단.
             if (isGetItem)
-            {
-                JsonData SendData = JsonMapper.ToJson(Data);
-                ServerClient.instance.Send(SendData.ToString());
                 gameObject.SetActive(false);
-            }
         }
         else
             gameObject.SetActive(false);
