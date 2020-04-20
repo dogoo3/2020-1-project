@@ -82,11 +82,8 @@
     <Compile Include="Assets\Scripts\Manager\RobbyManager.cs" />
     <Compile Include="Assets\Scripts\Objects\EnergyBall.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
-    <Compile Include="Assets\Scripts\Pattern\InduceBulletPattern.cs" />
-    <Compile Include="Assets\Scripts\Pattern\Pattern.cs" />
+    <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternManager.cs" />
-    <Compile Include="Assets\Scripts\Pattern\PatternReceiver.cs" />
-    <Compile Include="Assets\Scripts\Pattern\RandomLaserPattern.cs" />
     <Compile Include="Assets\Scripts\Player\Client\Player.cs" />
     <Compile Include="Assets\Scripts\Player\Client\SubAnimator.cs" />
     <Compile Include="Assets\Scripts\Player\OtherPlayer\OtherPlayerManager.cs" />

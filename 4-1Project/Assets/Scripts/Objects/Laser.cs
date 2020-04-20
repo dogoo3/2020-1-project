@@ -13,7 +13,7 @@ public class Laser : MonoBehaviour
 
     private void OnEnable()
     {
-        SetLaserIndex();
+        SetLaserIndex(_laserIndex);
     }
 
     private void Update()
@@ -21,6 +21,8 @@ public class Laser : MonoBehaviour
         _time += Time.deltaTime;
         if (_time >= 2.0f)
             ObjectPoolingManager.instance.InsertQueue(this, ObjectPoolingManager.instance.queue_randomlaser);
+        else
+            transform.position = Boss.instance.transform.position;
         switch (_laserIndex)
         {
             case 0: // Down
@@ -55,9 +57,9 @@ public class Laser : MonoBehaviour
         _time = 0;
     }
 
-    public void SetLaserIndex()
+    public void SetLaserIndex(int _laserIndex)
     {
-        _laserIndex = Random.Range(0, 8);
+        this._laserIndex = _laserIndex;
         transform.rotation = Quaternion.Euler(0, 0, 45 * _laserIndex);
     }
 }

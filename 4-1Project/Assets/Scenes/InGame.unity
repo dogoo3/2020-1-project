@@ -3518,7 +3518,7 @@ MonoBehaviour:
   laser: {fileID: 7277746016316210618, guid: 86fb12cc6b429ac4f87c4601e3d823ae, type: 3}
   energyBall: {fileID: 1031909560066091491, guid: c84dc74ff7073e14f8ffde823aff1689,
     type: 3}
-  poolingCount: 10
+  poolingCount: 40
 --- !u!4 &1384126563
 Transform:
   m_ObjectHideFlags: 0

@@ -269,6 +269,16 @@ public struct Damage
     }
 }
 
+public struct PhaseEnd
+{
+    public string type;
+
+    public void Init()
+    {
+        type = "PhaseEnd";
+    }
+}
+
 
 
 

@@ -6,8 +6,7 @@ public class EnergyBall : MonoBehaviour
 {
     Rigidbody2D _rigidbody2D;
     private float _time;
-    private Vector2 _mousepos;
-
+    
     public float lifetime = 2.0f;
     public int power;
 
@@ -18,7 +17,8 @@ public class EnergyBall : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.position = Vector2.zero;
+        if(Boss.instance != null)
+            transform.position = Boss.instance.transform.position;
         _rigidbody2D.velocity = Vector2.zero;
     }
 
@@ -32,5 +32,10 @@ public class EnergyBall : MonoBehaviour
     private void OnDisable()
     {
         _time = 0;
+    }
+
+    public void InduceBullet(Vector2 _dir)
+    {
+        _rigidbody2D.AddForce(_dir * power);
     }
 }

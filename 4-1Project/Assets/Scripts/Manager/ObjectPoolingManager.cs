@@ -11,7 +11,7 @@ public class ObjectPoolingManager : MonoBehaviour
 
     public Laser laser;
     public EnergyBall energyBall;
-    public int poolingCount = 10;
+    public int poolingCount = 40;
 
     private void Awake()
     {
@@ -20,11 +20,13 @@ public class ObjectPoolingManager : MonoBehaviour
         for (int i = 0; i < poolingCount; i++)
         {
             EnergyBall t_object = Instantiate(energyBall, Vector2.zero, Quaternion.identity);
+            t_object.transform.parent = gameObject.transform;
             queue_energyball.Enqueue(t_object);
             t_object.gameObject.SetActive(false);
         }
 
         Laser temp = Instantiate(laser, Vector2.zero, Quaternion.identity);
+        temp.transform.parent = gameObject.transform;
         queue_randomlaser.Enqueue(temp);
         temp.gameObject.SetActive(false);
     }

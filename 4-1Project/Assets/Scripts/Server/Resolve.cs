@@ -125,18 +125,21 @@ public class Resolve
                     Inventory.instance.UpdateShareInfo(Data);
                     break;
                 case "BulletDir": // 유도탄
-                    PatternManager.instance.LoadInduceBullet();
+                    Debug.Log("유도유도유도유도");
+                    PatternManager.instance.LoadInduceBullet(Data);
                     break;
                 case "RandomLaser": // 랜덤레이저
-                    PatternManager.instance.LoadRandomLaser();
+                    Debug.Log("랜덤랜덤랜덤레이저");
+                    PatternManager.instance.LoadRandomLaser(Data);
                     break;
                 case "BossHp":
                     Boss.instance.SetHP(Data);
                     break;
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Debug.Log(ex);
             Debug.Log("데이터를 받는 도중에 오류 " + data);
         }
     }
