@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 0 : 아이템 없음
+// 1 ~ 100 : 재료
+// 101 ~ 200 : 소비
+// 201 ~ 300 : 장비
+
 public class DataBase : MonoBehaviour
 {
     public List<Item> itemList = new List<Item>();
@@ -10,17 +15,18 @@ public class DataBase : MonoBehaviour
     private void Start()
     {
         // Material Item
-        itemList.Add(new Item(1, "50원", "50원입니다.", "50WON"));
-        itemList.Add(new Item(2, "100원", "100원입니다.", "100WON"));
-        itemList.Add(new Item(3, "500원", "500원입니다.", "500WON"));
-        itemList.Add(new Item(4, "골드바", "매우 비싼 골드바", "goldbar"));
+        itemList.Add(new Item(1, "주문서", "주문서.", "alchemy"));
+        itemList.Add(new Item(2, "에메랄드", "에메랄드.", "ashvattha"));
+        itemList.Add(new Item(3, "물방울", "물방울.", "Ereronium"));
+        itemList.Add(new Item(4, "헝겊", "헝겊.", "fabric"));
+        itemList.Add(new Item(5, "가넷", "가넷.", "hernite"));
+        itemList.Add(new Item(6, "고철", "고철.", "iron"));
+        itemList.Add(new Item(7, "사파이어", "사파이어", "gaiter"));
 
         // Potion Item
-        itemList.Add(new Item(101, "빨간 포션", "HP가 회복되게 할 겁니다", "RedPotion"));
-        itemList.Add(new Item(102, "파워 엘릭서", "짱짱하게 회복합니다", "PowerElixir"));
+        itemList.Add(new Item(101, "파우더", "피부", "powder"));
 
         // Equipment Item
-        itemList.Add(new Item(201, "법전", "법전으로 사람을 때려도 무죄입니다", "LawBook"));
-        itemList.Add(new Item(202, "샷건", "흔하게 볼 수 있는 총입니다", "ShotGun"));
+        itemList.Add(new Item(201, "펜던트", "펜던트...", "pendant"));
     }
 }
