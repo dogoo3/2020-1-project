@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 1610459205939091184}
   m_Layer: 0
   m_Name: Magician
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,8 +151,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mousePos: {x: 0, y: 0}
-  _speed: 5
-  HP: 100
+  _movespeed: 5
+  attackSpeed: 2
+  STR: 200
+  DEF: 10
+  fullHP: 0
 --- !u!114 &1610459205939091184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0296bc2b7d2d8f64498eb91fd7bbacf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameObject: {fileID: 1089642308199189051, guid: 7bbd18c20887c6648bd74264981dfb50,
+    type: 3}
 --- !u!114 &1610459203878564420
 MonoBehaviour:
   m_ObjectHideFlags: 0

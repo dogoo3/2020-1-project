@@ -259,15 +259,30 @@ public struct Phase
     }
 }
 
-public struct Damage
+public struct BossDamage // 플레이어가 보스를 때리면 서버에서 보스 체력을 관리하기 때문에 방어력까지 계산해서 보내준다.
 {
     public string type;
+    public int damage;
 
     public void Init()
     {
         type = "BossDamage";
     }
 }
+
+public struct PlayerDamage // 보스 탄환이 플레이어를 때리면 다른 플레이어들에게 내 HP를 알려줘야하므로 내 HP를 서버로 전송한다
+{
+    public string type;
+
+    public int HP;
+    public string nickname;
+
+    public void Init()
+    {
+        type = "PlayerDamage";
+    }
+}
+
 
 public struct PhaseEnd
 {

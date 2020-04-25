@@ -147,5 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1863a7301cbfc4ead47bbbd9e494ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3000
+  STR: 0
+  DEF: 20
   patternNum: 0
   _circleBullet: 16

@@ -108,7 +108,6 @@ public class Resolve
                     break;
                 case "Ready":
                     RobbyManager.instance.ReadyOn(Data);
-
                     if (bool.Parse(Data["Start"].ToString()))
                     {
                         GameManager.instance.GameSpawnData = data;
@@ -138,6 +137,10 @@ public class Resolve
                 case "BossHp":
                     Debug.Log("패턴 재시작");
                     Boss.instance.SetHP(Data);
+                    break;
+                case "PlayerDamage":
+                    Debug.Log("공격받음");
+                    HPManager.instance.ReceiveHp(Data);
                     break;
             }
         }

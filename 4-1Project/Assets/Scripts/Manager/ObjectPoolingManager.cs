@@ -6,11 +6,14 @@ public class ObjectPoolingManager : MonoBehaviour
 {
     public static ObjectPoolingManager instance;
 
-    public Queue<EnergyBall> queue_energyball = new Queue<EnergyBall>();
     public Queue<Laser> queue_randomlaser = new Queue<Laser>();
-
+    public Queue<Bullet> queue_energyball = new Queue<Bullet>();
+    public Queue<EnergyBall> queue_magicBall = new Queue<EnergyBall>();
+    
     public Laser laser;
-    public EnergyBall energyBall;
+    public Bullet energyBall;
+    public EnergyBall magicBall;
+    
     public int poolingCount = 40;
 
     private void Awake()
@@ -19,9 +22,17 @@ public class ObjectPoolingManager : MonoBehaviour
 
         for (int i = 0; i < poolingCount; i++)
         {
-            EnergyBall t_object = Instantiate(energyBall, Vector2.zero, Quaternion.identity);
+            Bullet t_object = Instantiate(energyBall, Vector2.zero, Quaternion.identity);
             t_object.transform.parent = gameObject.transform;
             queue_energyball.Enqueue(t_object);
+            t_object.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            EnergyBall t_object = Instantiate(magicBall, Vector2.zero, Quaternion.identity);
+            t_object.transform.parent = gameObject.transform;
+            queue_magicBall.Enqueue(t_object);
             t_object.gameObject.SetActive(false);
         }
 
@@ -31,10 +42,20 @@ public class ObjectPoolingManager : MonoBehaviour
         temp.gameObject.SetActive(false);
     }
 
-    public void InsertQueue(EnergyBall _object, Queue<EnergyBall> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
+    public void InsertQueue(Bullet _object, Queue<Bullet> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
     {
         _queue.Enqueue(_object);
         _object.gameObject.SetActive(false);
+    }
+    public Bullet GetQueue(Queue<Bullet> _queue)
+    {
+        if (queue_energyball.Count != 0)
+        {
+            Bullet t_object = _queue.Dequeue();
+            t_object.gameObject.SetActive(true);
+            return t_object;
+        }
+        return null;
     }
 
     public void InsertQueue(Laser _object, Queue<Laser> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
@@ -42,18 +63,6 @@ public class ObjectPoolingManager : MonoBehaviour
         _queue.Enqueue(_object);
         _object.gameObject.SetActive(false);
     }
-
-    public EnergyBall GetQueue(Queue<EnergyBall> _queue)
-    {
-        if (queue_energyball.Count != 0)
-        {
-            EnergyBall t_object = _queue.Dequeue();
-            t_object.gameObject.SetActive(true);
-            return t_object;
-        }
-        return null;
-    }
-
     public Laser GetQueue(Queue<Laser> _queue)
     {
         if (queue_randomlaser.Count != 0)
@@ -62,5 +71,19 @@ public class ObjectPoolingManager : MonoBehaviour
             return t_object;
         }
         return null;
+    }
+
+    public void InsertQueue(EnergyBall _object) // Second Paramerer is put object Queue(poolingmanager queue)
+    {
+        queue_magicBall.Enqueue(_object);
+        _object.gameObject.SetActive(false);
+    }
+    public void GetQueue()
+    {
+        if (queue_magicBall.Count != 0)
+        {
+            EnergyBall t_object = queue_magicBall.Dequeue();
+            t_object.gameObject.SetActive(true);
+        }
     }
 }

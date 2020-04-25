@@ -2,7 +2,7 @@
 
 public class PatternCommand
 {
-    protected EnergyBall _energyball;
+    protected Bullet _energyball;
     protected Laser _laser;
 
     public virtual void Execute(int _index) { }

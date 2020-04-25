@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
+using UnityEngine.UI;
 
 public enum PlayerState
 {
@@ -22,12 +23,16 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public Vector2 _mousePos;
+
     Vector2 _dirPos, _temp_dirPos;
     Vector2 _Pos, _movePos, _temp_movePos;
 
     public PlayerData Data;
-    public Damage damage_data;
-    public float _speed = 5.0f, HP = 100;
+    public BossDamage PtoB_damage_data; // 플레이어가 보스에게 데미지를 넣을 때
+    public PlayerDamage BtoP_damage_data; // 보스가 쏜 탄환에 플레이어가 맞으면
+
+    public float _movespeed = 5.0f, attackSpeed;
+    public int STR, DEF, fullHP;
 
     void Start()
     {
@@ -38,9 +43,11 @@ public class Player : MonoBehaviour
         _temp_movePos = Vector2.zero;
         _activesubAnimator = _subAnimator[0];
 
-        Data.Speed = _speed;
+        Data.Speed = _movespeed;
         Data.Init(GameManager.instance.PlayerName);
-        damage_data.Init();
+        PtoB_damage_data.Init();
+        BtoP_damage_data.Init();
+        BtoP_damage_data.nickname = GameManager.instance.PlayerName;
     }
 
     public void Update()
@@ -67,7 +74,6 @@ public class Player : MonoBehaviour
         _dirPos.y = Mathf.RoundToInt(_mousePos.normalized.y);
 
         // 마우스 좌표에 따른 캐릭터의 시점 변경
-
         _animator.SetFloat("xPos", _dirPos.x);
         _animator.SetFloat("yPos", _dirPos.y);
 
@@ -96,7 +102,7 @@ public class Player : MonoBehaviour
         if (_movePos != Vector2.zero)
         {
             ChangeAnimationState(true);
-            transform.Translate(_movePos * Time.deltaTime * _speed);
+            transform.Translate(_movePos * Time.deltaTime * _movespeed);
         }
         else
         {
@@ -149,9 +155,24 @@ public class Player : MonoBehaviour
         ServerClient.instance.Send(SendData.ToString());
     }
 
-    public void SendDamageInfo()
+    public void SendDamageInfo(int _def) // 내가 공격을 할 때
     {
-        JsonData SendData = JsonMapper.ToJson(damage_data);
+        if (STR - _def <= 0)
+            return;
+        PtoB_damage_data.damage = STR - _def;
+        JsonData SendData = JsonMapper.ToJson(PtoB_damage_data);
+        ServerClient.instance.Send(SendData.ToString());
+    }
+
+    public void Attacked(int _damage) // 외부에서 공격이 들어올 때.
+    {
+        if (_damage - DEF <= 0)
+            return;
+        HPManager.instance.myHP -= (_damage - DEF);
+        HPManager.instance.SetHP();
+        BtoP_damage_data.HP = HPManager.instance.myHP;
+
+        JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());
     }
 }

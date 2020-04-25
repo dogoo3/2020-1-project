@@ -75,8 +75,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mousePos: {x: 0, y: 0}
-  _speed: 5
-  HP: 100
+  _movespeed: 5
+  attackSpeed: 1
+  STR: 150
+  DEF: 50
+  fullHP: 0
 --- !u!50 &1405114167788028989
 Rigidbody2D:
   serializedVersion: 4
@@ -126,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b1630aeee6a64f9a0a6f83ad82d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0
+  attacktime: 1
 --- !u!1001 &3577444076653320588
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -62,7 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Boss.cs" />
+    <Compile Include="Assets\EnergyBall.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />
     <Compile Include="Assets\Scripts\InvenTory\DataBase.cs" />
     <Compile Include="Assets\Scripts\InvenTory\DragSlot.cs" />
@@ -76,22 +76,25 @@
     <Compile Include="Assets\Scripts\InvenTory\ShareInventorySlot.cs" />
     <Compile Include="Assets\Scripts\Item\GetItem.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\HPManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MakeManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ObjectPoolingManager.cs" />
     <Compile Include="Assets\Scripts\Manager\RobbyManager.cs" />
-    <Compile Include="Assets\Scripts\Objects\EnergyBall.cs" />
+    <Compile Include="Assets\Scripts\Objects\Boss.cs" />
+    <Compile Include="Assets\Scripts\Objects\Bullet.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternManager.cs" />
     <Compile Include="Assets\Scripts\Player\Client\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\Client\Player_Magician.cs" />
+    <Compile Include="Assets\Scripts\Player\Client\Player_Warrior.cs" />
     <Compile Include="Assets\Scripts\Player\Client\SubAnimator.cs" />
     <Compile Include="Assets\Scripts\Player\OtherPlayer\OtherPlayerManager.cs" />
     <Compile Include="Assets\Scripts\Player\Server\Player_Server.cs" />
-    <Compile Include="Assets\Scripts\Player_Magician.cs" />
-    <Compile Include="Assets\Scripts\Player_Warrior.cs" />
     <Compile Include="Assets\Scripts\Server\Protocol.cs" />
     <Compile Include="Assets\Scripts\Server\Resolve.cs" />
     <Compile Include="Assets\Scripts\Server\ServerClient.cs" />
+    <Compile Include="Assets\Scripts\UI\BossHPBar.cs" />
     <Compile Include="Assets\Scripts\UI\Chatting.cs" />
     <Compile Include="Assets\Scripts\UI\ControlUI.cs" />
     <Compile Include="Assets\Scripts\UI\RobbyUI.cs" />

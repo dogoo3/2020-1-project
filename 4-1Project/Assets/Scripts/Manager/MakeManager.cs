@@ -12,6 +12,11 @@ public class MakeManager : MonoBehaviour
     public CameraMove cameraMove;
 
     private GameObject obj_temp;
+    
+    public GameObject[] otherPlayerHPBar;
+
+    public Text hpBar_mynickname;
+    public Text[] hpBar_othernickname;
 
     // Start is called before the first frame update
     void Awake()
@@ -28,10 +33,10 @@ public class MakeManager : MonoBehaviour
                                , SpawnPoint[i].position, Quaternion.identity);
                     obj_temp.name = GameManager.instance.PlayerName;
                     cameraMove.target = obj_temp;
+                    hpBar_mynickname.text = GameManager.instance.PlayerName;
                 }
                 else 
                 {
-                    
                     for (int j = 0; j < GameManager.instance.playerInfo.Count; j++)
                     {
                         if (GameManager.instance.playerInfo[j].Name == Data["SessionIDList"][i]["SessionID"].ToString())
@@ -40,6 +45,10 @@ public class MakeManager : MonoBehaviour
                                 , SpawnPoint[i].position, Quaternion.identity);
                             obj_temp.name = GameManager.instance.playerInfo[j].Name;
                             OtherPlayerManager.instance.PlayerList.Add(GameManager.instance.playerInfo[j].Name, obj_temp.GetComponent<Player_Server>());
+
+                            // HpBar 할당
+                            otherPlayerHPBar[j].SetActive(true); // 서버 플레이어 HP바 활성화
+                            hpBar_othernickname[j].text = GameManager.instance.playerInfo[j].Name; // HpBar에 닉네임 삽입
                         }
                     }
                 }
