@@ -43,9 +43,15 @@ public class Player_Server : MonoBehaviour
         if (!_setOn)
         {
             if (Pos != Vector2.zero)
+            {
                 Move(Speed, true);
+                PS = PlayerState.Move;
+            }
             else
+            {
                 Move(0, false);
+                PS = PlayerState.Idle;
+            }
         }
         else
         {
@@ -56,7 +62,9 @@ public class Player_Server : MonoBehaviour
 
         _animator.SetFloat("xPos", Rot.x);
         _animator.SetFloat("yPos", Rot.y);
-       
+
+        if (PS == PlayerState.Attack)
+            ChangeAnimationState();
     }
 
     //Json 데이터들을 파싱하여 데이터를 갱신한다
@@ -123,6 +131,18 @@ public class Player_Server : MonoBehaviour
             if (_subAnimators[i].active)
             {
                 _subAnimators[i].Move(_state);
+                break;
+            }
+        }
+    }
+
+    void ChangeAnimationState()
+    {
+        for (int i = 0; i < _subAnimators.Length; i++)
+        {
+            if (_subAnimators[i].active)
+            {
+                _subAnimators[i].Attack();
                 break;
             }
         }

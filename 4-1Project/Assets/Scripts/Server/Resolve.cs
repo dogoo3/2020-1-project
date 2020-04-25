@@ -35,7 +35,7 @@ public class Resolve
         this.remain_byte = 0;
     }
 
-    public void ReadMessage(byte[]msgByte,int recvBytes)
+    public void ReadMessage(byte[] msgByte, int recvBytes)
     {
         this.remain_byte = recvBytes;
 
@@ -45,20 +45,20 @@ public class Resolve
         int nPacketData = this.PacketBufferMarker + msgByte.Length;
         int nReadData = 0;
 
-        while(nPacketData>0)    //받은 데이터를 모두 처리할 때까지 반복한다
+        while (nPacketData > 0)    //받은 데이터를 모두 처리할 때까지 반복한다
         {
             //남은 데이터가 패킷 헤더보다 작으면 중단한다
-            if(nPacketData<Defines.HEADERSIZE)
+            if (nPacketData < Defines.HEADERSIZE)
             {
                 break;
             }
 
             Array.Copy(PacketBuffer, nReadData, Header, 0, Defines.HEADERSIZE);
             int size = BitConverter.ToInt32(Header, 0);
-            
-            if(size<=nPacketData)   //일단 처리할 수 있는 만큼의 데이터가 있다면 패킷을 처리한다
+
+            if (size <= nPacketData)   //일단 처리할 수 있는 만큼의 데이터가 있다면 패킷을 처리한다
             {
-                string message = System.Text.Encoding.UTF8.GetString(PacketBuffer, nReadData + Defines.HEADERSIZE,size-4);
+                string message = System.Text.Encoding.UTF8.GetString(PacketBuffer, nReadData + Defines.HEADERSIZE, size - 4);
                 CheckData(message);
                 nPacketData -= size;
                 nReadData += size;
@@ -69,7 +69,7 @@ public class Resolve
             }
         }
 
-        if(nPacketData>0)   //만약 패킷 데이터 크기가 남아있다면 다시 패킷 데이터에 다시 넣어줌
+        if (nPacketData > 0)   //만약 패킷 데이터 크기가 남아있다면 다시 패킷 데이터에 다시 넣어줌
         {
             byte[] TempBuffer = new byte[2048];
             Array.Copy(PacketBuffer, nReadData, TempBuffer, 0, nPacketData);
@@ -132,7 +132,11 @@ public class Resolve
                     Debug.Log("랜덤랜덤랜덤레이저");
                     PatternManager.instance.LoadRandomLaser(Data);
                     break;
+                case "PhaseRestart":
+                    PatternManager.instance.PatternStart();
+                    break;
                 case "BossHp":
+                    Debug.Log("패턴 재시작");
                     Boss.instance.SetHP(Data);
                     break;
             }

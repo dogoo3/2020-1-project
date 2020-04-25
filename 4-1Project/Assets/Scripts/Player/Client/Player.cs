@@ -137,6 +137,14 @@ public class Player : MonoBehaviour
         playerState = PlayerState.Attack;
         Data.State = (int)PlayerState.Attack;
 
+        for (int i = 0; i < _subAnimator.Length; i++)
+        {
+            if (_subAnimator[i].active)
+            {
+                _subAnimator[i].Attack();
+                break;
+            }
+        }
         JsonData SendData = JsonMapper.ToJson(Data);
         ServerClient.instance.Send(SendData.ToString());
     }

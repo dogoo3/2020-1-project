@@ -15,11 +15,11 @@ public class Boss : MonoBehaviour
     private int _hp = 100;
     private float _fullHp;
 
-    private float _time;
-    public float loadtime;
     public int patternNum;
 
     public Phase Data;
+
+    public int _circleBullet;
 
     private void Awake()
     {
@@ -31,33 +31,30 @@ public class Boss : MonoBehaviour
         Data.Init(false);
     }
 
-    private void Update()
-    {
-        _time += 0.032f;
-        if (_time > loadtime)
-        {
-            switch (patternNum)
-            {
-                case 3: // 유도탄환
-                case 4: // 랜덤레이저
-                    SendPhaseData();
-                    break;
-                default:
-                    break;
-            }
-            _time = 0;
-        }
-    }
-
     public void SetHP(JsonData _data)
     {
         _hp = int.Parse(_data["Hp"].ToString());
-        patternNum = int.Parse(_data["Phase"].ToString());
+        if (patternNum != int.Parse(_data["Phase"].ToString()))
+        {
+            patternNum = int.Parse(_data["Phase"].ToString());
+            PatternManager.instance._isStart = true;
+        }
+        else
+        {
+            patternNum = int.Parse(_data["Phase"].ToString());
+        }
+
         Debug.Log(patternNum);
+    }
+
+    public void DelaySendPhaseData(float _delayTime)
+    {
+        Invoke("SendPhaseData", _delayTime);
     }
 
     private void SendPhaseData()
     {
+        CancelInvoke("SendPhaseData");
         Data.bx = transform.position.x;
         Data.by = transform.position.y;
 

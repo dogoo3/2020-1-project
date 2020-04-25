@@ -5,12 +5,14 @@ using LitJson;
 public class PatternManager : MonoBehaviour
 {
     public static PatternManager instance;
-    
+
     PatternCommand pat_induceBullet, pat_randomLaser;
     Vector2 playerPos;
     public PhaseEnd data_PhaseEnd;
 
-    private bool _isStart;
+    [HideInInspector] 
+    public bool _isStart;
+    private bool _isEnd;
     private int _index;
 
     private void Awake()
@@ -28,19 +30,32 @@ public class PatternManager : MonoBehaviour
 
     private void Update()
     {
-        if(_isStart)
+        if (_isStart)
         {
+            _isStart = false;
             switch (Boss.instance.patternNum)
             {
+                case 2:
+                    Debug.Log("총알 생성");
+                    pat_induceBullet.Execute(Boss.instance._circleBullet);
+                    break;
                 case 3: // 유도 탄환
                     pat_induceBullet.Execute(playerPos);
+                    Boss.instance.DelaySendPhaseData(0.5f);
                     break;
                 case 4: // 랜덤 레이저
                     pat_randomLaser.Execute(_index);
+                    Boss.instance.DelaySendPhaseData(0.5f);
                     break;
+
             }
-            Invoke("SendPhaseEnd", 0.5f);
-            _isStart = false;
+            _isEnd = true;
+        }
+
+        if (_isEnd)
+        {
+            _isEnd = false;
+            Invoke("SendPhaseEnd", 1.0f);
         }
     }
 
@@ -57,9 +72,15 @@ public class PatternManager : MonoBehaviour
         playerPos.y = float.Parse(_data["y"].ToString());
     }
 
+    public void PatternStart()
+    {
+        _isStart = true;
+    }
+
     private void SendPhaseEnd()
     {
         CancelInvoke("SendPhaseEnd");
+        Debug.Log("보스 패턴 재시작");
         JsonData SendData = JsonMapper.ToJson(data_PhaseEnd);
         ServerClient.instance.Send(SendData.ToString());
     }

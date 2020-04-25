@@ -1032,6 +1032,16 @@ PrefabInstance:
       propertyPath: _image
       value: 
       objectReference: {fileID: 192637438}
+    - target: {fileID: 4597207662596298871, guid: 3ac77985ad4c8934c9e0a57b39cec08f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4597207662843650835, guid: 3ac77985ad4c8934c9e0a57b39cec08f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4597207662961373281, guid: 3ac77985ad4c8934c9e0a57b39cec08f,
         type: 3}
       propertyPath: m_IsActive

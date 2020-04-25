@@ -50,4 +50,9 @@ public class SubAnimator : MonoBehaviour
         for(int i=0;i<_characterSprite.Length;i++)
             _characterSprite[i].gameObject.SetActive(_state);
     }
+
+    public void Attack()
+    {
+        _animator.SetTrigger("Attack");
+    }
 }
