@@ -29,7 +29,6 @@ public class Boss : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _playerPos = FindObjectOfType<Player>().transform;
         _BossHPBar = FindObjectOfType<BossHPBar>();
-        _BossHPBar.gameObject.SetActive(false);
         _fullHp = HP;
 
         Data.Init(false);

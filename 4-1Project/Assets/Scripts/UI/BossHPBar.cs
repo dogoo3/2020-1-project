@@ -23,6 +23,7 @@ public class BossHPBar : MonoBehaviour
         remainderHP = phaseFullHP;
         image_HPgauge[0].color = HPGaugeColor[9];
         image_HPgauge[1].color = HPGaugeColor[8];
+        gameObject.SetActive(false);
     }
 
     private void Update()
