@@ -14,7 +14,7 @@ public class ObjectPoolingManager : MonoBehaviour
     public Bullet energyBall;
     public EnergyBall magicBall;
     
-    public int poolingCount = 40;
+    public int poolingCount = 500;
 
     private void Awake()
     {
@@ -78,12 +78,13 @@ public class ObjectPoolingManager : MonoBehaviour
         queue_magicBall.Enqueue(_object);
         _object.gameObject.SetActive(false);
     }
-    public void GetQueue()
+    public void GetQueue(Vector2 _direction, Vector2 _transform)
     {
         if (queue_magicBall.Count != 0)
         {
             EnergyBall t_object = queue_magicBall.Dequeue();
             t_object.gameObject.SetActive(true);
+            t_object.ShootBall(_direction, _transform);
         }
     }
 }

@@ -124,12 +124,13 @@ public class Resolve
                     Inventory.instance.UpdateShareInfo(Data);
                     break;
                 case "BulletDir": // 유도탄
-                    Debug.Log("유도유도유도유도");
                     PatternManager.instance.LoadInduceBullet(Data);
                     break;
                 case "RandomLaser": // 랜덤레이저
-                    Debug.Log("랜덤랜덤랜덤레이저");
                     PatternManager.instance.LoadRandomLaser(Data);
+                    break;
+                case "CircleBulletType":  //원형 탄환
+                    PatternManager.instance.LoadInduceCircleBullet(Data);
                     break;
                 case "PhaseRestart":
                     PatternManager.instance.PatternStart();

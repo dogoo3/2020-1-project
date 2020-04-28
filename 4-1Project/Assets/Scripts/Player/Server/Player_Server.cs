@@ -22,6 +22,8 @@ public class Player_Server : MonoBehaviour
     public Vector2 Pos;
     // 시점(마우스 커서)
     public Vector2 Rot;
+    // 마법사 공격 방향
+    public Vector2 _magician_direction;
 
     //플레이어 속도
     public float Speed;
@@ -64,7 +66,11 @@ public class Player_Server : MonoBehaviour
         _animator.SetFloat("yPos", Rot.y);
 
         if (PS == PlayerState.Attack)
+        {
             ChangeAnimationState();
+            if(_magician_direction != Vector2.zero) // 마법사일 때만
+                ObjectPoolingManager.instance.GetQueue(_magician_direction, transform.position);
+        }
     }
 
     //Json 데이터들을 파싱하여 데이터를 갱신한다
@@ -82,6 +88,10 @@ public class Player_Server : MonoBehaviour
         SyncPos.x = float.Parse(Data["nx"].ToString());
         SyncPos.y = float.Parse(Data["ny"].ToString());
 
+        // 마법사 공격 방향
+        _magician_direction.x = float.Parse(Data["ax"].ToString());
+        _magician_direction.y = float.Parse(Data["ay"].ToString());
+
         GetMillTime = float.Parse(Data["time"].ToString());
         
         Speed = float.Parse(Data["Speed"].ToString());
@@ -94,7 +104,7 @@ public class Player_Server : MonoBehaviour
     //만약에 위치를 동기화하는게 아니라면 서버에서 받은 방향값을 가지고 이동을 진행
     public void Move(float _speed, bool _state)
     {
-        transform.Translate(Pos * Time.deltaTime * _speed);
+        transform.Translate(Pos.normalized * Time.deltaTime * _speed);
         ChangeAnimationState(_state);
     }
 
@@ -124,7 +134,7 @@ public class Player_Server : MonoBehaviour
         }
     }
 
-    void ChangeAnimationState(bool _state)
+    void ChangeAnimationState(bool _state) // 걷기
     {
         for (int i = 0; i < _subAnimators.Length; i++)
         {
@@ -136,7 +146,7 @@ public class Player_Server : MonoBehaviour
         }
     }
 
-    void ChangeAnimationState()
+    void ChangeAnimationState() // 공격
     {
         for (int i = 0; i < _subAnimators.Length; i++)
         {

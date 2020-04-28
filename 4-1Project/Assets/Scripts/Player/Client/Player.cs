@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
         if (_movePos != Vector2.zero)
         {
             ChangeAnimationState(true);
-            transform.Translate(_movePos * Time.deltaTime * _movespeed);
+            transform.Translate(_movePos.normalized * Time.deltaTime * _movespeed);
         }
         else
         {
