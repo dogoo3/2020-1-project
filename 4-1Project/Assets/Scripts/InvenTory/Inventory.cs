@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
 
     public Transform inv_slot, mix_slot, share_slot;
     public InventoryTab[] inventoryTabs;
-    public GameObject inventory;
+    public GameObject[] openInventory;
 
     public ItemMix Data;
 
@@ -73,7 +73,8 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         InitEquipInv(0);
-        inventory.SetActive(false);
+        for(int i=0;i<openInventory.Length;i++)
+            openInventory[i].SetActive(false);
     }
 
     private void Update()

@@ -46,7 +46,7 @@ public class MixResultSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (item.itemID != 0) // 아이템이 있어야 드래그 가능
         {
-            DragSlot.instance.DragSetImage(UI_item_image);
+            DragSlot.instance.DragSetImage(UI_item_image.sprite);
             DragSlot.instance.transform.position = eventData.position;
         }
     }

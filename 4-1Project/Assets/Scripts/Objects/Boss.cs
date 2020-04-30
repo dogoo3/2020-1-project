@@ -23,6 +23,8 @@ public class Boss : MonoBehaviour
 
     public int _circleBullet;
 
+    public int _floorDeathOn;   //장판 작동
+
     private void Awake()
     {
         instance = this;
@@ -36,19 +38,20 @@ public class Boss : MonoBehaviour
 
     public void SetHP(JsonData _data)
     {
-        HP = int.Parse(_data["Hp"].ToString());
-        if (patternNum != int.Parse(_data["Phase"].ToString()))
+        if(_fullHp == HP)
         {
             patternNum = int.Parse(_data["Phase"].ToString());
             PatternManager.instance._isStart = true;
         }
-        else
-        {
-            patternNum = int.Parse(_data["Phase"].ToString());
-        }
 
-        Debug.Log(patternNum);
+        HP = int.Parse(_data["Hp"].ToString());
     }
+
+    public void SetPhase(JsonData _data)
+    {
+        patternNum = int.Parse(_data["Phase"].ToString());
+    }
+
 
     public void DelaySendPhaseData(float _delayTime)
     {

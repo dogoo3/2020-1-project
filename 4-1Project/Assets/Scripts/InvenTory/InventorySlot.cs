@@ -83,7 +83,7 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
     {
         if(item.itemID != 0) // 아이템이 있어야 드래그 가능
         {
-            DragSlot.instance.DragSetImage(UI_item_image);
+            DragSlot.instance.DragSetImage(UI_item_image.sprite);
             DragSlot.instance.transform.position = eventData.position;
         }
     }
@@ -202,7 +202,36 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
                 if (item.itemCount == 0)
                     RemoveItem();
             }
+            EquipSlot equipSlot = eventData.pointerEnter.gameObject.GetComponent<EquipSlot>();
+            Debug.Log(eventData.pointerEnter.gameObject.name);
+            if (equipSlot != null)
+            {
+                Debug.Log(item.itemID);
+                bool a = item.itemID > 200;
+                if (a) // 드래그한 아이템이 장비아이템일경우
+                {
+                    Debug.Log(equipSlot.item.itemID);
 
+                    if (equipSlot.item.itemID == 0) // 빈 슬롯일 경우
+                    {
+                        Debug.Log("첫번째 if");
+                        equipSlot.item = item.Init();
+                        MinusItemCount();
+                    }
+                    else
+                    {
+                        equipSlot.UpdatePlayerStat(false); // 아이템이 바뀌기 전 기존 아이템의 스탯을 빼준다
+                        Item temp2 = equipSlot.item.Init();
+                        equipSlot.item = item.Init();
+                        item = temp2.Init();
+                    }
+                    equipSlot.UpdatePlayerStat(true); // 새로운 장비 아이템 스탯 업그레이드
+                }
+            }
+            InitUI();
+
+            if (item.itemCount == 0)
+                RemoveItem();
             DragSlot.instance.SetColor(0);
         }
         catch(Exception)

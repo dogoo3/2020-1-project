@@ -138,6 +138,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Floor")
+        {
+
+        }
+    }
+
     public void AttackPlayer()
     {
         playerState = PlayerState.Attack;

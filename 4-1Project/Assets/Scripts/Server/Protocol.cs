@@ -283,6 +283,15 @@ public struct PlayerDamage // 보스 탄환이 플레이어를 때리면 다른 
     }
 }
 
+public struct PhaseRestart
+{
+    public string type;
+
+    public void Init()
+    {
+        type = "PhaseRestart";
+    }
+}
 
 public struct PhaseEnd
 {
@@ -291,6 +300,16 @@ public struct PhaseEnd
     public void Init()
     {
         type = "PhaseEnd";
+    }
+}
+
+public struct PhaseTimeEnd
+{
+    public string type;
+
+    public void Init()
+    {
+        type = "PhaseTimeEnd";
     }
 }
 

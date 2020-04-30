@@ -28,5 +28,6 @@ public class DataBase : MonoBehaviour
 
         // Equipment Item
         itemList.Add(new Item(201, "펜던트", "펜던트...", "pendant"));
+        itemList.Add(new Item(202, "칼", "칼...", "knife"));
     }
 }

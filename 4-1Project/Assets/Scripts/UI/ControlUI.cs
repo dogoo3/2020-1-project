@@ -6,7 +6,7 @@ using LitJson;
 
 public class ControlUI : MonoBehaviour
 {
-    public GameObject inventory;
+    public GameObject[] openInventory;
     public InputField UI_typingfield;
 
     private void Update()
@@ -15,10 +15,16 @@ public class ControlUI : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                if (inventory.activeSelf)
-                    inventory.SetActive(false);
+                if (openInventory[0].activeSelf)
+                {
+                    for (int i = 0; i < openInventory.Length; i++)
+                        openInventory[i].SetActive(false);
+                }
                 else
-                    inventory.SetActive(true);
+                {
+                    for (int i = 0; i < openInventory.Length; i++)
+                        openInventory[i].SetActive(true);
+                }
                 return;
             }
         }
