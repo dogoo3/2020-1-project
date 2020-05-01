@@ -711,7 +711,7 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
-      Hash: a255efacdab173e69779f088f0401b39
+      Hash: c364615165dcdd8515e082366502b568
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InventoryTab

@@ -130,7 +130,6 @@ public class Resolve
                     PatternManager.instance.LoadInduceCircleBullet(Data);
                     break;
                 case "CircleFloor":
-                    
                     PatternManager.instance.LoadInduceCircleFloor(Data);
                     break;
                 case "TimerOn":

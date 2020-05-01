@@ -41,12 +41,14 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,  IEndDr
             _player.STR += _nowSTR;
             _player.DEF += _nowDEF;
             _UI_image.sprite = item.itemIcon;
+            _UI_image.color = new Color(1, 1, 1, 1);
         }
         else
         {
             _player.STR -= _nowSTR;
             _player.DEF -= _nowDEF;
             _UI_image.sprite = null;
+            _UI_image.color = new Color(1, 1, 1, 0);
         }
     }
 
