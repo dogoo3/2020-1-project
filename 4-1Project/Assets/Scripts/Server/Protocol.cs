@@ -313,6 +313,26 @@ public struct PhaseTimeEnd
     }
 }
 
+public struct FireBallState
+{
+    public string type;
+    public string Name;
+
+    public void Init(string _Name,bool _destroy)
+    {
+        if(!_destroy)
+        {
+            type = "DamageFireBall";
+        }
+        else
+        {
+            type = "DestroyFireBall";
+        }
+        
+        Name = _Name;
+    }
+}
+
 
 
 

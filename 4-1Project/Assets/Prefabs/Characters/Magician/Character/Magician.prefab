@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!114 &1610459203919787993
 MonoBehaviour:
@@ -25,6 +27,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!114 &1610459205244011769
 MonoBehaviour:
@@ -38,6 +42,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!1 &1610459205939091185
 GameObject:
@@ -168,8 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0296bc2b7d2d8f64498eb91fd7bbacf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  attacktime: 2
 --- !u!114 &1610459203878564420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!114 &7608753681100531201
 MonoBehaviour:
@@ -195,6 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!114 &1610459205284948887
 MonoBehaviour:
@@ -208,6 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!114 &1610459203915854216
 MonoBehaviour:
@@ -221,6 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!114 &1610459205193934512
 MonoBehaviour:
@@ -234,6 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3f1d73622b55e48b441295b860de83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_Warrior: {fileID: 0}
+  player_Magician: {fileID: 1610459205939091184}
   active: 0
 --- !u!1001 &1610459203878564423
 PrefabInstance:

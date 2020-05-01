@@ -9,8 +9,8 @@ public class Player_Magician : MonoBehaviour
     private Player _mainPlayer;
 
     private Vector2 _mousePos;
-
-    public float time, attacktime;
+    
+    private bool _isHit;
 
     private void Awake()
     {
@@ -21,12 +21,9 @@ public class Player_Magician : MonoBehaviour
 
     private void Update()
     {
-        if (time < attacktime + 0.5f)
-            time += 0.016f;
-
         if(Input.GetMouseButtonDown(0))
         {
-            if(time > attacktime)
+            if(!_isHit)
             {
                 _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 _mousePos -= (Vector2)transform.position;
@@ -34,11 +31,15 @@ public class Player_Magician : MonoBehaviour
 
                 _mainPlayer.Data.ax = _mousePos.x;
                 _mainPlayer.Data.ay = _mousePos.y;
-
-                time = 0;
-                ObjectPoolingManager.instance.GetQueue(_mousePos, transform.position);
+                
+                ObjectPoolingManager.instance.GetQueue(_mousePos, transform.position, gameObject.name);
                 _mainPlayer.AttackPlayer();
             }
         }
+    }
+
+    public void ActiveAttack(bool _isActive)
+    {
+        _isHit = _isActive;
     }
 }

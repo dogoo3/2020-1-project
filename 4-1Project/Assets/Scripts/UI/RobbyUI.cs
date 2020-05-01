@@ -185,5 +185,8 @@ public class RobbyUI : MonoBehaviour
             Invoke("ResetSystemMessage", 1.0f);
             Message = "";
         }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+            ServerClient.instance.Connect();
     }
 }

@@ -69,7 +69,7 @@ public class Player_Server : MonoBehaviour
         {
             ChangeAnimationState();
             if(_magician_direction != Vector2.zero) // 마법사일 때만
-                ObjectPoolingManager.instance.GetQueue(_magician_direction, transform.position);
+                ObjectPoolingManager.instance.GetQueue(_magician_direction, transform.position, gameObject.name);
         }
     }
 

@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EquipSlot.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Assets\Scripts\InvenTory\DragSlot.cs" />
     <Compile Include="Assets\Scripts\InvenTory\EquipDatabase.cs" />
     <Compile Include="Assets\Scripts\InvenTory\EquipInfo.cs" />
+    <Compile Include="Assets\Scripts\InvenTory\EquipSlot.cs" />
     <Compile Include="Assets\Scripts\InvenTory\Inventory.cs" />
     <Compile Include="Assets\Scripts\InvenTory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\InvenTory\InventoryTab.cs" />
@@ -88,6 +88,8 @@
     <Compile Include="Assets\Scripts\Objects\Bullet.cs" />
     <Compile Include="Assets\Scripts\Objects\CircleFloor.cs" />
     <Compile Include="Assets\Scripts\Objects\EnergyBall.cs" />
+    <Compile Include="Assets\Scripts\Objects\FireBallData.cs" />
+    <Compile Include="Assets\Scripts\Objects\Fire_Ball.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternManager.cs" />

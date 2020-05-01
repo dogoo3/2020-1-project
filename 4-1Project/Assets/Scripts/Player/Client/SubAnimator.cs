@@ -9,8 +9,10 @@ public class SubAnimator : MonoBehaviour
     // Unity Components
     Animator _animator;
     SpriteRenderer[] _characterSprite;
-    // Scripts
 
+    // Scripts
+    public Player_Warrior player_Warrior;
+    public Player_Magician player_Magician;
     // Unity Keywords
 
     // Variables
@@ -54,5 +56,27 @@ public class SubAnimator : MonoBehaviour
     public void Attack()
     {
         _animator.SetTrigger("Attack");
+    }
+
+    public void EnableAttack()
+    {
+        if (player_Warrior == null && player_Magician == null)
+            return;
+
+        if (player_Warrior != null)
+            player_Warrior.ActiveAttack(true);
+        else
+            player_Magician.ActiveAttack(true);
+    }
+
+    public void DisableAttack()
+    {
+        if (player_Warrior == null && player_Magician == null)
+            return;
+
+        if (player_Warrior != null)
+            player_Warrior.ActiveAttack(false);
+        else
+            player_Magician.ActiveAttack(false);
     }
 }

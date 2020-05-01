@@ -25,6 +25,10 @@ public class Boss : MonoBehaviour
 
     public int _floorDeathOn;   //장판 작동
 
+    public Fire_Ball _fireBall; //불 구슬 데미지 관련
+
+    bool _firstStart = true;
+
     private void Awake()
     {
         instance = this;
@@ -38,14 +42,21 @@ public class Boss : MonoBehaviour
 
     public void SetHP(JsonData _data)
     {
-        if(_fullHp == HP)
+        if(_fullHp == HP && _firstStart)
         {
             patternNum = int.Parse(_data["Phase"].ToString());
             PatternManager.instance._isStart = true;
+            _firstStart = false;
         }
 
         HP = int.Parse(_data["Hp"].ToString());
     }
+
+    public void SetFullHP()
+    {
+        HP = _fullHp;
+    }
+
 
     public void SetPhase(JsonData _data)
     {
@@ -75,5 +86,10 @@ public class Boss : MonoBehaviour
     {
         if(!_BossHPBar.gameObject.activeSelf)
             _BossHPBar.gameObject.SetActive(true);
+    }
+
+    public void SearchFireBall(JsonData _data)
+    {
+        _fireBall.ServerHitFireBall(_data["Name"].ToString());
     }
 }

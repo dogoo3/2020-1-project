@@ -10,11 +10,14 @@ public class ObjectPoolingManager : MonoBehaviour
     public Queue<Bullet> queue_energyball = new Queue<Bullet>();
     public Queue<EnergyBall> queue_magicBall = new Queue<EnergyBall>();
     public Queue<CircleFloor> queue_circleFloor = new Queue<CircleFloor>();
+    public Queue<Fire_Ball> queue_fireBall = new Queue<Fire_Ball>();
 
     public Laser laser;
     public Bullet energyBall;
     public EnergyBall magicBall;
     public CircleFloor circle;
+    public Fire_Ball fireBall;
+
     public int poolingCount = 500;
 
     private void Awake()
@@ -46,7 +49,13 @@ public class ObjectPoolingManager : MonoBehaviour
         CircleFloor floorTemp = Instantiate(circle, Vector2.zero, Quaternion.identity);
         floorTemp.transform.parent = gameObject.transform;
         queue_circleFloor.Enqueue(floorTemp);
-        floorTemp.gameObject.SetActive(false);  
+        floorTemp.gameObject.SetActive(false);
+
+        //불구슬
+        Fire_Ball fireBallTemp = Instantiate(fireBall, Vector2.zero, Quaternion.identity);
+        fireBallTemp.transform.parent = gameObject.transform;
+        queue_fireBall.Enqueue(fireBallTemp);
+        fireBallTemp.gameObject.SetActive(false);
     }
 
     public void InsertQueue(Bullet _object, Queue<Bullet> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
@@ -85,13 +94,13 @@ public class ObjectPoolingManager : MonoBehaviour
         queue_magicBall.Enqueue(_object);
         _object.gameObject.SetActive(false);
     }
-    public void GetQueue(Vector2 _direction, Vector2 _transform)
+    public void GetQueue(Vector2 _direction, Vector2 _transform,string _name)
     {
         if (queue_magicBall.Count != 0)
         {
             EnergyBall t_object = queue_magicBall.Dequeue();
             t_object.gameObject.SetActive(true);
-            t_object.ShootBall(_direction, _transform);
+            t_object.ShootBall(_direction, _transform,_name);
         }
     }
 
@@ -103,9 +112,26 @@ public class ObjectPoolingManager : MonoBehaviour
     }
     public CircleFloor GetQueue(Queue<CircleFloor> _queue)
     {
-        if (queue_laser.Count != 0)
+        if (queue_circleFloor.Count != 0)
         {
             CircleFloor t_object = _queue.Dequeue();
+            return t_object;
+        }
+        return null;
+    }
+
+    //원형 장판 풀링
+    public void InsertQueue(Fire_Ball _object, Queue<Fire_Ball> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
+    {
+        _queue.Enqueue(_object);
+        _object.gameObject.SetActive(false);
+    }
+
+    public Fire_Ball GetQueue(Queue<Fire_Ball> _queue)
+    {
+        if (queue_fireBall.Count != 0)
+        {
+            Fire_Ball t_object = _queue.Dequeue();
             return t_object;
         }
         return null;

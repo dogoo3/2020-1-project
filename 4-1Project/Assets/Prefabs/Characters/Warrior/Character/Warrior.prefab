@@ -129,8 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b1630aeee6a64f9a0a6f83ad82d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  attacktime: 1
 --- !u!1001 &3577444076653320588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -488,6 +486,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8287360768262568900, guid: 6668ea4b7bc95a046b5d94ce89498881,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 8335621638723706967, guid: 6668ea4b7bc95a046b5d94ce89498881,
         type: 3}
       propertyPath: m_Layer
@@ -563,6 +566,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2784292642019969862, guid: 0c28e6eb5cb59c7448f5167b56792a27,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 2992286196182261023, guid: 0c28e6eb5cb59c7448f5167b56792a27,
         type: 3}
       propertyPath: m_Layer
@@ -1108,6 +1116,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6005090394413318943, guid: 1b46469a2db9dd34ca3c5165ed2b9003,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 6364795911811685288, guid: 1b46469a2db9dd34ca3c5165ed2b9003,
         type: 3}
       propertyPath: m_Layer
@@ -1508,6 +1521,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7063899176065750267, guid: 7b36c0824a2e0eb46bfd0494e21c145b,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 7087291538223842367, guid: 7b36c0824a2e0eb46bfd0494e21c145b,
         type: 3}
       propertyPath: m_Layer
@@ -1818,6 +1836,11 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.z
       value: 0.074999996
       objectReference: {fileID: 0}
+    - target: {fileID: 3760187870938280893, guid: 30406be28d5e9414396f63e848919d3b,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 3791796933006856196, guid: 30406be28d5e9414396f63e848919d3b,
         type: 3}
       propertyPath: m_Layer
@@ -1973,6 +1996,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3577444076983048478}
     m_Modifications:
+    - target: {fileID: 651654204354168158, guid: 871343e97ccf4c749bbb6e830a521966,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 1031826447795438733, guid: 871343e97ccf4c749bbb6e830a521966,
         type: 3}
       propertyPath: m_Layer
@@ -2708,6 +2736,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7700229861625377643, guid: 18eed9d801133974ea62d7225ee26ce2,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 8400371599791353130, guid: 18eed9d801133974ea62d7225ee26ce2,
         type: 3}
       propertyPath: m_Layer
@@ -3088,6 +3121,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 8193130026492375834, guid: f1d67a36b0b7a8249b99bb8ffb0157d4,
+        type: 3}
+      propertyPath: player_Warrior
+      value: 
+      objectReference: {fileID: 8956558587212165021}
     - target: {fileID: 8466859386745444804, guid: f1d67a36b0b7a8249b99bb8ffb0157d4,
         type: 3}
       propertyPath: m_Layer

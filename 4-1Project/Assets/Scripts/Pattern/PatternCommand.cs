@@ -5,13 +5,14 @@ public class PatternCommand
     protected Bullet _energyball;
     protected Laser _laser;
     protected CircleFloor _circleFloor;
+    protected Fire_Ball _fireBall;
+
 
     public virtual void Execute() { }
     public virtual void Execute(int _index) { }
     public virtual void Execute(Vector2 _dir) { }
     //총알을 위한 Execute(이름을 별도로 지어줘도 무방하다)
     public virtual void BulletExecute(int _index, BulletType type) { }
-
     //원형 장판 관련함수
     public virtual void Execute(string _name) { }
 }
@@ -90,5 +91,27 @@ public class InduceCircleFloor : PatternCommand
     public override void Execute()
     {
         _circleFloor.InstanceDeathCheck();
+    }
+}
+
+public class InduceFireBall : PatternCommand
+{
+    public override void Execute(int _index)
+    {
+        _fireBall = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_fireBall);
+        if (_fireBall != null)
+        {
+            if(Boss.instance._fireBall ==null)
+            {
+                Boss.instance._fireBall = _fireBall;
+            }
+            _fireBall.CalcTime(_index); 
+            _fireBall.gameObject.SetActive(true);
+        }
+    }
+
+    public override void Execute()
+    {
+        Boss.instance._fireBall.CalcFireBall();
     }
 }

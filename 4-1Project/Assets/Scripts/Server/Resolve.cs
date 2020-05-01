@@ -129,11 +129,13 @@ public class Resolve
                 case "CircleBulletType":  //원형 탄환
                     PatternManager.instance.LoadInduceCircleBullet(Data);
                     break;
-                case "CircleFloor":
+                case "CircleFloor":                    
                     PatternManager.instance.LoadInduceCircleFloor(Data);
                     break;
+                case "FireBall":
+                    PatternManager.instance.LoadInuceFirBall(Data);
+                    break;
                 case "TimerOn":
-                    Debug.Log("들어옴!");
                     PatternManager.instance.LimitTimeOn();
                     break;
                 case "PhaseRestart":
@@ -143,12 +145,13 @@ public class Resolve
                     PatternManager.instance.PatternStart(Data);
                     break;
                 case "BossHp":
-                    Debug.Log("패턴 재시작");
                     Boss.instance.SetHP(Data);
                     break;
                 case "PlayerDamage":
-                    Debug.Log("공격받음");
                     HPManager.instance.ReceiveHp(Data);
+                    break;
+                case "DamageFireBall":
+                    Boss.instance.SearchFireBall(Data);
                     break;
             }
         }

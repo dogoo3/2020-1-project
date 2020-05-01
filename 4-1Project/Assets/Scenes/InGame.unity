@@ -3764,12 +3764,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e294a33547cfb439ed9d454d04cac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laser: {fileID: 7277746016316210618, guid: 86fb12cc6b429ac4f87c4601e3d823ae, type: 3}
+  laser: {fileID: 7454579848398322860, guid: 9c82d984cca377d4e920090a6c181b9a, type: 3}
   energyBall: {fileID: 1031909560066091491, guid: c84dc74ff7073e14f8ffde823aff1689,
     type: 3}
   magicBall: {fileID: 7804767140669495689, guid: 7bbd18c20887c6648bd74264981dfb50,
     type: 3}
   circle: {fileID: -1185611698008358207, guid: bd9f1a8b57b2edc49b030c670c8bf3ef, type: 3}
+  fireBall: {fileID: 887296150036240566, guid: d10f8b3b00498454f9f36b1a6671101e, type: 3}
   poolingCount: 40
 --- !u!4 &1384126563
 Transform:

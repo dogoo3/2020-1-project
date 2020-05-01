@@ -6,7 +6,7 @@ public class PatternManager : MonoBehaviour
 {
     public static PatternManager instance;
 
-    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor;
+    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor,pat_fireBall;
     Vector2 playerPos;
     public PhaseEnd data_PhaseEnd;
     public PhaseRestart data_Restart;
@@ -26,6 +26,10 @@ public class PatternManager : MonoBehaviour
     public string _circleFloorTargetName;
     public bool _limitTimeOn;
 
+    //불구슬 용
+    bool _setOn;
+    public int _time;
+
     private void Awake()
     {
         instance = this;
@@ -40,6 +44,8 @@ public class PatternManager : MonoBehaviour
         pat_induceBullet = new InduceBullet();
         pat_wheelLaser = new WheelLaser();
         pat_circleFloor = new InduceCircleFloor();
+        pat_fireBall = new InduceFireBall();
+
     }
 
     private void Update()
@@ -51,68 +57,21 @@ public class PatternManager : MonoBehaviour
             switch (Boss.instance.patternNum)
             {
                 case 2:
-                    Debug.Log("총알 생성");
-                    pat_induceBullet.BulletExecute(Boss.instance._circleBullet, BT);
-
-                    //만약 패턴이 시작된 횟수가 3일때 랜덤 탄환을
-                    //다시 계산하도록 한다
-                    if (_patternCount == 3)
-                    {
-                        _patternCount = 0;
-                        pat_wheelLaser.Execute(_index);
-
-                    }
-                    else
-                    {
-                        //그게 아니면 그냥 보냄
-                        _patternCount++;
-                        Invoke("Restart", 0.2f);
-                        //_isEnd = true;
-                    }
+                    PatternBallExecute();
                     break;
                 case 4: // 랜덤 레이저
                     pat_wheelLaser.Execute(_index);
                     break;
+                case 8:
+                    PatternFireBallExecute();
+                    break;
                 case 12:
-                    if(!_limitTimeOn)
-                    {
-                        //타겟 이름이 없을 경우 서버에다 타겟을 누가 정할지 알려준다
-                        if (_circleFloorTargetName == "")
-                        {
-                            Boss.instance.DelaySendPhaseData(0.5f);
-                        }
-                        else if (_circleFloorTargetName != "")
-                        {
-                            pat_circleFloor.Execute(_circleFloorTargetName);
-                        }
-                    }    
-                    else
-                    {
-                        //죽이라고 서버에서 지시하면 클라는 바로 캐릭터가 범위에 있는지를
-                        //확인하고 죽여버린다
-                        pat_circleFloor.Execute();
-                    }
+                    PatternCircleFloorExecute();
                     break;
                 default:
-                    pat_induceBullet.BulletExecute(Boss.instance._circleBullet, BT);
-
-                    //만약 패턴이 시작된 횟수가 3일때 랜덤 탄환을
-                    //다시 계산하도록 한다
-                    if (_patternCount == 3)
-                    {
-                        _patternCount = 0;
-                        pat_wheelLaser.Execute(_index);
-
-                    }
-                    else
-                    {
-                        //그게 아니면 그냥 보냄
-                        _patternCount++;
-                        Invoke("Restart", 0.2f);
-                    }
+                    PatternBallExecute();
                     break;
             }
-
         }
 
         if (_isEnd)
@@ -121,21 +80,78 @@ public class PatternManager : MonoBehaviour
             Invoke("SendPhaseEnd", 0.2f);
         }
     }
+    /*패턴 관련된 함수들 정리*/
+    #region PatternExecutes
 
-    public void TimeDelaySendDelayPhaseEnd(float _time)
+    void PatternBallExecute()
     {
-        Invoke("SendDelayPhaseEnd", _time);
+        Debug.Log("총알 생성");
+        pat_induceBullet.BulletExecute(Boss.instance._circleBullet, BT);
+
+        //만약 패턴이 시작된 횟수가 3일때 랜덤 탄환을
+        //다시 계산하도록 한다
+        if (_patternCount == 3)
+        {
+            _patternCount = 0;
+            pat_wheelLaser.Execute(_index);
+
+        }
+        else
+        {
+            //그게 아니면 그냥 보냄
+            _patternCount++;
+            Invoke("Restart", 0.2f);
+            //_isEnd = true;
+        }
     }
 
-    //페이즈가 끝났다는 시점을 지정해주기 위한 함수이다
-    public void SendDelayPhaseEnd()
+    void PatternFireBallExecute()
     {
-        CancelInvoke("SendDelayPhaseEnd");
-        _isEnd = true;
-        _limitTimeOn = false;
-        _circleFloorTargetName = "";
+        if (!_limitTimeOn)
+        {
+            if (!_setOn)
+            {
+                Boss.instance.DelaySendPhaseData(0.5f);
+            }
+            else
+            {
+                pat_fireBall.Execute(_time);
+            }
+        }
+        else
+        {
+            pat_fireBall.Execute();
+        }
+
     }
 
+    void PatternCircleFloorExecute()
+    {
+        if (!_limitTimeOn)
+        {
+            //타겟 이름이 없을 경우 서버에다 타겟을 누가 정할지 알려준다
+            if (_circleFloorTargetName == "")
+            {
+                Boss.instance.DelaySendPhaseData(0.5f);
+            }
+            else if (_circleFloorTargetName != "")
+            {
+                pat_circleFloor.Execute(_circleFloorTargetName);
+            }
+        }
+        else
+        {
+            //죽이라고 서버에서 지시하면 클라는 바로 캐릭터가 범위에 있는지를
+            //확인하고 죽여버린다
+            pat_circleFloor.Execute();
+        }
+    }
+    #endregion
+    /***********************/
+
+
+    //오브젝트 셋팅 관련
+    #region LoadInduce
     public void LoadRandomLaser(JsonData _data) // 랜덤 레이저를 날릴 인덱스를 Resolve.
     {
         _isStart = true;
@@ -155,10 +171,33 @@ public class PatternManager : MonoBehaviour
         _isStart = true;
     }
 
+    //불구슬 셋팅
+    public void LoadInuceFirBall(JsonData _data)
+    {
+        _time = int.Parse(_data["millTime"].ToString());
+        _setOn = true;
+        _isStart = true;
+    }
+    #endregion
+
     //서버에서 패턴을 재시작하라고 받으면 재시작을 위한 함수
     public void PatternRestart()
     {
         _isStart = true;
+    }
+
+    public void TimeDelaySendDelayPhaseEnd(float _time)
+    {
+        Invoke("SendDelayPhaseEnd", _time);
+    }
+
+    //페이즈가 끝났다는 시점을 지정해주기 위한 함수이다
+    public void SendDelayPhaseEnd()
+    {
+        CancelInvoke("SendDelayPhaseEnd");
+        _isEnd = true;
+        _limitTimeOn = false;
+        _circleFloorTargetName = "";
     }
 
     //패턴을 셋팅하고 그 패턴을 실행하는 함수
@@ -171,13 +210,11 @@ public class PatternManager : MonoBehaviour
     //시간 제한이 걸려있는 패턴일 경우에는 타이머 체크를 하고 서버로 보내주는 역할을 한다
     public void DelayPhaseTimeEnd(float _time)
     {
-        Debug.Log("제한 시간이 다됨전");
         Invoke("SendPhaseTimeEnd", _time);
     }
     
     private void SendPhaseTimeEnd()
     {
-        Debug.Log("제한 시간이 다됨");
         CancelInvoke("SendPhaseTimeEnd");
         JsonData SendData = JsonMapper.ToJson(data_PhaseTimeEnd);
         ServerClient.instance.Send(SendData.ToString());
@@ -191,7 +228,6 @@ public class PatternManager : MonoBehaviour
     private void SendPhaseEnd()
     {
         CancelInvoke("SendPhaseEnd");
-        Debug.Log("보스 패턴 재시작");
         JsonData SendData = JsonMapper.ToJson(data_PhaseEnd);
         ServerClient.instance.Send(SendData.ToString());
     }
