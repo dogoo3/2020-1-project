@@ -118,7 +118,7 @@ public class Resolve
                     Chatting.instance.ReceiveComment(Data);
                     break;
                 case "ItemMixResult":
-                    Inventory.instance.ReceiveMixResult(Data);
+                    MixWindow.instance.ReceiveMixResult(Data);
                     break;
                 case "SendShareInvInfo":
                     Inventory.instance.UpdateShareInfo(Data);

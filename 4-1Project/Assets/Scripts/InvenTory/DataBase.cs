@@ -9,8 +9,13 @@ using UnityEngine;
 
 public class DataBase : MonoBehaviour
 {
+    public static DataBase instance;
     public List<Item> itemList = new List<Item>();
 
+    private void Awake()
+    {
+        instance = this;
+    }
     // ItemID , ItemName, ItemDes, ItemSpriteFilename
     private void Start()
     {

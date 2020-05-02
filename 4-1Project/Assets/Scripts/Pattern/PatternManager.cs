@@ -6,7 +6,7 @@ public class PatternManager : MonoBehaviour
 {
     public static PatternManager instance;
 
-    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor,pat_fireBall;
+    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor, pat_fireBall;
     Vector2 playerPos;
     public PhaseEnd data_PhaseEnd;
     public PhaseRestart data_Restart;
@@ -14,6 +14,7 @@ public class PatternManager : MonoBehaviour
 
     [HideInInspector]
     public bool _isStart;
+    public bool _subIsStart = false;
     private bool _isEnd;
     private int _index;
 
@@ -21,6 +22,7 @@ public class PatternManager : MonoBehaviour
     [HideInInspector]
     public BulletType BT;
     public int _patternCount;
+    public int _subPatternCount;
 
     //원형 장판을 위한 함수
     public string _circleFloorTargetName;
@@ -29,6 +31,9 @@ public class PatternManager : MonoBehaviour
     //불구슬 용
     bool _setOn;
     public int _time;
+
+    //타이머
+    float _timer;
 
     private void Awake()
     {
@@ -66,6 +71,7 @@ public class PatternManager : MonoBehaviour
                     PatternFireBallExecute();
                     break;
                 case 12:
+
                     PatternCircleFloorExecute();
                     break;
                 default:
@@ -79,7 +85,13 @@ public class PatternManager : MonoBehaviour
             _isEnd = false;
             Invoke("SendPhaseEnd", 0.2f);
         }
+
+        if (_subIsStart)
+        {
+            Invoke("SubPatternBallExecute", 0.3f);
+        }
     }
+
     /*패턴 관련된 함수들 정리*/
     #region PatternExecutes
 
@@ -101,12 +113,35 @@ public class PatternManager : MonoBehaviour
             //그게 아니면 그냥 보냄
             _patternCount++;
             Invoke("Restart", 0.2f);
-            //_isEnd = true;
+        }
+    }
+
+
+    void SubPatternBallExecute()
+    {
+        CancelInvoke("SubPatternBallExecute");
+        if (Boss.instance.patternNum != 2)
+        {
+            if (_subPatternCount == 4)
+            {
+                _subPatternCount = 0;
+                _subIsStart = false;
+            }
+            else
+            {
+                _subPatternCount++;
+                pat_induceBullet.BulletExecute(Boss.instance._circleBullet, BT);
+            }
         }
     }
 
     void PatternFireBallExecute()
     {
+        if (!_subIsStart)
+        {
+            _subIsStart = true;
+        }
+
         if (!_limitTimeOn)
         {
             if (!_setOn)
@@ -127,6 +162,11 @@ public class PatternManager : MonoBehaviour
 
     void PatternCircleFloorExecute()
     {
+        if (!_subIsStart)
+        {
+            _subIsStart = true;
+        }
+
         if (!_limitTimeOn)
         {
             //타겟 이름이 없을 경우 서버에다 타겟을 누가 정할지 알려준다
@@ -168,6 +208,7 @@ public class PatternManager : MonoBehaviour
     public void LoadInduceCircleFloor(JsonData _data)
     {
         _circleFloorTargetName = _data["targetName"].ToString();
+        BT = (BulletType)int.Parse(_data["bulletType"].ToString());
         _isStart = true;
     }
 
@@ -175,6 +216,7 @@ public class PatternManager : MonoBehaviour
     public void LoadInuceFirBall(JsonData _data)
     {
         _time = int.Parse(_data["millTime"].ToString());
+        BT = (BulletType)int.Parse(_data["bulletType"].ToString());
         _setOn = true;
         _isStart = true;
     }
@@ -212,7 +254,7 @@ public class PatternManager : MonoBehaviour
     {
         Invoke("SendPhaseTimeEnd", _time);
     }
-    
+
     private void SendPhaseTimeEnd()
     {
         CancelInvoke("SendPhaseTimeEnd");
@@ -233,11 +275,16 @@ public class PatternManager : MonoBehaviour
     }
 
     //해당 페이즈를 재시작 해야하는지 물어보는 함수이다(연속된 패턴에서 사용함)
-    public void Restart()
+    public void SendServerRestart()
     {
-        CancelInvoke("Restart");
+        CancelInvoke("SendServerRestart");
         JsonData SendData = JsonMapper.ToJson(data_Restart);
         ServerClient.instance.Send(SendData.ToString());
     }
 
+    public void Restart()
+    {
+        CancelInvoke("Restart");
+        _isStart = true;
+    }
 }

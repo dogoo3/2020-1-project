@@ -84,7 +84,7 @@ public class InduceCircleFloor : PatternCommand
         _circleFloor = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_circleFloor);
         if (_circleFloor != null)
         {
-            _circleFloor.gameObject.SetActive(true);         
+            _circleFloor.gameObject.SetActive(true);
         }
     }
 
@@ -101,11 +101,11 @@ public class InduceFireBall : PatternCommand
         _fireBall = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_fireBall);
         if (_fireBall != null)
         {
-            if(Boss.instance._fireBall ==null)
+            if (Boss.instance._fireBall == null)
             {
                 Boss.instance._fireBall = _fireBall;
             }
-            _fireBall.CalcTime(_index); 
+            _fireBall.CalcTime(_index);
             _fireBall.gameObject.SetActive(true);
         }
     }

@@ -61,25 +61,35 @@ public class MixResultSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         InventorySlot inventorySlot = eventData.pointerEnter.gameObject.GetComponent<InventorySlot>();
         if(inventorySlot != null)
         {
-            InventorySlot temp = Inventory.instance.SearchInventorySlot(item.itemID); // 인벤토리 슬롯에 같은 ID의 아이템이 있는지 검색
-            if (temp != null) // 인벤토리 슬롯에 같은 아이템이 있으면
+            bool isGet = false;
+            // 장비창이 열려있고 장비아이템을 드롭
+            if (Inventory.instance._tabIndex == 0 && item.itemID > 200)
             {
-                temp.PlusItemCount(); // 인벤토리 슬롯의 갯수 1개 증가
-                RemoveItem(); // 조합결과 슬롯 삭제
-                temp.InitUI(); // 인벤토리 슬롯 UI 업데이트
-                SetAlpha(0);
+                Inventory.instance.InputEquipItem(item);
+                isGet = true;
             }
-            else // 인벤토리 슬롯에 같은 ID의 아이템이 없을 경우
+            // 재료창이 열려있고 재료아이템을 드롭
+            else if (Inventory.instance._tabIndex == 1 && item.itemID > 0 && item.itemID <= 100)
             {
-                if (inventorySlot.item.itemID == 0)
-                {
-                    inventorySlot.item = item.Init(); // 인벤토리 슬롯에 아이템 정보 할당
-                    inventorySlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
-                    inventorySlot.InitUI();
-                    RemoveItem(); // 조합 슬롯 갯수 1개 감소
-                    SetAlpha(0);
-                }
+                Inventory.instance.InputMatItem(item);
+                isGet = true;
             }
+            else if (Inventory.instance._tabIndex == 2 && item.itemID > 100 && item.itemID <= 200) // 소비창이 열려있고 소비아이템을 드롭
+            {
+                Inventory.instance.InputPotionItem(item);
+                isGet = true;
+            }
+            else { }
+
+            if (!isGet)
+            {
+                DragSlot.instance.SetColor(0);
+                return;
+            }
+            
+            SetAlpha(0);
+            RemoveItem(); // 조합결과 슬롯 삭제
+            MixWindow.instance.selectSlotNum = 0;
         }
         DragSlot.instance.SetColor(0);
     }
