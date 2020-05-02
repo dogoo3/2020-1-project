@@ -533,7 +533,7 @@ ScriptsOnlyBuild:
     className: Volume
   - hash:
       serializedVersion: 2
-      Hash: 53a5cee7eb8def45259677836cfba65e
+      Hash: 3135930561b0bfaef233b619da2d7cca
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MixWindow
@@ -1013,7 +1013,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerToggleHistory
   - hash:
       serializedVersion: 2
-      Hash: 008229fcaf5d1707d60936b0f4c8107f
+      Hash: ea2c5523ab8879a3b612d0c2c3bf4f67
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Inventory
@@ -1289,7 +1289,7 @@ ScriptsOnlyBuild:
     className: RenderObjects
   - hash:
       serializedVersion: 2
-      Hash: 503985db3bc66fb6baf3f6b23896427d
+      Hash: 62d0d32e3e67ca498e2187047e51a679
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PatternManager

@@ -2,6 +2,7 @@
 using System.Collections;
 using LitJson;
 using System;
+using UnityEngine.UI;
 
 public class MixWindow : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class MixWindow : MonoBehaviour
     public ItemMix Data;
 
     public MixWindowTab[] mixWindowTabs;
-
+    public Text text_money;
     public int selectSlotNum; // 레시피 슬롯을 클릭했을 때의 번호. 조합결과 아이템 번호가 들어온다.
 
     [HideInInspector]
@@ -68,6 +69,8 @@ public class MixWindow : MonoBehaviour
             }
             isMixed = false;
             isMixItemID = 0;
+            text_money.text = "";
+            Inventory.instance.text_money.text = Inventory.instance.mymoney.ToString();
         }
     }
 
@@ -108,7 +111,7 @@ public class MixWindow : MonoBehaviour
         }
 
         // 서버로 조합 슬롯의 데이터 전송
-        Data.Init(mat_itemID, mat_itemCount, 10000);
+        Data.Init(mat_itemID, mat_itemCount, Inventory.instance.mymoney);
         JsonData SendData = JsonMapper.ToJson(Data);
         ServerClient.instance.Send(SendData.ToString()); // Send와 동시에 Resolve받아 조합 성공 여부를 알려줌.
     }
@@ -119,7 +122,10 @@ public class MixWindow : MonoBehaviour
         {
             isMixed = bool.Parse(_data["result"].ToString());
             if (isMixed)
+            {
                 isMixItemID = int.Parse(_data["Item"].ToString());
+                Inventory.instance.mymoney = int.Parse(_data["money"].ToString());
+            }
         }
         catch (Exception)
         {
@@ -154,6 +160,7 @@ public class MixWindow : MonoBehaviour
             mixMaterialSlots[i].BackupItem();
             mixMaterialSlots[i].RemoveItem();
         }
+        text_money.text = "";
         selectSlotNum = 0;
     }
 

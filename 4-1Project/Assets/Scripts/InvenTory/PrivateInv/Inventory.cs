@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour
     private Item[] equip_Inv;
     private Item[] mat_Inv;
     private Item[] potion_Inv;
+    public int mymoney;
 
     private InventorySlot[] inventorySlots; // 인벤토리 슬롯
     private ShareInventorySlot[] shareInventorySlot; // 공유 인벤토리 슬롯
@@ -20,6 +21,7 @@ public class Inventory : MonoBehaviour
     public int _tabIndex; // 장비 / 재료 / 소비탭 인덱스 번호
 
     public Transform inv_slot, mix_slot, share_slot;
+    public Text text_money;
     public InventoryTab[] inventoryTabs;
     public GameObject[] openInventory;
     
@@ -42,10 +44,12 @@ public class Inventory : MonoBehaviour
             mat_Inv[i] = new Item();
             potion_Inv[i] = new Item();
         }
+        text_money.text = mymoney.ToString();
 
         // 서버와의 연동을 위해 공유 인벤토리의 슬롯에 따로 슬롯 인덱스를 할당해줌.
         for (int i = 0; i < shareInventorySlot.Length; i++)
             shareInventorySlot[i].slotIndex = i;
+
     }
 
     private void Start()
