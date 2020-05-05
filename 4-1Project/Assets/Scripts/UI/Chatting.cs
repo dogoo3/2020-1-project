@@ -31,7 +31,7 @@ public class Chatting : MonoBehaviour
                 JsonData SendData = JsonMapper.ToJson(Data);
                 ServerClient.instance.Send(SendData.ToString());
 
-                UI_chattingLog.text += '\n' + GameManager.instance.PlayerName + " : " + UI_typingfield.text;
+                UI_chattingLog.text += "\n" + GameManager.instance.PlayerName + " : " + UI_typingfield.text;
                 UI_typingfield.text = "";
                 UI_typingfield.gameObject.SetActive(false);
             }
@@ -58,6 +58,6 @@ public class Chatting : MonoBehaviour
 
     public void ReceiveComment(JsonData _data)
     {
-        _sendMessageBuffer += _data["username"].ToString() + " : " + _data["message"].ToString() + "\n";
+        _sendMessageBuffer += "\n" + _data["username"].ToString() + " : " + _data["message"].ToString();
     }
 }

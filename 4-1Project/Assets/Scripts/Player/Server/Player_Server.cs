@@ -72,12 +72,12 @@ public class Player_Server : MonoBehaviour
         _animator.SetFloat("xPos", Rot.x);
         _animator.SetFloat("yPos", Rot.y);
 
-        if (PS == PlayerState.Attack) // 전사, 마법사 기본공격
+        if (PS == PlayerState.Attack) // 기본공격
         {
             ChangeAnimationState(); // 애니메이션 상태 변경
             FindItemDropObject(); // 마우스 커서 방향에 채집물이 있는지 확인
         }
-        else if(PS == PlayerState.Skill) // 마법사 스킬공격
+        else if(PS == PlayerState.Skill) // 스킬공격
         {
             if (playerType == 1) // 마법사일 때만
             {

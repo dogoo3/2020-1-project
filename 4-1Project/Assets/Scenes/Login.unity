@@ -1699,7 +1699,7 @@ MonoBehaviour:
   ServerHeros:
   - {fileID: 3577444076983048476, guid: 1b3c010ece8ed1241a8f7cf5bb478d07, type: 3}
   - {fileID: 8375089130985291472, guid: 42aab3aefae00634eb77e04f4abd11f1, type: 3}
-  boss: {fileID: 8325361491396822724, guid: 685dd90a70c7e6443bfa6c0f602cf978, type: 3}
+  boss: {fileID: 4425051910683458879, guid: 4f2c28ec4e1229f4fa3ba9e0faec9696, type: 3}
   MakeNow: 0
   DeleteNow: 0
   DeleteNum: 0

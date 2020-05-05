@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     Animator _animator;
     
     SubAnimator[] _subAnimator;
-    SubAnimator _activesubAnimator;
+    //SubAnimator _activesubAnimator;
 
     [HideInInspector]
     public Vector2 _mousePos;
@@ -33,8 +33,8 @@ public class Player : MonoBehaviour
     public PlayerDamage BtoP_damage_data; // 보스가 쏜 탄환에 플레이어가 맞으면
 
     public float _movespeed = 5.0f, attackSpeed, invincibleTime;
-    [Header("전사 : 0, 마법사 : 1")]
-    public int playerType;
+    //[Header("전사 : 0, 마법사 : 1")]
+    //public int playerType;
     public int STR, DEF, fullHP;
 
     public bool _isCrash;
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         _subAnimator = GetComponentsInChildren<SubAnimator>();
         _temp_dirPos = Vector2.zero;
         _temp_movePos = Vector2.zero;
-        _activesubAnimator = _subAnimator[0];
+        //_activesubAnimator = _subAnimator[0];
 
         Data.Init(GameManager.instance.PlayerName);
         Data.Speed = _movespeed;
@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
             {
                 time = 0;
                 _isCrash = false;
+                Attacked(_isCrash);
             }
         }
     }
@@ -199,12 +200,18 @@ public class Player : MonoBehaviour
             return; // 피격 취소
 
         _isCrash = true;
-
+        Attacked(_isCrash);
         HPManager.instance.myHP = (int)Mathf.Clamp(HPManager.instance.myHP - (_damage - DEF), -1, HPManager.instance.myFullHP);
         HPManager.instance.SetHP();
         BtoP_damage_data.HP = HPManager.instance.myHP;
 
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());
+    }
+    
+    private void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
+    {
+        for (int i = 0; i < _subAnimator.Length; i++)
+            _subAnimator[i].Attacked(_isAttacked);
     }
 }

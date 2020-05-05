@@ -49,7 +49,7 @@ public class SubAnimator : MonoBehaviour
     {
         if (_characterSprite[0].gameObject.activeSelf == _state)
             return;
-        for(int i=0;i<_characterSprite.Length;i++)
+        for (int i = 0; i < _characterSprite.Length; i++)
             _characterSprite[i].gameObject.SetActive(_state);
     }
 
@@ -58,7 +58,12 @@ public class SubAnimator : MonoBehaviour
         _animator.SetTrigger("Attack");
     }
 
-    public void EnableAttack()
+    public void Attacked(bool _isAttacked)
+    {
+        _animator.SetBool("Attacked", _isAttacked);
+    }
+
+    public void EnableAttack() // 애니메이션 이벤트 함수
     {
         if (player_Warrior == null && player_Magician == null)
             return;
@@ -69,7 +74,7 @@ public class SubAnimator : MonoBehaviour
             player_Magician.ActiveAttack(true);
     }
 
-    public void DisableAttack()
+    public void DisableAttack() // 애니메이션 이벤트 함수
     {
         if (player_Warrior == null && player_Magician == null)
             return;
@@ -79,4 +84,6 @@ public class SubAnimator : MonoBehaviour
         else
             player_Magician.ActiveAttack(false);
     }
+
+
 }

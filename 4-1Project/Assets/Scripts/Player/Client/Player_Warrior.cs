@@ -45,7 +45,7 @@ public class Player_Warrior : MonoBehaviour
         }
     }
 
-    public void ActiveAttack(bool _isActive)
+    public void ActiveAttack(bool _isActive) // 애니메이션 이벤트 함수로 작동
     {
         _isHit = _isActive;
     }
