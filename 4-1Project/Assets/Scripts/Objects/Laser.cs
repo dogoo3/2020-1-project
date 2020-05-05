@@ -11,9 +11,9 @@ public class Laser : MonoBehaviour
     private LaserType LT;
     public float _speed = 100.0f;
     public bool _on = false;
-#pragma warning disable IDE0044 // 읽기 전용 한정자 추가
-    private int _setDir = 0;
-#pragma warning restore IDE0044 // 읽기 전용 한정자 추가
+// #pragma warning disable IDE0044 // 읽기 전용 한정자 추가
+    // private int _setDir = 0;
+// #pragma warning restore IDE0044 // 읽기 전용 한정자 추가
 
     void Update()
     {

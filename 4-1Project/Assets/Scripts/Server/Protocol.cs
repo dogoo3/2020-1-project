@@ -36,6 +36,8 @@ public struct PlayerData
     public string type;
     public string name;
 
+    // 플레이어 타입
+    // public int playerType;
     //방향값
     public double x, y;
     //회전값

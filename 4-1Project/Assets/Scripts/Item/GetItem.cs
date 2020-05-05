@@ -1,22 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LitJson;
 using UnityEngine.UI;
 
 public class GetItem : MonoBehaviour
 {
-    public int itemID;
+    private BoxCollider2D boxCollider2D;
+    private Animator animator;
     private bool isGetItem;
+    
+    public int itemID;
 
-    public ItemGet Data;
-
-    private void Start()
+    private void Awake()
     {
-        Data.Init(itemID);
+        animator = GetComponent<Animator>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == GameManager.instance.PlayerName)
         {
@@ -26,5 +27,19 @@ public class GetItem : MonoBehaviour
         }
         else
             gameObject.SetActive(false);
+    }
+
+    public void DisableObject()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void EnableCollider()
+    {
+        boxCollider2D.enabled = true;
+    }
+    public void DisableCollider()
+    {
+        boxCollider2D.enabled = false;
     }
 }

@@ -14,6 +14,9 @@ public class Player_Server : MonoBehaviour
 
     public PlayerState PS;
 
+    // 플레이어타입
+    public int playerType;
+
     // 캐릭터 위치
     public Vector2 SyncPos;
     public Vector2 NowPos;
@@ -23,7 +26,7 @@ public class Player_Server : MonoBehaviour
     // 시점(마우스 커서)
     public Vector2 Rot;
     // 마법사 공격 방향
-    public Vector2 _magician_direction;
+    public Vector2 _mouse_direction;
 
     //플레이어 속도
     public float Speed;
@@ -38,6 +41,10 @@ public class Player_Server : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _subAnimators = GetComponentsInChildren<SubAnimator>();
+        if (_animator.runtimeAnimatorController.name == "WarriorController")
+            playerType = 0;
+        else
+            playerType = 1;
     }
 
     private void Update()
@@ -65,11 +72,18 @@ public class Player_Server : MonoBehaviour
         _animator.SetFloat("xPos", Rot.x);
         _animator.SetFloat("yPos", Rot.y);
 
-        if (PS == PlayerState.Attack)
+        if (PS == PlayerState.Attack) // 전사, 마법사 기본공격
         {
-            ChangeAnimationState();
-            if(_magician_direction != Vector2.zero) // 마법사일 때만
-                ObjectPoolingManager.instance.GetQueue(_magician_direction, transform.position, gameObject.name);
+            ChangeAnimationState(); // 애니메이션 상태 변경
+            FindItemDropObject(); // 마우스 커서 방향에 채집물이 있는지 확인
+        }
+        else if(PS == PlayerState.Skill) // 마법사 스킬공격
+        {
+            if (playerType == 1) // 마법사일 때만
+            {
+                ChangeAnimationState();
+                ObjectPoolingManager.instance.GetQueue(_mouse_direction, transform.position, gameObject.name);
+            }
         }
     }
 
@@ -88,9 +102,9 @@ public class Player_Server : MonoBehaviour
         SyncPos.x = float.Parse(Data["nx"].ToString());
         SyncPos.y = float.Parse(Data["ny"].ToString());
 
-        // 마법사 공격 방향
-        _magician_direction.x = float.Parse(Data["ax"].ToString());
-        _magician_direction.y = float.Parse(Data["ay"].ToString());
+        // 마우스 포인터 방향벡터
+        _mouse_direction.x = float.Parse(Data["ax"].ToString());
+        _mouse_direction.y = float.Parse(Data["ay"].ToString());
 
         GetMillTime = float.Parse(Data["time"].ToString());
         
@@ -156,6 +170,18 @@ public class Player_Server : MonoBehaviour
                 break;
             }
         }
+    }
+
+    void FindItemDropObject()
+    {
+        RaycastHit2D _hit2D = Physics2D.Raycast(transform.position,_mouse_direction, 2f);
+        ItemDropObject itemDropObject = null;
+
+        if (_hit2D.collider != null)
+            itemDropObject = _hit2D.collider.GetComponent<ItemDropObject>();
+
+        if (itemDropObject != null)
+            itemDropObject.MinusCount();
     }
 }
 

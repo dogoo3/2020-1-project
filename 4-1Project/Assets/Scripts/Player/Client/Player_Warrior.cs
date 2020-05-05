@@ -15,19 +15,30 @@ public class Player_Warrior : MonoBehaviour
     }
 
     private void Update()
-    {if(Input.GetMouseButtonDown(0))
+    {
+        if (Input.GetMouseButtonDown(0))
         {
             if (!_isHit)
             {
                 _mainPlayer.AttackPlayer();
+
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f);
 
                 if (_hit2D.collider != null)
                 {
-                    if (_hit2D.collider.name == "Boss")
+                    ItemDropObject temp;
+
+                    if (_hit2D.collider.name == "Boss") // 보스에 맞으면
                     {
                         _mainPlayer.SendDamageInfo(Boss.instance.DEF);
                         Boss.instance.ActiveHPBar();
+                    }
+
+                    temp = _hit2D.collider.GetComponent<ItemDropObject>();
+
+                    if (temp != null) // 채집물에 맞으면
+                    {
+                        temp.MinusCount();
                     }
                 }
             }

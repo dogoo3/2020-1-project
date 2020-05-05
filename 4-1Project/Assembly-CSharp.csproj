@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ItemDropObject.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />
@@ -91,10 +92,12 @@
     <Compile Include="Assets\Scripts\Objects\Boss.cs" />
     <Compile Include="Assets\Scripts\Objects\Bullet.cs" />
     <Compile Include="Assets\Scripts\Objects\CircleFloor.cs" />
+    <Compile Include="Assets\Scripts\Objects\CrashObject.cs" />
     <Compile Include="Assets\Scripts\Objects\EnergyBall.cs" />
     <Compile Include="Assets\Scripts\Objects\FireBallData.cs" />
     <Compile Include="Assets\Scripts\Objects\Fire_Ball.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
+    <Compile Include="Assets\Scripts\Objects\Portal.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternManager.cs" />
     <Compile Include="Assets\Scripts\Player\Client\Player.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Assets\Scripts\UI\BossHPBar.cs" />
     <Compile Include="Assets\Scripts\UI\Chatting.cs" />
     <Compile Include="Assets\Scripts\UI\ControlUI.cs" />
+    <Compile Include="Assets\Scripts\UI\GameobjectOnOff.cs" />
     <Compile Include="Assets\Scripts\UI\RobbyUI.cs" />
     <None Include="Assets\Prefabs\3D Lasers Pack\Prefabs\Readme.txt" />
     <None Include="Assets\Shader\2DWater.shader" />

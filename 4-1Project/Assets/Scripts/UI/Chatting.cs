@@ -31,7 +31,7 @@ public class Chatting : MonoBehaviour
                 JsonData SendData = JsonMapper.ToJson(Data);
                 ServerClient.instance.Send(SendData.ToString());
 
-                UI_chattingLog.text += GameManager.instance.PlayerName + " : " + UI_typingfield.text + "\n";
+                UI_chattingLog.text += '\n' + GameManager.instance.PlayerName + " : " + UI_typingfield.text;
                 UI_typingfield.text = "";
                 UI_typingfield.gameObject.SetActive(false);
             }

@@ -9,6 +9,7 @@ public enum PlayerState
     Idle,
     Move,
     Attack,
+    Skill,
     Die,
 };
 
@@ -31,8 +32,13 @@ public class Player : MonoBehaviour
     public BossDamage PtoB_damage_data; // 플레이어가 보스에게 데미지를 넣을 때
     public PlayerDamage BtoP_damage_data; // 보스가 쏜 탄환에 플레이어가 맞으면
 
-    public float _movespeed = 5.0f, attackSpeed;
+    public float _movespeed = 5.0f, attackSpeed, invincibleTime;
+    [Header("전사 : 0, 마법사 : 1")]
+    public int playerType;
     public int STR, DEF, fullHP;
+
+    public bool _isCrash;
+    private float time;
 
     void Start()
     {
@@ -43,8 +49,10 @@ public class Player : MonoBehaviour
         _temp_movePos = Vector2.zero;
         _activesubAnimator = _subAnimator[0];
 
-        Data.Speed = _movespeed;
         Data.Init(GameManager.instance.PlayerName);
+        Data.Speed = _movespeed;
+        // Data.playerType = playerType;
+
         PtoB_damage_data.Init();
         BtoP_damage_data.Init();
         BtoP_damage_data.nickname = GameManager.instance.PlayerName;
@@ -62,16 +70,26 @@ public class Player : MonoBehaviour
             ChangeLookdirection();
             MoveCharacter();
         }
+        if(_isCrash)
+        {
+            time += Time.deltaTime;
+            if(time > invincibleTime)
+            {
+                time = 0;
+                _isCrash = false;
+            }
+        }
     }
 
     public void ChangeLookdirection()
     {
         _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _mousePos -= (Vector2)transform.position;
+        _mousePos.Normalize();
 
         // 마우스 커서의 좌표를 -1 ~ 1로 만들어줌
-        _dirPos.x = Mathf.RoundToInt(_mousePos.normalized.x);
-        _dirPos.y = Mathf.RoundToInt(_mousePos.normalized.y);
+        _dirPos.x = Mathf.RoundToInt(_mousePos.x);
+        _dirPos.y = Mathf.RoundToInt(_mousePos.y);
 
         // 마우스 좌표에 따른 캐릭터의 시점 변경
         _animator.SetFloat("xPos", _dirPos.x);
@@ -138,19 +156,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if(collision.gameObject.tag == "Floor")
+    //    {
+
+    //    }
+    //}
+
+    public void AttackPlayer(PlayerState _attackstate = PlayerState.Attack)
     {
-        if(collision.gameObject.tag == "Floor")
-        {
-
-        }
-    }
-
-    public void AttackPlayer()
-    {
-        playerState = PlayerState.Attack;
-        Data.State = (int)PlayerState.Attack;
-
+        playerState = _attackstate;
+        Data.State = (int)_attackstate;
+        Data.ax = _mousePos.x;
+        Data.ay = _mousePos.y;
         for (int i = 0; i < _subAnimator.Length; i++)
         {
             if (_subAnimator[i].active)
@@ -174,9 +193,14 @@ public class Player : MonoBehaviour
 
     public void Attacked(int _damage) // 외부에서 공격이 들어올 때.
     {
-        if (_damage - DEF <= 0)
+        if (_damage <= DEF) // 방어력이 들어온 데미지보다 높을 경우
             return;
-        HPManager.instance.myHP -= (_damage - DEF);
+        if (_isCrash) // 무적 상태일 경우
+            return; // 피격 취소
+
+        _isCrash = true;
+
+        HPManager.instance.myHP = (int)Mathf.Clamp(HPManager.instance.myHP - (_damage - DEF), -1, HPManager.instance.myFullHP);
         HPManager.instance.SetHP();
         BtoP_damage_data.HP = HPManager.instance.myHP;
 
