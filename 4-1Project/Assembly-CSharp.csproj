@@ -64,7 +64,9 @@
   <ItemGroup>
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
+    <Compile Include="Assets\Scripts\BombArea.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />
+    <Compile Include="Assets\Scripts\FirePillar.cs" />
     <Compile Include="Assets\Scripts\InvenTory\DataBase.cs" />
     <Compile Include="Assets\Scripts\InvenTory\DragSlot.cs" />
     <Compile Include="Assets\Scripts\InvenTory\EquipWin\EquipDatabase.cs" />
@@ -83,7 +85,6 @@
     <Compile Include="Assets\Scripts\InvenTory\PrivateInv\ItemTooltip.cs" />
     <Compile Include="Assets\Scripts\InvenTory\ShareInv\ShareInventorySlot.cs" />
     <Compile Include="Assets\Scripts\Item\GetItem.cs" />
-    <Compile Include="Assets\Scripts\ItemDropObject.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\HPManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MakeManager.cs" />
@@ -96,8 +97,10 @@
     <Compile Include="Assets\Scripts\Objects\EnergyBall.cs" />
     <Compile Include="Assets\Scripts\Objects\FireBallData.cs" />
     <Compile Include="Assets\Scripts\Objects\Fire_Ball.cs" />
+    <Compile Include="Assets\Scripts\Objects\ItemDropObject.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
     <Compile Include="Assets\Scripts\Objects\Portal.cs" />
+    <Compile Include="Assets\Scripts\PatrolFireball.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternManager.cs" />
     <Compile Include="Assets\Scripts\Player\Client\Player.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Assets\Scripts\Server\Protocol.cs" />
     <Compile Include="Assets\Scripts\Server\Resolve.cs" />
     <Compile Include="Assets\Scripts\Server\ServerClient.cs" />
+    <Compile Include="Assets\Scripts\TrapManager.cs" />
     <Compile Include="Assets\Scripts\UI\BossHPBar.cs" />
     <Compile Include="Assets\Scripts\UI\Chatting.cs" />
     <Compile Include="Assets\Scripts\UI\ControlUI.cs" />

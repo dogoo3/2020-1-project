@@ -61,6 +61,7 @@ public class SubAnimator : MonoBehaviour
     public void Attacked(bool _isAttacked)
     {
         _animator.SetBool("Attacked", _isAttacked);
+        DisableAttack(); // 애니메이션 공격 bool변수가 true에서 멈추는 것을 방지하기 위해서 강제로 false로 만들어버림.
     }
 
     public void EnableAttack() // 애니메이션 이벤트 함수

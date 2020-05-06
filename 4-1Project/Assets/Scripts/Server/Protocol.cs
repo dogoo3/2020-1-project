@@ -24,7 +24,7 @@ public struct Ready
     public void Init()
     {
         type = "Ready";
-        if(GameManager.instance != null)
+        if (GameManager.instance != null)
         {
             Name = GameManager.instance.PlayerName;
         }
@@ -36,8 +36,6 @@ public struct PlayerData
     public string type;
     public string name;
 
-    // 플레이어 타입
-    // public int playerType;
     //방향값
     public double x, y;
     //회전값
@@ -128,7 +126,7 @@ public struct MonsterData
 
     public string MonsterName;
     public string UserName;
-    public void Init(string User,string Monster)
+    public void Init(string User, string Monster)
     {
         type = "MonsterCheck";
         this.UserName = User;
@@ -320,21 +318,23 @@ public struct FireBallState
     public string type;
     public string Name;
 
-    public void Init(string _Name,bool _destroy)
+    public void Init(string _Name)
     {
-        if(!_destroy)
-        {
-            type = "DamageFireBall";
-        }
-        else
-        {
-            type = "DestroyFireBall";
-        }
-        
+
+        type = "DamageFireBall";
         Name = _Name;
     }
 }
 
+public struct DestroyFireBall
+{
+    public string type;
+
+    public void Init()
+    {
+        type = "DestroyFireBall";
+    }
+}
 
 
 

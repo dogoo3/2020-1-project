@@ -29,7 +29,8 @@ public class BossHPBar : MonoBehaviour
     private void Update()
     {
         bossHP = Boss.instance.HP;
-
+        if (bossHP <= 0)
+            gameObject.SetActive(false);
         phase = (int)(bossHP / phaseFullHP); // 현재 보스 HP에서 페이즈당 최대HP를 나눠서 몇 페이즈인지 계산
         remainderHP = bossHP % phaseFullHP; //  페이즈에 남은 HP
 
@@ -38,8 +39,6 @@ public class BossHPBar : MonoBehaviour
         else
             text_phase.text = "";
 
-        Debug.Log(remainderHP);
-        Debug.Log(phaseFullHP);
         image_HPgauge[0].fillAmount = remainderHP / phaseFullHP;
 
         // 0번 페이즈는 투명페이즈.

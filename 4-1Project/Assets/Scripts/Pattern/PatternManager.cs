@@ -55,6 +55,8 @@ public class PatternManager : MonoBehaviour
 
     private void Update()
     {
+        if (Boss.instance.HP <= 0)
+            gameObject.GetComponent<PatternManager>().enabled = false;
         if (_isStart)
         {
             _isStart = false;
@@ -71,7 +73,6 @@ public class PatternManager : MonoBehaviour
                     PatternFireBallExecute();
                     break;
                 case 12:
-
                     PatternCircleFloorExecute();
                     break;
                 default:

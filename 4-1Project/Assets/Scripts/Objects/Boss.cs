@@ -5,6 +5,7 @@ using LitJson;
 
 public class Boss : MonoBehaviour
 {
+    Animator _animator;
     public static Boss instance;
 
     Rigidbody2D _rigidbody2D;
@@ -35,6 +36,7 @@ public class Boss : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _playerPos = FindObjectOfType<Player>().transform;
         _BossHPBar = FindObjectOfType<BossHPBar>();
+        _animator = GetComponent<Animator>();
         _fullHp = HP;
 
         Data.Init(false);
@@ -50,6 +52,17 @@ public class Boss : MonoBehaviour
         }
 
         HP = int.Parse(_data["Hp"].ToString());
+    }
+
+    private void Update()
+    {
+        if (HP <= 0)
+            _animator.SetTrigger("Dead");
+    }
+
+    public void Dead()
+    {
+        gameObject.SetActive(false);
     }
 
     public void SetFullHP()

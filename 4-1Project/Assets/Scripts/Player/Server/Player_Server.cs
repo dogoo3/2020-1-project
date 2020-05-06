@@ -42,9 +42,9 @@ public class Player_Server : MonoBehaviour
         _animator = GetComponent<Animator>();
         _subAnimators = GetComponentsInChildren<SubAnimator>();
         if (_animator.runtimeAnimatorController.name == "WarriorController")
-            playerType = 0;
+            playerType = 0; // 전사일 경우 playerType은 0
         else
-            playerType = 1;
+            playerType = 1; // 마법사일 경우 playerType은 1
     }
 
     private void Update()

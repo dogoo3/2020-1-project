@@ -18,7 +18,7 @@ public class ObjectPoolingManager : MonoBehaviour
     public CircleFloor circle;
     public Fire_Ball fireBall;
 
-    public int poolingCount = 500;
+    public int poolingCount;
 
     private void Awake()
     {
@@ -30,13 +30,10 @@ public class ObjectPoolingManager : MonoBehaviour
             t_object.transform.parent = gameObject.transform;
             queue_energyball.Enqueue(t_object);
             t_object.gameObject.SetActive(false);
-        }
 
-        for (int i = 0; i < 10; i++)
-        {
-            EnergyBall t_object = Instantiate(magicBall, Vector2.zero, Quaternion.identity);
+            EnergyBall e_object = Instantiate(magicBall, Vector2.zero, Quaternion.identity);
             t_object.transform.parent = gameObject.transform;
-            queue_magicBall.Enqueue(t_object);
+            queue_magicBall.Enqueue(e_object);
             t_object.gameObject.SetActive(false);
         }
 

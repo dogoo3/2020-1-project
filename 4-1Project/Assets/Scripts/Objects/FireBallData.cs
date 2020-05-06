@@ -6,14 +6,16 @@ using LitJson;
 public class FireBallData : MonoBehaviour
 {
     FireBallState _data_damageFireBall;
-
+    DestroyFireBall _data_destroyFireBall;
     public int HitCount = 3;
     public int MaxCount = 3;
 
     bool _serverDamageSetOn;
+
     private void Awake()
     {
         MaxCount = HitCount;
+        _data_destroyFireBall.Init();
     }
 
     private void OnDisable()
@@ -26,21 +28,20 @@ public class FireBallData : MonoBehaviour
         HitCount = MaxCount;
         this.gameObject.SetActive(true);
     }
-  
+
     public void SetCount()
     {
-        if(HitCount ==0)
+        if (HitCount == 0)
         {
-            _data_damageFireBall.Init(this.gameObject.name, true);
+            _data_damageFireBall.Init(this.gameObject.name);
             JsonData SendData = JsonMapper.ToJson(_data_damageFireBall);
             ServerClient.instance.Send(SendData.ToString());
-            this.gameObject.SetActive(false);          
+            this.gameObject.SetActive(false);
         }
         else
-        { 
+        {
             HitCount -= 1;
-            _data_damageFireBall.Init(this.gameObject.name,false);
-            JsonData SendData = JsonMapper.ToJson(_data_damageFireBall);
+            JsonData SendData = JsonMapper.ToJson(_data_destroyFireBall);
             ServerClient.instance.Send(SendData.ToString());
         }
     }

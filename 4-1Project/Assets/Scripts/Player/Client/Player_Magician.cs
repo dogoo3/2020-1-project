@@ -26,10 +26,6 @@ public class Player_Magician : MonoBehaviour
         {
             if (!_isHit)
             {
-                //_mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                //_mousePos -= (Vector2)transform.position;
-                //_mousePos.Normalize();
-
                 ObjectPoolingManager.instance.GetQueue(_mainPlayer._mousePos, transform.position, gameObject.name);
                 _mainPlayer.AttackPlayer(PlayerState.Skill); // 마법사 스킬공격
             }
