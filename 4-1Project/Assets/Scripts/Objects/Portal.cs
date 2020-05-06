@@ -16,7 +16,6 @@ public class Portal : MonoBehaviour
 
             if (collision.name == GameManager.instance.PlayerName)
                 Camera.main.transform.position = cameraPos.transform.position;
-            
         }
     }
 }

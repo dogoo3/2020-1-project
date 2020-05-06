@@ -12,6 +12,8 @@ public class Player_Magician : MonoBehaviour
     private ItemDropObject temp;
 
     private bool _isHit;
+    private float _time;
+    public float attackspeed;
 
     private void Awake()
     {
@@ -22,12 +24,23 @@ public class Player_Magician : MonoBehaviour
 
     private void Update()
     {
+        if (_isHit)
+        {
+            _time += Time.deltaTime;
+            if (_time > attackspeed)
+            {
+                _time = 0;
+                _isHit = false;
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!_isHit)
             {
                 ObjectPoolingManager.instance.GetQueue(_mainPlayer._mousePos, transform.position, gameObject.name);
                 _mainPlayer.AttackPlayer(PlayerState.Skill); // 마법사 스킬공격
+                _isHit = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.F))
@@ -36,18 +49,14 @@ public class Player_Magician : MonoBehaviour
             {
                 _mainPlayer.AttackPlayer(); // 마법사 기본공격
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f);
+                _isHit = true;
 
-                if(_hit2D.collider != null)
+                if (_hit2D.collider != null)
                     temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
                 if (temp != null) // 채집물에 맞으면
                     temp.MinusCount();
             }
         }
-    }
-
-    public void ActiveAttack(bool _isActive)
-    {
-        _isHit = _isActive;
     }
 }

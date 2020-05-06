@@ -77,7 +77,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mousePos: {x: 0, y: 0}
   _movespeed: 5
-  attackSpeed: 1
   invincibleTime: 1.5
   STR: 150
   DEF: 50
@@ -132,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b1630aeee6a64f9a0a6f83ad82d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackspeed: 1.5
 --- !u!1 &8792587031721597043
 GameObject:
   m_ObjectHideFlags: 0

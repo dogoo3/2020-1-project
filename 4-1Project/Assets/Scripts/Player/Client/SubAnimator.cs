@@ -4,30 +4,16 @@ using UnityEngine;
 
 public class SubAnimator : MonoBehaviour
 {
-    /* Private */
-
-    // Unity Components
     Animator _animator;
     SpriteRenderer[] _characterSprite;
 
-    // Scripts
     public Player_Warrior player_Warrior;
     public Player_Magician player_Magician;
-    // Unity Keywords
 
-    // Variables
     private bool _walk;
     private bool _attack;
-    /* Public */
 
-    // Unity Components
-
-    // Scripts
-
-    // Unity Keywords
-
-    // Variables
-    public bool active;
+    public bool active;  // animator active option
 
     void Awake()
     {
@@ -37,7 +23,7 @@ public class SubAnimator : MonoBehaviour
 
     private void Update()
     {
-        IsActive(active);
+        IsActive(active); // Blend Tree에 따라서 애니메이션의 방향을 토대로 오브젝트를 활성화한다.
     }
 
     public void Move(bool _state)
@@ -61,30 +47,5 @@ public class SubAnimator : MonoBehaviour
     public void Attacked(bool _isAttacked)
     {
         _animator.SetBool("Attacked", _isAttacked);
-        DisableAttack(); // 애니메이션 공격 bool변수가 true에서 멈추는 것을 방지하기 위해서 강제로 false로 만들어버림.
     }
-
-    public void EnableAttack() // 애니메이션 이벤트 함수
-    {
-        if (player_Warrior == null && player_Magician == null)
-            return;
-
-        if (player_Warrior != null)
-            player_Warrior.ActiveAttack(true);
-        else
-            player_Magician.ActiveAttack(true);
-    }
-
-    public void DisableAttack() // 애니메이션 이벤트 함수
-    {
-        if (player_Warrior == null && player_Magician == null)
-            return;
-
-        if (player_Warrior != null)
-            player_Warrior.ActiveAttack(false);
-        else
-            player_Magician.ActiveAttack(false);
-    }
-
-
 }

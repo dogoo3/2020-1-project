@@ -8,6 +8,8 @@ public class Player_Warrior : MonoBehaviour
     private Player _mainPlayer;
 
     private bool _isHit;
+    private float _time;
+    public float attackspeed;
 
     private void Awake()
     {
@@ -16,12 +18,22 @@ public class Player_Warrior : MonoBehaviour
 
     private void Update()
     {
+        if (_isHit)
+        {
+            _time += Time.deltaTime;
+            if (_time > attackspeed)
+            {
+                _time = 0;
+                _isHit = false;
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!_isHit)
             {
                 _mainPlayer.AttackPlayer();
-
+                _isHit = true;
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f);
 
                 if (_hit2D.collider != null)

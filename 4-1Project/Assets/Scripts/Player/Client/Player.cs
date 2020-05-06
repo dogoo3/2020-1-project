@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public BossDamage PtoB_damage_data; // 플레이어가 보스에게 데미지를 넣을 때
     public PlayerDamage BtoP_damage_data; // 보스가 쏜 탄환에 플레이어가 맞으면
 
-    public float _movespeed = 5.0f, attackSpeed, invincibleTime;
+    public float _movespeed = 5.0f, invincibleTime;
     //[Header("전사 : 0, 마법사 : 1")]
     //public int playerType;
     public int STR, DEF, fullHP;
@@ -70,7 +70,8 @@ public class Player : MonoBehaviour
             ChangeLookdirection();
             MoveCharacter();
         }
-        if(_isCrash)
+
+        if(_isCrash) // 피격당했을 때 무적시간을 계산해서 무적을 풀어준다.
         {
             time += Time.deltaTime;
             if(time > invincibleTime)
@@ -156,14 +157,6 @@ public class Player : MonoBehaviour
             Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), collision.collider);
         }
     }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if(collision.gameObject.tag == "Floor")
-    //    {
-
-    //    }
-    //}
 
     public void AttackPlayer(PlayerState _attackstate = PlayerState.Attack)
     {

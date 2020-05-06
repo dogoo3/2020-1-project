@@ -97,6 +97,7 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnimatorStateTransitionInspector
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
@@ -525,7 +526,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 5b3db5b58310fac5474df8f4f275200a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Warrior
@@ -873,7 +874,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 5ced6109e19a1e1b21bdbdc28e9aa1ac
+      Hash: e9d13e6012a65df5c4ac58fb377cf817
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -1311,7 +1312,7 @@ ScriptsOnlyBuild:
     className: OtherPlayerManager
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 5b3db5b58310fac5474df8f4f275200a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Magician
@@ -1645,6 +1646,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: f349427748f5325d66e290f64dd2ab41
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AttackedVFX
   platform: 5
   scenePathNames:
   - Assets/Scenes/Login.unity
