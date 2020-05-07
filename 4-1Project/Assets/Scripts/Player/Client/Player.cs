@@ -83,6 +83,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SendPlayerInfoPacket()
+    {
+        JsonData SendData = JsonMapper.ToJson(Data);
+        ServerClient.instance.Send(SendData.ToString());
+    }
+
     public void ChangeLookdirection()
     {
         _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -121,13 +127,13 @@ public class Player : MonoBehaviour
 
         if (_movePos != Vector2.zero)
         {
-            ChangeAnimationState(true);
+            ChangeAnimationState_Move(true);
             transform.Translate(_movePos.normalized * Time.deltaTime * _movespeed);
         }
         else
         {
             Data.State = (int)PlayerState.Idle;
-            ChangeAnimationState(false);
+            ChangeAnimationState_Move(false);
         }
 
         if(_temp_movePos != _movePos)
@@ -138,7 +144,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void ChangeAnimationState(bool _state)
+    void ChangeAnimationState_Move(bool _state) // 걷기
     {
         for (int i = 0; i < _subAnimator.Length; i++)
         {
@@ -149,6 +155,21 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public void ChangeAnimationState_Attack() // 공격
+    {
+        for (int i = 0; i < _subAnimator.Length; i++)
+            _subAnimator[i].Attack();
+    }
+
+
+    private void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
+    {
+        for (int i = 0; i < _subAnimator.Length; i++)
+            _subAnimator[i].Attacked(_isAttacked);
+    }
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -164,14 +185,7 @@ public class Player : MonoBehaviour
         Data.State = (int)_attackstate;
         Data.ax = _mousePos.x;
         Data.ay = _mousePos.y;
-        for (int i = 0; i < _subAnimator.Length; i++)
-        {
-            if (_subAnimator[i].active)
-            {
-                _subAnimator[i].Attack();
-                break;
-            }
-        }
+        ChangeAnimationState_Attack();
         JsonData SendData = JsonMapper.ToJson(Data);
         ServerClient.instance.Send(SendData.ToString());
     }
@@ -200,11 +214,5 @@ public class Player : MonoBehaviour
 
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());
-    }
-    
-    private void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
-    {
-        for (int i = 0; i < _subAnimator.Length; i++)
-            _subAnimator[i].Attacked(_isAttacked);
     }
 }

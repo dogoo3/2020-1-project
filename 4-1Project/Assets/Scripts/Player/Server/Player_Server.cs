@@ -34,9 +34,6 @@ public class Player_Server : MonoBehaviour
     //시간
     public float GetMillTime;
 
-    //공격 애니메이션을 제어
-    public bool AttackOn;
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -69,19 +66,22 @@ public class Player_Server : MonoBehaviour
                 _setOn = false;
         }
 
+        //if (!_isAttack)
+        //    ChangeAnimationState_Attack(false);
+
         _animator.SetFloat("xPos", Rot.x);
         _animator.SetFloat("yPos", Rot.y);
 
         if (PS == PlayerState.Attack) // 기본공격
         {
-            ChangeAnimationState(); // 애니메이션 상태 변경
+            ChangeAnimationState_Attack(true); // 애니메이션 상태 변경
             FindItemDropObject(); // 마우스 커서 방향에 채집물이 있는지 확인
         }
         else if(PS == PlayerState.Skill) // 스킬공격
         {
             if (playerType == 1) // 마법사일 때만
             {
-                ChangeAnimationState();
+                ChangeAnimationState_Attack(true);
                 ObjectPoolingManager.instance.GetQueue(_mouse_direction, transform.position, gameObject.name);
             }
         }
@@ -119,7 +119,7 @@ public class Player_Server : MonoBehaviour
     public void Move(float _speed, bool _state)
     {
         transform.Translate(Pos.normalized * Time.deltaTime * _speed);
-        ChangeAnimationState(_state);
+        ChangeAnimationState_Move(_state);
     }
 
     //서버와 클라는 어느정도의 딜레이가 있다 때문에 클라에서 받은 시간을 계산해서 현재 위치를 예측해야한다
@@ -148,28 +148,16 @@ public class Player_Server : MonoBehaviour
         }
     }
 
-    void ChangeAnimationState(bool _state) // 걷기
+    void ChangeAnimationState_Move(bool _state) // 걷기
     {
         for (int i = 0; i < _subAnimators.Length; i++)
-        {
-            if (_subAnimators[i].active)
-            {
-                _subAnimators[i].Move(_state);
-                break;
-            }
-        }
+            _subAnimators[i].Move(_state);
     }
 
-    void ChangeAnimationState() // 공격
+    void ChangeAnimationState_Attack(bool _state) // 공격
     {
         for (int i = 0; i < _subAnimators.Length; i++)
-        {
-            if (_subAnimators[i].active)
-            {
-                _subAnimators[i].Attack();
-                break;
-            }
-        }
+            _subAnimators[i].Attack();
     }
 
     void FindItemDropObject()

@@ -25,6 +25,7 @@ public class Player_Warrior : MonoBehaviour
             {
                 _time = 0;
                 _isHit = false;
+                _mainPlayer.SendPlayerInfoPacket();
             }
         }
 
@@ -35,7 +36,7 @@ public class Player_Warrior : MonoBehaviour
                 _mainPlayer.AttackPlayer();
                 _isHit = true;
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f);
-
+                _mainPlayer.ChangeAnimationState_Attack();
                 if (_hit2D.collider != null)
                 {
                     ItemDropObject temp;
@@ -46,6 +47,9 @@ public class Player_Warrior : MonoBehaviour
                         Boss.instance.ActiveHPBar();
                     }
 
+                    if (_hit2D.collider.gameObject.tag == "FireBall")
+                        Boss.instance._fireBall.HitFireBall(_hit2D.collider.gameObject.name);
+
                     temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
                     if (temp != null) // 채집물에 맞으면
@@ -55,10 +59,5 @@ public class Player_Warrior : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void ActiveAttack(bool _isActive) // 애니메이션 이벤트 함수로 작동
-    {
-        _isHit = _isActive;
     }
 }

@@ -31,6 +31,7 @@ public class Player_Magician : MonoBehaviour
             {
                 _time = 0;
                 _isHit = false;
+                _mainPlayer.SendPlayerInfoPacket();
             }
         }
 
@@ -40,6 +41,7 @@ public class Player_Magician : MonoBehaviour
             {
                 ObjectPoolingManager.instance.GetQueue(_mainPlayer._mousePos, transform.position, gameObject.name);
                 _mainPlayer.AttackPlayer(PlayerState.Skill); // 마법사 스킬공격
+                _mainPlayer.ChangeAnimationState_Attack();
                 _isHit = true;
             }
         }
@@ -49,6 +51,7 @@ public class Player_Magician : MonoBehaviour
             {
                 _mainPlayer.AttackPlayer(); // 마법사 기본공격
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f);
+                _mainPlayer.ChangeAnimationState_Attack();
                 _isHit = true;
 
                 if (_hit2D.collider != null)

@@ -4,7 +4,6 @@ ScriptsOnlyBuild:
     - Boss
     - BossHPBar
     - Bullet
-    - CameraMove
     - Chatting
     - CircleFloor
     - ControlUI
@@ -97,7 +96,6 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnimatorStateTransitionInspector
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
@@ -219,8 +217,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13156}
     - Class: 114
       Script: {instanceID: 13326}
-    - Class: 114
-      Script: {instanceID: 13388}
     - Class: 114
       Script: {instanceID: 13430}
     - Class: 114
@@ -748,7 +744,7 @@ ScriptsOnlyBuild:
     className: CircleFloor
   - hash:
       serializedVersion: 2
-      Hash: 3b90ad8db4006909b65dfd0febbd55f7
+      Hash: 66e44a055c1c6f851a36eef10a5585ce
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Server
@@ -1150,7 +1146,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 24162dacef8057b6f6e5c52b1a1a4ff8
+      Hash: 955f5e27430673237247f13d8c477dd3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MakeManager
@@ -1646,15 +1642,9 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: f349427748f5325d66e290f64dd2ab41
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: AttackedVFX
   platform: 5
   scenePathNames:
   - Assets/Scenes/Login.unity
   - Assets/Scenes/Robby.unity
   - Assets/Scenes/InGame.unity
-  playerPath: C:/Users/dogoo/Desktop/0505/4-1Project.exe
+  playerPath: C:/Users/dogoo/Desktop/0507/4-1Project.exe
