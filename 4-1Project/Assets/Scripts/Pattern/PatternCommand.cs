@@ -3,6 +3,7 @@
 public class PatternCommand
 {
     protected Bullet _energyball;
+    protected Bullet[] _energyballs = new Bullet[4];
     protected Laser _laser;
     protected CircleFloor _circleFloor;
     protected Fire_Ball _fireBall;
@@ -54,6 +55,91 @@ public class InduceBullet : PatternCommand
                     if (_energyball != null)
                     {
                         _energyball.InduceBullet(new Vector2(Mathf.Cos(Theta * i), Mathf.Sin(Theta * i)), _type);
+                    }
+                }
+                break;
+            case BulletType.EVEN_SQUARE_CURVE:
+            case BulletType.EVEN_SQUARE_NORMAL:
+                for (int i = 0; i < 9; ++i)
+                {
+                    if(i%2==0)
+                    {
+                        _energyballs[0] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[0] != null)
+                        {
+                            _energyballs[0].InduceBullet(new Vector2(-1, -1 + (0.25f * i)));
+                        }
+                        _energyballs[1] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[1] != null)
+                        {
+                            _energyballs[1].InduceBullet(new Vector2(1, -1 + (0.25f * i)));
+                        }
+                        _energyballs[2] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[2] != null)
+                        {
+                            _energyballs[2].InduceBullet(new Vector2(-1 + (0.25f * i), -1));
+                        }
+                        _energyballs[3] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[3] != null)
+                        {
+                            _energyballs[3].InduceBullet(new Vector2(-1 + (0.25f * i), 1));
+                        }
+                    }
+                }
+                break;
+            case BulletType.ODD_NUMBER_SQUARE_CURVE:
+            case BulletType.ODD_NUMBER_SQUARE_NORMAL:
+                for (int i = 0; i < 9; ++i)
+                {
+                    if (i % 2 == 1)
+                    {
+                        _energyballs[0] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[0] != null)
+                        {
+                            _energyballs[0].InduceBullet(new Vector2(-1, -1 + (0.25f * i)));
+                        }
+                        _energyballs[1] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[1] != null)
+                        {
+                            _energyballs[1].InduceBullet(new Vector2(1, -1 + (0.25f * i)));
+                        }
+                        _energyballs[2] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[2] != null)
+                        {
+                            _energyballs[2].InduceBullet(new Vector2(-1 + (0.25f * i), -1));
+                        }
+                        _energyballs[3] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                        if (_energyballs[3] != null)
+                        {
+                            _energyballs[3].InduceBullet(new Vector2(-1 + (0.25f * i), 1));
+                        }
+                    }
+                }
+                break;
+
+            case BulletType.SQUARE_CURVE:
+            case BulletType.SQUARE_NORMAL:
+                for (int i = 0; i < 9; ++i)
+                {
+                    _energyballs[0] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                    if (_energyballs[0] != null)
+                    {
+                        _energyballs[0].InduceBullet(new Vector2(-1, -1 + (0.25f * i)));
+                    }
+                    _energyballs[1] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                    if (_energyballs[1] != null)
+                    {
+                        _energyballs[1].InduceBullet(new Vector2(1, -1 + (0.25f * i)));
+                    }
+                    _energyballs[2] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                    if (_energyballs[2] != null)
+                    {
+                        _energyballs[2].InduceBullet(new Vector2(-1 + (0.25f * i), -1));
+                    }
+                    _energyballs[3] = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+                    if (_energyballs[3] != null)
+                    {
+                        _energyballs[3].InduceBullet(new Vector2(-1 + (0.25f * i), 1));
                     }
                 }
                 break;

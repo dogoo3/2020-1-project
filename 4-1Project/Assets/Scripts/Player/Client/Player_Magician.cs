@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player_Magician : MonoBehaviour
 {
-    public static Player_Magician instance;
-
     private Player _mainPlayer;
     private RaycastHit2D _hit2D;
     private Vector2 _mousePos;
@@ -13,11 +11,14 @@ public class Player_Magician : MonoBehaviour
 
     private bool _isHit;
     private float _time;
+    private int _layerMask;
+
     public float attackspeed;
 
     private void Awake()
     {
-        instance = this;
+        _layerMask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("RoomCollider");
+        _layerMask = ~_layerMask;
 
         _mainPlayer = GetComponent<Player>();
     }
@@ -50,7 +51,7 @@ public class Player_Magician : MonoBehaviour
             if (!_isHit)
             {
                 _mainPlayer.AttackPlayer(); // 마법사 기본공격
-                _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f);
+                _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
                 _mainPlayer.ChangeAnimationState_Attack();
                 _isHit = true;
 

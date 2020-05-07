@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CineRoomCollider.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
     <Compile Include="Assets\Scripts\BombArea.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Scripts\Objects\Fire_Ball.cs" />
     <Compile Include="Assets\Scripts\Objects\ItemDropObject.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
+    <Compile Include="Assets\Scripts\Objects\Laser_Ray.cs" />
     <Compile Include="Assets\Scripts\Objects\Portal.cs" />
     <Compile Include="Assets\Scripts\PatrolFireball.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
@@ -216,6 +218,12 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/2020-1-project/4-1Project/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/2020-1-project/4-1Project/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/2020-1-project/4-1Project/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

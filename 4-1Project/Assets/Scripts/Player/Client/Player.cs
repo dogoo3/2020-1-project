@@ -169,8 +169,6 @@ public class Player : MonoBehaviour
             _subAnimator[i].Attacked(_isAttacked);
     }
 
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")

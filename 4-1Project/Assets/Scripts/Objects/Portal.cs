@@ -8,6 +8,9 @@ public class Portal : MonoBehaviour
 
     public Transform cameraPos;
 
+    [Header("이 포탈을 타고 이동하는 방 번호를 적으면 됨. 방번호는 1부터 시작함")]
+    public int toMoveroomNum;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -15,7 +18,8 @@ public class Portal : MonoBehaviour
             collision.gameObject.transform.position = teleportPos.position;
 
             if (collision.name == GameManager.instance.PlayerName)
-                Camera.main.transform.position = cameraPos.transform.position;
+                CineRoomCollider.instance.SetAreaCollider(toMoveroomNum);
+                //Camera.main.transform.position = cameraPos.transform.position;
         }
     }
 }

@@ -9,7 +9,9 @@ public class Player_Server : MonoBehaviour
 {
     Animator _animator;
     SubAnimator[] _subAnimators;
-    
+
+    private int _layerMask;
+
     private bool _setOn;
 
     public PlayerState PS;
@@ -36,6 +38,8 @@ public class Player_Server : MonoBehaviour
 
     private void Awake()
     {
+        _layerMask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("RoomCollider");
+        _layerMask = ~_layerMask;
         _animator = GetComponent<Animator>();
         _subAnimators = GetComponentsInChildren<SubAnimator>();
         if (_animator.runtimeAnimatorController.name == "WarriorController")
@@ -162,7 +166,7 @@ public class Player_Server : MonoBehaviour
 
     void FindItemDropObject()
     {
-        RaycastHit2D _hit2D = Physics2D.Raycast(transform.position,_mouse_direction, 2f);
+        RaycastHit2D _hit2D = Physics2D.Raycast(transform.position,_mouse_direction, 2f, _layerMask);
         ItemDropObject itemDropObject = null;
 
         if (_hit2D.collider != null)

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
   cameraPos: {fileID: 0}
+  toMoveroomNum: 0
 --- !u!95 &3531369227571724252
 Animator:
   serializedVersion: 3
@@ -223,6 +224,66 @@ Transform:
   m_Father: {fileID: 4908380325863395833}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3792388205104723379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2987233110976357745}
+  - component: {fileID: 7278800446111976807}
+  m_Layer: 9
+  m_Name: CameraCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2987233110976357745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3792388205104723379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4908380325863395833}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &7278800446111976807
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3792388205104723379}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -9.978293, y: 7.455659}
+      - {x: 9.933563, y: 7.3979783}
+      - {x: 9.938782, y: -7.4342055}
+      - {x: -9.978293, y: -7.434206}
 --- !u!1 &4339436950038882906
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
   cameraPos: {fileID: 0}
+  toMoveroomNum: 0
 --- !u!95 &491451276851736845
 Animator:
   serializedVersion: 3
@@ -393,6 +455,7 @@ Transform:
   - {fileID: 6449293134433099934}
   - {fileID: 5226583878461066126}
   - {fileID: 472159192275123965}
+  - {fileID: 2987233110976357745}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -574,6 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
   cameraPos: {fileID: 0}
+  toMoveroomNum: 0
 --- !u!95 &1680741514285349444
 Animator:
   serializedVersion: 3
@@ -707,6 +771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
   cameraPos: {fileID: 0}
+  toMoveroomNum: 0
 --- !u!95 &4166612543096772104
 Animator:
   serializedVersion: 3

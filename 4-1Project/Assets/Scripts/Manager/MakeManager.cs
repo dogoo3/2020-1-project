@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class MakeManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class MakeManager : MonoBehaviour
     public Text hpBar_mynickname;
     public Text[] hpBar_othernickname;
 
+    public CinemachineVirtualCamera cine_Camera;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,10 +31,11 @@ public class MakeManager : MonoBehaviour
                 if (GameManager.instance.PlayerName == Data["SessionIDList"][i]["SessionID"].ToString())
                 {
                     obj_temp = Instantiate(GameManager.instance.Heros[GameManager.instance.type]
-                               , SpawnPoint[i].position, Quaternion.identity);
-                    obj_temp.name = GameManager.instance.PlayerName;
-                    GameManager.instance._player = obj_temp.GetComponent<Player>();
-                    hpBar_mynickname.text = GameManager.instance.PlayerName;
+                               , SpawnPoint[i].position, Quaternion.identity); // 플레이어 생성
+                    obj_temp.name = GameManager.instance.PlayerName; // 플레이어 이름 변경
+                    cine_Camera.Follow = obj_temp.transform; // 플레이어에게 시네머신 적용
+                    GameManager.instance._player = obj_temp.GetComponent<Player>(); // 게임매니저에 플레이어 스크립트 적용
+                    hpBar_mynickname.text = GameManager.instance.PlayerName; // 플레이어 HP바 닉네임 적용
                 }
                 else 
                 {

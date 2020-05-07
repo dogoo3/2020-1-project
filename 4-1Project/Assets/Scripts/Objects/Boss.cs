@@ -60,6 +60,11 @@ public class Boss : MonoBehaviour
             _animator.SetTrigger("Dead");
     }
 
+    public void Attack()
+    {
+        _animator.SetTrigger("Attack");
+    }
+
     public void Dead()
     {
         gameObject.SetActive(false);
@@ -69,7 +74,6 @@ public class Boss : MonoBehaviour
     {
         HP = _fullHp;
     }
-
 
     public void SetPhase(JsonData _data)
     {

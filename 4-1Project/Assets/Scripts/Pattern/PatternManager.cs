@@ -21,6 +21,7 @@ public class PatternManager : MonoBehaviour
     //불렛 타입
     [HideInInspector]
     public BulletType BT;
+    public BulletType SBT;
     public int _patternCount;
     public int _subPatternCount;
 
@@ -99,8 +100,8 @@ public class PatternManager : MonoBehaviour
     void PatternBallExecute()
     {
         Debug.Log("총알 생성");
+       
         pat_induceBullet.BulletExecute(Boss.instance._circleBullet, BT);
-
         //만약 패턴이 시작된 횟수가 3일때 랜덤 탄환을
         //다시 계산하도록 한다
         if (_patternCount == 3)
@@ -123,16 +124,25 @@ public class PatternManager : MonoBehaviour
         CancelInvoke("SubPatternBallExecute");
         if (Boss.instance.patternNum != 2)
         {
-            if (_subPatternCount == 4)
+            if(SBT == BulletType.SQUARE_CURVE || SBT == BulletType.SQUARE_NORMAL)
             {
-                _subPatternCount = 0;
+                pat_induceBullet.BulletExecute(Boss.instance._circleBullet, SBT);
                 _subIsStart = false;
             }
             else
             {
-                _subPatternCount++;
-                pat_induceBullet.BulletExecute(Boss.instance._circleBullet, BT);
+                if (_subPatternCount == 4)
+                {
+                    _subPatternCount = 0;
+                    _subIsStart = false;
+                }
+                else
+                {
+                    _subPatternCount++;
+                    pat_induceBullet.BulletExecute(Boss.instance._circleBullet, SBT);
+                }
             }
+           
         }
     }
 
@@ -209,7 +219,7 @@ public class PatternManager : MonoBehaviour
     public void LoadInduceCircleFloor(JsonData _data)
     {
         _circleFloorTargetName = _data["targetName"].ToString();
-        BT = (BulletType)int.Parse(_data["bulletType"].ToString());
+        SBT = (BulletType)int.Parse(_data["bulletType"].ToString());
         _isStart = true;
     }
 
@@ -217,7 +227,7 @@ public class PatternManager : MonoBehaviour
     public void LoadInuceFirBall(JsonData _data)
     {
         _time = int.Parse(_data["millTime"].ToString());
-        BT = (BulletType)int.Parse(_data["bulletType"].ToString());
+        SBT = (BulletType)int.Parse(_data["bulletType"].ToString());
         _setOn = true;
         _isStart = true;
     }

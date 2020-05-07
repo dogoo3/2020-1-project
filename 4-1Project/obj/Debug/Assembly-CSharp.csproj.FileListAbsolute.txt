@@ -907,3 +907,7 @@ C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.RenderPipelines.ShaderGraph.Sh
 C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.ShaderGraph.Editor.pdb
 C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.RenderPipelines.Core.ShaderLibrary.pdb
 C:\2020-1-project\4-1Project\Temp\bin\Debug\Unity.ShaderGraph.Utilities.pdb
+C:\2020-1-project\4-1Project\Temp\bin\Debug\Cinemachine.dll
+C:\2020-1-project\4-1Project\Temp\bin\Debug\com.unity.cinemachine.editor.dll
+C:\2020-1-project\4-1Project\Temp\bin\Debug\Cinemachine.pdb
+C:\2020-1-project\4-1Project\Temp\bin\Debug\com.unity.cinemachine.editor.pdb
