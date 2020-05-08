@@ -87,8 +87,9 @@ public class HPManager : MonoBehaviour
         isSend = true;
     }
 
-    public void SetHP()
+    public void SetHP() // 내 HP를 조정
     {
         image_myHP.fillAmount = myHP / myFullHP;
+        CharacterInfoWindow.instance.UpdateHP(myHP);
     }
 }

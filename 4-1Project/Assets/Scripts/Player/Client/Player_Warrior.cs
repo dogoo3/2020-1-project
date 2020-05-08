@@ -20,6 +20,10 @@ public class Player_Warrior : MonoBehaviour
         _mainPlayer = GetComponent<Player>();
     }
 
+    private void Start()
+    {
+        CharacterInfoWindow.instance.UpdateASPD(attackspeed);
+    }
     private void Update()
     {
         if (_isHit)
@@ -29,18 +33,18 @@ public class Player_Warrior : MonoBehaviour
             {
                 _time = 0;
                 _isHit = false;
-                _mainPlayer.SendPlayerInfoPacket();
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (!_isHit)
         {
-            if (!_isHit)
+            if (Input.GetMouseButtonDown(0)) 
             {
                 _mainPlayer.AttackPlayer();
                 _isHit = true;
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
                 _mainPlayer.ChangeAnimationState_Attack();
+                _mainPlayer.SendPlayerInfoPacket();
                 if (_hit2D.collider != null)
                 {
                     ItemDropObject temp;

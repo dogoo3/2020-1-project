@@ -28,7 +28,8 @@ public class ItemDropObject : MonoBehaviour
             spriteRenderer.color = new Color(1, 1, 1, alpha-=0.014f);
             if (alpha <= 0)
             {
-                dropObject.SetActive(true);
+                if(dropObject != null)
+                    dropObject.SetActive(true);
                 gameObject.GetComponent<ItemDropObject>().enabled = false;
             }
         }

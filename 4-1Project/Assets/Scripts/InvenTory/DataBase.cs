@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 0 : 아이템 없음
-// 1 ~ 100 : 재료
-// 101 ~ 200 : 소비
-// 201 ~ 300 : 장비
+// 1 ~ 100 : 재료 (1)
+// 101 ~ 200 : 소비 (2)
+// 201 ~ 300 : 장비 (0)
 
 public class DataBase : MonoBehaviour
 {

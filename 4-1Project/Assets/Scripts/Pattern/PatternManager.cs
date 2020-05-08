@@ -60,6 +60,7 @@ public class PatternManager : MonoBehaviour
             gameObject.GetComponent<PatternManager>().enabled = false;
         if (_isStart)
         {
+            Boss.instance.Attack();
             _isStart = false;
             //_idEnd변수를 case문에 넣은 이유는 패이즈 마다 끝나는 패킷을 보내야하는 시점이 다르기 때문이다
             switch (Boss.instance.patternNum)

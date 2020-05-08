@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     public float _movespeed = 5.0f, invincibleTime;
     //[Header("전사 : 0, 마법사 : 1")]
     //public int playerType;
-    public int STR, DEF, fullHP;
+    public int STR, DEF;
 
     public bool _isCrash;
     private float time;
@@ -56,6 +56,10 @@ public class Player : MonoBehaviour
         PtoB_damage_data.Init();
         BtoP_damage_data.Init();
         BtoP_damage_data.nickname = GameManager.instance.PlayerName;
+
+        CharacterInfoWindow.instance.UpdateATK(STR);
+        CharacterInfoWindow.instance.UpdateDEF(DEF);
+        CharacterInfoWindow.instance.UpdateSPD(_movespeed);
     }
 
     public void Update()

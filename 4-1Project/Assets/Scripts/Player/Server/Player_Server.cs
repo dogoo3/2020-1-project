@@ -70,9 +70,6 @@ public class Player_Server : MonoBehaviour
                 _setOn = false;
         }
 
-        //if (!_isAttack)
-        //    ChangeAnimationState_Attack(false);
-
         _animator.SetFloat("xPos", Rot.x);
         _animator.SetFloat("yPos", Rot.y);
 
@@ -80,13 +77,16 @@ public class Player_Server : MonoBehaviour
         {
             ChangeAnimationState_Attack(true); // 애니메이션 상태 변경
             FindItemDropObject(); // 마우스 커서 방향에 채집물이 있는지 확인
+            PS = PlayerState.Idle;
         }
         else if(PS == PlayerState.Skill) // 스킬공격
         {
             if (playerType == 1) // 마법사일 때만
             {
+                Debug.Log("법사서버 스킬샷");
                 ChangeAnimationState_Attack(true);
                 ObjectPoolingManager.instance.GetQueue(_mouse_direction, transform.position, gameObject.name);
+                PS = PlayerState.Idle;
             }
         }
     }

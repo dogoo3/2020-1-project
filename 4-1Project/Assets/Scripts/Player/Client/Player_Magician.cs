@@ -23,6 +23,11 @@ public class Player_Magician : MonoBehaviour
         _mainPlayer = GetComponent<Player>();
     }
 
+    private void Start()
+    {
+        CharacterInfoWindow.instance.UpdateASPD(attackspeed);
+    }
+
     private void Update()
     {
         if (_isHit)
@@ -32,34 +37,32 @@ public class Player_Magician : MonoBehaviour
             {
                 _time = 0;
                 _isHit = false;
-                _mainPlayer.SendPlayerInfoPacket();
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (!_isHit)
         {
-            if (!_isHit)
+            if (Input.GetMouseButton(0))
             {
+                _isHit = true;
                 ObjectPoolingManager.instance.GetQueue(_mainPlayer._mousePos, transform.position, gameObject.name);
                 _mainPlayer.AttackPlayer(PlayerState.Skill); // 마법사 스킬공격
                 _mainPlayer.ChangeAnimationState_Attack();
-                _isHit = true;
+                _mainPlayer.SendPlayerInfoPacket();
             }
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (!_isHit)
+            if (Input.GetKeyDown(KeyCode.F))
             {
+                _isHit = true;
                 _mainPlayer.AttackPlayer(); // 마법사 기본공격
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
                 _mainPlayer.ChangeAnimationState_Attack();
-                _isHit = true;
 
                 if (_hit2D.collider != null)
                     temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
                 if (temp != null) // 채집물에 맞으면
                     temp.MinusCount();
+                _mainPlayer.SendPlayerInfoPacket();
             }
         }
     }

@@ -30,6 +30,9 @@ public class Fire_Ball : MonoBehaviour
                 }
             }
         }
+
+        if (Boss.instance.HP <= 0)
+            gameObject.SetActive(false);
     }
 
     private void OnEnable()

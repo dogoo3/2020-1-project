@@ -18,19 +18,22 @@ public class ObjectPoolingManager : MonoBehaviour
     public CircleFloor circle;
     public Fire_Ball fireBall;
 
-    public int poolingCount;
+    public int boss_poolingCount;
+    public int magician_poolingCount;
 
     private void Awake()
     {
         instance = this;
 
-        for (int i = 0; i < poolingCount; i++)
+        for (int i = 0; i < boss_poolingCount; i++)
         {
             Bullet t_object = Instantiate(energyBall, Vector2.zero, Quaternion.identity);
             t_object.transform.parent = gameObject.transform;
             queue_energyball.Enqueue(t_object);
             t_object.gameObject.SetActive(false);
 
+            if (i > magician_poolingCount)
+                continue;
             EnergyBall e_object = Instantiate(magicBall, Vector2.zero, Quaternion.identity);
             t_object.transform.parent = gameObject.transform;
             queue_magicBall.Enqueue(e_object);
@@ -117,7 +120,7 @@ public class ObjectPoolingManager : MonoBehaviour
         return null;
     }
 
-    //원형 장판 풀링
+    //불구슬 풀링
     public void InsertQueue(Fire_Ball _object, Queue<Fire_Ball> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
     {
         _queue.Enqueue(_object);

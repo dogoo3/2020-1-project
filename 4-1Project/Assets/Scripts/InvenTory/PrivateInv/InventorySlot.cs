@@ -101,19 +101,6 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
     {
         try
         {
-            //InventorySlot inventorySlot = eventData.pointerEnter.gameObject.GetComponent<InventorySlot>();
-            //if (inventorySlot != null) // 드롭한 슬롯이 인벤토리 슬롯일 경우 슬롯의 정보를 맞교환해준다.
-            //{
-            //    // 슬롯 간 정보를 교환해준 뒤
-            //    Item temp = inventorySlot.item.Init();
-            //    inventorySlot.item = item.Init();
-            //    item = temp.Init();
-
-            //    // UI 업데이트
-            //    InitUI();
-            //    inventorySlot.InitUI();
-            //}
-
             MixMaterialSlot mixMaterialSlot = eventData.pointerEnter.gameObject.GetComponent<MixMaterialSlot>();
             if (mixMaterialSlot != null) // 드롭한 슬롯이 조합재료 슬롯일 경우
             {
@@ -125,30 +112,6 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
                     mixMaterialSlot.PlusItemCount();
                     MinusItemCount();
                 }
-
-                //MixMaterialSlot temp = MixWindow.instance.SearchMixMaterialSlot(item.itemID); // 조합 슬롯 3개에 같은 ID의 아이템이 있는지 검색
-                //if (temp != null) // 조합 슬롯에 같은 ID의 아이템이 있으면
-                //{
-                //    temp.PlusItemCount(); // 조합 슬롯 갯수 1개 증가
-                //    MinusItemCount(); // 인벤토리 슬롯 갯수 1개 감소
-                //    temp.InitUI(); // 조합 슬롯 UI 업데이트
-                //}
-                //else // 조합 슬롯에 같은 ID의 아이템이 없을 경우
-                //{
-                //    if (mixMaterialSlot.item.itemID == 0) // 빈 슬롯에 드롭할 경우
-                //    {
-                //        mixMaterialSlot.item = item.Init(); // 조합 슬롯에 아이템 정보 할당
-                //        mixMaterialSlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
-                //        MinusItemCount(); // 인벤토리 아이템 갯수 1개 감소
-                //    }
-                //    else // 빈 슬롯이 아닐 경우(아이템을 스왑해 주어야 함)
-                //    {
-                //        Item temp2 = mixMaterialSlot.item.Init();
-                //        mixMaterialSlot.item = item.Init();
-                //        item = temp2.Init();
-                //    }
-                //    mixMaterialSlot.InitUI(); // 조합 슬롯 UI 업데이트
-                //}
 
                 InitUI();
 
@@ -212,12 +175,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
             Debug.Log(eventData.pointerEnter.gameObject.name);
             if (equipSlot != null)
             {
-                Debug.Log(item.itemID);
-                bool a = item.itemID > 200;
-                if (a) // 드래그한 아이템이 장비아이템일경우
+                if (item.itemID > 200) // 드래그한 아이템이 장비아이템일경우
                 {
-                    Debug.Log(equipSlot.item.itemID);
-
                     if (equipSlot.item.itemID == 0) // 빈 슬롯일 경우
                     {
                         Debug.Log("첫번째 if");

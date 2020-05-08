@@ -50,6 +50,8 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,  IEndDr
             _UI_image.sprite = null;
             _UI_image.color = new Color(1, 1, 1, 0);
         }
+        CharacterInfoWindow.instance.UpdateATK(_player.STR);
+        CharacterInfoWindow.instance.UpdateDEF(_player.DEF);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
