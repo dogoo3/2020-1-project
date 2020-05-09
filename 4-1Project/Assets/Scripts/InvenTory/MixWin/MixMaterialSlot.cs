@@ -105,19 +105,6 @@ public class MixMaterialSlot : MonoBehaviour,
     {
         try
         {
-            //MixMaterialSlot mixMaterialSlot = eventData.pointerEnter.gameObject.GetComponent<MixMaterialSlot>();
-            //if (mixMaterialSlot != null) // 드롭한 슬롯이 조합 슬롯일 경우 슬롯의 정보를 맞교환해준다.
-            //{
-            //    // 슬롯 간 정보를 교환해준 뒤
-            //    Item temp = mixMaterialSlot.item.Init();
-            //    mixMaterialSlot.item = item.Init();
-            //    item = temp.Init();
-
-            //    // UI 업데이트
-            //    InitUI();
-            //    mixMaterialSlot.InitUI();
-            //}
-
             InventorySlot inventorySlot = eventData.pointerEnter.gameObject.GetComponent<InventorySlot>();
             if (inventorySlot != null) // 드롭한 슬롯이 인벤토리 슬롯일 경우
             {

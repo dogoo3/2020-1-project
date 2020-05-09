@@ -74,7 +74,8 @@ public class MixResultSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 Inventory.instance.InputMatItem(item);
                 isGet = true;
             }
-            else if (Inventory.instance._tabIndex == 2 && item.itemID > 100 && item.itemID <= 200) // 소비창이 열려있고 소비아이템을 드롭
+            // 소비창이 열려있고 소비아이템을 드롭
+            else if (Inventory.instance._tabIndex == 2 && item.itemID > 100 && item.itemID <= 200)
             {
                 Inventory.instance.InputPotionItem(item);
                 isGet = true;

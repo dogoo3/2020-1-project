@@ -65,6 +65,29 @@ public class Inventory : MonoBehaviour
             shareInventorySlot[i].InitUI();
     }
 
+    public void UpdateItemArray(int _tabIndex)
+    {
+        switch (_tabIndex)
+        {
+            case 0: // 장비
+                UpdateInvArray(equip_Inv);
+                break;
+            case 1: // 소비
+                UpdateInvArray(potion_Inv);
+                break;
+            case 2: // 재료
+                UpdateInvArray(mat_Inv);
+                break;
+        }
+
+    }
+
+    private void UpdateInvArray(Item[] invArray)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+            invArray[i] = inventorySlots[i].item.Init();
+    }
+
     public void InputEquipItem(Item _item)
     {
         for(int i=0;i<equip_Inv.Length;i++)
@@ -109,15 +132,15 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < potion_Inv.Length; i++)
         {
-            if (potion_Inv[i].itemID == _item.itemID)
+            if (potion_Inv[i].itemID == _item.itemID)  // 인벤토리에 같은 아이템이 있는지 확인한다.
             {
-                potion_Inv[i].itemCount++;
+                potion_Inv[i].itemCount++; // 같은 아이템이 있으면 갯수를 올려준다
                 inventorySlots[i].item = potion_Inv[i].Init();
                 inventorySlots[i].InitUI();
                 return;
             }
         }
-        for (int i = 0; i < potion_Inv.Length; i++)
+        for (int i = 0; i < potion_Inv.Length; i++) // 인벤토리에 같은 아이템이 없으면 다시 검색해서 가장 먼저 비어있는 슬롯에 이에팀을 넣어준다.
         {
             if (potion_Inv[i].itemID == 0)
             {

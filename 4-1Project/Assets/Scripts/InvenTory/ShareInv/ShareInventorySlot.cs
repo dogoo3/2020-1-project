@@ -99,10 +99,7 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
                 Item temp = shareInventorySlot.item.Init();
                 shareInventorySlot.item = item.Init();
                 item = temp.Init();
-
-                // UI 업데이트
-                // InitUI();
-                // shareInventorySlot.InitUI();
+                
                 DragSlot.instance.SetColor(0);
                 return;
             }
@@ -123,6 +120,7 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
                     {
                         inventorySlot.item = item.Init();
                         inventorySlot.InitUI();
+                        Inventory.instance.UpdateItemArray(0);
                         JsonData SendData = JsonMapper.ToJson(deleteData);
                         ServerClient.instance.Send(SendData.ToString());
                     }
@@ -131,6 +129,7 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
                         Item temp2 = inventorySlot.item.Init();
                         inventorySlot.item = item.Init();
                         item = temp2.Init();
+                        Inventory.instance.UpdateItemArray(0);
                         JsonData SendData = JsonMapper.ToJson(deleteData);
                         ServerClient.instance.Send(SendData.ToString());
                     }
@@ -142,7 +141,6 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
                     if(item.itemID > 100 && Inventory.instance._tabIndex == 2 ||
                         item.itemID <= 100 && item.itemID > 0  && Inventory.instance._tabIndex == 1) // 아이템 타입과 맞지 않는 인벤토리 탭에 드롭하면 실행되지 않는다.
                     {
-                        Debug.Log("asdasdasd");
                         if (temp != null) // 인벤토리 슬롯에 같은 아이템이 있으면
                         {
                             temp.PlusItemCount(); // 인벤토리 슬롯의 갯수 1개 증가
@@ -163,6 +161,11 @@ public class ShareInventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler
                                 item = temp2.Init();
                             }
                         }
+                        if(item.itemID > 100 && item.itemID <= 200) // 소비 아이템
+                            Inventory.instance.UpdateItemArray(1);
+                        else // 재료 아이템
+                            Inventory.instance.UpdateItemArray(2);
+
                         JsonData SendData = JsonMapper.ToJson(deleteData);
                         ServerClient.instance.Send(SendData.ToString());
                     }

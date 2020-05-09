@@ -73,9 +73,9 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
         }
         UI_item_image.sprite = item.itemIcon;
         SetAlpha(1);
-        if (item.itemID > 200)
+        if (item.itemID > 200) // 장비아이템일 경우 아이템카운트를 표시하지않는다.
             UI_item_count.text = "";
-        else
+        else // 재료 / 소비아이템일 경우 아이템카운트를 표시한다.
             UI_item_count.text = item.itemCount.ToString();
     }
 
@@ -117,6 +117,8 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
 
                 if (item.itemCount == 0)
                     RemoveItem();
+                
+                Inventory.instance.UpdateItemArray(2); // 재료 슬롯 업데이트
             }
 
             ShareInventorySlot shareInventorySlot = eventData.pointerEnter.gameObject.GetComponent<ShareInventorySlot>();
@@ -126,13 +128,15 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
                 JsonData SendData = JsonMapper.ToJson(Data);
                 ServerClient.instance.Send(SendData.ToString());
 
-                ShareInventorySlot temp = Inventory.instance.SearchShareInventorySlot(item.itemID); // 공유 슬롯 3개에 같은 ID의 아이템이 있는지 검색
+                ShareInventorySlot temp = Inventory.instance.SearchShareInventorySlot(item.itemID); // 공유 슬롯에 같은 ID의 아이템이 있는지 검색
                 if(item.itemID > 200) // 드래그한 아이템이 장비아이템일경우
                 {
-                    if(shareInventorySlot.item.itemID == 0) // 드롭한 슬롯이 빈 슬롯일 경우
+                    if (shareInventorySlot.item.itemID == 0) // 드롭한 슬롯이 빈 슬롯일 경우
                     {
                         shareInventorySlot.item = item.Init();
                         MinusItemCount();
+                        if (item.itemCount == 0)
+                            RemoveItem();
                     }
                     else // 드롭한 슬롯이 빈 슬롯이 아니면
                     {
@@ -143,47 +147,78 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
                             item = temp2.Init();
                         }
                     }
+
+                    Inventory.instance.UpdateItemArray(0); // 장비 슬롯 업데이트
                 }
-                else
+                else if(item.itemID > 100) // 드래그한 아이템이 소비아이템일 경우
                 {
                     if (temp != null) // 공유 슬롯에 같은 ID의 아이템이 있으면
                     {
                         MinusItemCount(); // 인벤토리 슬롯 갯수 1개 감소
+                        if (item.itemCount == 0)
+                            RemoveItem();
                     }
-                    else // 공유 슬롯에 같은 ID의 아이템이 없을 경우
+                    else if (shareInventorySlot.item.itemID == 0) // 드롭한 슬롯이 빈 슬롯일 경우
                     {
-                        if (shareInventorySlot.item.itemID == 0) // 빈 슬롯에 드롭할 경우
-                        {
-                            shareInventorySlot.item = item.Init(); // 공유 슬롯에 아이템 정보 할당
-                            MinusItemCount(); // 인벤토리 아이템 갯수 1개 감소
-                        }
-                        else // 빈 슬롯이 아닐 경우(아이템을 스왑해 주어야 함)
+                        shareInventorySlot.item = item.Init();
+                        MinusItemCount();
+                        if (item.itemCount == 0)
+                            RemoveItem();
+                    }
+                    else// 드롭한 슬롯이 빈 슬롯이 아니면
+                    {
+                        if (shareInventorySlot.item.itemID > 100) // 소비 아이템끼리만 스왑할 수 있음
                         {
                             Item temp2 = shareInventorySlot.item.Init();
                             shareInventorySlot.item = item.Init();
                             item = temp2.Init();
                         }
                     }
+                    Inventory.instance.UpdateItemArray(1); // 소비 슬롯 업데이트
+                }
+                else // 드래그한 아이템이 재료아이템일경우
+                {
+                    if (temp != null) // 공유 슬롯에 같은 ID의 아이템이 있으면
+                    {
+                        MinusItemCount(); // 인벤토리 슬롯 갯수 1개 감소
+                        if (item.itemCount == 0)
+                            RemoveItem();
+                    }
+                    else if (shareInventorySlot.item.itemID == 0) // 드롭한 슬롯이 빈 슬롯일 경우
+                    {
+                        shareInventorySlot.item = item.Init();
+                        MinusItemCount();
+                        if (item.itemCount == 0)
+                            RemoveItem();
+                    }
+                    else// 드롭한 슬롯이 빈 슬롯이 아니면
+                    {
+                        if (shareInventorySlot.item.itemID > 0) // 재료 아이템끼리만 스왑할 수 있음
+                        {
+                            Item temp2 = shareInventorySlot.item.Init();
+                            shareInventorySlot.item = item.Init();
+                            item = temp2.Init();
+                        }
+                    }
+                    Inventory.instance.UpdateItemArray(2); // 재료 슬롯 업데이트
                 }
 
                 InitUI();
-
-                if (item.itemCount == 0)
-                    RemoveItem();
             }
+
             EquipSlot equipSlot = eventData.pointerEnter.gameObject.GetComponent<EquipSlot>();
-            Debug.Log(eventData.pointerEnter.gameObject.name);
             if (equipSlot != null)
             {
                 if (item.itemID > 200) // 드래그한 아이템이 장비아이템일경우
                 {
                     if (equipSlot.item.itemID == 0) // 빈 슬롯일 경우
                     {
-                        Debug.Log("첫번째 if");
                         equipSlot.item = item.Init();
                         MinusItemCount();
+                        if (item.itemCount == 0)
+                            RemoveItem();
                     }
-                    else
+                    else // 빈 슬롯이 아닐 경우
                     {
                         equipSlot.UpdatePlayerStat(false); // 아이템이 바뀌기 전 기존 아이템의 스탯을 빼준다
                         Item temp2 = equipSlot.item.Init();
@@ -191,12 +226,11 @@ public class InventorySlot : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
                         item = temp2.Init();
                     }
                     equipSlot.UpdatePlayerStat(true); // 새로운 장비 아이템 스탯 업그레이드
+                    Inventory.instance.UpdateItemArray(0); // 장비 슬롯 업데이트
                 }
             }
             InitUI();
 
-            if (item.itemCount == 0)
-                RemoveItem();
             DragSlot.instance.SetColor(0);
         }
         catch(Exception)
