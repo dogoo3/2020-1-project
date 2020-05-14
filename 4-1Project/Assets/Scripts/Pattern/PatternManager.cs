@@ -60,7 +60,6 @@ public class PatternManager : MonoBehaviour
             gameObject.GetComponent<PatternManager>().enabled = false;
         if (_isStart)
         {
-            Boss.instance.Attack();
             _isStart = false;
             //_idEnd변수를 case문에 넣은 이유는 패이즈 마다 끝나는 패킷을 보내야하는 시점이 다르기 때문이다
             switch (Boss.instance.patternNum)
@@ -259,6 +258,7 @@ public class PatternManager : MonoBehaviour
     {
         Boss.instance.patternNum = int.Parse(_data["Phase"].ToString());
         _isStart = true;
+        Boss.instance.Attack();
     }
 
     //시간 제한이 걸려있는 패턴일 경우에는 타이머 체크를 하고 서버로 보내주는 역할을 한다

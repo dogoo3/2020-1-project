@@ -50,6 +50,7 @@ public class Boss : MonoBehaviour
         {
             patternNum = int.Parse(_data["Phase"].ToString());
             PatternManager.instance._isStart = true;
+            Attack();
             _firstStart = false;
         }
 
@@ -65,6 +66,10 @@ public class Boss : MonoBehaviour
     public void Attack()
     {
         _animator.SetTrigger("Attack");
+    }
+
+    public void ShakeCamera() // 애니메이션 이벤트 함수
+    {
         _shakeCamera.PutShakeTime();
     }
 
