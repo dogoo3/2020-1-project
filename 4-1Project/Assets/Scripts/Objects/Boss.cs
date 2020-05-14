@@ -10,13 +10,14 @@ public class Boss : MonoBehaviour
 
     Rigidbody2D _rigidbody2D;
     Transform _playerPos;
+    ShakeCamera _shakeCamera;
+    BossHPBar _BossHPBar;
 
     private float _Nowpercent;
 
     public int HP, STR, DEF;
     private int _fullHp;
 
-    private BossHPBar _BossHPBar;
 
     public int patternNum;
 
@@ -37,6 +38,7 @@ public class Boss : MonoBehaviour
         _playerPos = FindObjectOfType<Player>().transform;
         _BossHPBar = FindObjectOfType<BossHPBar>();
         _animator = GetComponent<Animator>();
+        _shakeCamera = FindObjectOfType<ShakeCamera>();
         _fullHp = HP;
 
         Data.Init(false);
@@ -63,6 +65,7 @@ public class Boss : MonoBehaviour
     public void Attack()
     {
         _animator.SetTrigger("Attack");
+        _shakeCamera.PutShakeTime();
     }
 
     public void Dead()

@@ -169,7 +169,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6913446
 Animator:
@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 44037229}
   - component: {fileID: 44037231}
   - component: {fileID: 44037230}
+  - component: {fileID: 44037232}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -546,6 +547,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &44037232
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44037228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!4 &50423431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1476711275243063734, guid: cf56368876265d14bb4347a6ff6dbb49,
@@ -4966,7 +4984,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -5602,7 +5620,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &368729345
 GameObject:
@@ -5797,7 +5815,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -6689,7 +6707,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -7117,7 +7135,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &538427848 stripped
 Transform:
@@ -7648,7 +7666,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -7881,7 +7899,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -7960,7 +7978,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -8391,7 +8409,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -8580,7 +8598,7 @@ Transform:
   m_LocalScale: {x: 0.0866895, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &698919686 stripped
 MonoBehaviour:
@@ -9117,6 +9135,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 768224864600228768, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -9147,6 +9170,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 2987233110976357745, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -9167,6 +9195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraCollider_4
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4777559861345645844, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -9215,7 +9248,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -9257,6 +9290,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!60 &772643131 stripped
@@ -9424,7 +9462,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791536319
 GameObject:
@@ -10141,6 +10179,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.238
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 768224864600228768, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -10166,6 +10209,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 2987233110976357745, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -10211,6 +10259,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4777559861345645844, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -10259,7 +10312,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -10306,6 +10359,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &864439828 stripped
@@ -11718,7 +11776,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -13375,6 +13433,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 768224864600228768, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -13390,6 +13453,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleportPoint(8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 2987233110976357745, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -13425,6 +13493,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4339436950038882906, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -13483,7 +13556,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -13560,6 +13633,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &1275653334 stripped
@@ -14000,7 +14078,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -14312,7 +14390,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1386880293
 GameObject:
@@ -14540,8 +14618,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 44037229}
+  - {fileID: 1852045640}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1395770578
 MonoBehaviour:
@@ -14880,6 +14959,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 1548869264783867918, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -14890,6 +14974,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleportPoint(6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 3244285771613899315, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -14915,6 +15004,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4339436950038882906, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -14963,7 +15057,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -14995,6 +15089,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &1475847528 stripped
@@ -17340,7 +17439,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -17382,6 +17481,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1947886579}
     m_Modifications:
+    - target: {fileID: 1765257704, guid: f992384e36583cb4ea47173d7f6c9267, type: 3}
+      propertyPath: UI_chatWindowImage
+      value: 
+      objectReference: {fileID: 1765257703}
     - target: {fileID: 2285652528385990284, guid: f992384e36583cb4ea47173d7f6c9267,
         type: 3}
       propertyPath: m_Name
@@ -17391,6 +17494,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033443662133239870, guid: f992384e36583cb4ea47173d7f6c9267,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5026107948960549724, guid: f992384e36583cb4ea47173d7f6c9267,
         type: 3}
@@ -17497,7 +17605,9 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4033443661846129917, guid: f992384e36583cb4ea47173d7f6c9267, type: 3}
+    - {fileID: 4033443662133239870, guid: f992384e36583cb4ea47173d7f6c9267, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f992384e36583cb4ea47173d7f6c9267, type: 3}
 --- !u!224 &1765257702 stripped
 RectTransform:
@@ -17505,6 +17615,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1765257701}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1765257703 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8212407672698143767, guid: f992384e36583cb4ea47173d7f6c9267,
+    type: 3}
+  m_PrefabInstance: {fileID: 1765257701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1765839376
 GameObject:
   m_ObjectHideFlags: 0
@@ -17534,7 +17656,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1765839378
 MonoBehaviour:
@@ -18269,7 +18391,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -18459,6 +18581,54 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1848791495}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1852045639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852045640}
+  - component: {fileID: 1852045641}
+  m_Layer: 0
+  m_Name: CinemachineCameraShake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1852045640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852045639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1395770577}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1852045641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852045639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4678ec747142b47b609c686028a5d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 1
+  shakeAmplitude: 4
+  shakeFrequency: 8.5
+  playerstateRoomnum: 1
+  virtualcamera: {fileID: 1395770576}
 --- !u!1 &1857879711
 GameObject:
   m_ObjectHideFlags: 0
@@ -18652,7 +18822,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -19350,7 +19520,7 @@ RectTransform:
   - {fileID: 853963421}
   - {fileID: 908139421}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -19578,6 +19748,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 768224864600228768, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -19593,6 +19768,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleportPoint(7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 3244285771613899315, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -19603,6 +19783,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraCollider_7
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4339436950038882906, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -19667,7 +19852,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -19704,6 +19889,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &1961679818 stripped
@@ -19735,11 +19925,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 7.695441
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 2473157673392836145, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_Name
       value: TeleportPoint(9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 3634754240948080890, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -19765,6 +19965,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4339436950038882906, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -19813,7 +20018,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -19855,6 +20060,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &1965848306 stripped
@@ -20690,7 +20900,7 @@ Transform:
   - {fileID: 1121604579}
   - {fileID: 17788195}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2067927062
 MonoBehaviour:
@@ -20732,6 +20942,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 2473157673392836145, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_Name
@@ -20752,10 +20967,15 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 2987233110976357745, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3634754240948080890, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -20782,6 +21002,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4908380325863395831, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_Name
@@ -20825,7 +21050,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -20862,6 +21087,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &2069100438 stripped
@@ -21092,6 +21322,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 1548869264783867918, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -21117,6 +21352,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 2987233110976357745, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
@@ -21132,6 +21372,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraCollider_5
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4908380325863395831, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_Name
@@ -21175,7 +21420,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -21217,6 +21462,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &2130399785 stripped
@@ -21408,7 +21658,7 @@ PrefabInstance:
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5294510309397351600, guid: de6711f84e9576949a867d2a2a51df01,
         type: 3}
@@ -21726,6 +21976,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 676509649414621431, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 1548869264783867918, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -21751,6 +22006,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2917453415613582657, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 3244285771613899315, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_IsActive
@@ -21766,6 +22026,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraCollider_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4170078159698725770, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     - target: {fileID: 4908380325863395831, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_Name
@@ -21825,7 +22090,7 @@ PrefabInstance:
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4908380325863395833, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
         type: 3}
@@ -21862,6 +22127,11 @@ PrefabInstance:
       propertyPath: toMoveroomNum
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8490342072643363541, guid: 4238e77f1fa8a2c4f9effe686a5902b9,
+        type: 3}
+      propertyPath: shakecamera
+      value: 
+      objectReference: {fileID: 1852045641}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4238e77f1fa8a2c4f9effe686a5902b9, type: 3}
 --- !u!4 &4908380327156643953 stripped

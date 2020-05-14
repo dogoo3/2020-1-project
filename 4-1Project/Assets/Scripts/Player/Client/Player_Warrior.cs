@@ -24,6 +24,7 @@ public class Player_Warrior : MonoBehaviour
     {
         CharacterInfoWindow.instance.UpdateASPD(attackspeed);
     }
+
     private void Update()
     {
         if (_isHit)

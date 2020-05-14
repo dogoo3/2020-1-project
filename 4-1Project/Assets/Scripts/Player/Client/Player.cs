@@ -8,6 +8,7 @@ public enum PlayerState
 {
     Idle,
     Move,
+    Dash,
     Attack,
     Skill,
     Die,
@@ -20,7 +21,6 @@ public class Player : MonoBehaviour
     Animator _animator;
     
     SubAnimator[] _subAnimator;
-    //SubAnimator _activesubAnimator;
 
     [HideInInspector]
     public Vector2 _mousePos;
@@ -31,14 +31,22 @@ public class Player : MonoBehaviour
     public PlayerData Data;
     public BossDamage PtoB_damage_data; // 플레이어가 보스에게 데미지를 넣을 때
     public PlayerDamage BtoP_damage_data; // 보스가 쏜 탄환에 플레이어가 맞으면
+    public ParticleSystem[] dashBlur;
 
-    public float _movespeed = 5.0f, invincibleTime;
-    //[Header("전사 : 0, 마법사 : 1")]
-    //public int playerType;
+    public float _movespeed = 5.0f, invincibleTime, dashDelay = 2.0f;
+
     public int STR, DEF;
 
     public bool _isCrash;
     private float time;
+
+    private Vector2 toPos;
+    private float timeStartdash;
+    private bool dash;
+    private bool firstButtonPressed;
+    private float timeOfFirstButton;
+    private float dashSpeed = 0.2f;
+    private float ori_dashSpeed;
 
     void Start()
     {
@@ -47,16 +55,14 @@ public class Player : MonoBehaviour
         _subAnimator = GetComponentsInChildren<SubAnimator>();
         _temp_dirPos = Vector2.zero;
         _temp_movePos = Vector2.zero;
-        //_activesubAnimator = _subAnimator[0];
 
         Data.Init(GameManager.instance.PlayerName);
         Data.Speed = _movespeed;
-        // Data.playerType = playerType;
 
         PtoB_damage_data.Init();
         BtoP_damage_data.Init();
         BtoP_damage_data.nickname = GameManager.instance.PlayerName;
-
+        ori_dashSpeed = dashSpeed;
         CharacterInfoWindow.instance.UpdateATK(STR);
         CharacterInfoWindow.instance.UpdateDEF(DEF);
         CharacterInfoWindow.instance.UpdateSPD(_movespeed);
@@ -66,14 +72,20 @@ public class Player : MonoBehaviour
     {
         // 이동뿐만이 아니라 회전했을 때도 현재 위치를 패킷으로 보내주기 때문에
         // (패킷을 보낼 때 현재 위치도 계속 보내기 때문에 최신 위치 정보가 필요해서)
-        if (playerState != PlayerState.Die)
+        if (playerState != PlayerState.Die && playerState != PlayerState.Dash) // 사망상태이거나 대시중이 아닐경우
         {
-            // 현재 위치, 
+            // 현재 위치
             Data.nx = transform.position.x;
             Data.ny = transform.position.y;
+            // 시점 변환
             ChangeLookdirection();
+            // 캐릭터 이동
             MoveCharacter();
+            // 대시 키 입력
+            DashCharacter();
         }
+
+        CarculateDashTime(); // 대시 시간을 계산, 대시 쿨타임이랑 대시목적지 도달 시간이 다르기 때문에 조건을 걸 수 없음.
 
         if(_isCrash) // 피격당했을 때 무적시간을 계산해서 무적을 풀어준다.
         {
@@ -102,6 +114,7 @@ public class Player : MonoBehaviour
         // 마우스 커서의 좌표를 -1 ~ 1로 만들어줌
         _dirPos.x = Mathf.RoundToInt(_mousePos.x);
         _dirPos.y = Mathf.RoundToInt(_mousePos.y);
+        
 
         // 마우스 좌표에 따른 캐릭터의 시점 변경
         _animator.SetFloat("xPos", _dirPos.x);
@@ -148,6 +161,59 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void DashCharacter() // 플레이어의 대시를 컨트롤함.
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && firstButtonPressed && !dash) // 두 번째 클릭(대시중일때는 중복대시할 수 없다)
+        {
+            if (Time.time - timeOfFirstButton < 0.5f) // 0.5초 이내로 더블클릭하면
+            {
+                toPos = (Vector2)transform.position + _mousePos * 8.0f; // 대시할 좌표값목적지 쏴주고
+                timeStartdash = Time.time; // 대시 시작 시간 저장
+                playerState = PlayerState.Dash; // 상태변경
+                // 서버로 관련 데이터 전송
+                Data.dx = toPos.x;
+                Data.dy = toPos.y;
+                Data.State = (int)PlayerState.Dash;
+                ShowDashBlur(true);
+                dash = true; // 대시!
+                JsonData SendData = JsonMapper.ToJson(Data);
+                ServerClient.instance.Send(SendData.ToString());
+            }
+            firstButtonPressed = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !firstButtonPressed) // 첫 번째 클릭
+        {
+            firstButtonPressed = true; // 두 번째 클릭 가능
+            timeOfFirstButton = Time.time; // 첫 번째 클릭 시간 저장
+        }
+    }
+
+    public void CarculateDashTime() // 플레이어가 대시하는 실제 움직임.
+    {
+        if (dash)
+        {
+            transform.position = Vector2.Lerp(transform.position, toPos, dashSpeed); // 대시!
+            dashSpeed += 0.03f;
+            if (Mathf.Approximately(transform.position.x, toPos.x) && // 대시후 목적지까지 도달했을 경우
+               Mathf.Approximately(transform.position.y, toPos.y))
+                StopDash(transform);
+        }
+    }
+
+    public void StopDash(Transform to_transform)
+    {
+        playerState = PlayerState.Idle; // 상태를 아이들로 딱 한 번 바꿔줌.
+        Data.State = (int)PlayerState.Idle;
+        Data.nx = to_transform.position.x;
+        Data.ny = to_transform.position.y;
+        dashSpeed = ori_dashSpeed; // 첫 대시 스피드로 바꿔줌.
+        ShowDashBlur(false);
+        dash = false;
+        JsonData SendData = JsonMapper.ToJson(Data);
+        ServerClient.instance.Send(SendData.ToString());
+    }
+    
     void ChangeAnimationState_Move(bool _state) // 걷기
     {
         for (int i = 0; i < _subAnimator.Length; i++)
@@ -159,6 +225,21 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    void ShowDashBlur(bool _isStart) // 대시 표현
+    {
+        for (int i = 0; i < _subAnimator.Length; i++)
+        {
+            if (_subAnimator[i].active)
+            {
+                if(_isStart)
+                    dashBlur[i].Play();
+                else
+                    dashBlur[i].Stop();
+                break;
+            }
+        }
+    } 
 
     public void ChangeAnimationState_Attack() // 공격
     {
@@ -181,13 +262,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AttackPlayer(PlayerState _attackstate = PlayerState.Attack)
+    public void AttackPlayer(PlayerState _attackstate = PlayerState.Attack) // 플레이어가 다른 무언가를 공격
     {
-        playerState = _attackstate;
-        Data.State = (int)_attackstate;
-        Data.ax = _mousePos.x;
-        Data.ay = _mousePos.y;
-        ChangeAnimationState_Attack();
+        playerState = _attackstate; // 상태변경
+        Data.State = (int)_attackstate; // 서버로 보낼 패킷의 상태변경
+        Data.ax = _mousePos.x; // 서버로 보낼 패킷의 마우스 정규화 좌표
+        Data.ay = _mousePos.y; 
+        ChangeAnimationState_Attack(); // 공격 애니메이션 작동
         JsonData SendData = JsonMapper.ToJson(Data);
         ServerClient.instance.Send(SendData.ToString());
     }

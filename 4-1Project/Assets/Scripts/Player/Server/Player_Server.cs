@@ -16,6 +16,8 @@ public class Player_Server : MonoBehaviour
 
     public PlayerState PS;
 
+    public ParticleSystem[] dashBlur;
+
     // 플레이어타입
     public int playerType;
 
@@ -29,12 +31,14 @@ public class Player_Server : MonoBehaviour
     public Vector2 Rot;
     // 마법사 공격 방향
     public Vector2 _mouse_direction;
-
+    // 대시 목적지 좌표
+    public Vector2 dashtoPos;
     //플레이어 속도
     public float Speed;
 
     //시간
     public float GetMillTime;
+    private float dashSpeed = 0.2f;
 
     private void Awake()
     {
@@ -42,6 +46,7 @@ public class Player_Server : MonoBehaviour
         _layerMask = ~_layerMask;
         _animator = GetComponent<Animator>();
         _subAnimators = GetComponentsInChildren<SubAnimator>();
+
         if (_animator.runtimeAnimatorController.name == "WarriorController")
             playerType = 0; // 전사일 경우 playerType은 0
         else
@@ -50,7 +55,7 @@ public class Player_Server : MonoBehaviour
 
     private void Update()
     {
-        if (!_setOn)
+        if (!_setOn && PS != PlayerState.Dash)
         {
             if (Pos != Vector2.zero)
             {
@@ -65,6 +70,8 @@ public class Player_Server : MonoBehaviour
         }
         else
         {
+            dashSpeed = 0.2f;
+            ShowDashBlur(false);
             transform.position = Vector2.MoveTowards(transform.position, SyncPos, Speed * Time.smoothDeltaTime);
             if (Vector2.Distance(transform.position, SyncPos) == 0)
                 _setOn = false;
@@ -79,7 +86,8 @@ public class Player_Server : MonoBehaviour
             FindItemDropObject(); // 마우스 커서 방향에 채집물이 있는지 확인
             PS = PlayerState.Idle;
         }
-        else if(PS == PlayerState.Skill) // 스킬공격
+
+        else if (PS == PlayerState.Skill) // 스킬공격
         {
             if (playerType == 1) // 마법사일 때만
             {
@@ -88,6 +96,13 @@ public class Player_Server : MonoBehaviour
                 ObjectPoolingManager.instance.GetQueue(_mouse_direction, transform.position, gameObject.name);
                 PS = PlayerState.Idle;
             }
+        }
+
+        if (PS == PlayerState.Dash)
+        {
+            ShowDashBlur(true); // 대시 시작 잔상을 집어넣는다
+            transform.position = Vector2.Lerp(transform.position, dashtoPos, dashSpeed); // 대시!
+            dashSpeed += 0.03f;
         }
     }
 
@@ -110,10 +125,13 @@ public class Player_Server : MonoBehaviour
         _mouse_direction.x = float.Parse(Data["ax"].ToString());
         _mouse_direction.y = float.Parse(Data["ay"].ToString());
 
+        // 대시 목적지 좌표
+        dashtoPos.x = float.Parse(Data["dx"].ToString());
+        dashtoPos.y = float.Parse(Data["dy"].ToString());
+
         GetMillTime = float.Parse(Data["time"].ToString());
         
         Speed = float.Parse(Data["Speed"].ToString());
-
         PS = (PlayerState)int.Parse(Data["State"].ToString());
 
         _setOn = true;
@@ -162,6 +180,21 @@ public class Player_Server : MonoBehaviour
     {
         for (int i = 0; i < _subAnimators.Length; i++)
             _subAnimators[i].Attack();
+    }
+
+    void ShowDashBlur(bool _isStart) // 대시 표현
+    {
+        for (int i = 0; i < _subAnimators.Length; i++)
+        {
+            if (_subAnimators[i].active)
+            {
+                if (_isStart)
+                    dashBlur[i].Play();
+                else
+                    dashBlur[i].Stop();
+                break;
+            }
+        }
     }
 
     void FindItemDropObject()

@@ -40,7 +40,7 @@ public struct PlayerData
     public double x, y;
     //회전값
     public double rx, ry;
-    //공격값
+    //플레이어 위치에 대비한 마우스 포인터의 방향벡터
     public double ax, ay;
     //현재 위치
     public double nx, ny;
@@ -50,6 +50,8 @@ public struct PlayerData
     public double Speed;
     //현재 상태
     public int State;
+    // 대쉬 목적지 좌표
+    public double dx, dy;
 
     public void Init(string Name)
     {

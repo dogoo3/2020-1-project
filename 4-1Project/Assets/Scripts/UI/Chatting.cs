@@ -8,6 +8,7 @@ public class Chatting : MonoBehaviour
 {
     public static Chatting instance;
 
+    public Image UI_chatWindowImage;
     public InputField UI_typingfield;
     public Text UI_typingText;
     public Text UI_chattingLog;
@@ -39,11 +40,13 @@ public class Chatting : MonoBehaviour
             {
                 if (UI_typingfield.gameObject.activeSelf)
                 {
+                    UI_chatWindowImage.gameObject.SetActive(false);
                     UI_typingfield.gameObject.SetActive(false);
                     return;
                 }
                 else
                 {
+                    UI_chatWindowImage.gameObject.SetActive(true);
                     UI_typingfield.gameObject.SetActive(true);
                     UI_typingfield.ActivateInputField();
                 }
