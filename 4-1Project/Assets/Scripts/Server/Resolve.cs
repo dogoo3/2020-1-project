@@ -97,6 +97,10 @@ public class Resolve
                     if (OtherPlayerManager.instance.PlayerList.ContainsKey(Data["name"].ToString()))
                         OtherPlayerManager.instance.PlayerList[Data["name"].ToString()].SetInput(Data);
                     break;
+                case "PlayerPortal":
+                    if (OtherPlayerManager.instance.PlayerList.ContainsKey(Data["nickname"].ToString()))
+                        OtherPlayerManager.instance.PlayerList[Data["nickname"].ToString()].Teleport(Data);
+                    break;
                 case "UserInfo":
                     GameManager.instance.AddCharactor(Data);
                     break;

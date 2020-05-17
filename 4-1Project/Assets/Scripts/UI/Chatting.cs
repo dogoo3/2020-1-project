@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,18 +15,21 @@ public class Chatting : MonoBehaviour
     
     public SendMessage Data; // server Protocol Resolve
 
+    private bool _isActive; // Ã¤ÆÃÃ¢ÀÇ È°¼ºÈ­ ¿©ºÎ
+
     private string _sendMessageBuffer;
 
     private void Awake()
     {
         instance = this;
     }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) // ì±„íŒ…ì„ ë³´ë‚¼ ë•Œ
+        if (Input.GetKeyDown(KeyCode.Return)) // Ã¤ÆÃÀ» º¸³¾ ¶§
         {
-            if (UI_typingfield.text.Length > 0) // ì±„íŒ…ì°½ì— ë­”ê°€ë¥¼ ì³¤ìœ¼ë©´
+            if (UI_typingfield.text.Length > 0) // Ã¤ÆÃÃ¢¿¡ ¹º°¡¸¦ ÃÆÀ¸¸é
             {
                 Data.Init(GameManager.instance.PlayerName, UI_typingfield.text);
                 JsonData SendData = JsonMapper.ToJson(Data);
@@ -36,12 +39,13 @@ public class Chatting : MonoBehaviour
                 UI_typingfield.text = "";
                 UI_typingfield.gameObject.SetActive(false);
             }
-            else // ìºëŸ¿ ON / OFF
+            else // Ä³·µ ON / OFF
             {
                 if (UI_typingfield.gameObject.activeSelf)
                 {
                     UI_chatWindowImage.gameObject.SetActive(false);
                     UI_typingfield.gameObject.SetActive(false);
+                    _isActive = false;
                     return;
                 }
                 else
@@ -49,6 +53,7 @@ public class Chatting : MonoBehaviour
                     UI_chatWindowImage.gameObject.SetActive(true);
                     UI_typingfield.gameObject.SetActive(true);
                     UI_typingfield.ActivateInputField();
+                    _isActive = true;
                 }
             }
         }
@@ -62,5 +67,18 @@ public class Chatting : MonoBehaviour
     public void ReceiveComment(JsonData _data)
     {
         _sendMessageBuffer += "\n" + _data["username"].ToString() + " : " + _data["message"].ToString();
+    }
+
+    public void PutSystemMessage(string message, string color = null) // ¿ÜºÎ¿¡¼­ ¸Ş¼¼Áö¸¦ ³Ö¾îÁÖ´Â ÇÔ¼ö.
+    {
+        if (color == null) // »ö±òÀÌ ¾øÀ» °æ¿ì(±âº» Èò»ö)
+            UI_chattingLog.text += "\n" + message;
+        else // »ö±òÀÌ ÀÖÀ» °æ¿ì
+            UI_chattingLog.text += "\n" + "<color=" + color + ">" + message + "</color>";
+    }
+
+    public bool CheckActive() // Ã¤ÆÃÃ¢ÀÌ ¿­·È´ÂÁö ¾È ¿­·È´ÂÁö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+    {
+        return _isActive;
     }
 }

@@ -99,6 +99,6 @@ public class Fire_Ball : MonoBehaviour
                 break;
             }
         }
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

@@ -1,38 +1,48 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using LitJson;
 using System;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
+public enum MixWindowTabName
+{
+    Armor,
+    Weapon,
+    SubWeapon,
+    Accessory,
+    Active,
+};
 
 public class MixWindow : MonoBehaviour
 {
     public static MixWindow instance;
 
-    public RecipeSlot[] recipeSlots; // ë ˆì‹œí”¼ ìŠ¬ë¡¯
-    private MixMaterialSlot[] mixMaterialSlots; // ì¡°í•© ìŠ¬ë¡¯
-    private MixResultSlot mixResultSlot; // ì¡°í•©ê²°ê³¼ ìŠ¬ë¡¯
+    public RecipeSlot[] recipeSlots; // ·¹½ÃÇÇ ½½·Ô
+    private MixMaterialSlot[] mixMaterialSlots; // Á¶ÇÕ ½½·Ô
+    private MixResultSlot mixResultSlot; // Á¶ÇÕ°á°ú ½½·Ô
 
-    private int[] mat_itemID; // ì¡°í•© ì¬ë£Œ ì•„ì´í…œ ë²ˆí˜¸ë¥¼ ì •ë ¬í•˜ê¸° ìœ„í•œ ë°°ì—´
-    private int[] mat_itemCount; // ì¡°í•© ì¬ë£Œ ì•„ì´í…œ ê°¯ìˆ˜ë¥¼ ì •ë ¬í•˜ê¸° ìœ„í•œ ë°°ì—´
+    private int[] mat_itemID; // Á¶ÇÕ Àç·á ¾ÆÀÌÅÛ ¹øÈ£¸¦ Á¤·ÄÇÏ±â À§ÇÑ ¹è¿­
+    private int[] mat_itemCount; // Á¶ÇÕ Àç·á ¾ÆÀÌÅÛ °¹¼ö¸¦ Á¤·ÄÇÏ±â À§ÇÑ ¹è¿­
 
-    private bool isMixed; // ì¡°í•© ì„±ê³µ ì—¬ë¶€ë¥¼ ì„œë²„ì—ì„œ ë°›ì•„ì˜´
-    private int isMixItemID; // ì¡°í•© ì„±ê³µ ì‹œ ì„œë²„ì—ì„œ ë°›ì•„ì˜¤ëŠ” ì•„ì´í…œ ë²ˆí˜¸
+    private bool isMixed; // Á¶ÇÕ ¼º°ø ¿©ºÎ¸¦ ¼­¹ö¿¡¼­ ¹Ş¾Æ¿È
+    private int isMixItemID; // Á¶ÇÕ ¼º°ø ½Ã ¼­¹ö¿¡¼­ ¹Ş¾Æ¿À´Â ¾ÆÀÌÅÛ ¹øÈ£
 
     public ItemMix Data;
 
     public MixWindowTab[] mixWindowTabs;
     public Text text_money;
-    public int selectSlotNum; // ë ˆì‹œí”¼ ìŠ¬ë¡¯ì„ í´ë¦­í–ˆì„ ë•Œì˜ ë²ˆí˜¸. ì¡°í•©ê²°ê³¼ ì•„ì´í…œ ë²ˆí˜¸ê°€ ë“¤ì–´ì˜¨ë‹¤.
+    public int selectSlotNum; // ·¹½ÃÇÇ ½½·ÔÀ» Å¬¸¯ÇßÀ» ¶§ÀÇ ¹øÈ£. Á¶ÇÕ°á°ú ¾ÆÀÌÅÛ ¹øÈ£°¡ µé¾î¿Â´Ù.
 
     [HideInInspector]
-    public int _tabIndex; // ì¥ë¹„ / ì¬ë£Œ / ì†Œë¹„íƒ­ ì¸ë±ìŠ¤ ë²ˆí˜¸
+    public int _tabIndex; // Àåºñ / Àç·á / ¼ÒºñÅÇ ÀÎµ¦½º ¹øÈ£
 
-    [Header("ì¡°í•© ì•„ì´í…œ ì •ë³´ ì‚½ì…")]
-    public Recipe[] armorRecipe;
-    public Recipe[] weaponRecipe;
-    public Recipe[] subweaponRecipe;
-    public Recipe[] accessoryRecipe;
-    public Recipe[] activeRecipe;
+    [Header("Á¶ÇÕ ¾ÆÀÌÅÛ Á¤º¸ »ğÀÔ")]
+    public List<Recipe> armorRecipe;
+    public List<Recipe> weaponRecipe;
+    public List<Recipe> subweaponRecipe;
+    public List<Recipe> accessoryRecipe;
+    public List<Recipe> activeRecipe;
 
     private void Awake()
     {
@@ -43,26 +53,30 @@ public class MixWindow : MonoBehaviour
 
         mat_itemID = new int[mixMaterialSlots.Length];
         mat_itemCount = new int[mixMaterialSlots.Length];
+        
     }
 
     private void Start()
     {
-        ClickArmorTab(0);
+        ClickArmorTab(); // ±âº» ¼±ÅÃÀº ¹æ¾î±¸·Î
+        weaponRecipe = DataBase.instance.weaponRecipeList;
+        accessoryRecipe = DataBase.instance.accessoryRecipeList;
+        gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (isMixed) // ì¡°í•© ì„±ê³µ ì‹œ
+        if (isMixed) // Á¶ÇÕ ¼º°ø ½Ã
         {
             for (int i = 0; i < 3; i++)
-                mixMaterialSlots[i].RemoveItem(); // ì¡°í•© ìŠ¬ë¡¯ì˜ ì•„ì´í…œì„ ëª¨ë‘ ì—†ì•¤ ë‹¤ìŒ
+                mixMaterialSlots[i].RemoveItem(); // Á¶ÇÕ ½½·ÔÀÇ ¾ÆÀÌÅÛÀ» ¸ğµÎ ¾ø¾Ø ´ÙÀ½
 
-            for (int i = 0; i < DataBase.instance.itemList.Count; i++) // ì•„ì´í…œ ë°ì´í„°ë² ì´ìŠ¤ì—ì„œ IDì— ë§ëŠ” ì•„ì´í…œì„ ì°¾ì€ ë’¤
+            for (int i = 0; i < DataBase.instance.itemList.Count; i++) // ¾ÆÀÌÅÛ µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ ID¿¡ ¸Â´Â ¾ÆÀÌÅÛÀ» Ã£Àº µÚ
             {
                 if (isMixItemID == DataBase.instance.itemList[i].itemID)
                 {
-                    mixResultSlot.item.itemIcon = DataBase.instance.itemList[i].itemIcon; // ì•„ì´ì½˜ ì‚½ì…
-                    mixResultSlot.item = DataBase.instance.itemList[i].Init(); // ì•„ì´í…œ ì •ë³´ë¥¼ ì¡°í•©ê²°ê³¼ ìŠ¬ë¡¯ì— ë„£ì–´ì¤€ë‹¤.
+                    mixResultSlot.item.itemIcon = DataBase.instance.itemList[i].itemIcon; // ¾ÆÀÌÄÜ »ğÀÔ
+                    mixResultSlot.item = DataBase.instance.itemList[i].Init(); // ¾ÆÀÌÅÛ Á¤º¸¸¦ Á¶ÇÕ°á°ú ½½·Ô¿¡ ³Ö¾îÁØ´Ù.
                     mixResultSlot.item.itemCount = 1;
                     mixResultSlot.InitUI();
                 }
@@ -74,7 +88,7 @@ public class MixWindow : MonoBehaviour
         }
     }
 
-    // íƒ€ ìŠ¬ë¡¯ì—ì„œ ì¡°í•© ìŠ¬ë¡¯ìœ¼ë¡œ ì•„ì´í…œì´ ë„˜ì–´ì˜¬ ë•Œ, ìŠ¬ë¡¯ì— ê°™ì€ IDì˜ ì•„ì´í…œ ìœ ë¬´ë¥¼ íŒë³„í•¨.
+    // Å¸ ½½·Ô¿¡¼­ Á¶ÇÕ ½½·ÔÀ¸·Î ¾ÆÀÌÅÛÀÌ ³Ñ¾î¿Ã ¶§, ½½·Ô¿¡ °°Àº IDÀÇ ¾ÆÀÌÅÛ À¯¹«¸¦ ÆÇº°ÇÔ.
     public MixMaterialSlot SearchMixMaterialSlot(int _itemID)
     {
         for (int i = 0; i < mixMaterialSlots.Length; i++)
@@ -85,15 +99,15 @@ public class MixWindow : MonoBehaviour
         return null;
     }
 
-    public void CheckMaterial() // ì¡°í•© íŒë‹¨
+    public void CheckMaterial() // Á¶ÇÕ ÆÇ´Ü
     {
-        for (int i = 0; i < 3; i++) // ì¡°í•© ìŠ¬ë¡¯ 3ê°œì˜ itemIDë‘ itemCountë¥¼ ë°›ì•„ì˜¨ë‹¤.
+        for (int i = 0; i < 3; i++) // Á¶ÇÕ ½½·Ô 3°³ÀÇ itemID¶û itemCount¸¦ ¹Ş¾Æ¿Â´Ù.
         {
             mat_itemID[i] = mixMaterialSlots[i].item.itemID;
             mat_itemCount[i] = mixMaterialSlots[i].item.itemCount;
         }
 
-        for (int i = 0; i < 2; i++) // ì¡°í•© ìŠ¬ë¡¯ 3ê°œì˜ ItemIDë¥¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•œë‹¤.(itemCountë„ ê°™ì´ ë³€ê²½)
+        for (int i = 0; i < 2; i++) // Á¶ÇÕ ½½·Ô 3°³ÀÇ ItemID¸¦ ¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇÑ´Ù.(itemCountµµ °°ÀÌ º¯°æ)
         {
             for (int j = i + 1; j < 3; j++)
             {
@@ -110,13 +124,13 @@ public class MixWindow : MonoBehaviour
             }
         }
 
-        // ì„œë²„ë¡œ ì¡°í•© ìŠ¬ë¡¯ì˜ ë°ì´í„° ì „ì†¡
+        // ¼­¹ö·Î Á¶ÇÕ ½½·ÔÀÇ µ¥ÀÌÅÍ Àü¼Û
         Data.Init(mat_itemID, mat_itemCount, Inventory.instance.mymoney);
         JsonData SendData = JsonMapper.ToJson(Data);
-        ServerClient.instance.Send(SendData.ToString()); // Sendì™€ ë™ì‹œì— Resolveë°›ì•„ ì¡°í•© ì„±ê³µ ì—¬ë¶€ë¥¼ ì•Œë ¤ì¤Œ.
+        ServerClient.instance.Send(SendData.ToString()); // Send¿Í µ¿½Ã¿¡ Resolve¹Ş¾Æ Á¶ÇÕ ¼º°ø ¿©ºÎ¸¦ ¾Ë·ÁÁÜ.
     }
 
-    public void ReceiveMixResult(JsonData _data) // ì¡°í•© ê²°ê³¼ë¥¼ ì„œë²„ì—ì„œ ë°›ì•„ì˜¤ëŠ” í•¨ìˆ˜
+    public void ReceiveMixResult(JsonData _data) // Á¶ÇÕ °á°ú¸¦ ¼­¹ö¿¡¼­ ¹Ş¾Æ¿À´Â ÇÔ¼ö
     {
         try
         {
@@ -135,26 +149,26 @@ public class MixWindow : MonoBehaviour
 
     void ChangeTabColor(int _p_tabNum)
     {
-        mixWindowTabs[_tabIndex].DisableTab(); // ì´ì „ì— ì„ íƒëœ ì¸ë±ìŠ¤ì˜ íƒ­ ìƒ‰ê¹”ì„ ë¹„ì„ íƒ ìƒ‰ê¹”ë¡œ ë°”ê¿”ì¤€ ë’¤
-        _tabIndex = _p_tabNum; // íƒ­ ì¸ë±ìŠ¤ë¥¼ ë°”ê¾¸ê³ 
-        mixWindowTabs[_tabIndex].EnableTab(); // ìƒˆë¡œ ì„ íƒëœ ì¸ë±ìŠ¤ì˜ íƒ­ ìƒ‰ê¹”ë¡œ ë°”ê¿”ì¤€ë‹¤.
+        mixWindowTabs[_tabIndex].DisableTab(); // ÀÌÀü¿¡ ¼±ÅÃµÈ ÀÎµ¦½ºÀÇ ÅÇ »ö±òÀ» ºñ¼±ÅÃ »ö±ò·Î ¹Ù²ãÁØ µÚ
+        _tabIndex = _p_tabNum; // ÅÇ ÀÎµ¦½º¸¦ ¹Ù²Ù°í
+        mixWindowTabs[_tabIndex].EnableTab(); // »õ·Î ¼±ÅÃµÈ ÀÎµ¦½ºÀÇ ÅÇ »ö±ò·Î ¹Ù²ãÁØ´Ù.
     }
 
-    void UpdateRecipeSlot(Recipe[] _recipes)
+    void UpdateRecipeSlot(List<Recipe> _recipes)
     {
-        // ëª¨ë“  ë ˆì‹œí”¼ ìŠ¬ë¡¯ì„ ì´ˆê¸°í™”
+        // ¸ğµç ·¹½ÃÇÇ ½½·ÔÀ» ÃÊ±âÈ­
         for (int i = 0; i < recipeSlots.Length; i++)
         {
             recipeSlots[i].recipe.Reset();
-            recipeSlots[i].InitUI(0); // ì•ˆ ë³´ì´ê²Œ íˆ¬ëª…ì²˜ë¦¬
+            recipeSlots[i].InitUI(0); // ¾È º¸ÀÌ°Ô Åõ¸íÃ³¸®
         }
-        // ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì€ ë ˆì‹œí”¼ ì •ë³´ë¥¼ ìŠ¬ë¡¯ì— ë„£ì–´ì¤Œ.
-        for (int i = 0; i < _recipes.Length; i++)
+        // ¸Å°³º¯¼ö·Î ¹ŞÀº ·¹½ÃÇÇ Á¤º¸¸¦ ½½·Ô¿¡ ³Ö¾îÁÜ.
+        for (int i = 0; i < _recipes.Count; i++)
         {
             recipeSlots[i].recipe = _recipes[i].Init();
-            recipeSlots[i].InitUI(1); // ë³´ì´ê²Œ íˆ¬ëª…ê°’ 255
+            recipeSlots[i].InitUI(1); // º¸ÀÌ°Ô Åõ¸í°ª 255
         }
-        // ì œì‘ì¤‘ ë‹¤ë¥¸ íƒ­ì„ í´ë¦­í•˜ê²Œ ë  ê²½ìš° ì•„ì´í…œì„ ë°˜í™˜ì‹œì¼œì£¼ë©´ì„œ ìŠ¬ë¡¯ì„ ì´ˆê¸°í™”í•¨.
+        // Á¦ÀÛÁß ´Ù¸¥ ÅÇÀ» Å¬¸¯ÇÏ°Ô µÉ °æ¿ì ¾ÆÀÌÅÛÀ» ¹İÈ¯½ÃÄÑÁÖ¸é¼­ ½½·ÔÀ» ÃÊ±âÈ­ÇÔ.
         for(int i=0;i<mixMaterialSlots.Length;i++)
         {
             mixMaterialSlots[i].BackupItem();
@@ -163,34 +177,53 @@ public class MixWindow : MonoBehaviour
         text_money.text = "";
         selectSlotNum = 0;
     }
+    
+    public void InputRecipe(int _index) // 0:¹æ¾î±¸ 1:¹«±â 2:º¸Á¶¹«±â 3:¾×¼¼¼­¸® 4:¾×Æ¼ºê
+    {
+        switch (_index)
+        {
+            case (int)MixWindowTabName.Armor:
+                break;
+            case (int)MixWindowTabName.Weapon:
+                break;
+            case (int)MixWindowTabName.SubWeapon:
+                break;
+            case (int)MixWindowTabName.Accessory:
+                break;
+            case (int)MixWindowTabName.Active:
+                break;
+        }
+    }
 
-    public void ClickArmorTab(int _tabNum) // ë°©ì–´êµ¬ íƒ­ í´ë¦­ ì‹œ
+    #region ClickTab
+    public void ClickArmorTab() // ¹æ¾î±¸ ÅÇ Å¬¸¯ ½Ã
     {
         UpdateRecipeSlot(armorRecipe);
-        ChangeTabColor(_tabNum);
+        ChangeTabColor(0);
     }
 
-    public void ClickWeaponTab(int _tabNum) // ë¬´ê¸° íƒ­ í´ë¦­ ì‹œ
+    public void ClickWeaponTab() // ¹«±â ÅÇ Å¬¸¯ ½Ã
     {
         UpdateRecipeSlot(weaponRecipe);
-        ChangeTabColor(_tabNum);
+        ChangeTabColor(1);
     }
 
-    public void ClickSubWeaponTab(int _tabNum) // ë³´ì¡°ë¬´ê¸° íƒ­ í´ë¦­ ì‹œ
+    public void ClickSubWeaponTab() // º¸Á¶¹«±â ÅÇ Å¬¸¯ ½Ã
     {
         UpdateRecipeSlot(subweaponRecipe);
-        ChangeTabColor(_tabNum);
+        ChangeTabColor(2);
     }
 
-    public void ClickAccessoryTab(int _tabNum) // ì•¡ì„¸ì„œë¦¬ íƒ­ í´ë¦­ ì‹œ
+    public void ClickAccessoryTab() // ¾×¼¼¼­¸® ÅÇ Å¬¸¯ ½Ã
     {
         UpdateRecipeSlot(accessoryRecipe);
-        ChangeTabColor(_tabNum);
+        ChangeTabColor(3);
     }
 
-    public void ClickActiveTab(int _tabNum) // ì•¡í‹°ë¸Œ íƒ­ í´ë¦­ ì‹œ
+    public void ClickActiveTab() // ¾×Æ¼ºê ÅÇ Å¬¸¯ ½Ã
     {
         UpdateRecipeSlot(activeRecipe);
-        ChangeTabColor(_tabNum);
+        ChangeTabColor(4);
     }
+    #endregion
 }

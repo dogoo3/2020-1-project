@@ -44,7 +44,7 @@ public class EnergyBall : MonoBehaviour
                 PtoB_damage_data.damage = STR - Boss.instance.DEF;
                 ObjectPoolingManager.instance.InsertQueue(this);
 
-                if(_isPlayer)
+                if(_isPlayer) // 내가 쏜 공이 맞으면 체력계산
                 {
                     JsonData SendData = JsonMapper.ToJson(PtoB_damage_data);
                     ServerClient.instance.Send(SendData.ToString());

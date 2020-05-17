@@ -12,5 +12,6 @@ public class EquipDatabase : MonoBehaviour
         // Material Item
         equipInfoList.Add(new EquipInfo(201, 0, 23));
         equipInfoList.Add(new EquipInfo(202, 150, 0));
+        equipInfoList.Add(new EquipInfo(203, 0, 0));
     }
 }

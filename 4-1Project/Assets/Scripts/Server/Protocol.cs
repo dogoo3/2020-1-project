@@ -322,7 +322,6 @@ public struct FireBallState
 
     public void Init(string _Name)
     {
-
         type = "DamageFireBall";
         Name = _Name;
     }
@@ -337,6 +336,23 @@ public struct DestroyFireBall
         type = "DestroyFireBall";
     }
 }
+
+public struct PlayerPortal
+{
+    public string type;
+
+    public string nickname;
+    public double x;
+    public double y;
+    public bool get;
+
+    public void Init(string name)
+    {
+        nickname = name;
+        type = "PlayerPortal";
+    }
+}
+
 
 
 

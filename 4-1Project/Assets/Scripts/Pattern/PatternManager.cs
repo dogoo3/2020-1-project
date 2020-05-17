@@ -51,7 +51,6 @@ public class PatternManager : MonoBehaviour
         pat_wheelLaser = new WheelLaser();
         pat_circleFloor = new InduceCircleFloor();
         pat_fireBall = new InduceFireBall();
-
     }
 
     private void Update()
@@ -99,8 +98,6 @@ public class PatternManager : MonoBehaviour
 
     void PatternBallExecute()
     {
-        Debug.Log("총알 생성");
-       
         pat_induceBullet.BulletExecute(Boss.instance._circleBullet, BT);
         //만약 패턴이 시작된 횟수가 3일때 랜덤 탄환을
         //다시 계산하도록 한다
@@ -118,13 +115,12 @@ public class PatternManager : MonoBehaviour
         }
     }
 
-
     void SubPatternBallExecute()
     {
         CancelInvoke("SubPatternBallExecute");
         if (Boss.instance.patternNum != 2)
         {
-            if(SBT == BulletType.SQUARE_CURVE || SBT == BulletType.SQUARE_NORMAL)
+            if (SBT == BulletType.SQUARE_CURVE || SBT == BulletType.SQUARE_NORMAL)
             {
                 pat_induceBullet.BulletExecute(Boss.instance._circleBullet, SBT);
                 _subIsStart = false;
@@ -142,7 +138,7 @@ public class PatternManager : MonoBehaviour
                     pat_induceBullet.BulletExecute(Boss.instance._circleBullet, SBT);
                 }
             }
-           
+
         }
     }
 
@@ -236,6 +232,7 @@ public class PatternManager : MonoBehaviour
     //서버에서 패턴을 재시작하라고 받으면 재시작을 위한 함수
     public void PatternRestart()
     {
+        Boss.instance.Attack();
         _isStart = true;
     }
 
@@ -257,8 +254,8 @@ public class PatternManager : MonoBehaviour
     public void PatternStart(JsonData _data)
     {
         Boss.instance.patternNum = int.Parse(_data["Phase"].ToString());
-        _isStart = true;
         Boss.instance.Attack();
+        _isStart = true;
     }
 
     //시간 제한이 걸려있는 패턴일 경우에는 타이머 체크를 하고 서버로 보내주는 역할을 한다

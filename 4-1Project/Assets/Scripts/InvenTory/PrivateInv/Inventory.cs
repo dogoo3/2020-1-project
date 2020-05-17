@@ -49,7 +49,6 @@ public class Inventory : MonoBehaviour
         // 서버와의 연동을 위해 공유 인벤토리의 슬롯에 따로 슬롯 인덱스를 할당해줌.
         for (int i = 0; i < shareInventorySlot.Length; i++)
             shareInventorySlot[i].slotIndex = i;
-
     }
 
     private void Start()
@@ -360,6 +359,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool CheckHaveKey() // 보스 방에 들어가기 위한 열쇠를 가지고 있는지를 판단
+    {
+        for(int i=0;i< equip_Inv.Length;i++)
+        {
+            if (equip_Inv[i].itemID == 203) // 키 가지고 있으면
+                return true; 
+        }
+        return false;
+    }
+
+    #region ClickTab
     public void InitEquipInv(int _tabNum) // 장비 탭 클릭 시
     {
         UpdateItemInfo(_tabIndex);
@@ -380,4 +390,7 @@ public class Inventory : MonoBehaviour
         UpdateInvSlot(potion_Inv);
         ChangeTabColor(_tabNum);
     }
+    #endregion
+
+
 }

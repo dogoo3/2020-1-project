@@ -4,14 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-enum MixWindowTabName
-{
-    Armor,
-    Weapon,
-    SubWeapon,
-    Accessory,
-    Active,
-};
+
 
 public class MixWindowTab : MonoBehaviour, IPointerClickHandler
 {
@@ -39,26 +32,23 @@ public class MixWindowTab : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_tabIndex == (int)MixWindowTabName.Armor) // 방어구
+        switch (_tabIndex)
         {
-            MixWindow.instance.ClickArmorTab((int)MixWindowTabName.Armor);
+            case (int)MixWindowTabName.Armor:
+                MixWindow.instance.ClickArmorTab();
+                break;
+            case (int)MixWindowTabName.Weapon:
+                MixWindow.instance.ClickWeaponTab();
+                break;
+            case (int)MixWindowTabName.SubWeapon:
+                MixWindow.instance.ClickSubWeaponTab();
+                break;
+            case (int)MixWindowTabName.Accessory:
+                MixWindow.instance.ClickAccessoryTab();
+                break;
+            case (int)MixWindowTabName.Active:
+                MixWindow.instance.ClickActiveTab();
+                break;
         }
-        else if (_tabIndex == (int)MixWindowTabName.Weapon) // 무기
-        {
-            MixWindow.instance.ClickWeaponTab((int)MixWindowTabName.Weapon);
-        }
-        else if (_tabIndex == (int)MixWindowTabName.SubWeapon) // 보조무기
-        {
-            MixWindow.instance.ClickSubWeaponTab((int)MixWindowTabName.SubWeapon);
-        }
-        else if (_tabIndex == (int)MixWindowTabName.Accessory) // 액세서리
-        {
-            MixWindow.instance.ClickAccessoryTab((int)MixWindowTabName.Accessory);
-        }
-        else if (_tabIndex == (int)MixWindowTabName.Active) // 액티브
-        {
-            MixWindow.instance.ClickActiveTab((int)MixWindowTabName.Active);
-        }
-        else { }
     }
 }

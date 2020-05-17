@@ -46,7 +46,7 @@ public class RecipeSlot : MonoBehaviour, IPointerClickHandler
         }
 
         for(int i=0;i<matSlotImages.Length;i++)
-            mixMaterialSlots[i].SetSlot(recipe.mat_icons[i], recipe.itemID[i], recipe.itemCount[i]);
+            mixMaterialSlots[i].SetSlot(recipe.mat_icon[i], recipe.itemID[i], recipe.itemCount[i]);
         MixWindow.instance.text_money.text = Inventory.instance.mymoney + " / " + recipe.money;
         MixWindow.instance.selectSlotNum = recipe.slotResultnum;
     }

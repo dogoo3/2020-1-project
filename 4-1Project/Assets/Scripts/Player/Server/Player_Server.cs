@@ -15,7 +15,7 @@ public class Player_Server : MonoBehaviour
     private bool _setOn;
 
     public PlayerState PS;
-
+    private bool _isPortal;
     public ParticleSystem[] dashBlur;
 
     // 플레이어타입
@@ -33,6 +33,8 @@ public class Player_Server : MonoBehaviour
     public Vector2 _mouse_direction;
     // 대시 목적지 좌표
     public Vector2 dashtoPos;
+    // 포탈 탑승 좌표
+    private Vector2 portalPos;
     //플레이어 속도
     public float Speed;
 
@@ -86,7 +88,6 @@ public class Player_Server : MonoBehaviour
             FindItemDropObject(); // 마우스 커서 방향에 채집물이 있는지 확인
             PS = PlayerState.Idle;
         }
-
         else if (PS == PlayerState.Skill) // 스킬공격
         {
             if (playerType == 1) // 마법사일 때만
@@ -104,6 +105,20 @@ public class Player_Server : MonoBehaviour
             transform.position = Vector2.Lerp(transform.position, dashtoPos, dashSpeed); // 대시!
             dashSpeed += 0.03f;
         }
+
+        if(_isPortal)
+        {
+            transform.position = portalPos;
+            _isPortal = false;
+        }
+    }
+
+    public void Teleport(JsonData Data)
+    {
+        portalPos.x = float.Parse(Data["x"].ToString());
+        portalPos.y = float.Parse(Data["y"].ToString());
+
+        _isPortal = bool.Parse(Data["get"].ToString());
     }
 
     //Json 데이터들을 파싱하여 데이터를 갱신한다
