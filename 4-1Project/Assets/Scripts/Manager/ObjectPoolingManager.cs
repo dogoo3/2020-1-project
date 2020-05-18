@@ -11,12 +11,14 @@ public class ObjectPoolingManager : MonoBehaviour
     public Queue<EnergyBall> queue_magicBall = new Queue<EnergyBall>();
     public Queue<CircleFloor> queue_circleFloor = new Queue<CircleFloor>();
     public Queue<Fire_Ball> queue_fireBall = new Queue<Fire_Ball>();
+    public Queue<GameObject> queue_switch = new Queue<GameObject>();
 
     public Laser laser;
     public Bullet energyBall;
     public EnergyBall magicBall;
     public CircleFloor circle;
     public Fire_Ball fireBall;
+    public GameObject switch_bosskey;
 
     public int boss_poolingCount;
     public int magician_poolingCount;
@@ -56,6 +58,14 @@ public class ObjectPoolingManager : MonoBehaviour
         fireBallTemp.transform.parent = gameObject.transform;
         queue_fireBall.Enqueue(fireBallTemp);
         fireBallTemp.gameObject.SetActive(false);
+
+        for(int i=0;i<GameManager.instance.playerInfo.Count+1;i++)
+        {
+            GameObject _switch = Instantiate(switch_bosskey, Vector2.zero, Quaternion.identity);
+            _switch.transform.parent = gameObject.transform;
+            queue_switch.Enqueue(_switch);
+            _switch.gameObject.SetActive(false);
+        }
     }
 
     public void InsertQueue(Bullet _object, Queue<Bullet> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
@@ -132,6 +142,25 @@ public class ObjectPoolingManager : MonoBehaviour
         if (queue_fireBall.Count != 0)
         {
             Fire_Ball t_object = _queue.Dequeue();
+            return t_object;
+        }
+        return null;
+    }
+
+    // 스위치 풀링
+    public void InsertQueue(GameObject _object, Queue<GameObject> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
+    {
+        _queue.Enqueue(_object);
+        _object.gameObject.SetActive(false);
+    }
+
+    public GameObject GetQueue(Queue<GameObject> _queue, Vector2 _position)
+    {
+        if (queue_fireBall.Count != 0)
+        {
+            GameObject t_object = _queue.Dequeue();
+            t_object.transform.position = _position;
+            t_object.SetActive(true);
             return t_object;
         }
         return null;

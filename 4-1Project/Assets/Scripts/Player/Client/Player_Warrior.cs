@@ -6,6 +6,7 @@ public class Player_Warrior : MonoBehaviour
 {
     private RaycastHit2D _hit2D;
     private Player _mainPlayer;
+    private ItemDropObject temp;
 
     private bool _isHit;
     private float _time;
@@ -45,18 +46,16 @@ public class Player_Warrior : MonoBehaviour
                 _isHit = true;
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
                 _mainPlayer.ChangeAnimationState_Attack();
-                _mainPlayer.SendPlayerInfoPacket();
+
                 if (_hit2D.collider != null)
                 {
-                    ItemDropObject temp;
-
                     if (_hit2D.collider.name == "Boss") // 보스에 맞으면
                     {
                         _mainPlayer.SendDamageInfo(Boss.instance.DEF);
                         Boss.instance.ActiveHPBar();
                     }
 
-                    if (_hit2D.collider.gameObject.tag == "FireBall")
+                    if (_hit2D.collider.gameObject.tag == "FireBall") // 보스가 소환한 불구슬에 맞으면
                         Boss.instance._fireBall.HitFireBall(_hit2D.collider.gameObject.name);
                     
                     temp = _hit2D.collider.GetComponent<ItemDropObject>();
@@ -64,7 +63,22 @@ public class Player_Warrior : MonoBehaviour
                     if (temp != null) // 채집물에 맞으면
                     {
                         temp.MinusCount();
+                        if(!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
+                        {
+                            if(Random.Range(0,10) >= 3) // 스위치 스폰 X(70%)
+                            {
+                                temp.ChangeSpawnSwitchState(false);
+                                _mainPlayer.Data.switchstate = false;
+                            }
+                            else // 스위치 스폰 O(30%)
+                            {
+                                temp.ChangeSpawnSwitchState(true);
+                                _mainPlayer.Data.switchstate = true;
+                            }
+                        }
                     }
+
+                    _mainPlayer.SendPlayerInfoPacket();
                 }
             }
         }

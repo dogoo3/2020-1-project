@@ -169,7 +169,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6913446
 Animator:
@@ -5706,7 +5706,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &368729345
 GameObject:
@@ -7226,7 +7226,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &538427848 stripped
 Transform:
@@ -9544,7 +9544,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791536319
 GameObject:
@@ -11547,7 +11547,7 @@ PrefabInstance:
     - target: {fileID: 6359673384501474336, guid: 97d0f6c9b120750448997649f6c0d7ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6359673384501474336, guid: 97d0f6c9b120750448997649f6c0d7ee,
         type: 3}
@@ -14626,6 +14626,8 @@ MonoBehaviour:
     type: 3}
   circle: {fileID: -1185611698008358207, guid: bd9f1a8b57b2edc49b030c670c8bf3ef, type: 3}
   fireBall: {fileID: 887296150036240566, guid: d10f8b3b00498454f9f36b1a6671101e, type: 3}
+  switch_bosskey: {fileID: 3645702282100746284, guid: 01db85bcac44fcf448d59758304ff4ed,
+    type: 3}
   boss_poolingCount: 500
   magician_poolingCount: 150
 --- !u!4 &1384126563

@@ -939,7 +939,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: 85d435368f0a3180d4e274456c54fd3e
+      Hash: 8170ca03b5eb8d112d6dac2857a76e69
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ObjectPoolingManager
@@ -981,7 +981,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 56aee91f54714ba0e52ce475d72999bb
+      Hash: a6f6b6ed32845f8c228404506486d551
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player

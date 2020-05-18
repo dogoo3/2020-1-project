@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
     public int STR, DEF;
 
-    public bool _isCrash;
+    public bool _isCrash, isGetSwitch;
     private float time;
 
     private Vector2 toPos;

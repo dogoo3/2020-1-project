@@ -13,6 +13,8 @@ public class Player_Server : MonoBehaviour
     private int _layerMask;
 
     private bool _setOn;
+    private bool _isGetSwitch; // 스위치를 획득했는지 여부를 결정.(true면 얻음)
+    private bool _isSpawnSwitchState; // 스위치를 얻을 수 있는 상태인지 결정.
 
     public PlayerState PS;
     private bool _isPortal;
@@ -149,6 +151,7 @@ public class Player_Server : MonoBehaviour
         Speed = float.Parse(Data["Speed"].ToString());
         PS = (PlayerState)int.Parse(Data["State"].ToString());
 
+        _isSpawnSwitchState = bool.Parse(Data["switchstate"].ToString());
         _setOn = true;
     }
 
@@ -221,7 +224,10 @@ public class Player_Server : MonoBehaviour
             itemDropObject = _hit2D.collider.GetComponent<ItemDropObject>();
 
         if (itemDropObject != null)
-            itemDropObject.MinusCount();
+        {
+            itemDropObject.MinusCount(gameObject.name);
+            itemDropObject.ChangeSpawnSwitchState(_isSpawnSwitchState); // 클라이언트에서 스위치 생성을 랜덤한 bool값을 받아오기 때문에 그 캐릭터와 똑같은 값을 가지고 있다.
+        }
     }
 }
 

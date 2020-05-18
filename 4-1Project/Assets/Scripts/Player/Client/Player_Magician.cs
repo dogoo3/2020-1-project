@@ -10,9 +10,9 @@ public class Player_Magician : MonoBehaviour
     private ItemDropObject temp;
 
     private bool _isHit;
+
     private float _time;
     private int _layerMask;
-
     public float attackspeed;
 
     private void Awake()
@@ -61,7 +61,22 @@ public class Player_Magician : MonoBehaviour
                     temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
                 if (temp != null) // 채집물에 맞으면
-                    temp.MinusCount();
+                {
+                    temp.MinusCount(gameObject.name);
+                    if (!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
+                    {
+                        if (Random.Range(0, 10) >= 3) // 스위치 스폰 X(70%)
+                        {
+                            temp.ChangeSpawnSwitchState(false);
+                            _mainPlayer.Data.switchstate = false;
+                        }
+                        else // 스위치 스폰 O(30%)
+                        {
+                            temp.ChangeSpawnSwitchState(true);
+                            _mainPlayer.Data.switchstate = true;
+                        }
+                    }
+                }
                 _mainPlayer.SendPlayerInfoPacket();
             }
         }

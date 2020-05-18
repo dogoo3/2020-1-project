@@ -52,6 +52,8 @@ public struct PlayerData
     public int State;
     // 대쉬 목적지 좌표
     public double dx, dy;
+    // 스위치 획득 random bool값
+    public bool switchstate;
 
     public void Init(string Name)
     {
