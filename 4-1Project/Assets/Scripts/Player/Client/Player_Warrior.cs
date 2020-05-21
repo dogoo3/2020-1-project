@@ -65,12 +65,12 @@ public class Player_Warrior : MonoBehaviour
                         temp.MinusCount();
                         if(!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
                         {
-                            if(Random.Range(0,10) >= 3) // 스위치 스폰 X(70%)
+                            if(Random.Range(0,10) >= 5) // 스위치 스폰 X(70%)
                             {
                                 temp.ChangeSpawnSwitchState(false);
                                 _mainPlayer.Data.switchstate = false;
                             }
-                            else // 스위치 스폰 O(30%)
+                            else // 스위치 스폰 O(50%)
                             {
                                 temp.ChangeSpawnSwitchState(true);
                                 _mainPlayer.Data.switchstate = true;

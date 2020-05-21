@@ -355,6 +355,30 @@ public struct PlayerPortal
     }
 }
 
+//public struct MagicSquarePassword
+//{
+//    public string type;
+
+//    public int[] password;
+
+//    public void Init()
+//    {
+//        type = "MagicSqaurePassword";
+//    }
+//}
+
+//public struct MagicSquareDead
+//{
+//    public string type;
+
+//    public string[] nickname; // 사망시킬 유저들의 닉네임
+
+//    public void Init()
+//    {
+//        type = "MagicSquareDead";
+//    }
+//}
+
 
 
 

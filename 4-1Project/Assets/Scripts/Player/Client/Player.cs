@@ -247,7 +247,6 @@ public class Player : MonoBehaviour
             _subAnimator[i].Attack();
     }
 
-
     private void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
     {
         for (int i = 0; i < _subAnimator.Length; i++)
@@ -294,6 +293,16 @@ public class Player : MonoBehaviour
         HPManager.instance.myHP = (int)Mathf.Clamp(HPManager.instance.myHP - (_damage - DEF), -1, HPManager.instance.myFullHP);
         HPManager.instance.SetHP();
         BtoP_damage_data.HP = HPManager.instance.myHP;
+
+        JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
+        ServerClient.instance.Send(SendData.ToString());
+    }
+
+    public void Dead()
+    {
+        HPManager.instance.myHP = 0;
+        HPManager.instance.SetHP();
+        BtoP_damage_data.HP = 0;
 
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());

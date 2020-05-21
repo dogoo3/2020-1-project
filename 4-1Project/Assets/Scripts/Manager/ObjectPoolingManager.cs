@@ -37,9 +37,9 @@ public class ObjectPoolingManager : MonoBehaviour
             if (i > magician_poolingCount)
                 continue;
             EnergyBall e_object = Instantiate(magicBall, Vector2.zero, Quaternion.identity);
-            t_object.transform.parent = gameObject.transform;
+            e_object.transform.parent = gameObject.transform;
             queue_magicBall.Enqueue(e_object);
-            t_object.gameObject.SetActive(false);
+            e_object.gameObject.SetActive(false);
         }
 
         Laser temp = Instantiate(laser, Vector2.zero, Quaternion.identity);
@@ -159,7 +159,7 @@ public class ObjectPoolingManager : MonoBehaviour
         if (queue_fireBall.Count != 0)
         {
             GameObject t_object = _queue.Dequeue();
-            t_object.transform.position = _position;
+            t_object.transform.position = _position + new Vector2(0, 2);
             t_object.SetActive(true);
             return t_object;
         }

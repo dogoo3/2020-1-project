@@ -37,7 +37,7 @@ public class SwitchManager : MonoBehaviour
         {
             // 사운드 넣어주면 좋을 듯
             // 채팅창 시스템 메시지 넣어주고(빨간색, "새로운 레시피를 획득하였습니다!")
-            Chatting.instance.PutSystemMessage("새로운 레시피를 획득했습니다!", "red");
+            Chatting.instance.PutSystemMessage("새로운 레시피를 획득했습니다!", "lime");
             // 레시피 넣어준다.
             MixWindow.instance.activeRecipe.Add(DataBase.instance.activeRecipeList[0]);
             _isGet = true;

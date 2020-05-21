@@ -62,6 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MagicSquare\MagicSquare.cs" />
+    <Compile Include="Assets\MagicSquare\MagicSquareManager.cs" />
+    <Compile Include="Assets\MagicSquare\ResetPassword.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />

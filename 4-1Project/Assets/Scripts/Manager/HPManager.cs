@@ -4,14 +4,6 @@ using UnityEngine.UI;
 using LitJson;
 using System.Collections.Generic;
 
-//[System.Serializable]
-//struct OtherHP
-//{
-//    public string nickname;
-//    public int otherHP;
-//    public int otherFullHP;
-//}
-
 public class HPManager : MonoBehaviour
 {
     public static HPManager instance;
