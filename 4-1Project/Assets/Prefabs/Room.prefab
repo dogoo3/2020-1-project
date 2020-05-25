@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
-  cameraPos: {fileID: 0}
+  shakecamera: {fileID: 0}
   toMoveroomNum: 0
 --- !u!95 &3531369227571724252
 Animator:
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
-  cameraPos: {fileID: 0}
+  shakecamera: {fileID: 0}
   toMoveroomNum: 0
 --- !u!95 &491451276851736845
 Animator:
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
-  cameraPos: {fileID: 0}
+  shakecamera: {fileID: 0}
   toMoveroomNum: 0
 --- !u!95 &1680741514285349444
 Animator:
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportPos: {fileID: 0}
-  cameraPos: {fileID: 0}
+  shakecamera: {fileID: 0}
   toMoveroomNum: 0
 --- !u!95 &4166612543096772104
 Animator:

@@ -6,7 +6,6 @@ public class Player_Warrior : MonoBehaviour
 {
     private RaycastHit2D _hit2D;
     private Player _mainPlayer;
-    private ItemDropObject temp;
 
     private bool _isHit;
     private float _time;
@@ -57,28 +56,15 @@ public class Player_Warrior : MonoBehaviour
 
                     if (_hit2D.collider.gameObject.tag == "FireBall") // 보스가 소환한 불구슬에 맞으면
                         Boss.instance._fireBall.HitFireBall(_hit2D.collider.gameObject.name);
-                    
-                    temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
-                    if (temp != null) // 채집물에 맞으면
+                        _mainPlayer.temp = _hit2D.collider.GetComponent<ItemDropObject>();
+
+                    if (_mainPlayer.temp != null) // 채집물에 맞으면
                     {
-                        temp.MinusCount();
-                        if(!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
-                        {
-                            if(Random.Range(0,10) >= 5) // 스위치 스폰 X(70%)
-                            {
-                                temp.ChangeSpawnSwitchState(false);
-                                _mainPlayer.Data.switchstate = false;
-                            }
-                            else // 스위치 스폰 O(50%)
-                            {
-                                temp.ChangeSpawnSwitchState(true);
-                                _mainPlayer.Data.switchstate = true;
-                            }
-                        }
+                        _mainPlayer.temp.MinusCount(gameObject.name);
+                        if (!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
+                            _mainPlayer.SendItemPercentPacket();
                     }
-
-                    _mainPlayer.SendPlayerInfoPacket();
                 }
             }
         }

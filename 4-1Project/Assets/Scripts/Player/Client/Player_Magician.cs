@@ -7,7 +7,7 @@ public class Player_Magician : MonoBehaviour
     private Player _mainPlayer;
     private RaycastHit2D _hit2D;
     private Vector2 _mousePos;
-    private ItemDropObject temp;
+    //private ItemDropObject temp;
 
     private bool _isHit;
 
@@ -58,26 +58,14 @@ public class Player_Magician : MonoBehaviour
                 _mainPlayer.ChangeAnimationState_Attack();
 
                 if (_hit2D.collider != null)
-                    temp = _hit2D.collider.GetComponent<ItemDropObject>();
+                    _mainPlayer.temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
-                if (temp != null) // 채집물에 맞으면
+                if (_mainPlayer.temp != null) // 채집물에 맞으면
                 {
-                    temp.MinusCount(gameObject.name);
+                    _mainPlayer.temp.MinusCount(gameObject.name);
                     if (!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
-                    {
-                        if (Random.Range(0, 10) >= 5) // 스위치 스폰 X(70%)
-                        {
-                            temp.ChangeSpawnSwitchState(false);
-                            _mainPlayer.Data.switchstate = false;
-                        }
-                        else // 스위치 스폰 O(50%)
-                        {
-                            temp.ChangeSpawnSwitchState(true);
-                            _mainPlayer.Data.switchstate = true;
-                        }
-                    }
+                        _mainPlayer.SendItemPercentPacket();
                 }
-                _mainPlayer.SendPlayerInfoPacket();
             }
         }
     }

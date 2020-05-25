@@ -122,8 +122,13 @@
     <Compile Include="Assets\Scripts\UI\ControlUI.cs" />
     <Compile Include="Assets\Scripts\UI\GameobjectOnOff.cs" />
     <Compile Include="Assets\Scripts\UI\RobbyUI.cs" />
+    <Compile Include="Assets\ShowMagicianTut.cs" />
+    <Compile Include="Assets\ShowTutorial.cs" />
+    <Compile Include="Assets\SkipTutorial.cs" />
     <Compile Include="Assets\Switch\PortalOpenSwitch.cs" />
     <Compile Include="Assets\Switch\SwitchManager.cs" />
+    <Compile Include="Assets\TutorialObject.cs" />
+    <Compile Include="Assets\TutorialText.cs" />
     <None Include="Assets\Prefabs\3D Lasers Pack\Prefabs\Readme.txt" />
     <None Include="Assets\Shader\2DWater.shader" />
     <None Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\If you want to use lasers in 2D.txt" />

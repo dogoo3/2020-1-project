@@ -157,6 +157,13 @@ public class Resolve
                 case "DamageFireBall":
                     Boss.instance.SearchFireBall(Data);
                     break;
+                case "ItemPerResult":
+                    if (Data["name"].ToString() == GameManager.instance.PlayerName)
+                        GameManager.instance._player.SetPercentItem(Data);
+                    else if (OtherPlayerManager.instance.PlayerList.ContainsKey(Data["name"].ToString()))
+                        OtherPlayerManager.instance.PlayerList[Data["name"].ToString()].Setpercent(Data);
+                    else { }
+                    break;
             }
         }
         catch (Exception ex)

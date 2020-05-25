@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public Vector2 _mousePos;
+    [HideInInspector]
+    public ItemDropObject temp;
 
     Vector2 _dirPos, _temp_dirPos;
     Vector2 _Pos, _movePos, _temp_movePos;
@@ -31,13 +33,14 @@ public class Player : MonoBehaviour
     public PlayerData Data;
     public BossDamage PtoB_damage_data; // 플레이어가 보스에게 데미지를 넣을 때
     public PlayerDamage BtoP_damage_data; // 보스가 쏜 탄환에 플레이어가 맞으면
+    public ItemPerResult itemperresult_data;
     public ParticleSystem[] dashBlur;
 
     public float _movespeed = 5.0f, invincibleTime, dashDelay = 2.0f;
 
     public int STR, DEF;
 
-    public bool _isCrash, isGetSwitch;
+    public bool _isCrash, isGetSwitch, isSwitch, isSetSwitch;
     private float time;
 
     private Vector2 toPos;
@@ -61,6 +64,7 @@ public class Player : MonoBehaviour
 
         PtoB_damage_data.Init();
         BtoP_damage_data.Init();
+        itemperresult_data.Init();
         BtoP_damage_data.nickname = GameManager.instance.PlayerName;
         ori_dashSpeed = dashSpeed;
         CharacterInfoWindow.instance.UpdateATK(STR);
@@ -97,11 +101,30 @@ public class Player : MonoBehaviour
                 Attacked(_isCrash);
             }
         }
+
+        if(isSetSwitch)
+        {
+            if(temp != null)
+                temp.ChangeSpawnSwitchState(isSwitch); // 클라이언트에서 스위치 생성을 랜덤한 bool값을 받아오기 때문에 그 캐릭터와 똑같은 값을 가지고 있다.
+            isSetSwitch = false;
+        }
+    }
+
+    public void SetPercentItem(JsonData Data)
+    {
+        isSwitch = bool.Parse(Data["result"].ToString());
+        isSetSwitch = true;
     }
 
     public void SendPlayerInfoPacket()
     {
         JsonData SendData = JsonMapper.ToJson(Data);
+        ServerClient.instance.Send(SendData.ToString());
+    }
+
+    public void SendItemPercentPacket()
+    {
+        JsonData SendData = JsonMapper.ToJson(itemperresult_data);
         ServerClient.instance.Send(SendData.ToString());
     }
 
