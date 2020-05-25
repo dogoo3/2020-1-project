@@ -59,6 +59,9 @@ public class MakeManager : MonoBehaviour
             // 보스 소환
             obj_temp = Instantiate(GameManager.instance.boss, spawnPoint_boss.position, Quaternion.identity);
             obj_temp.name = "Boss";
+
+            // 브금 재생
+            SoundManager.instance.PlayBGM("TalesWeaver");
         }
     }
 }
