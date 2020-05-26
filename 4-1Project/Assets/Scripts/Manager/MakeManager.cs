@@ -61,7 +61,7 @@ public class MakeManager : MonoBehaviour
             obj_temp.name = "Boss";
 
             // 브금 재생
-            SoundManager.instance.PlayBGM("TalesWeaver");
+            // SoundManager.instance.PlayBGM("TalesWeaver");
         }
     }
 }
