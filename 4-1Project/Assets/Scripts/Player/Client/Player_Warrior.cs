@@ -7,9 +7,9 @@ public class Player_Warrior : MonoBehaviour
     private RaycastHit2D _hit2D;
     private Player _mainPlayer;
 
-    private bool _isHit;
-    private float _time;
-    public float attackspeed;
+    private bool _isHit, _isSkill;
+    private float _attackcooltime, _skillcooltime;
+    public float attackspeed, skillcooltime;
 
     private int _layerMask;
 
@@ -27,17 +27,14 @@ public class Player_Warrior : MonoBehaviour
 
     private void Update()
     {
-        if (_isHit)
+        #region Attack
+        if (_isHit) // 공격쿨타임 중
         {
-            _time += Time.deltaTime;
-            if (_time > attackspeed)
-            {
-                _time = 0;
+            if (Time.time - _attackcooltime > attackspeed)
                 _isHit = false;
-            }
         }
 
-        if (!_isHit)
+        if (!_isHit) // 공격쿨타임 종료
         {
             if (Input.GetMouseButtonDown(0)) 
             {
@@ -45,6 +42,7 @@ public class Player_Warrior : MonoBehaviour
                 _isHit = true;
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
                 _mainPlayer.ChangeAnimationState_Attack();
+                _attackcooltime = Time.time;
 
                 if (_hit2D.collider != null)
                 {
@@ -68,5 +66,35 @@ public class Player_Warrior : MonoBehaviour
                 }
             }
         }
+        #endregion
+        #region Skill
+        if(_isSkill) // 스킬 쿨타임 중
+        {
+            if (Time.time - _skillcooltime > skillcooltime)
+                _isSkill = false;
+        }
+        if(!_isSkill) // 스킬 쿨타임 종료(스킬발동)
+        {
+            if(Input.GetMouseButtonDown(1))
+            {
+                _skillcooltime = Time.time; // 스킬발동시간 기록
+                _mainPlayer.DEF *= 2; // 방어력 X2
+                _mainPlayer.ChangePS(PlayerState.Invincible); // 플레이어 상태 무적
+                // 무적 이펙트 발동
+                _isSkill = true;
+                // 스킬발동 후 해제
+                _mainPlayer.Invoke("Invoke_ChangePSIdle", 1f); // 무적 상태 해제
+                Invoke("Invoke_OffEffect", 1f);
+                _mainPlayer.Invoke("Invoke_DivideDEF", 15f); // 방어력 원상복구
+            }
+        }
+        #endregion
     }
+
+    #region Invoke
+    private void Invoke_OffEffect()
+    {
+        // 이펙트 해제
+    }
+    #endregion
 }

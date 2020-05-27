@@ -7,13 +7,16 @@ public class Player_Magician : MonoBehaviour
     private Player _mainPlayer;
     private RaycastHit2D _hit2D;
     private Vector2 _mousePos;
-    //private ItemDropObject temp;
 
     private bool _isHit;
 
-    private float _time;
+    private float _attacktime;
     private int _layerMask;
     public float attackspeed;
+
+    private bool _isSkill;
+    private float _skilltime;
+    public float skillcooltime;
 
     private void Awake()
     {
@@ -32,18 +35,15 @@ public class Player_Magician : MonoBehaviour
     {
         if (_isHit)
         {
-            _time += Time.deltaTime;
-            if (_time > attackspeed)
-            {
-                _time = 0;
+            if (Time.time - _attacktime > attackspeed)
                 _isHit = false;
-            }
         }
 
         if (!_isHit)
         {
             if (Input.GetMouseButton(0))
             {
+                _attacktime = Time.time;
                 _isHit = true;
                 ObjectPoolingManager.instance.GetQueue(_mainPlayer._mousePos, transform.position, gameObject.name);
                 _mainPlayer.AttackPlayer(PlayerState.Skill); // 마법사 스킬공격
@@ -52,6 +52,7 @@ public class Player_Magician : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
+                _attacktime = Time.time;
                 _isHit = true;
                 _mainPlayer.AttackPlayer(); // 마법사 기본공격
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
@@ -66,6 +67,24 @@ public class Player_Magician : MonoBehaviour
                     if (!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
                         _mainPlayer.SendItemPercentPacket();
                 }
+            }
+        }
+        if (_isSkill)
+        {
+            if (Time.time - _skilltime > skillcooltime)
+                _isSkill = false;
+        }
+        if(!_isSkill)
+        {
+            if(Input.GetMouseButtonDown(1))
+            {
+                // 플레이어가 이동 못 하도록 함
+                _mainPlayer.ChangePS(PlayerState.Meteor);
+                // 3초짜리 메테오 애니메이션
+                _isSkill = true;
+                // 3초 뒤 메테오 발사
+                // 3초 뒤 플레이어 이동 해제
+                _mainPlayer.Invoke("Invoke_ChangePSIdle", 3f);
             }
         }
     }

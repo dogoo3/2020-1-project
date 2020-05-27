@@ -11,6 +11,8 @@ public enum PlayerState
     Dash,
     Attack,
     Skill,
+    Invincible,
+    Meteor,
     Die,
 };
 
@@ -76,7 +78,8 @@ public class Player : MonoBehaviour
     {
         // 이동뿐만이 아니라 회전했을 때도 현재 위치를 패킷으로 보내주기 때문에
         // (패킷을 보낼 때 현재 위치도 계속 보내기 때문에 최신 위치 정보가 필요해서)
-        if (playerState != PlayerState.Die && playerState != PlayerState.Dash) // 사망상태이거나 대시중이 아닐경우
+        if (playerState != PlayerState.Die && playerState != PlayerState.Dash &&
+            playerState != PlayerState.Meteor) // 사망상태이거나 대시중이 아닐경우
         {
             // 현재 위치
             Data.nx = transform.position.x;
@@ -308,8 +311,10 @@ public class Player : MonoBehaviour
     {
         if (_damage <= DEF) // 방어력이 들어온 데미지보다 높을 경우
             return;
-        if (_isCrash) // 무적 상태일 경우
+        if (_isCrash) // 무적 상태일 경우(애니메이션을 위한 BOOL)
             return; // 피격 취소
+        if (playerState == PlayerState.Invincible) // PlayerState에서 무적상태
+            return;
 
         _isCrash = true;
         Attacked(_isCrash);
@@ -330,4 +335,21 @@ public class Player : MonoBehaviour
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());
     }
+
+    #region SimpleFunc
+    public void ChangePS(PlayerState _ps)
+    {
+        playerState = _ps;
+    }
+    #endregion
+    #region Invoke
+    public void Invoke_ChangePSIdle() // 아이들로 상태변경(무적->, 메테오->)
+    {
+        playerState = PlayerState.Idle;
+    }
+    public void Invoke_DivideDEF() // 방어력 절반으로 감소
+    {
+        DEF /= 2;
+    }
+    #endregion
 }
