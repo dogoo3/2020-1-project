@@ -109,6 +109,20 @@ public class Player_Server : MonoBehaviour
             dashSpeed += 0.03f;
         }
 
+        if(PS == PlayerState.Invincible) //전사 스킬
+        {
+            PS = PlayerState.Idle;
+            Debug.Log("(서버) 전사 무적이펙트 활성화");// 이펙트 활성화
+            Invoke("OFFWarriorInvEffect", 1f); 
+        }
+
+        if(PS == PlayerState.Meteor) // 마법사 메테오 스킬
+        {
+            PS = PlayerState.Idle;
+            Debug.Log("(서버) 법사 메테오 시전준비 애니메이션 진행");
+            Invoke("OFFMagicianSkill", 3.0f);
+        }
+
         if(_isPortal)
         {
             transform.position = portalPos;
@@ -238,5 +252,18 @@ public class Player_Server : MonoBehaviour
         if (itemDropObject != null)
             itemDropObject.MinusCount(gameObject.name);
     }
+    #region Invoke
+    private void OFFWarriorInvEffect()
+    {
+        // 전사 무적 이펙트 해제
+        Debug.Log("(서버)전사 무적 이펙트 해제");
+    }
+    private void OFFMagicianSkill()
+    {
+        PS = PlayerState.Idle;
+        Debug.Log("(서버)메테오 소환");
+        // 메테오 소환
+    }
+    #endregion
 }
 

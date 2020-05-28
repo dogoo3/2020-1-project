@@ -79,7 +79,8 @@ public class Player_Warrior : MonoBehaviour
             {
                 _skillcooltime = Time.time; // 스킬발동시간 기록
                 _mainPlayer.DEF *= 2; // 방어력 X2
-                _mainPlayer.ChangePS(PlayerState.Invincible); // 플레이어 상태 무적
+                CharacterInfoWindow.instance.UpdateDEF(_mainPlayer.DEF);
+                _mainPlayer.AttackPlayer(PlayerState.Invincible);
                 // 무적 이펙트 발동
                 _isSkill = true;
                 // 스킬발동 후 해제
@@ -94,6 +95,7 @@ public class Player_Warrior : MonoBehaviour
     #region Invoke
     private void Invoke_OffEffect()
     {
+        Debug.Log("전사 무적이펙트 해제");
         // 이펙트 해제
     }
     #endregion
