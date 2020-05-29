@@ -12,6 +12,8 @@ public class ObjectPoolingManager : MonoBehaviour
     public Queue<CircleFloor> queue_circleFloor = new Queue<CircleFloor>();
     public Queue<Fire_Ball> queue_fireBall = new Queue<Fire_Ball>();
     public Queue<GameObject> queue_switch = new Queue<GameObject>();
+    public Queue<Restriction> queue_restriction = new Queue<Restriction>();
+    public Queue<Meteor> queue_meteor = new Queue<Meteor>();
 
     public Laser laser;
     public Bullet energyBall;
@@ -19,6 +21,8 @@ public class ObjectPoolingManager : MonoBehaviour
     public CircleFloor circle;
     public Fire_Ball fireBall;
     public GameObject switch_bosskey;
+    public Restriction restriction;
+    public Meteor meteor;
 
     public int boss_poolingCount;
     public int magician_poolingCount;
@@ -42,6 +46,7 @@ public class ObjectPoolingManager : MonoBehaviour
             e_object.gameObject.SetActive(false);
         }
 
+        // 레이저
         Laser temp = Instantiate(laser, Vector2.zero, Quaternion.identity);
         temp.transform.parent = gameObject.transform;
         queue_laser.Enqueue(temp);
@@ -59,15 +64,27 @@ public class ObjectPoolingManager : MonoBehaviour
         queue_fireBall.Enqueue(fireBallTemp);
         fireBallTemp.gameObject.SetActive(false);
 
-        for(int i=0;i<GameManager.instance.playerInfo.Count+1;i++)
+        // 스위치 및 속박
+        for (int i = 0; i < GameManager.instance.playerInfo.Count + 1; i++)
         {
             GameObject _switch = Instantiate(switch_bosskey, Vector2.zero, Quaternion.identity);
             _switch.transform.parent = gameObject.transform;
             queue_switch.Enqueue(_switch);
             _switch.gameObject.SetActive(false);
+
+            Restriction _restrict = Instantiate(restriction, Vector2.zero, Quaternion.identity);
+            _restrict.transform.parent = gameObject.transform;
+            queue_restriction.Enqueue(_restrict);
+            _restrict.gameObject.SetActive(false);
+
+            Meteor _meteor = Instantiate(meteor, Vector2.zero, Quaternion.identity);
+            _meteor.transform.parent = gameObject.transform;
+            queue_meteor.Enqueue(_meteor);
+            _meteor.gameObject.SetActive(false);
         }
     }
 
+    // 보스 총알 풀링 
     public void InsertQueue(Bullet _object, Queue<Bullet> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
     {
         _queue.Enqueue(_object);
@@ -84,6 +101,7 @@ public class ObjectPoolingManager : MonoBehaviour
         return null;
     }
 
+    // 레이저 풀링
     public void InsertQueue(Laser _object, Queue<Laser> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
     {
         _queue.Enqueue(_object);
@@ -99,6 +117,7 @@ public class ObjectPoolingManager : MonoBehaviour
         return null;
     }
 
+    // 에너지볼 풀링(법사 공격스킬)
     public void InsertQueue(EnergyBall _object) // Second Paramerer is put object Queue(poolingmanager queue)
     {
         queue_magicBall.Enqueue(_object);
@@ -113,7 +132,7 @@ public class ObjectPoolingManager : MonoBehaviour
             t_object.ShootBall(_direction, _transform,_name);
         }
     }
-
+   
     //원형 장판 풀링
     public void InsertQueue(CircleFloor _object, Queue<CircleFloor> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
     {
@@ -136,7 +155,6 @@ public class ObjectPoolingManager : MonoBehaviour
         _queue.Enqueue(_object);
         _object.gameObject.SetActive(false);
     }
-
     public Fire_Ball GetQueue(Queue<Fire_Ball> _queue)
     {
         if (queue_fireBall.Count != 0)
@@ -153,10 +171,9 @@ public class ObjectPoolingManager : MonoBehaviour
         _queue.Enqueue(_object);
         _object.gameObject.SetActive(false);
     }
-
     public GameObject GetQueue(Queue<GameObject> _queue, Vector2 _position)
     {
-        if (queue_fireBall.Count != 0)
+        if (queue_switch.Count != 0)
         {
             GameObject t_object = _queue.Dequeue();
             t_object.transform.position = _position + new Vector2(0, 2);
@@ -164,5 +181,37 @@ public class ObjectPoolingManager : MonoBehaviour
             return t_object;
         }
         return null;
+    }
+
+    // 속박 풀링
+    public void InsertQueue(Restriction _object, Queue<Restriction> _queue) // Second Paramerer is put object Queue(poolingmanager queue)
+    {
+        _queue.Enqueue(_object);
+        _object.gameObject.SetActive(false);
+    }
+    public Restriction GetQueue(Queue<Restriction> _queue)
+    {
+        if(queue_restriction.Count != 0)
+        {
+            Restriction t_object = _queue.Dequeue();
+            return t_object;
+        }
+        return null;
+    }
+
+    // 메테오 풀링
+    public void InsertQueue(Meteor _object) // Second Paramerer is put object Queue(poolingmanager queue)
+    {
+        queue_meteor.Enqueue(_object);
+        _object.gameObject.SetActive(false);
+    }
+    public void GetQueue_meteor(Vector2 _direction, Vector2 _transform, string _name)
+    {
+        if (queue_meteor.Count != 0)
+        {
+            Meteor t_object = queue_meteor.Dequeue();
+            t_object.gameObject.SetActive(true);
+            t_object.ShootBall(_direction, _transform, _name);
+        }
     }
 }

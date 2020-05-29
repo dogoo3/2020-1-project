@@ -7,7 +7,7 @@ public class PatternCommand
     protected Laser _laser;
     protected CircleFloor _circleFloor;
     protected Fire_Ball _fireBall;
-
+    protected Restriction _restriction;
 
     public virtual void Execute() { }
     public virtual void Execute(int _index) { }
@@ -199,5 +199,19 @@ public class InduceFireBall : PatternCommand
     public override void Execute()
     {
         Boss.instance._fireBall.CalcFireBall();
+    }
+}
+
+public class RestrictionPattern : PatternCommand
+{
+    public override void Execute(string _name)
+    {
+        _restriction = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_restriction);
+        Debug.Log(_name);
+        if (_restriction != null)
+        {
+            _restriction.SetTargetname(_name);
+            _restriction.gameObject.SetActive(true);
+        }
     }
 }

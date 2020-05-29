@@ -13,12 +13,13 @@ public enum PlayerState
     Skill,
     Invincible,
     Meteor,
+    Restriction,
     Die,
 };
 
 public class Player : MonoBehaviour
 {
-    PlayerState playerState;
+    public PlayerState playerState;
 
     Animator _animator;
     
@@ -76,6 +77,16 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        if(playerState == PlayerState.Restriction)
+        {
+            if(dash) // 대시중에 속박먹으면 대시 강제종료
+            {
+                dashSpeed = ori_dashSpeed; // 첫 대시 스피드로 바꿔줌.
+                ShowDashBlur(false);
+                dash = false;
+            }
+            return;
+        }
         // 이동뿐만이 아니라 회전했을 때도 현재 위치를 패킷으로 보내주기 때문에
         // (패킷을 보낼 때 현재 위치도 계속 보내기 때문에 최신 위치 정보가 필요해서)
         if (playerState != PlayerState.Die && playerState != PlayerState.Dash &&
@@ -273,7 +284,7 @@ public class Player : MonoBehaviour
             _subAnimator[i].Attack();
     }
 
-    private void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
+    public void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
     {
         for (int i = 0; i < _subAnimator.Length; i++)
             _subAnimator[i].Attacked(_isAttacked);
@@ -319,6 +330,17 @@ public class Player : MonoBehaviour
         _isCrash = true;
         Attacked(_isCrash);
         HPManager.instance.myHP = (int)Mathf.Clamp(HPManager.instance.myHP - (_damage - DEF), -1, HPManager.instance.myFullHP);
+        HPManager.instance.SetHP();
+        BtoP_damage_data.HP = HPManager.instance.myHP;
+
+        JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
+        ServerClient.instance.Send(SendData.ToString());
+    }
+
+    public void Attacked_Restriction(int _secDamage)
+    {
+        Attacked(true);
+        HPManager.instance.myHP -= _secDamage;
         HPManager.instance.SetHP();
         BtoP_damage_data.HP = HPManager.instance.myHP;
 

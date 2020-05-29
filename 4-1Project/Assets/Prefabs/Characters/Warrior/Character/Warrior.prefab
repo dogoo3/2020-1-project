@@ -14345,6 +14345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933d7744e88a32b488ea5ff151b87a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerState: 0
   _mousePos: {x: 0, y: 0}
   temp: {fileID: 0}
   dashBlur:

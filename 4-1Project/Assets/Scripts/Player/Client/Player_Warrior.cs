@@ -27,6 +27,9 @@ public class Player_Warrior : MonoBehaviour
 
     private void Update()
     {
+        if (_mainPlayer.playerState == PlayerState.Restriction)
+            return;
+
         #region Attack
         if (_isHit) // 공격쿨타임 중
         {

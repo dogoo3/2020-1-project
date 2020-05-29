@@ -23474,7 +23474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121604578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -349.9, y: -149.07, z: 0}
+  m_LocalPosition: {x: -347.88, y: -150.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1035167926}
@@ -26864,6 +26864,9 @@ MonoBehaviour:
   fireBall: {fileID: 887296150036240566, guid: d10f8b3b00498454f9f36b1a6671101e, type: 3}
   switch_bosskey: {fileID: 3645702282100746284, guid: 01db85bcac44fcf448d59758304ff4ed,
     type: 3}
+  restriction: {fileID: 6943068897801540615, guid: beb2a31fa9295dc49aeaff4d3102dacf,
+    type: 3}
+  meteor: {fileID: 2699821172047811971, guid: 542cd47be1c9eb444804a01f5d450cc9, type: 3}
   boss_poolingCount: 500
   magician_poolingCount: 150
 --- !u!4 &1384126563

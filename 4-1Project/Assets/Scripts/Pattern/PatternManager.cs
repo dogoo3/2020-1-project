@@ -6,7 +6,8 @@ public class PatternManager : MonoBehaviour
 {
     public static PatternManager instance;
 
-    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor, pat_fireBall;
+    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor, pat_fireBall, pat_restriction;
+
     Vector2 playerPos;
     public PhaseEnd data_PhaseEnd;
     public PhaseRestart data_Restart;
@@ -36,6 +37,9 @@ public class PatternManager : MonoBehaviour
     //타이머
     float _timer;
 
+    // 속박
+    public string restricTargetname;
+
     private void Awake()
     {
         instance = this;
@@ -51,6 +55,7 @@ public class PatternManager : MonoBehaviour
         pat_wheelLaser = new WheelLaser();
         pat_circleFloor = new InduceCircleFloor();
         pat_fireBall = new InduceFireBall();
+        pat_restriction = new RestrictionPattern();
     }
 
     private void Update()
@@ -74,6 +79,9 @@ public class PatternManager : MonoBehaviour
                     break;
                 case 12:
                     PatternCircleFloorExecute();
+                    break;
+                case 21:
+                    PatternRestriction();
                     break;
                 default:
                     PatternBallExecute();
@@ -138,7 +146,6 @@ public class PatternManager : MonoBehaviour
                     pat_induceBullet.BulletExecute(Boss.instance._circleBullet, SBT);
                 }
             }
-
         }
     }
 
@@ -193,6 +200,14 @@ public class PatternManager : MonoBehaviour
             pat_circleFloor.Execute();
         }
     }
+
+    private void PatternRestriction()
+    {
+        if(restricTargetname != "")
+            pat_restriction.Execute(restricTargetname);
+        else
+            Boss.instance.DelaySendPhaseData(0.5f);
+    }
     #endregion
     /***********************/
 
@@ -227,6 +242,14 @@ public class PatternManager : MonoBehaviour
         _setOn = true;
         _isStart = true;
     }
+
+    // 속박 셋팅
+    public void LoadRestriction(JsonData _data)
+    {
+        restricTargetname = _data["targetName"].ToString();
+        Debug.Log(restricTargetname);
+        _isStart = true;
+    }
     #endregion
 
     //서버에서 패턴을 재시작하라고 받으면 재시작을 위한 함수
@@ -248,6 +271,7 @@ public class PatternManager : MonoBehaviour
         _isEnd = true;
         _limitTimeOn = false;
         _circleFloorTargetName = "";
+        restricTargetname = "";
     }
 
     //패턴을 셋팅하고 그 패턴을 실행하는 함수
@@ -276,6 +300,7 @@ public class PatternManager : MonoBehaviour
         _limitTimeOn = true;
         _isStart = true;
     }
+
     private void SendPhaseEnd()
     {
         CancelInvoke("SendPhaseEnd");

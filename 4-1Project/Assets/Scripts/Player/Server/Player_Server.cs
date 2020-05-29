@@ -261,6 +261,7 @@ public class Player_Server : MonoBehaviour
     private void OFFMagicianSkill()
     {
         PS = PlayerState.Idle;
+        ObjectPoolingManager.instance.GetQueue_meteor(_mouse_direction, transform.position, gameObject.name);
         Debug.Log("(서버)메테오 소환");
         // 메테오 소환
     }

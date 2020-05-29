@@ -66,6 +66,7 @@
     <Compile Include="Assets\MagicSquare\MagicSquare.cs" />
     <Compile Include="Assets\MagicSquare\MagicSquareManager.cs" />
     <Compile Include="Assets\MagicSquare\ResetPassword.cs" />
+    <Compile Include="Assets\Meteor.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser_Ray.cs" />
     <Compile Include="Assets\Scripts\Objects\Portal.cs" />
+    <Compile Include="Assets\Scripts\Objects\Restriction.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternManager.cs" />
     <Compile Include="Assets\Scripts\Player\Client\Player.cs" />
