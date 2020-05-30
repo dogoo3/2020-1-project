@@ -48,4 +48,9 @@ public class SubAnimator : MonoBehaviour
     {
         _animator.SetBool("Attacked", _state);
     }
+
+    public void Meteor()
+    {
+        _animator.SetTrigger("Meteor");
+    }
 }

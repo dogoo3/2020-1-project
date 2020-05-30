@@ -133,11 +133,14 @@ public class Resolve
                 case "CircleBulletType":  //원형 탄환
                     PatternManager.instance.LoadInduceCircleBullet(Data);
                     break;
-                case "CircleFloor":                    
+                case "CircleFloor": // 원형장판(안전지대)                   
                     PatternManager.instance.LoadInduceCircleFloor(Data);
                     break;
-                case "FireBall":
+                case "FireBall": // 불구슬
                     PatternManager.instance.LoadInuceFirBall(Data);
+                    break;
+                case "Restriction": // 속박
+                    PatternManager.instance.LoadRestriction(Data);
                     break;
                 case "TimerOn":
                     PatternManager.instance.LimitTimeOn();

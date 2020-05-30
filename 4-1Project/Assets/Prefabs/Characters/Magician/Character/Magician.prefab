@@ -9753,7 +9753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933d7744e88a32b488ea5ff151b87a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerState: 0
   _mousePos: {x: 0, y: 0}
+  temp: {fileID: 0}
   dashBlur:
   - {fileID: 4197098581368508905}
   - {fileID: 1261160889630720840}
@@ -9769,6 +9771,9 @@ MonoBehaviour:
   STR: 200
   DEF: 10
   _isCrash: 0
+  isGetSwitch: 0
+  isSwitch: 0
+  isSetSwitch: 0
 --- !u!114 &1610459205939091184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9782,6 +9787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackspeed: 1.5
+  skillcooltime: 300
 --- !u!1 &2752396757763635152
 GameObject:
   m_ObjectHideFlags: 0

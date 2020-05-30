@@ -45,6 +45,9 @@ public class Player_Server : MonoBehaviour
     public float GetMillTime;
     private float dashSpeed = 0.2f;
 
+    // 전사 무적벽
+    public GameObject invincibleWall;
+
     private void Awake()
     {
         _layerMask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("RoomCollider");
@@ -87,7 +90,7 @@ public class Player_Server : MonoBehaviour
 
         if (PS == PlayerState.Attack) // 기본공격
         {
-            ChangeAnimationState_Attack(true); // 애니메이션 상태 변경
+            ChangeAnimationState_Attack(); // 애니메이션 상태 변경
             FindItemDropObject(); // 마우스 커서 방향에 채집물이 있는지 확인
             PS = PlayerState.Idle;
         }
@@ -96,7 +99,7 @@ public class Player_Server : MonoBehaviour
             if (playerType == 1) // 마법사일 때만
             {
                 Debug.Log("법사서버 스킬샷");
-                ChangeAnimationState_Attack(true);
+                ChangeAnimationState_Attack();
                 ObjectPoolingManager.instance.GetQueue(_mouse_direction, transform.position, gameObject.name);
                 PS = PlayerState.Idle;
             }
@@ -107,6 +110,22 @@ public class Player_Server : MonoBehaviour
             ShowDashBlur(true); // 대시 시작 잔상을 집어넣는다
             transform.position = Vector2.Lerp(transform.position, dashtoPos, dashSpeed); // 대시!
             dashSpeed += 0.03f;
+        }
+
+        if(PS == PlayerState.Invincible) //전사 스킬
+        {
+            PS = PlayerState.Idle;
+            invincibleWall.SetActive(true);
+            Debug.Log("(서버) 전사 무적이펙트 활성화");// 이펙트 활성화
+            Invoke("OFFWarriorInvEffect", 1f); 
+        }
+
+        if(PS == PlayerState.Meteor) // 마법사 메테오 스킬
+        {
+            PS = PlayerState.Idle;
+            ChangeAnimationState_Meteor();
+            //Debug.Log("(서버) 법사 메테오 시전준비 애니메이션 진행");
+            Invoke("OFFMagicianSkill", 3.0f);
         }
 
         if(_isPortal)
@@ -206,10 +225,16 @@ public class Player_Server : MonoBehaviour
             _subAnimators[i].Move(_state);
     }
 
-    void ChangeAnimationState_Attack(bool _state) // 공격
+    void ChangeAnimationState_Attack() // 공격
     {
         for (int i = 0; i < _subAnimators.Length; i++)
             _subAnimators[i].Attack();
+    }
+
+    void ChangeAnimationState_Meteor() // 공격
+    {
+        for (int i = 0; i < _subAnimators.Length; i++)
+            _subAnimators[i].Meteor();
     }
 
     void ShowDashBlur(bool _isStart) // 대시 표현
@@ -238,5 +263,20 @@ public class Player_Server : MonoBehaviour
         if (itemDropObject != null)
             itemDropObject.MinusCount(gameObject.name);
     }
+    #region Invoke
+    private void OFFWarriorInvEffect()
+    {
+        // 전사 무적 이펙트 해제
+        invincibleWall.SetActive(false);
+        Debug.Log("(서버)전사 무적 이펙트 해제");
+    }
+    private void OFFMagicianSkill()
+    {
+        PS = PlayerState.Idle;
+        ObjectPoolingManager.instance.GetQueue_meteor(_mouse_direction, transform.position, gameObject.name);
+        Debug.Log("(서버)메테오 소환");
+        // 메테오 소환
+    }
+    #endregion
 }
 

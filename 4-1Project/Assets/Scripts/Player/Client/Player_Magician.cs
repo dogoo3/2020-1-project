@@ -33,6 +33,8 @@ public class Player_Magician : MonoBehaviour
 
     private void Update()
     {
+        if (_mainPlayer.playerState == PlayerState.Restriction)
+            return;
         if (_isHit)
         {
             if (Time.time - _attacktime > attackspeed)
@@ -41,6 +43,9 @@ public class Player_Magician : MonoBehaviour
 
         if (!_isHit)
         {
+            if (Time.time - _skilltime < 3.0f) // 메테오를 시전 중일 때는 기본공격 및 스킬공격 불가능
+                return;
+
             if (Input.GetMouseButton(0))
             {
                 _attacktime = Time.time;
@@ -79,13 +84,21 @@ public class Player_Magician : MonoBehaviour
             if(Input.GetMouseButtonDown(1))
             {
                 // 플레이어가 이동 못 하도록 함
-                _mainPlayer.ChangePS(PlayerState.Meteor);
+                _mainPlayer.AttackPlayer(PlayerState.Meteor);
+                _mainPlayer.ChangeAnimationState_Meteor();
                 // 3초짜리 메테오 애니메이션
                 _isSkill = true;
                 // 3초 뒤 메테오 발사
-                // 3초 뒤 플레이어 이동 해제
-                _mainPlayer.Invoke("Invoke_ChangePSIdle", 3f);
+                Invoke("ShootMeteor", 3.0f);
+                _mainPlayer.Invoke("Invoke_ChangePSIdle", 3.0f); // 3초 뒤 플레이어 이동 해제
             }
         }
+
     }
+    #region Invoke
+    private void ShootMeteor()
+    {
+        ObjectPoolingManager.instance.GetQueue_meteor(_mainPlayer._mousePos, transform.position, gameObject.name);
+    }
+    #endregion
 }

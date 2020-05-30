@@ -66,6 +66,7 @@
     <Compile Include="Assets\MagicSquare\MagicSquare.cs" />
     <Compile Include="Assets\MagicSquare\MagicSquareManager.cs" />
     <Compile Include="Assets\MagicSquare\ResetPassword.cs" />
+    <Compile Include="Assets\Meteor.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
     <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMove.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser_Ray.cs" />
     <Compile Include="Assets\Scripts\Objects\Portal.cs" />
+    <Compile Include="Assets\Scripts\Objects\Restriction.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternCommand.cs" />
     <Compile Include="Assets\Scripts\Pattern\PatternManager.cs" />
     <Compile Include="Assets\Scripts\Player\Client\Player.cs" />
@@ -133,6 +135,7 @@
     <None Include="Assets\Prefabs\3D Lasers Pack\Prefabs\Readme.txt" />
     <None Include="Assets\Shader\2DWater.shader" />
     <None Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\If you want to use lasers in 2D.txt" />
+    <None Include="Assets\Effects\EFB\Documentation\READ_ME.txt" />
     <None Include="Assets\Prefabs\3D Lasers Pack\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\Readme.txt" />
     <None Include="Assets\Prefabs\3D Lasers Pack\Shaders\Add_CenterGlow.shader" />
