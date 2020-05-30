@@ -284,15 +284,12 @@ public class Player : MonoBehaviour
             _subAnimator[i].Attack();
     }
 
-<<<<<<< HEAD
     public void ChangeAnimationState_Meteor()
     {
         for (int i = 0; i < _subAnimator.Length; i++)
             _subAnimator[i].Meteor();
     }
 
-=======
->>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
     public void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
     {
         for (int i = 0; i < _subAnimator.Length; i++)

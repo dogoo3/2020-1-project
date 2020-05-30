@@ -85,11 +85,7 @@ public class Player_Magician : MonoBehaviour
             {
                 // 플레이어가 이동 못 하도록 함
                 _mainPlayer.AttackPlayer(PlayerState.Meteor);
-<<<<<<< HEAD
                 _mainPlayer.ChangeAnimationState_Meteor();
-=======
-                Debug.Log("3초짜리 메테오 시전 애니메이션");
->>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
                 // 3초짜리 메테오 애니메이션
                 _isSkill = true;
                 // 3초 뒤 메테오 발사

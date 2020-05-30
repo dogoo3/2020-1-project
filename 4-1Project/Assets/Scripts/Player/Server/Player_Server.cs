@@ -115,10 +115,7 @@ public class Player_Server : MonoBehaviour
         if(PS == PlayerState.Invincible) //전사 스킬
         {
             PS = PlayerState.Idle;
-<<<<<<< HEAD
             invincibleWall.SetActive(true);
-=======
->>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
             Debug.Log("(서버) 전사 무적이펙트 활성화");// 이펙트 활성화
             Invoke("OFFWarriorInvEffect", 1f); 
         }
@@ -126,12 +123,8 @@ public class Player_Server : MonoBehaviour
         if(PS == PlayerState.Meteor) // 마법사 메테오 스킬
         {
             PS = PlayerState.Idle;
-<<<<<<< HEAD
             ChangeAnimationState_Meteor();
             //Debug.Log("(서버) 법사 메테오 시전준비 애니메이션 진행");
-=======
-            Debug.Log("(서버) 법사 메테오 시전준비 애니메이션 진행");
->>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
             Invoke("OFFMagicianSkill", 3.0f);
         }
 
@@ -274,10 +267,7 @@ public class Player_Server : MonoBehaviour
     private void OFFWarriorInvEffect()
     {
         // 전사 무적 이펙트 해제
-<<<<<<< HEAD
         invincibleWall.SetActive(false);
-=======
->>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
         Debug.Log("(서버)전사 무적 이펙트 해제");
     }
     private void OFFMagicianSkill()

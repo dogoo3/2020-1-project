@@ -3321,7 +3321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.392}
   m_RaycastTarget: 1
@@ -3340,27 +3339,6 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1946020154
 CanvasRenderer:
-=======
-  PlayerName: 
-  type: 0
-  _player: {fileID: 0}
-  GameSpawnData: 
-  playerInfo: []
-  Heros:
-  - {fileID: 3577444076983048476, guid: 46fa60892bffac647967543e60174b57, type: 3}
-  - {fileID: 1610459205939091185, guid: 5276834afbd8f654ba3f0b439079a981, type: 3}
-  ServerHeros:
-  - {fileID: 3577444076983048476, guid: e22d543ef3eb78a4ca7b22b6bb742e8b, type: 3}
-  - {fileID: 8375089130985291472, guid: 42aab3aefae00634eb77e04f4abd11f1, type: 3}
-  boss: {fileID: 764012663203235287, guid: 4f2c28ec4e1229f4fa3ba9e0faec9696, type: 3}
-  MakeNow: 0
-  DeleteNow: 0
-  DeleteNum: 0
-  PlayerReady: 0
-  GameStart: 0
---- !u!4 &1746968809
-Transform:
->>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
