@@ -86,7 +86,10 @@ public class Player_Warrior : MonoBehaviour
                 _mainPlayer.DEF *= 2; // 방어력 X2
                 CharacterInfoWindow.instance.UpdateDEF(_mainPlayer.DEF);
                 _mainPlayer.AttackPlayer(PlayerState.Invincible);
+<<<<<<< HEAD
                 invincibleWall.SetActive(true);
+=======
+>>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
                 // 무적 이펙트 발동
                 _isSkill = true;
                 // 스킬발동 후 해제
@@ -102,7 +105,10 @@ public class Player_Warrior : MonoBehaviour
     private void Invoke_OffEffect()
     {
         Debug.Log("전사 무적이펙트 해제");
+<<<<<<< HEAD
         invincibleWall.SetActive(false);
+=======
+>>>>>>> 006855fe5060f21ca960e63d9448e5c24ebcbcb5
         // 이펙트 해제
     }
     #endregion
