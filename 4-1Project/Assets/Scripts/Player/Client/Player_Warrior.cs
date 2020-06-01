@@ -65,7 +65,7 @@ public class Player_Warrior : MonoBehaviour
                     if (_mainPlayer.temp != null) // 채집물에 맞으면
                     {
                         _mainPlayer.temp.MinusCount(gameObject.name);
-                        if (!_mainPlayer.isGetSwitch) // 스위치를 스폰하지 못했을경우
+                        if (!_mainPlayer.isGetSwitch && _mainPlayer.temp.CheckCount()) // 스위치를 스폰하지 못했을경우, 아이템 카운트가 0인 경우
                             _mainPlayer.SendItemPercentPacket();
                     }
                 }

@@ -138,6 +138,7 @@ public class Player : MonoBehaviour
 
     public void SendItemPercentPacket()
     {
+        Debug.Log("서버 전송");
         JsonData SendData = JsonMapper.ToJson(itemperresult_data);
         ServerClient.instance.Send(SendData.ToString());
     }

@@ -14,23 +14,18 @@ public class MagicSquareManager : MonoBehaviour
 
     public int[] correctPassword;
 
-    //public MagicSquarePassword data_password;
-    //public MagicSquareDead data_dead;
-
     private void Awake()
     {
         instance = this;
         _password = new int[4];
         _deadNickname = new List<string>();
-        //data_password.Init();
-        //data_dead.Init();
     }
 
     public void PlusMagicSqaureCount(int _magicSquareNum, string _myName) // 밟은 플레이어 수 1 증가
     {
-        _password[_passwordArrayIndex++ % 4] = _magicSquareNum;
-        _deadNickname.Add(_myName);
-        CheckOnPlayerCount();
+        _password[_passwordArrayIndex++ % 4] = _magicSquareNum; // 패스워드 저장
+        _deadNickname.Add(_myName); // 사망 대상 닉네임 등록
+        CheckOnPlayerCount(); // 올라갔는데 2명 이상인지 판단.
     }
 
     public void MinusMagicSquareCount(string _myName) // 밟은 플레이어 수 1 감소
@@ -72,7 +67,6 @@ public class MagicSquareManager : MonoBehaviour
             Debug.Log("암호를 풀었습니다!");
             _isClear = true;
         }
-        // 마법진 패스워드를 서버로 전송(MagicSquarePassword)
     }
 
     private void SearchPlayerNameDelete(string _deleteName)

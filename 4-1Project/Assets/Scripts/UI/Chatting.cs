@@ -38,6 +38,7 @@ public class Chatting : MonoBehaviour
                 UI_chattingLog.text += "\n" + GameManager.instance.PlayerName + " : " + UI_typingfield.text;
                 UI_typingfield.text = "";
                 UI_typingfield.gameObject.SetActive(false);
+                _isActive = false;
             }
             else // Ä³·µ ON / OFF
             {

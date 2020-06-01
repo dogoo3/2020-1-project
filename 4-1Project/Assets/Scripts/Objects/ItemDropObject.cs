@@ -56,4 +56,12 @@ public class ItemDropObject : MonoBehaviour
         if(attackCount > 0) // 체력이 남은동안에만 스위치 생성가능 상태가 변경될 수 있도록 한다.
             _isSpawnSwitch = _p_isState;
     }
+
+    public bool CheckCount()
+    {
+        if (attackCount == 0)
+            return true;
+        else
+            return false;
+    }
 }
