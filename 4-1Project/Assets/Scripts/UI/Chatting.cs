@@ -37,25 +37,17 @@ public class Chatting : MonoBehaviour
 
                 UI_chattingLog.text += "\n" + GameManager.instance.PlayerName + " : " + UI_typingfield.text;
                 UI_typingfield.text = "";
-                UI_typingfield.gameObject.SetActive(false);
-                _isActive = false;
+                ONOFFWindow(false);
             }
             else // Ä³·µ ON / OFF
             {
-                if (UI_typingfield.gameObject.activeSelf)
+                if (UI_typingfield.gameObject.activeSelf) // Ä³·µÀÌ »ì¾ÆÀÖÀ¸¸é 
                 {
-                    UI_chatWindowImage.gameObject.SetActive(false);
-                    UI_typingfield.gameObject.SetActive(false);
-                    _isActive = false;
+                    ONOFFWindow(false); // Ä³·µ°ú Ã¢À» Á×ÀÎ´Ù.
                     return;
                 }
                 else
-                {
-                    UI_chatWindowImage.gameObject.SetActive(true);
-                    UI_typingfield.gameObject.SetActive(true);
-                    UI_typingfield.ActivateInputField();
-                    _isActive = true;
-                }
+                    ONOFFWindow(true);
             }
         }
         if (_sendMessageBuffer != null)
@@ -63,6 +55,15 @@ public class Chatting : MonoBehaviour
             UI_chattingLog.text += _sendMessageBuffer;
             _sendMessageBuffer = null;
         }
+    }
+
+    private void ONOFFWindow(bool _is)
+    {
+        if (_is)
+            UI_typingfield.ActivateInputField();
+        _isActive = _is;
+        UI_chatWindowImage.gameObject.SetActive(_is);
+        UI_typingfield.gameObject.SetActive(_is);
     }
 
     public void ReceiveComment(JsonData _data)
