@@ -11,12 +11,18 @@ public class Boss : MonoBehaviour
     Rigidbody2D _rigidbody2D;
     Transform _playerPos;
     ShakeCamera _shakeCamera;
-    BossHPBar _BossHPBar;
+
+    [Header("보스 죽으면 오브젝트를 활성화할건가?")]
+    public bool _isDeadActive;
+    public ActiveBossDead _activeBossdead;
+
+    public BossHPBar BossHPBar;
 
     private float _Nowpercent;
 
-    public int HP, STR, DEF;
-    private int _fullHp;
+    public int HP, STR, DEF, HPBarPhase;
+    [HideInInspector]
+    public int _fullHp;
 
     public int patternNum;
 
@@ -28,19 +34,26 @@ public class Boss : MonoBehaviour
 
     public Fire_Ball _fireBall; //불 구슬 데미지 관련
 
-    bool _firstStart = true, _attack;
+    bool _firstStart, _attack;
 
     private void Awake()
     {
+        Debug.Log("Instance : " + gameObject.name);
         instance = this;
+        _firstStart = true;
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _playerPos = FindObjectOfType<Player>().transform;
-        _BossHPBar = FindObjectOfType<BossHPBar>();
+        BossHPBar = GameObject.Find("BossHPBar").transform.Find("BossHPBar").GetComponent<BossHPBar>();
         _animator = GetComponent<Animator>();
         _shakeCamera = FindObjectOfType<ShakeCamera>();
         _fullHp = HP;
-
+        if (_isDeadActive)
+            _activeBossdead = FindObjectOfType<ActiveBossDead>();
         Data.Init(false);
+    }
+
+    private void Start()
+    {
+        _playerPos = FindObjectOfType<Player>().transform;
     }
 
     public void SetHP(JsonData _data)
@@ -79,6 +92,9 @@ public class Boss : MonoBehaviour
 
     public void Dead()
     {
+        Debug.Log("애니메이션 접근");
+        if(_activeBossdead != null)
+            _activeBossdead.ActiveObject();
         gameObject.SetActive(false);
     }
 
@@ -112,8 +128,8 @@ public class Boss : MonoBehaviour
 
     public void ActiveHPBar()
     {
-        if (!_BossHPBar.gameObject.activeSelf)
-            _BossHPBar.gameObject.SetActive(true);
+        if (!BossHPBar.gameObject.activeSelf)
+            BossHPBar.gameObject.SetActive(true);
     }
 
     public void SearchFireBall(JsonData _data)

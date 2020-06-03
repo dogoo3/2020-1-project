@@ -19,7 +19,7 @@ public class SkipTutorial : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
             _nowInplayer++;
             if (_playerCount == _nowInplayer)
@@ -30,9 +30,7 @@ public class SkipTutorial : MonoBehaviour
     private void Update()
     {
         if (_isFull)
-        {
             Invoke("SkipTuto", 0.1f);
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

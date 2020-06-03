@@ -33,8 +33,9 @@ public class Player_Magician : MonoBehaviour
 
     private void Update()
     {
-        if (_mainPlayer.playerState == PlayerState.Restriction)
+        if (_mainPlayer.playerState == PlayerState.Restriction) // 속박상태이면 어떤 행동도 할 수 없음.
             return;
+
         if (_isHit)
         {
             if (Time.time - _attacktime > attackspeed)
@@ -83,6 +84,7 @@ public class Player_Magician : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(1))
             {
+                _skilltime = Time.time;
                 // 플레이어가 이동 못 하도록 함
                 _mainPlayer.AttackPlayer(PlayerState.Meteor);
                 _mainPlayer.ChangeAnimationState_Meteor();

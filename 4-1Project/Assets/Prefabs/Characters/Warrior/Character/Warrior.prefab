@@ -14448,8 +14448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b1630aeee6a64f9a0a6f83ad82d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackspeed: 1.5
-  skillcooltime: 210
+  attackspeed: 0.2
+  skillcooltime: 45
   invincibleWall: {fileID: 1053070169078142243}
 --- !u!1 &5802997117799514667
 GameObject:

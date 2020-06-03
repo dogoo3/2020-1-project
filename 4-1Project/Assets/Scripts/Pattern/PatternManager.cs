@@ -2,11 +2,19 @@
 using System.Collections;
 using LitJson;
 
+public enum BossType
+{
+    SemiBoss,
+    FinalBoss,
+};
+
 public class PatternManager : MonoBehaviour
 {
     public static PatternManager instance;
 
     PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor, pat_fireBall, pat_restriction;
+
+    public BossType bossType;
 
     Vector2 playerPos;
     public PhaseEnd data_PhaseEnd;
@@ -61,30 +69,62 @@ public class PatternManager : MonoBehaviour
     private void Update()
     {
         if (Boss.instance.HP <= 0)
+        {
             gameObject.GetComponent<PatternManager>().enabled = false;
+            gameObject.GetComponent<Collider2D>().enabled = false;
+        }
         if (_isStart)
         {
             _isStart = false;
             //_idEnd변수를 case문에 넣은 이유는 패이즈 마다 끝나는 패킷을 보내야하는 시점이 다르기 때문이다
-            switch (Boss.instance.patternNum)
+
+            switch(bossType)
             {
-                case 2:
-                    PatternBallExecute();
+                case BossType.SemiBoss: // 중간보스 패턴
+                    switch (Boss.instance.patternNum)
+                    {
+                        case 2:
+                            PatternBallExecute();
+                            break;
+                        case 4: // 랜덤 레이저
+                            pat_wheelLaser.Execute(_index);
+                            break;
+                        case 8:
+                            PatternFireBallExecute();
+                            break;
+                        case 12:
+                            PatternCircleFloorExecute();
+                            break;
+                        case 21:
+                            PatternRestriction();
+                            break;
+                        default:
+                            PatternBallExecute();
+                            break;
+                    }
                     break;
-                case 4: // 랜덤 레이저
-                    pat_wheelLaser.Execute(_index);
-                    break;
-                case 8:
-                    PatternFireBallExecute();
-                    break;
-                case 12:
-                    PatternCircleFloorExecute();
-                    break;
-                case 21:
-                    PatternRestriction();
-                    break;
-                default:
-                    PatternBallExecute();
+                case BossType.FinalBoss: // 최종보스 패턴
+                    switch (Boss.instance.patternNum)
+                    {
+                        case 2:
+                            PatternBallExecute();
+                            break;
+                        case 4: // 랜덤 레이저
+                            pat_wheelLaser.Execute(_index);
+                            break;
+                        case 8:
+                            PatternFireBallExecute();
+                            break;
+                        case 12:
+                            PatternCircleFloorExecute();
+                            break;
+                        case 21:
+                            PatternRestriction();
+                            break;
+                        default:
+                            PatternBallExecute();
+                            break;
+                    }
                     break;
             }
         }

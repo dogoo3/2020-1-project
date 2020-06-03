@@ -15,16 +15,18 @@ public class Restriction : MonoBehaviour
         {
             transform.parent = null;
             
-            if(PatternManager.instance.restricTargetname == GameManager.instance.PlayerName)
+            if(PatternManager.instance.restricTargetname == GameManager.instance.PlayerName) // 본인
             {
                 Attacked = true;
                 GameManager.instance._player.playerState = PlayerState.Restriction;
+                GameManager.instance._player.Data.State = (int)PlayerState.Restriction;
+                GameManager.instance._player.SendPlayerInfoPacket();
+                
                 transform.parent = GameManager.instance._player.transform;
                 transform.localPosition = Vector2.zero;
             }
-            else
+            else // 다른 유저
             {
-                Debug.Log(_targetPlayername);
                 transform.parent = OtherPlayerManager.instance.PlayerList[_targetPlayername].transform;
                 transform.localPosition = Vector2.zero;
             }
@@ -51,6 +53,8 @@ public class Restriction : MonoBehaviour
         {
             Attacked = false;
             GameManager.instance._player.playerState = PlayerState.Idle;
+            GameManager.instance._player.Data.State = (int)PlayerState.Idle;
+            GameManager.instance._player.SendPlayerInfoPacket();
             GameManager.instance._player.Attacked(false);
             ObjectPoolingManager.instance.InsertQueue(this, ObjectPoolingManager.instance.queue_restriction);
             PatternManager.instance.SendDelayPhaseEnd();
@@ -64,6 +68,5 @@ public class Restriction : MonoBehaviour
     public void SetTargetname(string _nickname)
     {
         _targetPlayername = _nickname;
-        Debug.Log(_targetPlayername);
     }
 }

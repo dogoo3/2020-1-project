@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         // 이동뿐만이 아니라 회전했을 때도 현재 위치를 패킷으로 보내주기 때문에
         // (패킷을 보낼 때 현재 위치도 계속 보내기 때문에 최신 위치 정보가 필요해서)
         if (playerState != PlayerState.Die && playerState != PlayerState.Dash &&
-            playerState != PlayerState.Meteor) // 사망상태이거나 대시중, 법사 메테오 사용중이 아닐경우
+            playerState != PlayerState.Meteor && playerState != PlayerState.Restriction) // 사망상태이거나 대시중, 법사 메테오 사용중이 아닐경우
         {
             // 현재 위치
             Data.nx = transform.position.x;

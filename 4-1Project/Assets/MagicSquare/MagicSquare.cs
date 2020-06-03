@@ -29,7 +29,7 @@ public class MagicSquare : MonoBehaviour
             _onMagicsquare = true; // 마법진이 눌러짐
             _onPlayername = collision.name; // 마법진을 밟은 플레이어의 이름 저장
             _spriteRenderer.sprite = onMagicSquare; // 마법진 스프라이트 교체
-            MagicSquareManager.instance.PlusMagicSqaureCount(passwordNumber, collision.name);
+            PuzzleRoomManager.instance.PlusMagicSqaureCount(passwordNumber, collision.name);
         }
     }
 
@@ -42,7 +42,7 @@ public class MagicSquare : MonoBehaviour
         {
             _onMagicsquare = false; // 마법진에서 내려옴
             _spriteRenderer.sprite = nononMagicSquare;
-            MagicSquareManager.instance.MinusMagicSquareCount(collision.name);
+            PuzzleRoomManager.instance.MinusMagicSquareCount(collision.name);
         }
     }
 }

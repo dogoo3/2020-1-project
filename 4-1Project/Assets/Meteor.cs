@@ -37,7 +37,7 @@ public class Meteor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Boss")
+        if (collision.tag == "Boss")
         {
             if (STR - Boss.instance.DEF > 0)
             {

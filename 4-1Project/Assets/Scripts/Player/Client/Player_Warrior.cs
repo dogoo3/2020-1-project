@@ -51,7 +51,7 @@ public class Player_Warrior : MonoBehaviour
 
                 if (_hit2D.collider != null)
                 {
-                    if (_hit2D.collider.name == "Boss") // 보스에 맞으면
+                    if (_hit2D.collider.tag == "Boss") // 보스에 맞으면
                     {
                         _mainPlayer.SendDamageInfo(Boss.instance.DEF);
                         Boss.instance.ActiveHPBar();
@@ -60,7 +60,7 @@ public class Player_Warrior : MonoBehaviour
                     if (_hit2D.collider.gameObject.tag == "FireBall") // 보스가 소환한 불구슬에 맞으면
                         Boss.instance._fireBall.HitFireBall(_hit2D.collider.gameObject.name);
 
-                        _mainPlayer.temp = _hit2D.collider.GetComponent<ItemDropObject>();
+                    _mainPlayer.temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
                     if (_mainPlayer.temp != null) // 채집물에 맞으면
                     {

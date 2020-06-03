@@ -28,8 +28,8 @@ public class DataBase : MonoBehaviour
     private void Start()
     {
         // Material Item
-        itemList.Add(new Item(1, "주문서", "주문서.", "alchemy"));
-        itemList.Add(new Item(2, "에메랄드", "에메랄드.", "ashvattha"));
+        itemList.Add(new Item(1, "에메랄드", "에메랄드.", "ashvattha"));
+        itemList.Add(new Item(2, "낡은 종잇장", "희미하지만 4자리 번호가 써있다...\n1312??", "alchemy"));
         itemList.Add(new Item(3, "물방울", "물방울.", "Ereronium"));
         itemList.Add(new Item(4, "헝겊", "헝겊.", "fabric"));
         itemList.Add(new Item(5, "가넷", "가넷.", "hernite"));

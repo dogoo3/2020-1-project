@@ -63,6 +63,9 @@ public class Player_Server : MonoBehaviour
 
     private void Update()
     {
+        if (PS == PlayerState.Restriction)
+            return;
+
         if (!_setOn && PS != PlayerState.Dash)
         {
             if (Pos != Vector2.zero)
@@ -256,12 +259,22 @@ public class Player_Server : MonoBehaviour
     {
         RaycastHit2D _hit2D = Physics2D.Raycast(transform.position,_mouse_direction, 2f, _layerMask);
         itemDropObject = null;
-
         if (_hit2D.collider != null)
+        {
             itemDropObject = _hit2D.collider.GetComponent<ItemDropObject>();
-
-        if (itemDropObject != null)
-            itemDropObject.MinusCount(gameObject.name);
+            if (itemDropObject != null)
+            {
+                itemDropObject.MinusCount(gameObject.name);
+                return;
+            }
+            
+            if (_hit2D.collider.gameObject.tag == "FireBall")
+            {
+                Debug.Log("Hit2d" + _hit2D.collider.gameObject.name);
+                Boss.instance._fireBall.HitFireBall(_hit2D.collider.gameObject.name);
+                return;
+            }
+        }
     }
     #region Invoke
     private void OFFWarriorInvEffect()

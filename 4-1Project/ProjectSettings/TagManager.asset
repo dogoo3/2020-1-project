@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - FireBall
+  - Boss
   layers:
   - Default
   - TransparentFX

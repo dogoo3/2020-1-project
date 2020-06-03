@@ -23,7 +23,7 @@ public class ResetPassword : MonoBehaviour
         {
             _onButton = true;
             _spriterenderer.sprite = onButton;
-            MagicSquareManager.instance.ResetPasswordArrayIndex();
+            PuzzleRoomManager.instance.ResetPasswordArrayIndex();
         }
     }
 

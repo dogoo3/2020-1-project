@@ -9787,7 +9787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackspeed: 1.5
-  skillcooltime: 300
+  skillcooltime: 30
 --- !u!1 &2752396757763635152
 GameObject:
   m_ObjectHideFlags: 0
