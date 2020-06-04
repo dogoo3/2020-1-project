@@ -4,27 +4,31 @@ using UnityEngine;
 
 public class Player_Warrior : MonoBehaviour
 {
-    private RaycastHit2D _hit2D;
     private Player _mainPlayer;
+    private SkillCooltimeController _cooltimecontroller;
+
+    private RaycastHit2D _hit2D;
 
     private bool _isHit, _isSkill;
-    private float _attackcooltime, _skillcooltime;
-    public float attackspeed, skillcooltime;
-
-    public GameObject invincibleWall;
-
     private int _layerMask;
+    private float _attackcooltime, _skillcooltime;
+
+    public GameObject invincibleWall; // 무적 방어벽
+
+    public float attackspeed, skillcooltime;
 
     private void Awake()
     {
         _layerMask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("RoomCollider");
         _layerMask = ~_layerMask;
         _mainPlayer = GetComponent<Player>();
+        _cooltimecontroller = GameObject.Find("SkillIcon").transform.Find("CooltimePanel").GetComponent<SkillCooltimeController>();
     }
 
     private void Start()
     {
         CharacterInfoWindow.instance.UpdateASPD(attackspeed);
+        _cooltimecontroller.SetCooltime(skillcooltime);
     }
 
     private void Update()
@@ -76,7 +80,11 @@ public class Player_Warrior : MonoBehaviour
         if(_isSkill) // 스킬 쿨타임 중
         {
             if (Time.time - _skillcooltime > skillcooltime)
+            {
                 _isSkill = false;
+                _cooltimecontroller.EndCooltime();
+            }
+            _cooltimecontroller.ShowCooltime(Time.time - _skillcooltime);
         }
         if(!_isSkill) // 스킬 쿨타임 종료(스킬발동)
         {

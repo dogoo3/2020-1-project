@@ -40,6 +40,7 @@ public class ItemDropObject : MonoBehaviour
                 if(dropObject != null)
                     dropObject.SetActive(true);
                 gameObject.GetComponent<ItemDropObject>().enabled = false;
+                Debug.Log(_isSpawnSwitch);
                 if(_isSpawnSwitch && !_isSuccessSwitch)
                 {
                     if (_lastattackUsername == GameManager.instance.PlayerName) // 마지막으로 때린 사람이 나라면
@@ -53,7 +54,7 @@ public class ItemDropObject : MonoBehaviour
 
     public void ChangeSpawnSwitchState(bool _p_isState)
     {
-        if(attackCount > 0) // 체력이 남은동안에만 스위치 생성가능 상태가 변경될 수 있도록 한다.
+        if(attackCount == 0) // 체력이 남은동안에만 스위치 생성가능 상태가 변경될 수 있도록 한다.
             _isSpawnSwitch = _p_isState;
     }
 

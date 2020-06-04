@@ -5,24 +5,25 @@ using UnityEngine;
 public class ShowObject : MonoBehaviour
 {
     SpriteRenderer _renderer;
-    Color32 color32;
+    Color color;
 
-    public int showSpeed = 2;
+    public float showSpeed = 2;
 
     private void Awake()
     {
+        showSpeed *= 0.003921568f;
         _renderer = GetComponent<SpriteRenderer>();
-        color32 = _renderer.color;
+        color = _renderer.color;
     }
 
     private void Update()
     {
-        if (color32.a <= 255)
+        if (color.a <= 1)
         {
-            color32.a = (byte)Mathf.Clamp(color32.a += 2, 0, 256);
-            _renderer.color = color32;
-            Debug.Log(color32.a);
-            if (color32.a == 255)
+            color.a = Mathf.Clamp(color.a += showSpeed, 0, 1);
+            _renderer.color = color;
+            Debug.Log(color.a);
+            if (color.a == 1)
                 gameObject.GetComponent<ShowObject>().enabled = false; // 할 일 다 끝나면 스크립트 종료
         }
     }

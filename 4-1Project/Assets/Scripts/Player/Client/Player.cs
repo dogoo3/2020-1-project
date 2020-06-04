@@ -116,18 +116,19 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(isSetSwitch)
-        {
-            if(temp != null)
-                temp.ChangeSpawnSwitchState(isSwitch); // 클라이언트에서 스위치 생성을 랜덤한 bool값을 받아오기 때문에 그 캐릭터와 똑같은 값을 가지고 있다.
-            isSetSwitch = false;
-        }
+        //if(isSetSwitch)
+        //{
+        //    isSetSwitch = false;
+        //}
     }
 
     public void SetPercentItem(JsonData Data)
     {
         isSwitch = bool.Parse(Data["result"].ToString());
-        isSetSwitch = true;
+        Debug.Log(isSwitch);
+        if (temp != null)
+            temp.ChangeSpawnSwitchState(isSwitch); // 클라이언트에서 스위치 생성을 랜덤한 bool값을 받아오기 때문에 그 캐릭터와 똑같은 값을 가지고 있다.
+        //isSetSwitch = true;
     }
 
     public void SendPlayerInfoPacket()

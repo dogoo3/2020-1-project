@@ -19,6 +19,10 @@ public class MakeManager : MonoBehaviour
 
     public CinemachineVirtualCamera cine_Camera;
 
+    public Image UI_skillicon;
+    public Sprite warriorSkillIcon;
+    public Sprite magicianSkillIcon;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -59,6 +63,12 @@ public class MakeManager : MonoBehaviour
             // 보스 소환
             obj_temp = Instantiate(GameManager.instance.boss, spawnPoint_boss.position, Quaternion.identity);
             obj_temp.name = "Boss";
+
+            // 스킬 아이콘 적용
+            if (GameManager.instance.type == 0) // 전사
+                UI_skillicon.sprite = warriorSkillIcon;
+            else // 마법사
+                UI_skillicon.sprite = magicianSkillIcon;
 
             // 브금 재생
             // SoundManager.instance.PlayBGM("TalesWeaver");
