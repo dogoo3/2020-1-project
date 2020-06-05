@@ -345,7 +345,7 @@ public class Player : MonoBehaviour
         ServerClient.instance.Send(SendData.ToString());
     }
 
-    public void Attacked_Restriction(int _secDamage)
+    public void Attacked_Restriction(int _secDamage) // 속박과 유도미사일에 맞을 때마다 체력 감소
     {
         Attacked(true);
         HPManager.instance.myHP -= _secDamage;

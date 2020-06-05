@@ -51,6 +51,7 @@ public class MakeManager : MonoBehaviour
                                 , SpawnPoint[i].position, Quaternion.identity);
                             obj_temp.name = GameManager.instance.playerInfo[j].Name;
                             OtherPlayerManager.instance.PlayerList.Add(GameManager.instance.playerInfo[j].Name, obj_temp.GetComponent<Player_Server>());
+                            OtherPlayerManager.instance.s_playerlist.Add(GameManager.instance.playerInfo[j].Name);
 
                             // HpBar 할당
                             otherPlayerHPBar[j].SetActive(true); // 서버 플레이어 HP바 활성화

@@ -12,7 +12,7 @@ public class PatternManager : MonoBehaviour
 {
     public static PatternManager instance;
 
-    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor, pat_fireBall, pat_restriction;
+    PatternCommand pat_induceBullet, pat_wheelLaser, pat_circleFloor, pat_fireBall, pat_restriction, pat_inducemissile;
 
     public BossType bossType;
 
@@ -64,6 +64,7 @@ public class PatternManager : MonoBehaviour
         pat_circleFloor = new InduceCircleFloor();
         pat_fireBall = new InduceFireBall();
         pat_restriction = new RestrictionPattern();
+        pat_inducemissile = new InduceMissilePattern();
     }
 
     private void Update()
@@ -90,13 +91,15 @@ public class PatternManager : MonoBehaviour
                             pat_wheelLaser.Execute(_index);
                             break;
                         case 8:
-                            PatternFireBallExecute();
+                            //PatternFireBallExecute();
+                            DoublePatternBallExecute();
                             break;
                         case 12:
                             PatternCircleFloorExecute();
                             break;
                         case 21:
-                            PatternRestriction();
+                            PatternInduceMissile();
+                            //PatternRestriction();
                             break;
                         default:
                             PatternBallExecute();
@@ -109,7 +112,7 @@ public class PatternManager : MonoBehaviour
                         case 2:
                             PatternBallExecute();
                             break;
-                        case 4: // 랜덤 레이저
+                        case 4:
                             pat_wheelLaser.Execute(_index);
                             break;
                         case 8:
@@ -153,7 +156,6 @@ public class PatternManager : MonoBehaviour
         {
             _patternCount = 0;
             pat_wheelLaser.Execute(_index);
-
         }
         else
         {
@@ -247,6 +249,30 @@ public class PatternManager : MonoBehaviour
             pat_restriction.Execute(restricTargetname);
         else
             Boss.instance.DelaySendPhaseData(0.5f);
+    }
+
+    private void PatternInduceMissile()
+    {
+        pat_inducemissile.Execute();
+    }
+
+    private void DoublePatternBallExecute()
+    {
+        pat_induceBullet.BulletDoubleExecute(Boss.instance._circleBullet * 3);
+
+        //만약 패턴이 시작된 횟수가 3일때 랜덤 탄환을
+        //다시 계산하도록 한다
+        if (_patternCount == 3)
+        {
+            _patternCount = 0;
+            pat_wheelLaser.Execute(_index);
+        }
+        else
+        {
+            //그게 아니면 그냥 보냄
+            _patternCount++;
+            Invoke("Restart", 0.2f);
+        }
     }
     #endregion
     /***********************/

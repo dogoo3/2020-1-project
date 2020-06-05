@@ -22,7 +22,7 @@ public class TutorialText : MonoBehaviour
     {
         if (alpha.a < 255)
         {
-            alpha.a += 3;
+            alpha.a += 5;
             spriterenderer.color = alpha;
         }
     }

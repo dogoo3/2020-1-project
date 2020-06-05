@@ -8,12 +8,14 @@ public class PatternCommand
     protected CircleFloor _circleFloor;
     protected Fire_Ball _fireBall;
     protected Restriction _restriction;
+    protected InduceMissile _inducemissile;
 
     public virtual void Execute() { }
     public virtual void Execute(int _index) { }
     public virtual void Execute(Vector2 _dir) { }
     //총알을 위한 Execute(이름을 별도로 지어줘도 무방하다)
     public virtual void BulletExecute(int _index, BulletType type) { }
+    public virtual void BulletDoubleExecute(int _index) { }
     //원형 장판 관련함수
     public virtual void Execute(string _name) { }
 }
@@ -26,6 +28,24 @@ public class InduceBullet : PatternCommand
         if (_energyball != null)
         {
             _energyball.InduceBullet(_dir);
+        }
+    }
+
+    public override void BulletDoubleExecute(int _index)
+    {
+        Debug.Log("더블 써클 패턴");
+        float Theta = (Mathf.PI * 2) / _index;
+
+        for (int i = 1; i <= _index * 2; ++i)
+        {
+            _energyball = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_energyball);
+            if (i % 2 == 0)
+                _energyball.transform.Translate(Vector2.left * 4f);
+            else
+                _energyball.transform.Translate(Vector2.right * 4f);
+
+            if (_energyball != null)
+                _energyball.InduceBullet(new Vector2(Mathf.Cos((Theta / 2.0f) + (Theta * i)), Mathf.Sin((Theta / 2.0f) + (Theta * i))), BulletType.EVEN_CIRCLE_NORMAL);
         }
     }
 
@@ -207,11 +227,19 @@ public class RestrictionPattern : PatternCommand
     public override void Execute(string _name)
     {
         _restriction = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_restriction);
-        Debug.Log(_name);
         if (_restriction != null)
         {
             _restriction.SetTargetname(_name);
             _restriction.gameObject.SetActive(true);
         }
+    }
+}
+
+public class InduceMissilePattern : PatternCommand
+{
+    public override void Execute()
+    {
+        for (int i = 0; i < GameManager.instance.playerInfo.Count + 1; i++)
+            _inducemissile = ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_inducemissile);
     }
 }

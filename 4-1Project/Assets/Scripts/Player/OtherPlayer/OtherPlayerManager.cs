@@ -9,6 +9,7 @@ public class OtherPlayerManager : MonoBehaviour
     public static OtherPlayerManager instance;
 
     public Dictionary<string, Player_Server> PlayerList = new Dictionary<string, Player_Server>();
+    public List<string> s_playerlist = new List<string>();
 
     private void Awake()
     {

@@ -33608,7 +33608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121604578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -347.08, y: -150.04, z: 0}
+  m_LocalPosition: {x: -347.08, y: -150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1035167926}
@@ -34176,6 +34176,12 @@ PrefabInstance:
       objectReference: {fileID: 853963422}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b242f2753c366642b069e94335463f7, type: 3}
+--- !u!1 &1173803513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2176262864309808685, guid: 5b242f2753c366642b069e94335463f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1173803512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1188962923 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683,
@@ -36861,6 +36867,8 @@ MonoBehaviour:
   restriction: {fileID: 6943068897801540615, guid: beb2a31fa9295dc49aeaff4d3102dacf,
     type: 3}
   meteor: {fileID: 2699821172047811971, guid: 542cd47be1c9eb444804a01f5d450cc9, type: 3}
+  inducemissile: {fileID: 8328769460703835133, guid: 88ccf4fc586be4f4fa9795521d1d950b,
+    type: 3}
   boss_poolingCount: 500
   magician_poolingCount: 150
 --- !u!4 &1384126563
@@ -38631,8 +38639,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1592205712}
   - component: {fileID: 1592205715}
-  - component: {fileID: 1592205714}
   - component: {fileID: 1592205713}
+  - component: {fileID: 1592205716}
+  - component: {fileID: 1592205714}
   m_Layer: 0
   m_Name: SkipTutorial
   m_TagString: Untagged
@@ -38648,8 +38657,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592205711}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.3411736, y: 5.099998, z: 0}
-  m_LocalScale: {x: 0.8823529, y: 0.3846154, z: 1}
+  m_LocalPosition: {x: -7.58, y: 5.03, z: 0}
+  m_LocalScale: {x: 0.632, y: 0.632, z: 0.632}
   m_Children: []
   m_Father: {fileID: 4908380327599139889}
   m_RootOrder: 10
@@ -38661,7 +38670,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592205711}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d30355c5bbe1be244b4e1c2ecdf9bac8, type: 3}
   m_Name: 
@@ -38669,8 +38678,8 @@ MonoBehaviour:
   inGameTransform: {fileID: 4908380327156643955}
   _playerCount: 0
   _nowInplayer: 0
---- !u!70 &1592205714
-CapsuleCollider2D:
+--- !u!58 &1592205714
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -38682,9 +38691,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03367631, y: -0.028329626}
-  m_Size: {x: 2.8062463, y: 2.633002}
-  m_Direction: 1
+  m_Offset: {x: 0, y: -0.000007629394}
+  serializedVersion: 2
+  m_Radius: 1.5271795
 --- !u!212 &1592205715
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -38724,7 +38733,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2ac8940f23a0a145b863fbac1367b85, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9fc76ac42521b00448210c281951bb3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -38735,6 +38744,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1592205716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592205711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f53a55938499a45ae7bb39c1e823f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportPos: {fileID: 4908380327156643955}
+  shakecamera: {fileID: 1852045641}
+  toMoveroomNum: 1
 --- !u!1 &1592514993
 GameObject:
   m_ObjectHideFlags: 0
@@ -40075,6 +40099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a0cd0b088de2845a52aebd16a4b5ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  s_playerlist: []
 --- !u!4 &1777636485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7722093108319419426, guid: 006cd9939db064c48a715c80f85b3c9d,
@@ -41690,7 +41715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadActiveObject:
-  - {fileID: 0}
+  - {fileID: 1173803513}
   - {fileID: 34190511}
 --- !u!4 &1941635058 stripped
 Transform:
