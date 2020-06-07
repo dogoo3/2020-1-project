@@ -167,6 +167,9 @@ public class Resolve
                         OtherPlayerManager.instance.PlayerList[Data["name"].ToString()].Setpercent(Data);
                     else { }
                     break;
+                case "GetItemID":
+                    ItemBox.instance.GetItemID(Data);
+                    break;
             }
         }
         catch (Exception ex)

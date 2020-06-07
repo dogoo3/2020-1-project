@@ -30,9 +30,6 @@ public class Laser_Ray : MonoBehaviour
         Debug.DrawLine(transform.position, Pos.position, new Color(1, 0, 0));
         
         if (Physics2D.Linecast(this.transform.position, Pos.position, _laser.layer))
-        {
             GameManager.instance._player.Attacked(_laser.LaserDamage);
-            Debug.Log("들어옴");
-        }
     }
 }

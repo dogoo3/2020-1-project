@@ -108,8 +108,7 @@ public class Player_Warrior : MonoBehaviour
 
     #region Invoke
     private void Invoke_OffEffect()
-    {
-        Debug.Log("전사 무적이펙트 해제");
+    { 
         invincibleWall.SetActive(false);
         // 이펙트 해제
     }

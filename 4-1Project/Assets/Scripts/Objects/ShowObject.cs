@@ -22,7 +22,6 @@ public class ShowObject : MonoBehaviour
         {
             color.a = Mathf.Clamp(color.a += showSpeed, 0, 1);
             _renderer.color = color;
-            Debug.Log(color.a);
             if (color.a == 1)
                 gameObject.GetComponent<ShowObject>().enabled = false; // 할 일 다 끝나면 스크립트 종료
         }

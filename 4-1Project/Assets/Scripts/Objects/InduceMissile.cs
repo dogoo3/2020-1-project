@@ -50,7 +50,10 @@ public class InduceMissile : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.name == GameManager.instance.PlayerName)
+        {
             _attacked = false;
+            GameManager.instance._player.Attacked(_attacked);
+        }
     }
 
     #region Invoke

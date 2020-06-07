@@ -11,7 +11,6 @@ public class ActiveBossDead : MonoBehaviour
     {
         for (int i = 0; i < deadActiveObject.Length; i++)
         {
-            Debug.Log("활성화중");
             deadActiveObject[i].SetActive(true);
         }
     }

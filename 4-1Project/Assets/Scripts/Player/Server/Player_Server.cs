@@ -101,7 +101,6 @@ public class Player_Server : MonoBehaviour
         {
             if (playerType == 1) // 마법사일 때만
             {
-                Debug.Log("법사서버 스킬샷");
                 ChangeAnimationState_Attack();
                 ObjectPoolingManager.instance.GetQueue(_mouse_direction, transform.position, gameObject.name);
                 PS = PlayerState.Idle;
@@ -119,7 +118,6 @@ public class Player_Server : MonoBehaviour
         {
             PS = PlayerState.Idle;
             invincibleWall.SetActive(true);
-            Debug.Log("(서버) 전사 무적이펙트 활성화");// 이펙트 활성화
             Invoke("OFFWarriorInvEffect", 1f); 
         }
 
@@ -127,7 +125,6 @@ public class Player_Server : MonoBehaviour
         {
             PS = PlayerState.Idle;
             ChangeAnimationState_Meteor();
-            //Debug.Log("(서버) 법사 메테오 시전준비 애니메이션 진행");
             Invoke("OFFMagicianSkill", 3.0f);
         }
 
@@ -217,9 +214,7 @@ public class Player_Server : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
-        {
             Physics2D.IgnoreCollision(gameObject.GetComponent<CapsuleCollider2D>(), collision.collider);
-        }
     }
 
     void ChangeAnimationState_Move(bool _state) // 걷기
@@ -270,7 +265,6 @@ public class Player_Server : MonoBehaviour
             
             if (_hit2D.collider.gameObject.tag == "FireBall")
             {
-                Debug.Log("Hit2d" + _hit2D.collider.gameObject.name);
                 Boss.instance._fireBall.HitFireBall(_hit2D.collider.gameObject.name);
                 return;
             }
@@ -281,13 +275,11 @@ public class Player_Server : MonoBehaviour
     {
         // 전사 무적 이펙트 해제
         invincibleWall.SetActive(false);
-        Debug.Log("(서버)전사 무적 이펙트 해제");
     }
     private void OFFMagicianSkill()
     {
         PS = PlayerState.Idle;
         ObjectPoolingManager.instance.GetQueue_meteor(_mouse_direction, transform.position, gameObject.name);
-        Debug.Log("(서버)메테오 소환");
         // 메테오 소환
     }
     #endregion

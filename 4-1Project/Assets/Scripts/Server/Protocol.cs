@@ -363,6 +363,17 @@ public struct ItemPerResult
     }
 }
 
+public struct GetItemID
+{
+    public string type;
+
+    public void Init()
+    {
+        type = "GetItemID";
+    }
+}
+
+
 //public struct MagicSquarePassword
 //{
 //    public string type;

@@ -117,18 +117,10 @@ public class ObjectPoolingManager : MonoBehaviour
         for (int i = 0; i < GameManager.instance.playerInfo.Count + 1; i++)
         {
             _induceMissile = queue_inducemissile.Dequeue();
-            Debug.Log(_induceMissile.name);
             if (i == 0) // 나에게 오는 유도미사일
-            {
-                Debug.Log("미사일 객체 클라이언트");
-                Debug.Log(GameManager.instance._player.transform);
                 _induceMissile.SetInduceObject(GameManager.instance._player.transform);
-            }
             else // 서버 플레이어에게 가는 유도미사일
-            {
-                Debug.Log("미사일 객체 서버");
                _induceMissile.SetInduceObject(OtherPlayerManager.instance.PlayerList[OtherPlayerManager.instance.s_playerlist[i - 1]].transform);
-            }
             queue_inducemissile.Enqueue(_induceMissile);
         }
     }

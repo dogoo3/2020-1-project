@@ -48,7 +48,8 @@ public class BossHPBar : MonoBehaviour
         bossHP = Boss.instance.HP;
         if (bossHP <= 0)
         {
-            GameClearMessage.gameObject.SetActive(true);
+            if(GameClearMessage != null)
+                GameClearMessage.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
         carculatePhase = (int)(bossHP / phaseFullHP); // 현재 보스 HP에서 페이즈당 최대HP를 나눠서 몇 페이즈인지 계산

@@ -33,7 +33,6 @@ public class InduceBullet : PatternCommand
 
     public override void BulletDoubleExecute(int _index)
     {
-        Debug.Log("더블 써클 패턴");
         float Theta = (Mathf.PI * 2) / _index;
 
         for (int i = 1; i <= _index * 2; ++i)

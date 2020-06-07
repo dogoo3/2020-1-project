@@ -92,7 +92,6 @@ public class Boss : MonoBehaviour
 
     public void Dead()
     {
-        Debug.Log("애니메이션 접근");
         if(_activeBossdead != null)
             _activeBossdead.ActiveObject();
         gameObject.SetActive(false);

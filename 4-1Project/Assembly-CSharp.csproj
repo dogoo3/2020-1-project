@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\Objects\FireBallData.cs" />
     <Compile Include="Assets\Scripts\Objects\Fire_Ball.cs" />
     <Compile Include="Assets\Scripts\Objects\InduceMissile.cs" />
+    <Compile Include="Assets\Scripts\Objects\ItemBox.cs" />
     <Compile Include="Assets\Scripts\Objects\ItemDropObject.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser.cs" />
     <Compile Include="Assets\Scripts\Objects\Laser_Ray.cs" />

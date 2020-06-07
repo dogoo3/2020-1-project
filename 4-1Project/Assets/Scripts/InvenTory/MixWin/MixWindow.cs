@@ -138,7 +138,7 @@ public class MixWindow : MonoBehaviour
             if (isMixed)
             {
                 isMixItemID = int.Parse(_data["Item"].ToString());
-                Inventory.instance.mymoney = int.Parse(_data["money"].ToString());
+                Inventory.instance.mymoney = int.Parse(_data["money"].ToString()); // 서버에서 돈 계산까지 다 해줘서 줌.
             }
         }
         catch (Exception)
