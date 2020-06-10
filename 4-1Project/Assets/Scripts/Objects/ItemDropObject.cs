@@ -5,19 +5,23 @@ using UnityEngine;
 public class ItemDropObject : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    private float alpha = 1.0f;
     private bool _isSpawnSwitch;
     private bool _isSuccessSwitch;
     private string _lastattackUsername;
+    private Color color;
     public GameObject dropObject;
+    
 
     public bool tutorial;
     [Header("몇 대 맞으면 아이템을떨굴건지")]
     public int attackCount;
+    [Header("같이 투명해질 스프라이트")]
+    public SpriteRenderer[] subSprites;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        color = new Color(1, 1, 1, 1);
     }
 
     public void MinusCount(string _nickname = "")
@@ -34,8 +38,12 @@ public class ItemDropObject : MonoBehaviour
     {
         if (attackCount <= 0)
         {
-            spriteRenderer.color = new Color(1, 1, 1, alpha-=0.014f);
-            if (alpha <= 0 && !tutorial)
+            color.a -= 0.014f;
+            spriteRenderer.color = color; // 부모 스프라이트 투명하게 하고
+            for (int i = 0; i < subSprites.Length; i++) // 자식으로 꾸며주는 스프라이트 있으면 같이 투명하게 해줌.
+                subSprites[i].color = color;
+
+            if (color.a <= 0 && !tutorial)
             {
                 if(dropObject != null)
                     dropObject.SetActive(true);
