@@ -185,11 +185,20 @@ public class Player : MonoBehaviour
         {
             ChangeAnimationState_Move(true);
             transform.Translate(_movePos.normalized * Time.deltaTime * _movespeed);
+            if (GameManager.instance.type == 0)
+                SoundManager.instance.PlaySFX("1PC_Move_3",false);
+            else
+                SoundManager.instance.PlaySFX("2PC_Move_1",false);
         }
         else
         {
             Data.State = (int)PlayerState.Idle;
             ChangeAnimationState_Move(false);
+
+            if (GameManager.instance.type == 0)
+                SoundManager.instance.StopSFX("1PC_Move_3");
+            else
+                SoundManager.instance.StopSFX("2PC_Move_1");
         }
 
         if(_temp_movePos != _movePos)

@@ -72,7 +72,7 @@ public class MakeManager : MonoBehaviour
                 UI_skillicon.sprite = magicianSkillIcon;
 
             // 브금 재생
-            // SoundManager.instance.PlayBGM("TalesWeaver");
+            SoundManager.instance.PlayBGM("Main_3");
         }
     }
 }

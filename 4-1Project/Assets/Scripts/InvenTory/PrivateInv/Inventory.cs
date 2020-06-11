@@ -363,7 +363,7 @@ public class Inventory : MonoBehaviour
     {
         for(int i=0;i< equip_Inv.Length;i++)
         {
-            if (equip_Inv[i].itemID == 203) // 키 가지고 있으면
+            if (equip_Inv[i].itemID == 207) // 키 가지고 있으면
                 return true; 
         }
         return false;

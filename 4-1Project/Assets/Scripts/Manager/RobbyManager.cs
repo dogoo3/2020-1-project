@@ -79,6 +79,8 @@ public class RobbyManager : MonoBehaviour
 
             charactors.Add(a);
         }
+
+        SoundManager.instance.PlayBGM("Lobby_2");
     }
 
     public void MakeCharactor()
