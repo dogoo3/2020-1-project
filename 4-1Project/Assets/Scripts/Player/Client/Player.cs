@@ -224,6 +224,11 @@ public class Player : MonoBehaviour
                 Data.State = (int)PlayerState.Dash;
                 ShowDashBlur(true);
                 dash = true; // 대시!
+                if (GameManager.instance.type == 0) // 전사플레이어
+                    SoundManager.instance.PlaySFX("1PC_Dash_1");
+                else
+                    SoundManager.instance.PlaySFX("2PC_Dash_1");
+
                 JsonData SendData = JsonMapper.ToJson(Data);
                 ServerClient.instance.Send(SendData.ToString());
             }
@@ -258,6 +263,12 @@ public class Player : MonoBehaviour
         dashSpeed = ori_dashSpeed; // 첫 대시 스피드로 바꿔줌.
         ShowDashBlur(false);
         dash = false;
+
+        if (GameManager.instance.type == 0) // 전사플레이어
+            SoundManager.instance.StopSFX("1PC_Dash_1");
+        else
+            SoundManager.instance.StopSFX("2PC_Dash_1");
+
         JsonData SendData = JsonMapper.ToJson(Data);
         ServerClient.instance.Send(SendData.ToString());
     }
@@ -299,6 +310,7 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < _subAnimator.Length; i++)
             _subAnimator[i].Meteor();
+        SoundManager.instance.PlaySFX("2PC_Skill_22");
     }
 
     public void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
@@ -349,6 +361,11 @@ public class Player : MonoBehaviour
         HPManager.instance.myHP = (int)Mathf.Clamp(HPManager.instance.myHP - (_damage - DEF), -1, HPManager.instance.myFullHP);
         HPManager.instance.SetHP();
         BtoP_damage_data.HP = HPManager.instance.myHP;
+
+        if (GameManager.instance.type == 0) // 전사플레이어
+            SoundManager.instance.PlaySFX("1PC_Hit_4");
+        else
+            SoundManager.instance.PlaySFX("2PC_Hit_4");
 
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());

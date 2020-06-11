@@ -62,8 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
-    <Compile Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
+    <Compile Include="Assets\3D Lasers Pack\Demo scene lasers\EGA_DemoLasers.cs" />
+    <Compile Include="Assets\3D Lasers Pack\Demo scene lasers\EGA_Laser.cs" />
     <Compile Include="Assets\Scripts\AdvertiseSAGE.cs" />
     <Compile Include="Assets\Scripts\Camera\CineRoomCollider.cs" />
     <Compile Include="Assets\Scripts\Camera\ShakeCamera.cs" />
@@ -123,6 +123,7 @@
     <Compile Include="Assets\Scripts\Server\Protocol.cs" />
     <Compile Include="Assets\Scripts\Server\Resolve.cs" />
     <Compile Include="Assets\Scripts\Server\ServerClient.cs" />
+    <Compile Include="Assets\Scripts\Sound\ChangeBGM.cs" />
     <Compile Include="Assets\Scripts\Sound\LocalSound.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\UI\IngameScene\BossHPBar.cs" />
@@ -139,13 +140,13 @@
     <Compile Include="Assets\Scripts\UI\Tutorial\SkipTutorial.cs" />
     <Compile Include="Assets\Scripts\UI\Tutorial\TutorialObject.cs" />
     <Compile Include="Assets\Scripts\UI\Tutorial\TutorialText.cs" />
-    <None Include="Assets\Prefabs\3D Lasers Pack\Prefabs\Readme.txt" />
+    <None Include="Assets\3D Lasers Pack\Prefabs\Readme.txt" />
     <None Include="Assets\Shader\2DWater.shader" />
-    <None Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\If you want to use lasers in 2D.txt" />
+    <None Include="Assets\3D Lasers Pack\Demo scene lasers\If you want to use lasers in 2D.txt" />
     <None Include="Assets\Effects\EFB\Documentation\READ_ME.txt" />
-    <None Include="Assets\Prefabs\3D Lasers Pack\Shaders\Blend_CenterGlow.shader" />
-    <None Include="Assets\Prefabs\3D Lasers Pack\Demo scene lasers\Readme.txt" />
-    <None Include="Assets\Prefabs\3D Lasers Pack\Shaders\Add_CenterGlow.shader" />
+    <None Include="Assets\3D Lasers Pack\Shaders\Blend_CenterGlow.shader" />
+    <None Include="Assets\3D Lasers Pack\Demo scene lasers\Readme.txt" />
+    <None Include="Assets\3D Lasers Pack\Shaders\Add_CenterGlow.shader" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:/2020-1-project/4-1Project/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>

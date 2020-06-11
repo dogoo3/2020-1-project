@@ -45,7 +45,7 @@ public class Player_Warrior : MonoBehaviour
 
         if (!_isHit) // 공격쿨타임 종료
         {
-            if (Input.GetMouseButtonDown(0)) 
+            if (Input.GetMouseButtonDown(0))
             {
                 _mainPlayer.AttackPlayer();
                 _isHit = true;
@@ -53,16 +53,22 @@ public class Player_Warrior : MonoBehaviour
                 _mainPlayer.ChangeAnimationState_Attack();
                 _attackcooltime = Time.time;
 
+                SoundManager.instance.PlaySFX("1PC_Swing_9");
+
                 if (_hit2D.collider != null)
                 {
                     if (_hit2D.collider.tag == "Boss") // 보스에 맞으면
                     {
                         _mainPlayer.SendDamageInfo(Boss.instance.DEF);
                         Boss.instance.ActiveHPBar();
+                        SoundManager.instance.PlaySFX("1PC_Enemy_Hit2");
                     }
 
                     if (_hit2D.collider.gameObject.tag == "FireBall") // 보스가 소환한 불구슬에 맞으면
+                    {
                         Boss.instance._fireBall.HitFireBall(_hit2D.collider.gameObject.name);
+                        SoundManager.instance.PlaySFX("1PC_Enemy_Hit2");
+                    }
 
                     _mainPlayer.temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
@@ -97,6 +103,8 @@ public class Player_Warrior : MonoBehaviour
                 invincibleWall.SetActive(true);
                 // 무적 이펙트 발동
                 _isSkill = true;
+                // 사운드 실행
+                SoundManager.instance.PlaySFX("1PC_Skill_3");
                 // 스킬발동 후 해제
                 _mainPlayer.Invoke("Invoke_ChangePSIdle", 1f); // 무적 상태 해제
                 Invoke("Invoke_OffEffect", 1f);

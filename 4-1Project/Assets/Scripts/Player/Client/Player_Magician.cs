@@ -52,6 +52,7 @@ public class Player_Magician : MonoBehaviour
                     _isHit = true;
                     ObjectPoolingManager.instance.GetQueue(_mainPlayer._mousePos, transform.position, gameObject.name);
                     _mainPlayer.AttackPlayer(PlayerState.Skill); // 마법사 스킬공격
+                    SoundManager.instance.PlaySFX("2PC_Skill_16");
                     _mainPlayer.ChangeAnimationState_Attack();
                     _mainPlayer.SendPlayerInfoPacket();
                 }
@@ -62,6 +63,7 @@ public class Player_Magician : MonoBehaviour
                     _mainPlayer.AttackPlayer(); // 마법사 기본공격
                     _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
                     _mainPlayer.ChangeAnimationState_Attack();
+                    SoundManager.instance.PlaySFX("2PC_Attack_4");
 
                     if (_hit2D.collider != null)
                         _mainPlayer.temp = _hit2D.collider.GetComponent<ItemDropObject>();

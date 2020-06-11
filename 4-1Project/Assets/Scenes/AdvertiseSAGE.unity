@@ -296,7 +296,12 @@ PrefabInstance:
     - target: {fileID: 7891799422755381780, guid: d702f35a1b8991d4ab39ceb95b7db677,
         type: 3}
       propertyPath: m_Volume
-      value: 0.7
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7891799422755381780, guid: d702f35a1b8991d4ab39ceb95b7db677,
+        type: 3}
+      propertyPath: BypassListenerEffects
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7891799422755381789, guid: d702f35a1b8991d4ab39ceb95b7db677,
         type: 3}

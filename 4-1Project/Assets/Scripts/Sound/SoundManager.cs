@@ -14,8 +14,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgmPlayer;
     [Header("SFX 플레이어")]
     public AudioSource[] sfxPlayer;
-
-    string temp;
+    
     private void Awake()
     {
         instance = this;
@@ -37,8 +36,12 @@ public class SoundManager : MonoBehaviour
     {
         if (bgmSound.ContainsKey(_bgmName)) // 내가 재생하려는 BGM이 있으면
         {
-            bgmPlayer.clip = bgmSound[_bgmName];
-            bgmPlayer.Play();
+            if(bgmPlayer.clip.name != _bgmName) // 이미 실행중인 브금이면 실행하지 않는다.
+            {
+
+                bgmPlayer.clip = bgmSound[_bgmName];
+                bgmPlayer.Play();
+            }
         }
     }
 
