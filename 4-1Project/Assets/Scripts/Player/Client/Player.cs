@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public BossDamage PtoB_damage_data; // 플레이어가 보스에게 데미지를 넣을 때
     public PlayerDamage BtoP_damage_data; // 보스가 쏜 탄환에 플레이어가 맞으면
     public ItemPerResult itemperresult_data;
+    public Playerexit gameOver;
     public ParticleSystem[] dashBlur;
 
     public float _movespeed = 5.0f, invincibleTime, dashDelay = 2.0f;
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
     private float timeOfFirstButton;
     private float dashSpeed = 0.2f;
     private float ori_dashSpeed;
+    private bool _isDead;
 
     void Start()
     {
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour
         PtoB_damage_data.Init();
         BtoP_damage_data.Init();
         itemperresult_data.Init();
+        gameOver.Init();
         BtoP_damage_data.nickname = GameManager.instance.PlayerName;
         ori_dashSpeed = dashSpeed;
         CharacterInfoWindow.instance.UpdateATK(STR);
@@ -77,6 +80,16 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        if(playerState == PlayerState.Die)
+        {
+            if (!_isDead)
+            {
+                SendPlayerInfoPacket();
+                Invoke("Invoke_Dead",4.0f);
+                _isDead = true;
+            }
+            return;
+        }
         if(playerState == PlayerState.Restriction)
         {
             if(dash) // 대시중에 속박먹으면 대시 강제종료
@@ -112,14 +125,9 @@ public class Player : MonoBehaviour
             {
                 time = 0;
                 _isCrash = false;
-                Attacked(_isCrash);
+                ChangeAnimationState_Attacked(_isCrash);
             }
         }
-
-        //if(isSetSwitch)
-        //{
-        //    isSetSwitch = false;
-        //}
     }
 
     public void SetPercentItem(JsonData Data)
@@ -310,10 +318,15 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < _subAnimator.Length; i++)
             _subAnimator[i].Meteor();
-        SoundManager.instance.PlaySFX("2PC_Skill_22");
     }
 
-    public void Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
+    public void ChangeAnimationState_Dead()
+    {
+        for (int i = 0; i < _subAnimator.Length; i++)
+            _subAnimator[i].Dead();
+    }
+
+    public void ChangeAnimationState_Attacked(bool _isAttacked) // 피격당했을때 애니메이션, true면 피격중, false면 피격해제.
     {
         for (int i = 0; i < _subAnimator.Length; i++)
             _subAnimator[i].Attacked(_isAttacked);
@@ -357,7 +370,7 @@ public class Player : MonoBehaviour
             return;
 
         _isCrash = true;
-        Attacked(_isCrash);
+        ChangeAnimationState_Attacked(_isCrash);
         HPManager.instance.myHP = (int)Mathf.Clamp(HPManager.instance.myHP - (_damage - DEF), -1, HPManager.instance.myFullHP);
         HPManager.instance.SetHP();
         BtoP_damage_data.HP = HPManager.instance.myHP;
@@ -369,11 +382,18 @@ public class Player : MonoBehaviour
 
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());
+        
+        if (HPManager.instance.myHP <= 0) // 공격 당했는데 피가 없으면
+        {
+            playerState = PlayerState.Die;
+            Data.State = (int)PlayerState.Die;
+            ChangeAnimationState_Dead();
+        }
     }
 
     public void Attacked_Restriction(int _secDamage) // 속박과 유도미사일에 맞을 때마다 체력 감소
     {
-        Attacked(true);
+        ChangeAnimationState_Attacked(true);
         HPManager.instance.myHP -= _secDamage;
         HPManager.instance.SetHP();
         BtoP_damage_data.HP = HPManager.instance.myHP;
@@ -409,6 +429,13 @@ public class Player : MonoBehaviour
     {
         DEF /= 2;
         CharacterInfoWindow.instance.UpdateDEF(DEF);
+    }
+    public void Invoke_Dead() // 플레이어 사망
+    {
+        JsonData SendData = JsonMapper.ToJson(gameOver);
+        ServerClient.instance.Send(SendData.ToString());
+
+        GameManager.instance.DeadCharacter();
     }
     #endregion
 }

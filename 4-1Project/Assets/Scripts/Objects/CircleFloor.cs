@@ -75,7 +75,7 @@ public class CircleFloor : MonoBehaviour
         {
             if (!_enterPlayer)
             {
-                GameManager.instance._player.Attacked(9999);
+                GameManager.instance._player.Dead();
             }
         }
         this.gameObject.SetActive(false);

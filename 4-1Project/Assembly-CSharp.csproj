@@ -87,10 +87,10 @@
     <Compile Include="Assets\Scripts\Item\GetItem.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\HPManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\LobbyManager.cs" />
     <Compile Include="Assets\Scripts\Manager\MakeManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ObjectPoolingManager.cs" />
     <Compile Include="Assets\Scripts\Manager\PuzzleRoomManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\RobbyManager.cs" />
     <Compile Include="Assets\Scripts\Manager\SwitchManager.cs" />
     <Compile Include="Assets\Scripts\Objects\ActiveBossDead.cs" />
     <Compile Include="Assets\Scripts\Objects\Boss.cs" />
@@ -130,8 +130,10 @@
     <Compile Include="Assets\Scripts\UI\IngameScene\CharacterInfoWindow.cs" />
     <Compile Include="Assets\Scripts\UI\IngameScene\Chatting.cs" />
     <Compile Include="Assets\Scripts\UI\IngameScene\ControlUI.cs" />
+    <Compile Include="Assets\Scripts\UI\IngameScene\GameEndPortal.cs" />
+    <Compile Include="Assets\Scripts\UI\IngameScene\GameEndSignal.cs" />
     <Compile Include="Assets\Scripts\UI\IngameScene\ONOFFMixwindow.cs" />
-    <Compile Include="Assets\Scripts\UI\LobbyScene\RobbyUI.cs" />
+    <Compile Include="Assets\Scripts\UI\LobbyScene\LobbyUI.cs" />
     <Compile Include="Assets\Scripts\UI\LoginScene\LoginWindow.cs" />
     <Compile Include="Assets\Scripts\UI\MagicSquare.cs" />
     <Compile Include="Assets\Scripts\UI\PortalOpenSwitch.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Assets\Scripts\UI\Tutorial\SkipTutorial.cs" />
     <Compile Include="Assets\Scripts\UI\Tutorial\TutorialObject.cs" />
     <Compile Include="Assets\Scripts\UI\Tutorial\TutorialText.cs" />
+    <Compile Include="Assets\TempScript.cs" />
     <None Include="Assets\3D Lasers Pack\Prefabs\Readme.txt" />
     <None Include="Assets\Shader\2DWater.shader" />
     <None Include="Assets\3D Lasers Pack\Demo scene lasers\If you want to use lasers in 2D.txt" />

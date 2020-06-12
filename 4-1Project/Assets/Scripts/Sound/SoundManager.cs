@@ -36,12 +36,20 @@ public class SoundManager : MonoBehaviour
     {
         if (bgmSound.ContainsKey(_bgmName)) // 내가 재생하려는 BGM이 있으면
         {
-            if(bgmPlayer.clip.name != _bgmName) // 이미 실행중인 브금이면 실행하지 않는다.
+            if (bgmPlayer.clip != null)
             {
-
+                if (bgmPlayer.clip.name != _bgmName) // 이미 실행중인 브금이면 실행하지 않는다.
+                {
+                    bgmPlayer.clip = bgmSound[_bgmName];
+                    bgmPlayer.Play();
+                }
+            }
+            else
+            {
                 bgmPlayer.clip = bgmSound[_bgmName];
                 bgmPlayer.Play();
             }
+
         }
     }
 

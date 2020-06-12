@@ -48,6 +48,10 @@ public class PatternManager : MonoBehaviour
     // 속박
     public string restricTargetname;
 
+    // 사운드
+    [HideInInspector]
+    public LocalSound _localSound;
+
     private void Awake()
     {
         instance = this;
@@ -55,6 +59,7 @@ public class PatternManager : MonoBehaviour
         data_PhaseEnd.Init();
         data_Restart.Init();
         data_PhaseTimeEnd.Init();
+        _localSound = GetComponent<LocalSound>();
     }
 
     private void Start()
@@ -65,6 +70,9 @@ public class PatternManager : MonoBehaviour
         pat_fireBall = new InduceFireBall();
         pat_restriction = new RestrictionPattern();
         pat_inducemissile = new InduceMissilePattern();
+
+        if (bossType == BossType.FinalBoss) // 최종보스 소환시 
+            SoundManager.instance.PlaySFX("Middle_B_Appear_8");
     }
 
     private void Update()
@@ -86,23 +94,29 @@ public class PatternManager : MonoBehaviour
                     {
                         case 2:
                             PatternBallExecute();
+                            _localSound.PlayLocalSound("Middle_B_Att_Bullet_31");
                             break;
                         case 4: // 랜덤 레이저
                             pat_wheelLaser.Execute(_index);
+                            _localSound.PlayLocalSound("Middle_B_Att_Laser_1");
                             break;
                         case 8:
                             //PatternFireBallExecute();
                             DoublePatternBallExecute();
+                            _localSound.PlayLocalSound("Final_B_Att_Bullet_34");
                             break;
                         case 12:
                             PatternCircleFloorExecute();
+                            _localSound.PlayLocalSound("Middle_B_Att_Safety_11");
                             break;
                         case 21:
                             PatternInduceMissile();
+                            _localSound.PlayLocalSound("Final_B_Att_Missile_1");
                             //PatternRestriction();
                             break;
                         default:
                             PatternBallExecute();
+                            _localSound.PlayLocalSound("Middle_B_Att_Bullet_34");
                             break;
                     }
                     break;
@@ -111,21 +125,27 @@ public class PatternManager : MonoBehaviour
                     {
                         case 2:
                             PatternBallExecute();
+                            _localSound.PlayLocalSound("Middle_B_Att_Bullet_34");
                             break;
                         case 4:
                             pat_wheelLaser.Execute(_index);
+                            _localSound.PlayLocalSound("Final_B_Att_Laser_1");
                             break;
                         case 8:
                             PatternFireBallExecute();
+                            _localSound.PlayLocalSound("Middle_B_Att_Dead_8");
                             break;
                         case 12:
                             PatternCircleFloorExecute();
+                            _localSound.PlayLocalSound("Middle_B_Att_Safety_11");
                             break;
                         case 21:
                             PatternRestriction();
+                            _localSound.PlayLocalSound("Final_B_Att_Shackles_8");
                             break;
                         default:
                             PatternBallExecute();
+                            _localSound.PlayLocalSound("Middle_B_Att_Bullet_31");
                             break;
                     }
                     break;

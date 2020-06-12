@@ -24,6 +24,7 @@ public class ResetPassword : MonoBehaviour
             _onButton = true;
             _spriterenderer.sprite = onButton;
             PuzzleRoomManager.instance.ResetPasswordArrayIndex();
+            SoundManager.instance.PlaySFX("Switch_2");
         }
     }
 

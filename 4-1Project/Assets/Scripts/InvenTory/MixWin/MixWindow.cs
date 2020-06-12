@@ -58,9 +58,12 @@ public class MixWindow : MonoBehaviour
 
     private void Start()
     {
-        ClickArmorTab(); // 기본 선택은 방어구로
+        armorRecipe = DataBase.instance.armorRecipeList;
         weaponRecipe = DataBase.instance.weaponRecipeList;
+        subweaponRecipe = DataBase.instance.subweaponRecipeList;
         accessoryRecipe = DataBase.instance.accessoryRecipeList;
+        activeRecipe = DataBase.instance.activeRecipeList;
+        ClickArmorTab(); // 기본 선택은 방어구로
         gameObject.SetActive(false);
     }
 
@@ -85,6 +88,7 @@ public class MixWindow : MonoBehaviour
             isMixItemID = 0;
             text_money.text = "";
             Inventory.instance.text_money.text = Inventory.instance.mymoney.ToString();
+            SoundManager.instance.PlaySFX("Making_Complete_10");
         }
     }
 

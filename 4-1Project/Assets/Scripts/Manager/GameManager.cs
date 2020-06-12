@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        
+        type = 0;
     }
 
     //로비에서 캐릭터를 생성할때 사용 
@@ -101,5 +101,18 @@ public class GameManager : MonoBehaviour
     public void SceneChange(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
+    }
+
+    public void DeadCharacter()
+    {
+        OtherPlayerManager.instance.PlayerList.Clear();
+        OtherPlayerManager.instance.s_playerlist.Clear();
+
+        SceneManager.LoadScene("Lobby");
+        _player = null;
+        playerInfo.Clear();
+        PlayerReady = false;
+        type = 0;
+        GameSpawnData = "";
     }
 }

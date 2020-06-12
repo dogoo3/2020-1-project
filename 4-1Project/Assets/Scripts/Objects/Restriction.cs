@@ -55,7 +55,7 @@ public class Restriction : MonoBehaviour
             GameManager.instance._player.playerState = PlayerState.Idle;
             GameManager.instance._player.Data.State = (int)PlayerState.Idle;
             GameManager.instance._player.SendPlayerInfoPacket();
-            GameManager.instance._player.Attacked(false);
+            GameManager.instance._player.ChangeAnimationState_Attacked(false);
             ObjectPoolingManager.instance.InsertQueue(this, ObjectPoolingManager.instance.queue_restriction);
             PatternManager.instance.SendDelayPhaseEnd();
         }

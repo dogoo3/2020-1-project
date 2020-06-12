@@ -52,7 +52,7 @@ public class InduceMissile : MonoBehaviour
         if (collision.name == GameManager.instance.PlayerName)
         {
             _attacked = false;
-            GameManager.instance._player.Attacked(_attacked);
+            GameManager.instance._player.ChangeAnimationState_Attacked(_attacked);
         }
     }
 

@@ -24,6 +24,7 @@ public class ControlUI : MonoBehaviour
                     for (int i = 0; i < openInventory.Length; i++)
                         openInventory[i].SetActive(true);
                 }
+                SoundManager.instance.PlaySFX("Inven_OpenClose");
                 return;
             }
         }

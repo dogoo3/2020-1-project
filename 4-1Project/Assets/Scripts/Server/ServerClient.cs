@@ -264,7 +264,7 @@ public class ServerClient : MonoBehaviour
                 playerInfo.Init(GameManager.instance.PlayerName, "abc");
                 JsonData Data = JsonMapper.ToJson(playerInfo);
                 Send(Data.ToString());
-                GameManager.instance.SceneChange("Robby");
+                GameManager.instance.SceneChange("Lobby");
             }
         }
     }

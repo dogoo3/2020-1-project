@@ -77,7 +77,14 @@ public class Boss : MonoBehaviour
         }
 
         if (HP <= 0)
+        {
             _animator.SetTrigger("Dead");
+            if (PatternManager.instance.bossType == BossType.SemiBoss)
+                SoundManager.instance.PlaySFX("Middle_B_Die_1");
+            else
+                SoundManager.instance.PlaySFX("Final_B_Die_9");
+        }
+
     }
 
     public void Attack()

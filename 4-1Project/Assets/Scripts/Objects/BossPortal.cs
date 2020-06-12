@@ -34,6 +34,10 @@ public class BossPortal : MonoBehaviour
                 data.x = teleportPos.position.x;
                 data.y = teleportPos.position.y;
                 data.get = true;
+
+                if (Boss.instance.name == "Boss")
+                    SoundManager.instance.PlayBGM("Boss_2");
+                
                 JsonData SendData = JsonMapper.ToJson(data);
                 ServerClient.instance.Send(SendData.ToString());
             }

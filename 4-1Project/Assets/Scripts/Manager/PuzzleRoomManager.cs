@@ -86,6 +86,7 @@ public class PuzzleRoomManager : MonoBehaviour
 
     private void CorrectPassword()
     {
+        SoundManager.instance.PlaySFX("Boss_Portal_9");
         launchObject.SetActive(true);
     }
 }

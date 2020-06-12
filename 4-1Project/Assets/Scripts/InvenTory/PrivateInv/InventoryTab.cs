@@ -39,14 +39,17 @@ public class InventoryTab : MonoBehaviour, IPointerClickHandler
     {
         if (_tabIndex == (int)TabName.Equipment) // 장비
         {
+            SoundManager.instance.PlaySFX("Inven_Tap_7");
             Inventory.instance.InitEquipInv(_tabIndex);
         }
         else if (_tabIndex == (int)TabName.Material) // 재료
         {
+            SoundManager.instance.PlaySFX("Inven_Tap_7");
             Inventory.instance.InitMatInv(_tabIndex);
         }
         else if (_tabIndex == (int)TabName.Potion) // 소비
         {
+            SoundManager.instance.PlaySFX("Inven_Tap_7");
             Inventory.instance.InitPotionInv(_tabIndex);
         }
         else { }

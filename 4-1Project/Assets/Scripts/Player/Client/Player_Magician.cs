@@ -84,7 +84,6 @@ public class Player_Magician : MonoBehaviour
                 _isSkill = false;
                 _cooltimecontroller.EndCooltime();
             }
-            Debug.Log("법사 스킬 시전 쿨타임");
             _cooltimecontroller.ShowCooltime(Time.time - _skillcooltime);
         }
         if (!_isSkill)
@@ -95,7 +94,6 @@ public class Player_Magician : MonoBehaviour
                 _mainPlayer.AttackPlayer(PlayerState.Meteor);
                 _skillcooltime = Time.time;
                 _isSkill = true;
-                Debug.Log(_isSkill);
                 // 플레이어가 이동 못 하도록 함
                 Invoke("ShootMeteor", 3.0f);  // 3초 뒤 메테오 발사
                 _mainPlayer.Invoke("Invoke_ChangePSIdle", 3.0f); // 3초 뒤 플레이어 이동 해제
@@ -106,6 +104,7 @@ public class Player_Magician : MonoBehaviour
     private void ShootMeteor()
     {
         ObjectPoolingManager.instance.GetQueue_meteor(_mainPlayer._mousePos, transform.position, gameObject.name);
+        SoundManager.instance.PlaySFX("2PC_Skill_22");
     }
     #endregion
 }

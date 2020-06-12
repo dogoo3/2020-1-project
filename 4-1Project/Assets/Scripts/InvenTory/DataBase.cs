@@ -46,7 +46,7 @@ public class DataBase : MonoBehaviour
         // Equipment Item
         itemList.Add(new Item(207, "열쇠", "이 열쇠가 있어야 보스방에 입장할 수 있습니다.", "bosskey"));
         itemList.Add(new Item(201, "선지자의 로브", "문구1", "robe"));
-        itemList.Add(new Item(202, "선지자의 탈리스만", "문구1", "tailsman"));
+        itemList.Add(new Item(202, "선지자의 탈리스만", "문구1", "talisman"));
         itemList.Add(new Item(203, "선지자의 스태프", "문구1", "staff"));
         itemList.Add(new Item(204, "선구자의 갑옷", "문구1", "armor"));
         itemList.Add(new Item(205, "선구자의 깃발", "문구1", "gauntlet"));
@@ -65,10 +65,10 @@ public class DataBase : MonoBehaviour
         // SubWeapon Recipe
 
         // Accessory Recipe
-        accessoryRecipeList.Add(new Recipe(10, 1, "alchemy", 8, 1, "Ereronium", 7, 1, "gaiter", 5000, "tailsman", 202));
+        accessoryRecipeList.Add(new Recipe(10, 1, "alchemy", 8, 1, "Ereronium", 7, 1, "gaiter", 5000, "talisman", 202));
         accessoryRecipeList.Add(new Recipe(9, 1, "pendant", 8, 1, "Ereronium", 7, 1, "gaiter", 5000, "gauntlet", 205));
 
         // Active Recipe
-        activeRecipeList.Add(new Recipe(1, 1, "alchemy", 4, 1, "fabric", 7, 1, "gaiter", 10000, "bosskey", 207));
+        activeRecipeList.Add(new Recipe(1, 1, "hernite", 4, 1, "fabric", 7, 1, "gaiter", 10000, "bosskey", 207));
     }
 }

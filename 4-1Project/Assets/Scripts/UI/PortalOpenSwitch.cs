@@ -26,6 +26,7 @@ public class PortalOpenSwitch : MonoBehaviour
             _pushPlayername = collision.name; // 스위치를 밟은 플레이어 이름 저장
             _spriteRenderer.sprite = pushSwitch; // 스위치 스프라이트 교체
             Debug.Log(_pushPlayername + "플레이어가 누름!");
+            SoundManager.instance.PlaySFX("Switch_2");
             SwitchManager.instance.PlusSwitchCount();
         }
     }

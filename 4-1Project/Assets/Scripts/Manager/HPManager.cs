@@ -18,10 +18,13 @@ public class HPManager : MonoBehaviour
     public List<string> nickname;
     public List<float> otherFullHP;
 
+    public GameObject gameOverSignal;
+
     private bool isSend;
     private int send_hp;
     private float time;
     private string send_nickname;
+
 
     private void Awake()
     {
@@ -83,5 +86,8 @@ public class HPManager : MonoBehaviour
     {
         image_myHP.fillAmount = myHP / myFullHP;
         CharacterInfoWindow.instance.UpdateHP(myHP);
+
+        if (myHP <= 0)
+            gameOverSignal.SetActive(true);
     }
 }

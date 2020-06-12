@@ -19,6 +19,7 @@ public class PuzzleroomStatue : MonoBehaviour
 
     public void DestroyStatue()
     {
+        SoundManager.instance.PlaySFX("Statue_Broken_9");
         _animator.enabled = true;
     }
 }

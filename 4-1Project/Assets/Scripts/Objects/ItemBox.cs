@@ -7,9 +7,9 @@ public class ItemBox : MonoBehaviour
 {
     public static ItemBox instance;
 
-    SpriteRenderer spriteRenderer;
-
-    GetItemID _itemData;
+    private SpriteRenderer spriteRenderer;
+    private LocalSound _localsound;
+    private GetItemID _itemData;
 
     private int[] itemIDs = new int[3];
     private Vector2 _objectPos;
@@ -25,6 +25,7 @@ public class ItemBox : MonoBehaviour
     {
         instance = this;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _localsound = GetComponent<LocalSound>();
         _objectPos = transform.position;
 
         _itemData.Init();
@@ -49,11 +50,13 @@ public class ItemBox : MonoBehaviour
             JsonData SendData = JsonMapper.ToJson(_itemData); // 박스에서 뜰 랜덤 아이템의 ID를 달라고 서버에 요청한다.
             ServerClient.instance.Send(SendData.ToString());
             gameObject.GetComponent<Collider2D>().enabled = false;
+            _localsound.PlayLocalSound();
         }
         else if (collision.tag == "Player") // 서버 플레이어가 박스를 터치했을 경우
         {
             spriteRenderer.sprite = sprite_openItembox;
             gameObject.GetComponent<Collider2D>().enabled = false;
+            _localsound.PlayLocalSound();
         }
         else { }
     }

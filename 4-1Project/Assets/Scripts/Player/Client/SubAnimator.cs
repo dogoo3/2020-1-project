@@ -53,4 +53,14 @@ public class SubAnimator : MonoBehaviour
     {
         _animator.SetTrigger("Meteor");
     }
+
+    public void Dead()
+    {
+        _animator.SetTrigger("Dead");
+    }
+
+    public void DisableObject()
+    {
+        gameObject.GetComponentInParent<GameObject>().gameObject.SetActive(false);
+    }
 }

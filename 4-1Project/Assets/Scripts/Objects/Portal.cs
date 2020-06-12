@@ -33,6 +33,12 @@ public class Portal : MonoBehaviour
             data.x = teleportPos.position.x;
             data.y = teleportPos.position.y;
             data.get = true;
+
+            if (toMoveroomNum == 11)
+                SoundManager.instance.PlayBGM("Boss_3");
+            else
+                SoundManager.instance.PlayBGM("Main_3");
+
             JsonData SendData = JsonMapper.ToJson(data);
             ServerClient.instance.Send(SendData.ToString());
         }

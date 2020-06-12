@@ -91,7 +91,7 @@ public class Resolve
             switch (Data["type"].ToString())
             {
                 case "UI":
-                    RobbyUI.instance.Check(Data);
+                    LobbyUI.instance.Check(Data);
                     break;
                 case "PlayerData":
                     if (OtherPlayerManager.instance.PlayerList.ContainsKey(Data["name"].ToString()))
@@ -102,16 +102,18 @@ public class Resolve
                         OtherPlayerManager.instance.PlayerList[Data["nickname"].ToString()].Teleport(Data);
                     break;
                 case "UserInfo":
+                    Debug.Log(data);
                     GameManager.instance.AddCharactor(Data);
                     break;
                 case "UserOut":
                     GameManager.instance.DeleteCharactor(Data);
                     break;
                 case "ChangeType":
-                    RobbyManager.instance.ChangeCharactor(Data);
+                    LobbyManager.instance.ChangeCharactor(Data);
                     break;
                 case "Ready":
-                    RobbyManager.instance.ReadyOn(Data);
+                    Debug.Log(data);
+                    LobbyManager.instance.ReadyOn(Data);
                     if (bool.Parse(Data["Start"].ToString()))
                     {
                         GameManager.instance.GameSpawnData = data;
@@ -170,6 +172,9 @@ public class Resolve
                 case "GetItemID":
                     ItemBox.instance.GetItemID(Data);
                     break;
+                //case "PlayerExit":
+                //    GameManager.instance.DeadCharacter(Data);
+                //    break;
             }
         }
         catch (Exception ex)

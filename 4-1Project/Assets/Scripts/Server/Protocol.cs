@@ -373,6 +373,16 @@ public struct GetItemID
     }
 }
 
+public struct Playerexit
+{
+    public string type;
+
+    public void Init()
+    {
+        type = "PlayerExit";
+    }
+}
+
 
 //public struct MagicSquarePassword
 //{

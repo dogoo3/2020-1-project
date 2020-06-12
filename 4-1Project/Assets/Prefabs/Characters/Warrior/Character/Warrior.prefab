@@ -14308,6 +14308,7 @@ GameObject:
   - component: {fileID: 1405114167788028989}
   - component: {fileID: 7215510734591149179}
   - component: {fileID: 8956558587212165021}
+  - component: {fileID: 610503350071792267}
   m_Layer: 8
   m_Name: Warrior
   m_TagString: Player
@@ -14448,9 +14449,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b1630aeee6a64f9a0a6f83ad82d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invincibleWall: {fileID: 1053070169078142243}
   attackspeed: 0.2
   skillcooltime: 45
-  invincibleWall: {fileID: 1053070169078142243}
+--- !u!81 &610503350071792267
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3577444076983048476}
+  m_Enabled: 1
 --- !u!1 &5802997117799514667
 GameObject:
   m_ObjectHideFlags: 0
