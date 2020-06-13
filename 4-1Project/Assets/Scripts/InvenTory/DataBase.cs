@@ -69,6 +69,6 @@ public class DataBase : MonoBehaviour
         accessoryRecipeList.Add(new Recipe(9, 1, "pendant", 8, 1, "Ereronium", 7, 1, "gaiter", 5000, "gauntlet", 205));
 
         // Active Recipe
-        activeRecipeList.Add(new Recipe(1, 1, "hernite", 4, 1, "fabric", 7, 1, "gaiter", 10000, "bosskey", 207));
+        // activeRecipeList.Add(new Recipe(1, 1, "hernite", 4, 1, "fabric", 7, 1, "gaiter", 10000, "bosskey", 207));
     }
 }

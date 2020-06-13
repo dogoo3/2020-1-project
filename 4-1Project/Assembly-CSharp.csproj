@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\InvenTory\PrivateInv\ItemTooltip.cs" />
     <Compile Include="Assets\Scripts\InvenTory\ShareInv\ShareInventorySlot.cs" />
     <Compile Include="Assets\Scripts\Item\GetItem.cs" />
+    <Compile Include="Assets\Scripts\Item\InstantiateItem.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\HPManager.cs" />
     <Compile Include="Assets\Scripts\Manager\LobbyManager.cs" />

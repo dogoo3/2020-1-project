@@ -102,7 +102,6 @@ public class Resolve
                         OtherPlayerManager.instance.PlayerList[Data["nickname"].ToString()].Teleport(Data);
                     break;
                 case "UserInfo":
-                    Debug.Log(data);
                     GameManager.instance.AddCharactor(Data);
                     break;
                 case "UserOut":
@@ -112,7 +111,6 @@ public class Resolve
                     LobbyManager.instance.ChangeCharactor(Data);
                     break;
                 case "Ready":
-                    Debug.Log(data);
                     LobbyManager.instance.ReadyOn(Data);
                     if (bool.Parse(Data["Start"].ToString()))
                     {

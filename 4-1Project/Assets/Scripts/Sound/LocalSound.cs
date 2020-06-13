@@ -15,16 +15,18 @@ public class LocalSound : MonoBehaviour
     {
         _audioSource.Stop();
         _audioSource.Play();
-        Debug.Log(_audioSource.isPlaying);
-        Debug.Log(_audioSource.clip.name);
     }
 
-    public void PlayLocalSound(string _soundName) // 여러 개의 사운드를 변경하면서 실행할 때 사용함.
+    public void PlayLocalSound(string _soundName, bool _isLoop = false) // 여러 개의 사운드를 변경하면서 실행할 때 사용함.
     {
         if(SoundManager.instance.sfxSound.ContainsKey(_soundName))
         {
             _audioSource.Stop();
             _audioSource.clip = SoundManager.instance.sfxSound[_soundName];
+            if (_isLoop)
+                _audioSource.loop = true;
+            else
+                _audioSource.loop = false;
             _audioSource.Play();
         }
     }

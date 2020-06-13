@@ -61,6 +61,6 @@ public class SubAnimator : MonoBehaviour
 
     public void DisableObject()
     {
-        gameObject.GetComponentInParent<GameObject>().gameObject.SetActive(false);
+        gameObject.GetComponentInParent<Transform>().gameObject.SetActive(false);
     }
 }

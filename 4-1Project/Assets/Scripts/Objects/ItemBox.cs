@@ -29,6 +29,8 @@ public class ItemBox : MonoBehaviour
         _objectPos = transform.position;
 
         _itemData.Init();
+
+        _localsound.PlayLocalSound("Reward_Box_1", true);
     }
 
     private void Update()
@@ -50,13 +52,13 @@ public class ItemBox : MonoBehaviour
             JsonData SendData = JsonMapper.ToJson(_itemData); // 박스에서 뜰 랜덤 아이템의 ID를 달라고 서버에 요청한다.
             ServerClient.instance.Send(SendData.ToString());
             gameObject.GetComponent<Collider2D>().enabled = false;
-            _localsound.PlayLocalSound();
+            _localsound.PlayLocalSound("Inven_OpenClose");
         }
         else if (collision.tag == "Player") // 서버 플레이어가 박스를 터치했을 경우
         {
             spriteRenderer.sprite = sprite_openItembox;
             gameObject.GetComponent<Collider2D>().enabled = false;
-            _localsound.PlayLocalSound();
+            _localsound.PlayLocalSound("Inven_OpenClose");
         }
         else { }
     }

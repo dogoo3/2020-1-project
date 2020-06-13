@@ -690,6 +690,7 @@ MonoBehaviour:
   _time: 0
   restricTargetname: 
   _localSound: {fileID: 0}
+  pnum: {fileID: 0}
 --- !u!114 &2144757348911858624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +723,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 20.60389
+  MinDistance: 41.473724
   MaxDistance: 41.473724
   Pan2D: 0
   rolloffMode: 1

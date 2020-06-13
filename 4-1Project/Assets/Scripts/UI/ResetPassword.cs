@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResetPassword : MonoBehaviour
 {
     private SpriteRenderer _spriterenderer;
+    private LocalSound _localSound;
     private bool _onButton;
 
     public Sprite nononButton;
@@ -12,7 +13,8 @@ public class ResetPassword : MonoBehaviour
 
     private void Awake()
     {
-        _spriterenderer = GetComponent<SpriteRenderer>();    
+        _spriterenderer = GetComponent<SpriteRenderer>();
+        _localSound = GetComponent<LocalSound>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,7 +26,7 @@ public class ResetPassword : MonoBehaviour
             _onButton = true;
             _spriterenderer.sprite = onButton;
             PuzzleRoomManager.instance.ResetPasswordArrayIndex();
-            SoundManager.instance.PlaySFX("Switch_2");
+            _localSound.PlayLocalSound("Switch_2");
         }
     }
 

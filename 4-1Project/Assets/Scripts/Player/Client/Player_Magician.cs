@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player_Magician : MonoBehaviour
 {
@@ -48,6 +49,9 @@ public class Player_Magician : MonoBehaviour
             {
                 if (Input.GetMouseButton(0))
                 {
+                    if (_mainPlayer.CheckClickInv())
+                        return;
+
                     _attackcooltime = Time.time;
                     _isHit = true;
                     ObjectPoolingManager.instance.GetQueue(_mainPlayer._mousePos, transform.position, gameObject.name);
@@ -63,17 +67,20 @@ public class Player_Magician : MonoBehaviour
                     _mainPlayer.AttackPlayer(); // 마법사 기본공격
                     _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
                     _mainPlayer.ChangeAnimationState_Attack();
-                    SoundManager.instance.PlaySFX("2PC_Attack_4");
+                    SoundManager.instance.PlaySFX("1PC_Swing_9");
 
                     if (_hit2D.collider != null)
+                    {
                         _mainPlayer.temp = _hit2D.collider.GetComponent<ItemDropObject>();
 
-                    if (_mainPlayer.temp != null) // 채집물에 맞으면
-                    {
-                        _mainPlayer.temp.MinusCount(gameObject.name);
-                        if (!_mainPlayer.isGetSwitch && _mainPlayer.temp.CheckCount()) // 스위치를 스폰하지 못했을경우, 아이템 카운트가 0인 경우
-                            _mainPlayer.SendItemPercentPacket();
+                        if (_mainPlayer.temp != null) // 채집물에 맞으면
+                        {
+                            _mainPlayer.temp.MinusCount(gameObject.name);
+                            if (!_mainPlayer.isGetSwitch && _mainPlayer.temp.CheckCount()) // 스위치를 스폰하지 못했을경우, 아이템 카운트가 0인 경우
+                                _mainPlayer.SendItemPercentPacket();
+                        }
                     }
+                    
                 }
             }
         }
@@ -90,6 +97,9 @@ public class Player_Magician : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+                if (_mainPlayer.CheckClickInv())
+                    return;
+
                 _mainPlayer.ChangeAnimationState_Meteor(); // 3초짜리 메테오 애니메이션
                 _mainPlayer.AttackPlayer(PlayerState.Meteor);
                 _skillcooltime = Time.time;

@@ -39,7 +39,7 @@ public class SwitchManager : MonoBehaviour
             // 채팅창 시스템 메시지 넣어주고(빨간색, "새로운 레시피를 획득하였습니다!")
             Chatting.instance.PutSystemMessage("새로운 레시피를 획득했습니다!", "lime");
             // 레시피 넣어준다.
-            MixWindow.instance.activeRecipe.Add(DataBase.instance.activeRecipeList[0]);
+            DataBase.instance.activeRecipeList.Add(new Recipe(1, 1, "hernite", 4, 1, "fabric", 7, 1, "gaiter", 10000, "bosskey", 207));
             _isGet = true;
             Debug.Log("조합 레시피 획득!");
         }

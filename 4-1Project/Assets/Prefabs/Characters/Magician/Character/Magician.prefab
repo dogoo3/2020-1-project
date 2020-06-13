@@ -9787,7 +9787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0296bc2b7d2d8f64498eb91fd7bbacf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackspeed: 1.5
+  attackspeed: 0.4
   skillcooltime: 30
 --- !u!81 &13912569919083014
 AudioListener:

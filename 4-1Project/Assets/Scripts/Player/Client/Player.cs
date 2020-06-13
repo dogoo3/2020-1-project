@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public enum PlayerState
 {
@@ -20,6 +21,11 @@ public enum PlayerState
 public class Player : MonoBehaviour
 {
     public PlayerState playerState;
+
+    private List<RaycastResult> results = new List<RaycastResult>(); // 여기에 히트 된 개체 저장
+    private GraphicRaycaster gr;
+    private PointerEventData ped;
+    private GameObject _InvUI;
 
     Animator _animator;
     
@@ -50,17 +56,23 @@ public class Player : MonoBehaviour
     private Vector2 toPos;
     private float timeStartdash;
     private bool dash;
+    private float dashCooltime;
     private bool firstButtonPressed;
     private float timeOfFirstButton;
     private float dashSpeed = 0.2f;
     private float ori_dashSpeed;
     private bool _isDead;
-
+    
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        _subAnimator = GetComponentsInChildren<SubAnimator>();
+        gr = FindObjectOfType<GraphicRaycaster>();
+        ped = new PointerEventData(null);
+    }
     void Start()
     {
         playerState = PlayerState.Idle;
-        _animator = GetComponent<Animator>();
-        _subAnimator = GetComponentsInChildren<SubAnimator>();
         _temp_dirPos = Vector2.zero;
         _temp_movePos = Vector2.zero;
 
@@ -84,7 +96,6 @@ public class Player : MonoBehaviour
         {
             if (!_isDead)
             {
-                SendPlayerInfoPacket();
                 Invoke("Invoke_Dead",4.0f);
                 _isDead = true;
             }
@@ -147,7 +158,6 @@ public class Player : MonoBehaviour
 
     public void SendItemPercentPacket()
     {
-        Debug.Log("서버 전송");
         JsonData SendData = JsonMapper.ToJson(itemperresult_data);
         ServerClient.instance.Send(SendData.ToString());
     }
@@ -219,7 +229,7 @@ public class Player : MonoBehaviour
 
     public void DashCharacter() // 플레이어의 대시를 컨트롤함.
     {
-        if (Input.GetKeyDown(KeyCode.Space) && firstButtonPressed && !dash) // 두 번째 클릭(대시중일때는 중복대시할 수 없다)
+        if (Input.GetKeyDown(KeyCode.Space) && firstButtonPressed) // 두 번째 클릭(대시중일때는 중복대시할 수 없다)
         {
             if (Time.time - timeOfFirstButton < 0.5f) // 0.5초 이내로 더블클릭하면
             {
@@ -232,6 +242,7 @@ public class Player : MonoBehaviour
                 Data.State = (int)PlayerState.Dash;
                 ShowDashBlur(true);
                 dash = true; // 대시!
+                dashCooltime = Time.time;
                 if (GameManager.instance.type == 0) // 전사플레이어
                     SoundManager.instance.PlaySFX("1PC_Dash_1");
                 else
@@ -243,7 +254,7 @@ public class Player : MonoBehaviour
             firstButtonPressed = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !firstButtonPressed) // 첫 번째 클릭
+        if (Input.GetKeyDown(KeyCode.Space) && !firstButtonPressed && Time.time - dashCooltime > 0.5f) // 첫 번째 클릭
         {
             firstButtonPressed = true; // 두 번째 클릭 가능
             timeOfFirstButton = Time.time; // 첫 번째 클릭 시간 저장
@@ -388,6 +399,7 @@ public class Player : MonoBehaviour
             playerState = PlayerState.Die;
             Data.State = (int)PlayerState.Die;
             ChangeAnimationState_Dead();
+            SendPlayerInfoPacket();
         }
     }
 
@@ -400,6 +412,14 @@ public class Player : MonoBehaviour
 
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());
+
+        if (HPManager.instance.myHP <= 0) // 속박 당했는데 피가 없으면
+        {
+            playerState = PlayerState.Die;
+            Data.State = (int)PlayerState.Die;
+            ChangeAnimationState_Dead();
+            SendPlayerInfoPacket();
+        }
     }
 
     public void Dead()
@@ -410,6 +430,25 @@ public class Player : MonoBehaviour
 
         JsonData SendData = JsonMapper.ToJson(BtoP_damage_data);
         ServerClient.instance.Send(SendData.ToString());
+    }
+    
+    public bool CheckClickInv()
+    {
+        bool _is = false;
+
+        results.Clear();
+        ped.position = Input.mousePosition;
+        gr.Raycast(ped, results);
+        
+        for (int i = 0; i < results.Count; i++)
+        {
+            _InvUI = results[i].gameObject;
+            if (_InvUI.tag == "Inventory")
+                _is =  true;
+            else
+                _is =  false;
+        }
+        return _is;
     }
 
     #region SimpleFunc

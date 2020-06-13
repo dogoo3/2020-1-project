@@ -38,7 +38,6 @@ public class Boss : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Instance : " + gameObject.name);
         instance = this;
         _firstStart = true;
         _rigidbody2D = GetComponent<Rigidbody2D>();
