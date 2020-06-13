@@ -35,9 +35,7 @@ public class Portal : MonoBehaviour
             data.get = true;
 
             if (toMoveroomNum == 11)
-                SoundManager.instance.PlayBGM("Boss_3");
-            else
-                SoundManager.instance.PlayBGM("Main_3");
+                SoundManager.instance.PlaySFX("Boss_Portal_9");
 
             JsonData SendData = JsonMapper.ToJson(data);
             ServerClient.instance.Send(SendData.ToString());

@@ -47,6 +47,7 @@ public class Player_Server : MonoBehaviour
 
     // 전사 무적벽
     public GameObject invincibleWall;
+    private bool _Die;
 
     private void Awake()
     {
@@ -63,6 +64,18 @@ public class Player_Server : MonoBehaviour
 
     private void Update()
     {
+        if(PS == PlayerState.Die)
+        {
+            Debug.Log("idashjfioa");
+            if (!_Die)
+            {
+                Debug.Log("asfdjklsadf");
+                Move(0, false);
+                ChangeAnimationState_Dead();
+                 _Die = true;
+            }
+            return;
+        }
         if (PS == PlayerState.Restriction)
             return;
 
@@ -233,6 +246,12 @@ public class Player_Server : MonoBehaviour
     {
         for (int i = 0; i < _subAnimators.Length; i++)
             _subAnimators[i].Meteor();
+    }
+
+    void ChangeAnimationState_Dead() // 공격
+    {
+        for (int i = 0; i < _subAnimators.Length; i++)
+            _subAnimators[i].Dead();
     }
 
     void ShowDashBlur(bool _isStart) // 대시 표현

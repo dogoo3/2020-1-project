@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Player_Warrior : MonoBehaviour
 {
@@ -47,6 +49,9 @@ public class Player_Warrior : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                if (_mainPlayer.CheckClickInv())
+                    return;
+
                 _mainPlayer.AttackPlayer();
                 _isHit = true;
                 _hit2D = Physics2D.Raycast(transform.position, _mainPlayer._mousePos, 2f, _layerMask);
@@ -96,6 +101,9 @@ public class Player_Warrior : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(1))
             {
+                if (_mainPlayer.CheckClickInv())
+                    return;
+
                 _skillcooltime = Time.time; // 스킬발동시간 기록
                 _mainPlayer.DEF *= 2; // 방어력 X2
                 CharacterInfoWindow.instance.UpdateDEF(_mainPlayer.DEF);

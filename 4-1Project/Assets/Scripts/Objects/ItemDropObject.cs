@@ -32,7 +32,8 @@ public class ItemDropObject : MonoBehaviour
         _localsound.PlayLocalSound();
         if(attackCount == 0) // 오브젝트 체력? 이 0이되면 
         {
-            if(_nickname == GameManager.instance.PlayerName) // 클라 플레이어가 마지막으로 오브젝트를 때렸음
+            gameObject.GetComponent<Collider2D>().enabled = false;
+            if (_nickname == GameManager.instance.PlayerName) // 클라 플레이어가 마지막으로 오브젝트를 때렸음
                 _lastattackUsername = _nickname;
         }
     }
@@ -48,16 +49,18 @@ public class ItemDropObject : MonoBehaviour
 
             if (color.a <= 0 && !tutorial)
             {
-                if(dropObject != null)
-                    dropObject.SetActive(true);
                 gameObject.GetComponent<ItemDropObject>().enabled = false;
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                if(_isSpawnSwitch && !_isSuccessSwitch)
+                if (!tutorial)
                 {
-                    if (_lastattackUsername == GameManager.instance.PlayerName) // 마지막으로 때린 사람이 나라면
-                        GameManager.instance._player.isGetSwitch = true; // 나는 더이상 스위치를 만들 수 없다.
-                    ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_switch,transform.position + (Vector3.right*1)); // 풀링매니저에서 스위치 가져오고
-                    _isSuccessSwitch = true; // 1개만 풀링될 수 있도록 함.
+                    if (dropObject != null)
+                        dropObject.SetActive(true);
+                    if (_isSpawnSwitch && !_isSuccessSwitch)
+                    {
+                        if (_lastattackUsername == GameManager.instance.PlayerName) // 마지막으로 때린 사람이 나라면
+                            GameManager.instance._player.isGetSwitch = true; // 나는 더이상 스위치를 만들 수 없다.
+                        ObjectPoolingManager.instance.GetQueue(ObjectPoolingManager.instance.queue_switch, transform.position + (Vector3.right * 1)); // 풀링매니저에서 스위치 가져오고
+                        _isSuccessSwitch = true; // 1개만 풀링될 수 있도록 함.
+                    }
                 }
             }
         }
