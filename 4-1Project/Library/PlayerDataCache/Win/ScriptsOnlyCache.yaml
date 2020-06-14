@@ -73,7 +73,6 @@ ScriptsOnlyBuild:
     - SoundManager
     - SubAnimator
     - SwitchManager
-    - TempScript
     - TutorialObject
     - TutorialText
     Cinemachine.dll:
@@ -251,31 +250,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14810}
     - Class: 114
-      Script: {instanceID: 15194}
+      Script: {instanceID: 15196}
     - Class: 114
-      Script: {instanceID: 15214}
+      Script: {instanceID: 15216}
     - Class: 114
-      Script: {instanceID: 15286}
+      Script: {instanceID: 15288}
     - Class: 114
-      Script: {instanceID: 15610}
+      Script: {instanceID: 15612}
     - Class: 114
-      Script: {instanceID: 15838}
+      Script: {instanceID: 15840}
     - Class: 114
-      Script: {instanceID: 15894}
+      Script: {instanceID: 15896}
     - Class: 114
-      Script: {instanceID: 16144}
+      Script: {instanceID: 16146}
     - Class: 114
-      Script: {instanceID: 16148}
+      Script: {instanceID: 16150}
     - Class: 114
-      Script: {instanceID: 16194}
-    - Class: 114
-      Script: {instanceID: 16224}
+      Script: {instanceID: 16196}
     - Class: 114
       Script: {instanceID: 16226}
     - Class: 114
-      Script: {instanceID: 16372}
+      Script: {instanceID: 16228}
     - Class: 114
-      Script: {instanceID: 16378}
+      Script: {instanceID: 16374}
+    - Class: 114
+      Script: {instanceID: 16380}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -452,8 +451,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14676}
     - Class: 114
-      Script: {instanceID: 14692}
-    - Class: 114
       Script: {instanceID: 14790}
     - Class: 114
       Script: {instanceID: 14792}
@@ -464,35 +461,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14954}
     - Class: 114
-      Script: {instanceID: 15050}
+      Script: {instanceID: 15028}
     - Class: 114
-      Script: {instanceID: 15214}
+      Script: {instanceID: 15052}
     - Class: 114
-      Script: {instanceID: 15242}
+      Script: {instanceID: 15216}
     - Class: 114
-      Script: {instanceID: 15406}
+      Script: {instanceID: 15244}
     - Class: 114
-      Script: {instanceID: 15514}
+      Script: {instanceID: 15408}
     - Class: 114
-      Script: {instanceID: 15854}
+      Script: {instanceID: 15516}
     - Class: 114
-      Script: {instanceID: 15922}
+      Script: {instanceID: 15856}
     - Class: 114
-      Script: {instanceID: 16098}
+      Script: {instanceID: 15924}
     - Class: 114
-      Script: {instanceID: 16114}
+      Script: {instanceID: 16100}
     - Class: 114
-      Script: {instanceID: 16194}
+      Script: {instanceID: 16116}
     - Class: 114
-      Script: {instanceID: 16216}
+      Script: {instanceID: 16196}
     - Class: 114
-      Script: {instanceID: 16278}
+      Script: {instanceID: 16218}
     - Class: 114
-      Script: {instanceID: 16286}
+      Script: {instanceID: 16280}
     - Class: 114
-      Script: {instanceID: 16396}
+      Script: {instanceID: 16288}
     - Class: 114
-      Script: {instanceID: 27096}
+      Script: {instanceID: 16398}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -571,9 +568,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14470}
     - Class: 114
-      Script: {instanceID: 15214}
+      Script: {instanceID: 15216}
     - Class: 114
-      Script: {instanceID: 16194}
+      Script: {instanceID: 16196}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -664,15 +661,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14918}
     - Class: 114
-      Script: {instanceID: 15214}
+      Script: {instanceID: 15216}
     - Class: 114
-      Script: {instanceID: 15624}
+      Script: {instanceID: 15626}
     - Class: 114
-      Script: {instanceID: 16194}
+      Script: {instanceID: 16196}
     - Class: 114
-      Script: {instanceID: 16278}
+      Script: {instanceID: 16280}
     - Class: 114
-      Script: {instanceID: 16296}
+      Script: {instanceID: 16298}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -712,7 +709,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 7c8ba9e44265436e3c5553ac4a845e7d
+      Hash: c3272f0a0e15a9e831d49d206a7c6b4e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Warrior
@@ -1078,7 +1075,7 @@ ScriptsOnlyBuild:
     className: SpriteLibrary
   - hash:
       serializedVersion: 2
-      Hash: d01da8830bcd0863b294f0cf9da64a7a
+      Hash: 149fdf42c99fa3db6c60f9a0ba2ce97d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EquipDatabase
@@ -1162,7 +1159,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: ca06947a646ba5e75a2358142167c424
+      Hash: e5b0419f3d127fd1ef127e3d46e2201f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -1786,7 +1783,7 @@ ScriptsOnlyBuild:
     className: AdvertiseSAGE
   - hash:
       serializedVersion: 2
-      Hash: 47bb312f279c018979b5d38a6c1ad1fc
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Magician
@@ -1850,6 +1847,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: CinemachineImpulseSource
+  - hash:
+      serializedVersion: 2
+      Hash: 54d03e157617b6fe333556566cc270ef
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: InstantiateItem
   - hash:
       serializedVersion: 2
       Hash: 24b6e7c219be9f3da9c4ec6d3d82876e
@@ -2228,12 +2231,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameEndPortal
-  - hash:
-      serializedVersion: 2
-      Hash: 54d03e157617b6fe333556566cc270ef
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: InstantiateItem
   platform: 5
   scenePathNames:
   - Assets/Scenes/AdvertiseSAGE.unity

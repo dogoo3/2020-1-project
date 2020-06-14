@@ -59,6 +59,11 @@ public class SubAnimator : MonoBehaviour
         _animator.SetTrigger("Dead");
     }
 
+    public void SetAttackSpeed(float _value)
+    {
+        _animator.SetFloat("AttackSpeed", _value);
+    }
+
     public void DisableObject()
     {
         gameObject.GetComponentInParent<Transform>().gameObject.SetActive(false);

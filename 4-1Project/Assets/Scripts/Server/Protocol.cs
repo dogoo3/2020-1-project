@@ -52,6 +52,8 @@ public struct PlayerData
     public int State;
     // 대쉬 목적지 좌표
     public double dx, dy;
+    // 공격 속도
+    public double attackspeed;
 
     public void Init(string Name)
     {

@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class Player_Magician : MonoBehaviour
 {
     private Player _mainPlayer;
-    private SkillCooltimeController _cooltimecontroller;
 
     private Vector2 _mousePos;
     private RaycastHit2D _hit2D;
@@ -15,21 +14,18 @@ public class Player_Magician : MonoBehaviour
     private int _layerMask;
     private float _attackcooltime, _skillcooltime;
 
-    public float attackspeed, skillcooltime;
-
     private void Awake()
     {
         _layerMask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("RoomCollider");
         _layerMask = ~_layerMask;
 
         _mainPlayer = GetComponent<Player>();
-        _cooltimecontroller = GameObject.Find("SkillIcon").transform.Find("CooltimePanel").GetComponent<SkillCooltimeController>();
     }
 
     private void Start()
     {
-        CharacterInfoWindow.instance.UpdateASPD(attackspeed);
-        _cooltimecontroller.SetCooltime(skillcooltime);
+        CharacterInfoWindow.instance.UpdateASPD(_mainPlayer.attackcooltime);
+        _mainPlayer.Data.attackspeed = 1.2f;
     }
 
     private void Update()
@@ -39,7 +35,7 @@ public class Player_Magician : MonoBehaviour
 
         if (_isHit)
         {
-            if (Time.time - _attackcooltime > attackspeed)
+            if (Time.time - _attackcooltime > _mainPlayer.attackcooltime)
                 _isHit = false;
         }
 
@@ -86,12 +82,12 @@ public class Player_Magician : MonoBehaviour
         }
         if (_isSkill)
         {
-            if (Time.time - _skillcooltime > skillcooltime)
+            if (Time.time - _skillcooltime > _mainPlayer.skillcooltime)
             {
                 _isSkill = false;
-                _cooltimecontroller.EndCooltime();
+                _mainPlayer._cooltimecontroller.EndCooltime();
             }
-            _cooltimecontroller.ShowCooltime(Time.time - _skillcooltime);
+            _mainPlayer._cooltimecontroller.ShowCooltime(Time.time - _skillcooltime);
         }
         if (!_isSkill)
         {

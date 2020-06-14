@@ -615,7 +615,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5369,7 +5369,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -9755,6 +9755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: 0
+  _cooltimecontroller: {fileID: 0}
   _mousePos: {x: 0, y: 0}
   temp: {fileID: 0}
   dashBlur:
@@ -9769,6 +9770,10 @@ MonoBehaviour:
   _movespeed: 8
   invincibleTime: 1.5
   dashDelay: 2
+  rate_attackspeed: 0
+  rate_cooltime: 0
+  attackcooltime: 0.4
+  skillcooltime: 30
   STR: 200
   DEF: 10
   _isCrash: 0
@@ -9787,8 +9792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0296bc2b7d2d8f64498eb91fd7bbacf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackspeed: 0.4
-  skillcooltime: 30
 --- !u!81 &13912569919083014
 AudioListener:
   m_ObjectHideFlags: 0
@@ -10397,7 +10400,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -15151,7 +15154,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -19905,7 +19908,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -24674,7 +24677,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -29428,7 +29431,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -34182,7 +34185,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:

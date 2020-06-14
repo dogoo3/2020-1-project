@@ -632,7 +632,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5386,7 +5386,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -10140,7 +10140,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -15034,7 +15034,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -19788,7 +19788,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -24542,7 +24542,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -29296,7 +29296,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -34130,7 +34130,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -40247,6 +40247,11 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.z
       value: 0.085
       objectReference: {fileID: 0}
+    - target: {fileID: 2760818535459552572, guid: afb3a6e14a1d16249bd9539eaed74e76,
+        type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: -1.6614542
+      objectReference: {fileID: 0}
     - target: {fileID: 5020448198260894916, guid: afb3a6e14a1d16249bd9539eaed74e76,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -40296,6 +40301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Center.x
       value: -1.6600411
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184093619376364360, guid: afb3a6e14a1d16249bd9539eaed74e76,
+        type: 3}
+      propertyPath: m_Bounds.m_Center.y
+      value: -3.5237904
       objectReference: {fileID: 0}
     - target: {fileID: 6567414909241973230, guid: afb3a6e14a1d16249bd9539eaed74e76,
         type: 3}

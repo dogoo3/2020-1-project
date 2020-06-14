@@ -37,11 +37,15 @@ public class SwitchManager : MonoBehaviour
         {
             // 사운드 넣어주면 좋을 듯
             // 채팅창 시스템 메시지 넣어주고(빨간색, "새로운 레시피를 획득하였습니다!")
-            Chatting.instance.PutSystemMessage("새로운 레시피를 획득했습니다!", "lime");
-            // 레시피 넣어준다.
-            DataBase.instance.activeRecipeList.Add(new Recipe(1, 1, "hernite", 4, 1, "fabric", 7, 1, "gaiter", 10000, "bosskey", 207));
-            _isGet = true;
-            Debug.Log("조합 레시피 획득!");
+            Invoke("Invoke_GetRecipe", 0.01f);
         }
+    }
+
+    private void Invoke_GetRecipe()
+    {
+        Chatting.instance.PutSystemMessage("새로운 레시피를 획득했습니다!", "lime");
+        // 레시피 넣어준다.
+        DataBase.instance.activeRecipeList.Add(new Recipe(1, 1, "hernite", 4, 1, "fabric", 7, 1, "gaiter", 10000, "bosskey", 207));
+        _isGet = true;
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 public class Player_Warrior : MonoBehaviour
 {
     private Player _mainPlayer;
-    private SkillCooltimeController _cooltimecontroller;
 
     private RaycastHit2D _hit2D;
 
@@ -17,20 +16,18 @@ public class Player_Warrior : MonoBehaviour
 
     public GameObject invincibleWall; // 무적 방어벽
 
-    public float attackspeed, skillcooltime;
 
     private void Awake()
     {
         _layerMask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("RoomCollider");
         _layerMask = ~_layerMask;
         _mainPlayer = GetComponent<Player>();
-        _cooltimecontroller = GameObject.Find("SkillIcon").transform.Find("CooltimePanel").GetComponent<SkillCooltimeController>();
     }
 
     private void Start()
     {
-        CharacterInfoWindow.instance.UpdateASPD(attackspeed);
-        _cooltimecontroller.SetCooltime(skillcooltime);
+        CharacterInfoWindow.instance.UpdateASPD(_mainPlayer.attackcooltime);
+        _mainPlayer.Data.attackspeed = 1;
     }
 
     private void Update()
@@ -41,7 +38,7 @@ public class Player_Warrior : MonoBehaviour
         #region Attack
         if (_isHit) // 공격쿨타임 중
         {
-            if (Time.time - _attackcooltime > attackspeed)
+            if (Time.time - _attackcooltime > _mainPlayer.attackcooltime)
                 _isHit = false;
         }
 
@@ -90,12 +87,12 @@ public class Player_Warrior : MonoBehaviour
         #region Skill
         if(_isSkill) // 스킬 쿨타임 중
         {
-            if (Time.time - _skillcooltime > skillcooltime)
+            if (Time.time - _skillcooltime > _mainPlayer.skillcooltime)
             {
                 _isSkill = false;
-                _cooltimecontroller.EndCooltime();
+                _mainPlayer._cooltimecontroller.EndCooltime();
             }
-            _cooltimecontroller.ShowCooltime(Time.time - _skillcooltime);
+            _mainPlayer._cooltimecontroller.ShowCooltime(Time.time - _skillcooltime);
         }
         if(!_isSkill) // 스킬 쿨타임 종료(스킬발동)
         {

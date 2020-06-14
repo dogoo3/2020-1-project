@@ -59,6 +59,7 @@ public class Boss : MonoBehaviour
     {
         if (_fullHp == HP && _firstStart)
         {
+            Debug.Log(_data["Phase"].ToString());
             patternNum = int.Parse(_data["Phase"].ToString());
             _attack = true;
             PatternManager.instance._isStart = true;

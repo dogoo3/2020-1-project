@@ -15,6 +15,8 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,  IEndDr
     
     private int _nowSTR;
     private int _nowDEF;
+    private float _attackspeed;
+    private float _cooltimeper;
 
     private void Awake()
     {
@@ -36,10 +38,14 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,  IEndDr
                 {
                     _nowSTR = equipDatabase.equipInfoList[i].STR;
                     _nowDEF = equipDatabase.equipInfoList[i].DEF;
+                    _attackspeed = equipDatabase.equipInfoList[i].AttackSpeed;
+                    _cooltimeper = equipDatabase.equipInfoList[i].cooltimePer;
                 }
             }
             _player.STR += _nowSTR;
             _player.DEF += _nowDEF;
+            _player.rate_attackspeed += _attackspeed;
+            _player.rate_cooltime += _cooltimeper;
             _UI_image.sprite = item.itemIcon;
             _UI_image.color = new Color(1, 1, 1, 1);
         }
@@ -47,11 +53,16 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,  IEndDr
         {
             _player.STR -= _nowSTR;
             _player.DEF -= _nowDEF;
+            _player.rate_attackspeed -= _attackspeed;
+            _player.rate_cooltime -= _cooltimeper;
             _UI_image.sprite = null;
             _UI_image.color = new Color(1, 1, 1, 0);
         }
+
+        _player.SetPlayerAvality(); // 공격속도와 쿨타임 갱신
         CharacterInfoWindow.instance.UpdateATK(_player.STR);
         CharacterInfoWindow.instance.UpdateDEF(_player.DEF);
+        CharacterInfoWindow.instance.UpdateASPD(1 - _player.rate_attackspeed);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -83,6 +94,8 @@ public class EquipSlot : MonoBehaviour, IBeginDragHandler, IDragHandler,  IEndDr
                     item.itemID = 0;
                     _nowSTR = 0;
                     _nowDEF = 0;
+                    _attackspeed = 0;
+                    _cooltimeper = 0;
                 }
                 else // 다른 장비 아이템이 있을 경우
                 {

@@ -56,10 +56,10 @@ public class EnergyBall : MonoBehaviour
 
         if (collision.gameObject.tag == "FireBall")
         {
-            if(_isPlayer)
-            {
+            if (_isPlayer)
                 Boss.instance._fireBall.HitFireBall(collision.gameObject.name);
-            }            
+            else
+                collision.gameObject.SetActive(false);
             ObjectPoolingManager.instance.InsertQueue(this);
         }      
     }

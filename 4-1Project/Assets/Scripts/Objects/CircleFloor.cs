@@ -32,6 +32,11 @@ public class CircleFloor : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Boss.instance.HP <= 0)
+            gameObject.SetActive(false);
+    }
 
     private void OnDisable()
     {
@@ -71,13 +76,16 @@ public class CircleFloor : MonoBehaviour
     //범위에 있는지 아니면 밖에 있는지 확인한다 만약에 밖이면 피통 0
     public void InstanceDeathCheck()
     {
-        if (_target != GameManager.instance.PlayerName)
+        if (Boss.instance.HP != 0)
         {
-            if (!_enterPlayer)
+            if (_target != GameManager.instance.PlayerName)
             {
-                GameManager.instance._player.Dead();
+                if (!_enterPlayer)
+                {
+                    GameManager.instance._player.Dead();
+                }
             }
         }
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

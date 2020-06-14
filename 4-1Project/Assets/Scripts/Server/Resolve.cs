@@ -86,8 +86,9 @@ public class Resolve
     {
         try
         {
-            //Debug.Log(data);
+            // Debug.Log(data);
             JsonData Data = JsonMapper.ToObject(data);
+            
             switch (Data["type"].ToString())
             {
                 case "UI":
@@ -130,7 +131,7 @@ public class Resolve
                 case "RandomLaser": // 랜덤레이저
                     PatternManager.instance.LoadRandomLaser(Data);
                     break;
-                case "CircleBulletType":  //원형 탄환
+                case "CircleBulletType": //원형 탄환
                     PatternManager.instance.LoadInduceCircleBullet(Data);
                     break;
                 case "CircleFloor": // 원형장판(안전지대)                   

@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010db97b0612a1a478480808f9f1e5e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossType: 0
+  bossType: 1
   _isStart: 0
   _subIsStart: 0
   BT: 0
@@ -690,7 +690,6 @@ MonoBehaviour:
   _time: 0
   restricTargetname: 
   _localSound: {fileID: 0}
-  pnum: {fileID: 0}
 --- !u!114 &2144757348911858624
 MonoBehaviour:
   m_ObjectHideFlags: 0

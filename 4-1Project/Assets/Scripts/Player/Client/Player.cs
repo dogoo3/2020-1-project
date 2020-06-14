@@ -29,7 +29,9 @@ public class Player : MonoBehaviour
 
     Animator _animator;
     
-    SubAnimator[] _subAnimator;
+    private SubAnimator[] _subAnimator;
+    [HideInInspector]
+    public SkillCooltimeController _cooltimecontroller;
 
     [HideInInspector]
     public Vector2 _mousePos;
@@ -47,9 +49,14 @@ public class Player : MonoBehaviour
     public ParticleSystem[] dashBlur;
 
     public float _movespeed = 5.0f, invincibleTime, dashDelay = 2.0f;
+    [HideInInspector]
+    public float rate_attackspeed, rate_cooltime; // 누적 공속/쿨타임
+    public float attackcooltime, skillcooltime; // 현재 공속/쿨타임 -> 공속은 반비례
+    private float _ani_attackspeed = 1; // 애니메이션 재생속도. 곱셈 정비례
+    private float _ori_attackCooltime, _ori_skillcooltime; // 첫 공속, 쿨타임
 
     public int STR, DEF;
-
+    
     public bool _isCrash, isGetSwitch, isSwitch, isSetSwitch;
     private float time;
 
@@ -69,6 +76,9 @@ public class Player : MonoBehaviour
         _subAnimator = GetComponentsInChildren<SubAnimator>();
         gr = FindObjectOfType<GraphicRaycaster>();
         ped = new PointerEventData(null);
+
+        _cooltimecontroller = GameObject.Find("SkillIcon").transform.Find("CooltimePanel").GetComponent<SkillCooltimeController>();
+
     }
     void Start()
     {
@@ -85,9 +95,12 @@ public class Player : MonoBehaviour
         gameOver.Init();
         BtoP_damage_data.nickname = GameManager.instance.PlayerName;
         ori_dashSpeed = dashSpeed;
+        _ori_attackCooltime = attackcooltime;
+        _ori_skillcooltime = skillcooltime;
         CharacterInfoWindow.instance.UpdateATK(STR);
         CharacterInfoWindow.instance.UpdateDEF(DEF);
         CharacterInfoWindow.instance.UpdateSPD(_movespeed);
+        _cooltimecontroller.SetCooltime(skillcooltime);
     }
 
     public void Update()
@@ -96,6 +109,10 @@ public class Player : MonoBehaviour
         {
             if (!_isDead)
             {
+                if (GameManager.instance.type == 0)
+                    SoundManager.instance.PlaySFX("1PC_Die_2");
+                else
+                    SoundManager.instance.PlaySFX("2PC_Die_2");
                 Invoke("Invoke_Dead",4.0f);
                 _isDead = true;
             }
@@ -343,6 +360,12 @@ public class Player : MonoBehaviour
             _subAnimator[i].Attacked(_isAttacked);
     }
 
+    public void ChangeAnimationValue_AttackSpeed(float _value)
+    {
+        for (int i = 0; i < _subAnimator.Length; i++)
+            _subAnimator[i].SetAttackSpeed(_value);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -449,6 +472,16 @@ public class Player : MonoBehaviour
                 _is =  false;
         }
         return _is;
+    }
+
+    public void SetPlayerAvality()
+    {
+        ChangeAnimationValue_AttackSpeed(_ani_attackspeed + rate_attackspeed); // 애니메이션 실행속도 조정(정비례)
+        attackcooltime = _ori_attackCooltime - rate_attackspeed; // 공격 쿨타임 조정(반비례)
+
+        _cooltimecontroller.SetCooltime(_ori_skillcooltime * (1f - rate_cooltime));
+        Data.attackspeed = _ani_attackspeed + rate_attackspeed;
+        SendPlayerInfoPacket();
     }
 
     #region SimpleFunc

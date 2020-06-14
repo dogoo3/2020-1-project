@@ -80,11 +80,7 @@ public class MixMaterialSlot : MonoBehaviour,
 
     public void InitUI()
     {
-        // UI_item_image.sprite = item.itemIcon;
-        // SetAlpha(1);
         UI_item_count.text = item.itemCount.ToString() + " / " + _maxItemCount.ToString();
-        // if (item.itemCount == 0)
-        //    RemoveItem();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -117,27 +113,20 @@ public class MixMaterialSlot : MonoBehaviour,
                 }
                 else // 인벤토리 슬롯에 같은 ID의 아이템이 없을 경우
                 {
-                    // 드롭한 슬롯의 아이템 ID가 0이면
-                    if (inventorySlot.item.itemID == 0)
+                    if (item.itemCount > 0)
                     {
-                        inventorySlot.item = item.Init(); // 인벤토리 슬롯에 아이템 정보 할당
-                        inventorySlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
-                        MinusItemCount(); // 조합 슬롯 갯수 1개 감소
+                        // 드롭한 슬롯의 아이템 ID가 0이면
+                        if (inventorySlot.item.itemID == 0)
+                        {
+                            inventorySlot.item = item.Init(); // 인벤토리 슬롯에 아이템 정보 할당
+                            inventorySlot.item.itemCount = 1; // 아이템의 갯수는 1로 초기화
+                            MinusItemCount(); // 조합 슬롯 갯수 1개 감소
+                        }
                     }
-                    //// 0이 아니면 아무것도 하지 않는다.
-                    //else
-                    //{
-                    //    Item temp2 = inventorySlot.item.Init();
-                    //    inventorySlot.item = item.Init();
-                    //    item = temp2.Init();
-                    //}
                 }
 
                 InitUI();
                 inventorySlot.InitUI(); // 인벤토리 슬롯 UI 업데이트
-
-                //if (item.itemCount == 0)
-                //    RemoveItem();
             }
             DragSlot.instance.SetColor(0);
         }

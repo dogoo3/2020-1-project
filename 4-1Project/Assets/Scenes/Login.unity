@@ -2037,7 +2037,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
 --- !u!222 &1310206952
@@ -2219,6 +2219,7 @@ MonoBehaviour:
   InviteMessage: {fileID: 0}
   OtherUserName: 
   charactors: []
+  _isLobby: 0
 --- !u!114 &1337557196
 MonoBehaviour:
   m_ObjectHideFlags: 0

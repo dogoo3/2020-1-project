@@ -600,7 +600,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5369,7 +5369,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -10123,7 +10123,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -14987,7 +14987,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -19756,7 +19756,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -24510,7 +24510,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -29279,7 +29279,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -33586,6 +33586,7 @@ MonoBehaviour:
   dashtoPos: {x: 0, y: 0}
   Speed: 0
   GetMillTime: 0
+  invincibleWall: {fileID: 0}
 --- !u!114 &5102007045322388142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34201,7 +34202,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 20
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -39668,6 +39669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Center.x
       value: 3.1018786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5053388088942726511, guid: 3e36cb5401830664ab258a2765704af3,
+        type: 3}
+      propertyPath: m_Bounds.m_Center.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5289127150993918103, guid: 3e36cb5401830664ab258a2765704af3,
         type: 3}

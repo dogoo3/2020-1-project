@@ -88,32 +88,27 @@ public class PatternManager : MonoBehaviour
             _isStart = false;
             //_idEnd변수를 case문에 넣은 이유는 패이즈 마다 끝나는 패킷을 보내야하는 시점이 다르기 때문이다
             // 사용하는 Boss.instance.patternNum = 2, 4, 8, 21
+            // Debug.Log(Boss.instance.patternNum);
             switch(bossType)
             {
                 case BossType.SemiBoss: // 중간보스 패턴
                     switch (Boss.instance.patternNum)
                     {
-                        case 2:
-                            PatternBallExecute();
+                        case 2: 
+                            PatternBallExecute(); // 원형탄환
                             _localSound.PlayLocalSound("Middle_B_Att_Bullet_31");
                             break;
-                        case 4: // 랜덤 레이저
-                            pat_wheelLaser.Execute(_index);
+                        case 4: 
+                            pat_wheelLaser.Execute(_index); // 원형레이저
                             _localSound.PlayLocalSound("Middle_B_Att_Laser_1");
                             break;
                         case 8:
-                            //PatternFireBallExecute();
-                            DoublePatternBallExecute();
-                            _localSound.PlayLocalSound("Final_B_Att_Bullet_34");
+                            PatternFireBallExecute(); // 불구슬
+                            _localSound.PlayLocalSound("Middle_B_Att_Dead_8");
                             break;
                         case 12:
-                            PatternCircleFloorExecute();
+                            PatternCircleFloorExecute(); // 안전지대
                             _localSound.PlayLocalSound("Middle_B_Att_Safety_11");
-                            break;
-                        case 21:
-                            PatternInduceMissile();
-                            _localSound.PlayLocalSound("Final_B_Att_Missile_1");
-                            //PatternRestriction();
                             break;
                         default:
                             PatternBallExecute();
@@ -125,23 +120,19 @@ public class PatternManager : MonoBehaviour
                     switch (Boss.instance.patternNum)
                     {
                         case 2:
-                            PatternBallExecute();
-                            _localSound.PlayLocalSound("Middle_B_Att_Bullet_34");
+                            PatternInduceMissile(); // 유도 미사일
+                            _localSound.PlayLocalSound("Final_B_Att_Missile_1");
                             break;
                         case 4:
-                            pat_wheelLaser.Execute(_index);
+                            pat_wheelLaser.Execute(_index); // 원형 레이저
                             _localSound.PlayLocalSound("Final_B_Att_Laser_1");
                             break;
                         case 8:
-                            PatternFireBallExecute();
-                            _localSound.PlayLocalSound("Middle_B_Att_Dead_8");
-                            break;
-                        case 12:
-                            PatternCircleFloorExecute();
-                            _localSound.PlayLocalSound("Middle_B_Att_Safety_11");
+                            DoublePatternBallExecute(); // 원형탄환 X2
+                            _localSound.PlayLocalSound("Final_B_Att_Bullet_34");
                             break;
                         case 21:
-                            PatternRestriction();
+                            PatternRestriction(); // 속박
                             _localSound.PlayLocalSound("Final_B_Att_Shackles_8");
                             break;
                         default:
@@ -234,7 +225,6 @@ public class PatternManager : MonoBehaviour
         {
             pat_fireBall.Execute();
         }
-
     }
 
     void PatternCircleFloorExecute()

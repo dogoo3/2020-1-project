@@ -17,6 +17,7 @@ public class Player_Server : MonoBehaviour
     private bool _isSpawnSwitchState; // 스위치를 얻을 수 있는 상태인지 결정.
 
     public PlayerState PS;
+    private float _attackSpeed;
     private bool _isPortal;
     private ItemDropObject itemDropObject = null;
     public ParticleSystem[] dashBlur;
@@ -66,10 +67,8 @@ public class Player_Server : MonoBehaviour
     {
         if(PS == PlayerState.Die)
         {
-            Debug.Log("idashjfioa");
             if (!_Die)
             {
-                Debug.Log("asfdjklsadf");
                 Move(0, false);
                 ChangeAnimationState_Dead();
                  _Die = true;
@@ -94,6 +93,7 @@ public class Player_Server : MonoBehaviour
         }
         else
         {
+            ChangeAnimationValue_AttackSpeed(_attackSpeed);
             dashSpeed = 0.2f;
             ShowDashBlur(false);
             transform.position = Vector2.MoveTowards(transform.position, SyncPos, Speed * Time.smoothDeltaTime);
@@ -190,6 +190,8 @@ public class Player_Server : MonoBehaviour
         Speed = float.Parse(Data["Speed"].ToString());
         PS = (PlayerState)int.Parse(Data["State"].ToString());
 
+        _attackSpeed = float.Parse(Data["attackspeed"].ToString());
+
         _setOn = true;
     }
 
@@ -253,6 +255,13 @@ public class Player_Server : MonoBehaviour
         for (int i = 0; i < _subAnimators.Length; i++)
             _subAnimators[i].Dead();
     }
+
+    public void ChangeAnimationValue_AttackSpeed(float _value)
+    {
+        for (int i = 0; i < _subAnimators.Length; i++)
+            _subAnimators[i].SetAttackSpeed(_value);
+    }
+
 
     void ShowDashBlur(bool _isStart) // 대시 표현
     {
