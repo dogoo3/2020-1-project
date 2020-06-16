@@ -35,10 +35,10 @@ public class HPManager : MonoBehaviour
         switch(GameManager.instance.type) // 직업에 따른 내 HP 최대체력 지정
         {
             case 0: // 전사
-                myHP = 500;
+                myHP = 1500;
                 break;
             case 1: // 마법사
-                myHP = 300;
+                myHP = 900;
                 break;
         }
 
@@ -49,10 +49,10 @@ public class HPManager : MonoBehaviour
             switch(GameManager.instance.playerInfo[i].type) // 다른 플레이어들의 최대HP값을 저장
             {
                 case 0: // 전사
-                    otherFullHP.Add(500); 
+                    otherFullHP.Add(1500); 
                     break;
                 case 1: // 마법사
-                    otherFullHP.Add(300);
+                    otherFullHP.Add(900);
                     break;
             }
             nickname.Add(GameManager.instance.playerInfo[i].Name);
