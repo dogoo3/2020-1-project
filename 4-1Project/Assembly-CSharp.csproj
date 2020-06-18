@@ -145,6 +145,7 @@
     <Compile Include="Assets\Scripts\UI\Tutorial\TutorialText.cs" />
     <Compile Include="Assets\TempScript.cs" />
     <None Include="Assets\3D Lasers Pack\Prefabs\Readme.txt" />
+    <None Include="Assets\Server IP&amp;PORT.txt" />
     <None Include="Assets\Shader\2DWater.shader" />
     <None Include="Assets\3D Lasers Pack\Demo scene lasers\If you want to use lasers in 2D.txt" />
     <None Include="Assets\Effects\EFB\Documentation\READ_ME.txt" />

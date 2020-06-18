@@ -56,8 +56,8 @@ public class Restriction : MonoBehaviour
             GameManager.instance._player.Data.State = (int)PlayerState.Idle;
             GameManager.instance._player.SendPlayerInfoPacket();
             GameManager.instance._player.ChangeAnimationState_Attacked(false);
-            //ObjectPoolingManager.instance.InsertQueue(this, ObjectPoolingManager.instance.queue_restriction);
-            //PatternManager.instance.SendDelayPhaseEnd();
+            ObjectPoolingManager.instance.InsertQueue(this, ObjectPoolingManager.instance.queue_restriction);
+            PatternManager.instance.SendDelayPhaseEnd();
         }
         else
         {
@@ -65,14 +65,14 @@ public class Restriction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.name == _targetPlayername)
-        {
-            ObjectPoolingManager.instance.InsertQueue(this, ObjectPoolingManager.instance.queue_restriction);
-            PatternManager.instance.SendDelayPhaseEnd();
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.name == _targetPlayername)
+    //    {
+    //        ObjectPoolingManager.instance.InsertQueue(this, ObjectPoolingManager.instance.queue_restriction);
+    //        PatternManager.instance.SendDelayPhaseEnd();
+    //    }
+    //}
 
     public void SetTargetname(string _nickname)
     {

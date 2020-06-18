@@ -42,10 +42,7 @@ public class Chatting : MonoBehaviour
             else // Ä³·µ ON / OFF
             {
                 if (UI_typingfield.gameObject.activeSelf) // Ä³·µÀÌ »ì¾ÆÀÖÀ¸¸é 
-                {
                     ONOFFWindow(false); // Ä³·µ°ú Ã¢À» Á×ÀÎ´Ù.
-                    return;
-                }
                 else
                     ONOFFWindow(true);
             }
@@ -59,11 +56,11 @@ public class Chatting : MonoBehaviour
 
     private void ONOFFWindow(bool _is)
     {
+        UI_typingfield.gameObject.SetActive(_is);
         if (_is)
             UI_typingfield.ActivateInputField();
         _isActive = _is;
         UI_chatWindowImage.gameObject.SetActive(_is);
-        UI_typingfield.gameObject.SetActive(_is);
     }
 
     public void ReceiveComment(JsonData _data)

@@ -43,7 +43,7 @@ public class Player_Magician : MonoBehaviour
         {
             if (Time.time - _skillcooltime > 3.0f) // 메테오를 시전 중일 때는 기본공격 및 스킬공격 불가능
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     if (_mainPlayer.CheckClickInv())
                         return;
@@ -56,7 +56,7 @@ public class Player_Magician : MonoBehaviour
                     _mainPlayer.ChangeAnimationState_Attack();
                     _mainPlayer.SendPlayerInfoPacket();
                 }
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && !Chatting.instance.CheckActive())
                 {
                     _attackcooltime = Time.time;
                     _isHit = true;
