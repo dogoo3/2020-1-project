@@ -152,6 +152,40 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    private bool CheckEmptyItem(Item[] _item, int _DBindex, int _openTap) // 아이템배열, 아이템 번호, 현재 열린 탭 정보
+    {
+        for (int i = 0; i < _item.Length; i++) // 아이템 저장 배열 내 검색
+        {
+            if (_item[i].itemID == 0) // 빈 슬롯을 찾으면
+            {
+                _item[i] = DataBase.instance.itemList[_DBindex].Init();
+                if (_tabIndex == _openTap) // 현재 열린 창이 아이템 저장 배열과 일치하면
+                {
+                    inventorySlots[i].item = equip_Inv[i]; //  UI 즉시 반영
+                    inventorySlots[i].InitUI();
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    private bool CheckEqualItem(Item[] _item, int _equalItemID, int _openTap)
+    {
+        for (int i = 0; i < _item.Length; i++) // 같은 ID의 아이템이 있는지 체크
+        {
+            if (_item[i].itemID == _equalItemID) // 슬롯에 같은 아이템이 있으면
+            {
+                _item[i].itemCount++; // 아이템 갯수 1 증가
+                if (_tabIndex == _openTap) // 현재 열린 창이 아이템 저장 배열과 일치하면
+                {
+                    inventorySlots[i].item = _item[i]; //  UI 즉시 반영
+                    inventorySlots[i].InitUI();
+                }
+                return true;
+            }
+        }
+        return false;
+    }
     public bool GetItem(int _itemID) // 인게임 필드에서 새로운 아이템을 획득할 경우에 호출하는 함수.
     {
         for (int i = 0; i < DataBase.instance.itemList.Count; i++) // 아이템 데이터베이스
@@ -160,79 +194,21 @@ public class Inventory : MonoBehaviour
             {
                 if (_itemID > 200) // 장비템 습득
                 {
-                    for (int j = 0; j < equip_Inv.Length; j++) // 장비 배열 내 검색
-                    {
-                        if (equip_Inv[j].itemID == 0) // 빈 슬롯을 찾으면
-                        {
-                            equip_Inv[j] = DataBase.instance.itemList[i].Init();
-                            if (_tabIndex == 0) // 현재 열린 창이 장비창일경우
-                            {
-                                inventorySlots[j].item = equip_Inv[j];
-                                inventorySlots[j].InitUI();
-                            }
-                            return true;
-                        }
-                    }
+                    return CheckEmptyItem(equip_Inv, i, 0);
                 }
                 else if (_itemID > 100) // 소비템 습득
                 {
-                    for (int j = 0; j < potion_Inv.Length; j++) // 같은 ID의 아이템이 있는지 체크
-                    {
-                        if (potion_Inv[j].itemID == _itemID) // 슬롯에 같은 아이템이 있으면
-                        {
-                            potion_Inv[j].itemCount++; // 아이템 갯수 1 증가
-                            if (_tabIndex == 2) // 현재 열린 창이 소비창일경우
-                            {
-                                inventorySlots[j].item = potion_Inv[j];
-                                inventorySlots[j].InitUI();
-                            }
-                            return true;
-                        }
-                    }
-
-                    for (int j = 0; j < potion_Inv.Length; j++) // 아이템의 빈 공간 체크
-                    {
-                        if (potion_Inv[j].itemID == 0)
-                        {
-                            potion_Inv[j] = DataBase.instance.itemList[i].Init(); // 아이템 정보를 슬롯에 할당
-                            if (_tabIndex == 2) // 현재 열린 창이 소비창일경우
-                            {
-                                inventorySlots[j].item = potion_Inv[j];
-                                inventorySlots[j].InitUI();
-                            }
-                            return true;
-                        }
-                    }
+                    if (!CheckEqualItem(potion_Inv, i, 2)) // 같은 아이템이 없으면 빈 슬롯에 아이템을 넣어준다.
+                        return CheckEmptyItem(potion_Inv, i, 2);
+                    else
+                        return true;
                 }
                 else // 재료템 습득
                 {
-                    for (int j = 0; j < mat_Inv.Length; j++) // 같은 ID의 아이템이 있는지 체크
-                    {
-                        if (mat_Inv[j].itemID == _itemID) // 슬롯에 같은 아이템이 있으면
-                        {
-                            mat_Inv[j].itemCount++; // 아이템 갯수 1 증가
-                            if (_tabIndex == 1) // 현재 열린 창이 재료창일경우
-                            {
-                                inventorySlots[j].item = mat_Inv[j];
-                                inventorySlots[j].InitUI();
-                            }
-                            return true;
-                        }
-                    }
-
-                    for (int j = 0; j < mat_Inv.Length; j++) // 아이템의 빈 공간 체크
-                    {
-                        if (mat_Inv[j].itemID == 0) // 슬롯에 같은 아이템이 없으면
-                        {
-                            mat_Inv[j] = DataBase.instance.itemList[i].Init(); // 아이템 정보를 슬롯에 할당
-                            if (_tabIndex == 1) // 현재 열린 창이 재료창일경우
-                            {
-                                inventorySlots[j].item = mat_Inv[j];
-                                inventorySlots[j].InitUI();
-                            }
-                            return true;
-                        }
-                    }
+                    if (!CheckEqualItem(mat_Inv, i, 1)) // 같은 아이템이 없으면 빈 슬롯에 아이템을 넣어준다.
+                        return CheckEmptyItem(mat_Inv, i, 1);
+                    else
+                        return true;
                 }
             }
         }

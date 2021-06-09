@@ -86,7 +86,6 @@ public class Resolve
     {
         try
         {
-            // Debug.Log(data);
             JsonData Data = JsonMapper.ToObject(data);
             
             switch (Data["type"].ToString())
